@@ -5,7 +5,7 @@
 #          Thomas Karlsson,
 #          Naturhistoriska riksmuseet
 # 
-# $Id: kärlvl,v 1.6 2004-08-09 08:09:59 grahn Exp $
+# $Id: kärlvl,v 1.7 2004-08-22 20:16:19 grahn Exp $
 # 
 # Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -44,8 +44,8 @@ while(<>) {
     my ($dummy, $status, $latin, $se) = map {s|</td>||; $_} @bits;
 
     next if $latin =~ m|^<A HREF|;
-    if($status eq ' ' and $latin =~ m|^<font size.+?<B>(\w+?ceae)|) {
-	printf "\n%-20s [%s]\n", "", $1;
+    if($status eq ' ' and $latin =~ m|^<font size.+?<B>(.+?ceae)|) {
+	printf "\n# %s\n", $1;
 	next;
     }
     if($status eq ' ' and $latin =~ m|^<B>(.+?)</B>|) {
@@ -71,7 +71,7 @@ while(<>) {
 	$sci = "$genus $species";
     }
 
-    next if $status =~ /[t?-]/;
+    next unless $status =~ /[abt ]/;
 
-    printf "%-20s %s\n", $se, $sci;
+    printf "%-23s (%s)\n", $se, $sci;
 }
