@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.2 2005-01-06 19:38:37 grahn Exp $
+# $Id: groblad_report.py,v 1.3 2005-01-08 21:10:16 grahn Exp $
 #
 # Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -29,7 +29,7 @@ class Place:
         self.place = None
         self.coordinate = None
         self.date = None
-        self.observers = []
+        self.observers = None
         self.plants = {}
     def contains(self, species):
         return self.plants.has_key(species)
@@ -85,15 +85,17 @@ for s in lines:
         elif name=='date':
             place.date = value
         elif name=='observers':
-            place.observers = value.split()
+            place.observers = value
         elif name=='comments':
             pass
+        else:
+            print >>sys.stderr, 'hey, what\'s this?', s
     else:
         pass
 
 species = []
 speciesre = re.compile(r'^(.+?)\s*\((.+)\)')
-f = open('/usr/local/lib/groblad/species', 'r')
+f = open('INSTALLBASE/lib/groblad/species', 'r')
 for s in f.readlines():
     m = speciesre.match(s)
     if m:
@@ -105,17 +107,22 @@ for sp in species:
     if not seen.has_key(name): continue
     del seen[name]
     print '.XP'
-    print sp
-    print ':'
+    print '%s:' % sp
+    ss = []
     for p in places:
         if not p.contains(name): continue
         if p.coordinate:
-            print '%s (%s).' % (p.place, p.coordinate.tstr())
+            s = '%s (%s).' % (p.place, p.coordinate.tstr())
         else:
-            print '%s.' % p.place
+            s = '%s.' % p.place
+        if p.date and p.observers:
+            s += '\n%s %s.' % (p.observers, p.date)
         if p.plants[name] != '':
-            print '%s.' % p.plants[name] 
-        print r'\(em'
+            s += '\n%s' % p.plants[name]
+        if s[-1] != '.':
+            s += '.'
+        ss.append(s)
+    print '\n\\(em\n'.join(ss)
     print '.'
 
 # At this point 'seen' may contain a number of names
