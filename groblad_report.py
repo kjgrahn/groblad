@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.3 2005-01-08 21:10:16 grahn Exp $
+# $Id: groblad_report.py,v 1.4 2005-01-17 21:02:24 grahn Exp $
 #
 # Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -112,7 +112,7 @@ for sp in species:
     for p in places:
         if not p.contains(name): continue
         if p.coordinate:
-            s = '%s (%s).' % (p.place, p.coordinate.tstr())
+            s = '%s\n(%s).' % (p.place, p.coordinate.tstr())
         else:
             s = '%s.' % p.place
         if p.date and p.observers:
