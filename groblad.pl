@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: groblad.pl,v 1.2 2004-08-14 21:13:44 grahn Exp $
+# $Id: groblad.pl,v 1.3 2005-01-08 21:08:48 grahn Exp $
 # $Name:  $
 #
 # groblad - interactively editing botanical observations
@@ -39,8 +39,8 @@ $template = $hometempl
 $template = $opt_f
     if defined $opt_f;
 
-my $tmpname0 = "/tmp/groblad.tmp0.$$";
-my $tmpname1 = "/tmp/groblad.tmp1.$$";
+my $tmpname0 = "/tmp/groblad.tmp0.$$.txt";
+my $tmpname1 = "/tmp/groblad.tmp1.$$.txt";
 
 my $editor = "emacs";
 
