@@ -1,0 +1,3093 @@
+#                                                                  -*- text -*-
+{
+place        : 
+coordinate   : 
+date         : 
+observers    : 
+comments     : 
+}{
+
+#       Lycopodiaceae
+fjällummer           : : 
+plattlummer          : : 
+vanlig plattlummer   : : 
+finnlummer           : : 
+cypresslummer        : : 
+mellanlummer         : : 
+lopplummer           : : 
+groddlummer          : : 
+vanlig lopplummer    : : 
+strandlummer         : : 
+revlummer            : : 
+nordlummer           : : 
+vanlig revlummer     : : 
+mattlummer           : : 
+vanlig mattlummer    : : 
+riplummer            : : 
+
+#     Selaginellaceae
+dvärglummer          : : 
+
+#     Selaginellaceae
+vekt braxengräs      : : 
+styvt braxengräs     : : 
+
+#        Equisetaceae
+åkerfräken           : : 
+vanlig åkerfräken    : : 
+krypfräken           : : 
+strandfräken         : : 
+sjöfräken            : : 
+skavfräken           : : 
+gotlandsfräken       : : 
+älvfräken            : : 
+kärrfräken           : : 
+ängsfräken           : : 
+trådfräken           : : 
+skogsfräken          : : 
+jättefräken          : : 
+smalfräken           : : 
+
+#     Ophioglossaceae
+nordlåsbräken        : : 
+topplåsbräken        : : 
+låsbräken            : : 
+rutlåsbräken         : : 
+höstlåsbräken        : : 
+dvärglåsbräken       : : 
+stor låsbräken       : : 
+ormtunga             : : 
+
+#         Osmundaceae
+safsa                : : 
+
+#         Adiantaceae
+krusbräken           : : 
+
+#       Polypodiaceae
+stensöta             : : 
+
+#    Dennstaedtiaceae
+höbräken             : : 
+örnbräken            : : 
+slokörnbräken        : : 
+taigaörnbräken       : : 
+
+#    Thelypteridaceae
+bergbräken           : : 
+hultbräken           : : 
+kärrbräken           : : 
+
+#        Aspleniaceae
+glansbräken          : : 
+brunbräken           : : 
+mjältbräken          : : 
+murruta              : : 
+hjorttunga           : : 
+gaffelbräken         : : 
+svartbräken          : : 
+kalksvartbräken      : : 
+vanlig svartbräken   : : 
+grönbräken           : : 
+
+#         Woodsiaceae
+fjällbräken          : : 
+majbräken            : : 
+alpstenbräken        : : 
+stenbräken           : : 
+fjällstenbräken      : : 
+vanlig stenbräken    : : 
+finbräken            : : 
+ryssbräken           : : 
+ekbräken             : : 
+kalkbräken           : : 
+strutbräken          : : 
+fjällhällebräken     : : 
+dvärghällebräken     : : 
+hällebräken          : : 
+
+#     Dryopteridaceae
+raggträjon           : : 
+skogsbräken          : : 
+granbräken           : : 
+lundbräken           : : 
+nordbräken           : : 
+vanlig nordbräken    : : 
+träjon               : : 
+uddbräken            : : 
+skuggbräken          : : 
+taggbräken           : : 
+
+#         Blechnaceae
+kambräken            : : 
+vanlig kambräken     : : 
+
+#        Marsileaceae
+klotgräs             : : 
+
+#            Pinaceae
+silvergran           : : 
+lärk                 : : 
+europeisk lärk       : : 
+äkta dahurlärk       : : 
+kurilerlärk          : : 
+ussurilärk           : : 
+prinslärk            : : 
+gran                 : : 
+vanlig gran          : : 
+altaigran            : : 
+vitgran              : : 
+cembratall           : : 
+contortatall         : : 
+bergtall             : : 
+vanlig bergtall      : : 
+svarttall            : : 
+weymouthtall         : : 
+tall                 : : 
+lapptall             : : 
+vanlig tall          : : 
+blå douglasgran      : : 
+grön douglasgran     : : 
+
+#        Cupressaceae
+en                   : : 
+vanlig en            : : 
+
+#            Taxaceae
+idegran              : : 
+
+#          Salicaceae
+silverpoppel         : : 
+jämtlandspoppel      : : 
+ontariopoppel        : : 
+balsampoppel         : : 
+sorgpoppel           : : 
+kanadapoppel         : : 
+gråpoppel            : : 
+svartpoppel          : : 
+asp                  : : 
+vitpil               : : 
+vanlig vitpil        : : 
+kavelpil             : : 
+risvide              : : 
+trippelvide          : : 
+bindvide             : : 
+tårpil               : : 
+sälg                 : : 
+vanlig sälg          : : 
+gråsälg              : : 
+gråvide              : : 
+vanligt gråvide      : : 
+daggvide             : : 
+äkta daggvide        : : 
+lavendelvide         : : 
+knäckepil            : : 
+ripvide              : : 
+vanligt ripvide      : : 
+ryssvide             : : 
+blekvide             : : 
+fjällblekvide        : : 
+finnblekvide         : : 
+källblekvide         : : 
+dvärgvide            : : 
+ullvide              : : 
+glandelvide          : : 
+vanligt ullvide      : : 
+lappvide             : : 
+hybridpil            : : 
+fyrisvide            : : 
+svartvide            : : 
+sätervide            : : 
+kolavide             : : 
+vanligt svartvide    : : 
+glansvide            : : 
+odonvide             : : 
+jolster              : : 
+grönvide             : : 
+polarvide            : : 
+rödvide              : : 
+krypvide             : : 
+sandvide             : : 
+vanligt krypvide     : : 
+rosmarinvide         : : 
+nätvide              : : 
+grönpil              : : 
+häckvide             : : 
+finnvide             : : 
+ängsvide             : : 
+mandelpil            : : 
+korgvide             : : 
+
+#          Myricaceae
+pors                 : : 
+
+#          Betulaceae
+klibbal              : : 
+gråal                : : 
+karelsk gråal        : : 
+vanlig gråal         : : 
+lappal               : : 
+hasselal             : : 
+dvärgbjörk           : : 
+vårtbjörk            : : 
+glasbjörk            : : 
+fjällbjörk           : : 
+vanlig glasbjörk     : : 
+
+#          Corylaceae
+avenbok              : : 
+hassel               : : 
+
+#            Fagaceae
+bok                  : : 
+bergek               : : 
+ek                   : : 
+rödek                : : 
+
+#            Ulmaceae
+alm                  : : 
+skogsalm             : : 
+bergalm              : : 
+vresalm              : : 
+lundalm              : : 
+
+#         Cannabaceae
+humle                : : 
+
+#          Urticaceae
+grenig väggört       : : 
+väggört              : : 
+brännässla           : : 
+vanlig brännässla    : : 
+skogsnässla          : : 
+fjällnässla          : : 
+etternässla          : : 
+
+#         Santalaceae
+spindelört           : : 
+
+#           Viscaceae
+mistel               : : 
+
+#    Aristolochiaceae
+hålrot               : : 
+hasselört            : : 
+
+#        Polygonaceae
+alpslide             : : 
+vippslide            : : 
+stor ormrot          : : 
+ormrot               : : 
+hybridslide          : : 
+åkerbinda            : : 
+lövbinda             : : 
+parkslide            : : 
+jätteslide           : : 
+dvärgsyra            : : 
+fjällsyra            : : 
+vattenpilört         : : 
+ävjepilört           : : 
+bitterpilört         : : 
+pilört               : : 
+strandpilört         : : 
+vanlig pilört        : : 
+åkerpilört           : : 
+vanlig åkerpilört    : : 
+rosenpilört          : : 
+syrenslide           : : 
+trampört             : : 
+stor trampört        : : 
+nordtrampört         : : 
+stolt trampört       : : 
+bägartrampört        : : 
+smal trampört        : : 
+spetstrampört        : : 
+näbbtrampört         : : 
+sandtrampört         : : 
+ängssyra             : : 
+vanlig ängssyra      : : 
+smal ängssyra        : : 
+lappsyra             : : 
+bergsyra             : : 
+äkta bergsyra        : : 
+sandsyra             : : 
+rödsyra              : : 
+hästskräppa          : : 
+storskräppa          : : 
+vippskräppa          : : 
+dikesskräppa         : : 
+krusskräppa          : : 
+vanlig krusskräppa   : : 
+ölandsskräppa        : : 
+tandskräppa          : : 
+vattenskräppa        : : 
+gårdsskräppa         : : 
+strandskräppa        : : 
+tomtskräppa          : : 
+tandad tomtskräppa   : : 
+slät tomtskräppa     : : 
+mellantomtskräppa    : : 
+sumpskräppa          : : 
+spenatskräppa        : : 
+finnskräppa          : : 
+skönskräppa          : : 
+skogsskräppa         : : 
+sköldsyra            : : 
+stor ängssyra        : : 
+hamnskräppa          : : 
+
+#      Chenopodiaceae
+flikmålla            : : 
+broskmålla           : : 
+trädgårdsmålla       : : 
+sandmålla            : : 
+strandmålla          : : 
+skaftmålla           : : 
+brådmålla            : : 
+vägmålla             : : 
+saltmålla            : : 
+spjutmålla           : : 
+silvermålla          : : 
+luddmålla            : : 
+strandbeta           : : 
+beta                 : : 
+svinmålla            : : 
+vanlig svinmålla     : : 
+lungrot              : : 
+smultronmålla        : : 
+fikonmålla           : : 
+vanlig fikonmålla    : : 
+bärmålla             : : 
+blåmålla             : : 
+lönnmålla            : : 
+gatmålla             : : 
+fiskmålla            : : 
+rödmålla             : : 
+östersjömålla        : : 
+svenskmålla          : : 
+bymålla              : : 
+stinkmålla           : : 
+lusfrö               : : 
+rankspenat           : : 
+styv glasört         : : 
+glasört              : : 
+sodaört              : : 
+saltört              : : 
+
+#       Amaranthaceae
+mållamarant          : : 
+grekamarant          : : 
+stjärnamarant        : : 
+
+#      Phytolaccaceae
+kermesbär            : : 
+
+#       Portulacaceae
+deltasidenblomma     : : 
+vinterportlak        : : 
+vårsköna             : : 
+vanlig vårsköna      : : 
+källört              : : 
+vanlig källört       : : 
+vårtkällört          : : 
+vårkällört           : : 
+portlak              : : 
+vildportlak          : : 
+
+#     Caryophyllaceae
+klätt                : : 
+åkerklätt            : : 
+kalknarv             : : 
+grusnarv             : : 
+spädnarv             : : 
+skrednarv            : : 
+sandnarv             : : 
+kustsandnarv         : : 
+vanlig sandnarv      : : 
+rosenglim            : : 
+bergglim             : : 
+fjällarv             : : 
+vanlig fjällarv      : : 
+kal fjällarv         : : 
+ullig fjällarv       : : 
+fältarv              : : 
+raggarv              : : 
+lapparv              : : 
+västkustarv          : : 
+riparv               : : 
+hönsarv              : : 
+kal hönsarv          : : 
+smal hönsarv         : : 
+vanlig hönsarv       : : 
+knipparv             : : 
+klibbarv             : : 
+snöarv               : : 
+alvararv             : : 
+vårarv               : : 
+östkustarv           : : 
+silverarv            : : 
+skorem               : : 
+sandnejlika          : : 
+skånsk sandnejlika   : : 
+knippnejlika         : : 
+borstnejlika         : : 
+blodnejlika          : : 
+backnejlika          : : 
+praktnejlika         : : 
+såpört               : : 
+grusnejlika          : : 
+knytling             : : 
+fågelarv             : : 
+saltarv              : : 
+vanlig saltarv       : : 
+glimmerört           : : 
+studentnejlika       : : 
+purpurklätt          : : 
+gökblomster          : : 
+vanligt gökblomster  : : 
+fjällnörel           : : 
+rödnörel             : : 
+raknörel             : : 
+sandnörel            : : 
+ryssnarv             : : 
+skogsnarv            : : 
+sprödarv             : : 
+hylsnejlika          : : 
+klippnejlika         : : 
+fältnarv             : : 
+tuvnarv              : : 
+strandnarv           : : 
+hårnarv              : : 
+dvärgnarv            : : 
+knutnarv             : : 
+nordknutnarv         : : 
+sydknutnarv          : : 
+normansnarv          : : 
+krypnarv             : : 
+stennarv             : : 
+sylnarv              : : 
+såpnejlika           : : 
+grönknavel           : : 
+åkerknavel           : : 
+tuvknavel            : : 
+vitknavel            : : 
+fjällglim            : : 
+sandglim             : : 
+vanlig sandglim      : : 
+gaffelglim           : : 
+vanlig gaffelglim    : : 
+rödblära             : : 
+vanlig rödblära      : : 
+dvärgrödblära        : : 
+kal rödblära         : : 
+franskglim           : : 
+polarblära           : : 
+vitblära             : : 
+fransglim            : : 
+nattglim             : : 
+backglim             : : 
+kal backglim         : : 
+vanlig backglim      : : 
+ryssglim             : : 
+strandglim           : : 
+alvarglim            : : 
+vanlig strandglim    : : 
+klibbglim            : : 
+smällglim            : : 
+vanlig smällglim     : : 
+fjällblära           : : 
+åkerspärgel          : : 
+sydspärgel           : : 
+linspärgel           : : 
+jättespärgel         : : 
+foderspärgel         : : 
+vårspärgel           : : 
+havsnarv             : : 
+rödnarv              : : 
+saltnarv             : : 
+källarv              : : 
+norrlandsarv         : : 
+sumparv              : : 
+strandsumparv        : : 
+kärrsumparv          : : 
+finnstjärnblomma     : : 
+grässtjärnblomma     : : 
+buskstjärnblomma     : : 
+skogsstjärnblomma    : : 
+polarstjärnblomma    : : 
+våtarv               : : 
+strandvåtarv         : : 
+vanlig våtarv        : : 
+bokarv               : : 
+lundarv              : : 
+sydlundarv           : : 
+nordlundarv          : : 
+blekarv              : : 
+kärrstjärnblomma     : : 
+fjällnejlika         : : 
+vanlig fjällnejlika  : : 
+öländsk fjällnejlika : : 
+spenslig fjällnejlika : : 
+tjärblomster         : : 
+vanligt tjärblomster : : 
+
+#        Nymphaeaceae
+gul näckros          : : 
+dvärgnäckros         : : 
+vit näckros          : : 
+sydnäckros           : : 
+nordnäckros          : : 
+atlantnäckros        : : 
+
+#    Ceratophyllaceae
+hornsärv             : : 
+vårtsärv             : : 
+
+#       Ranunculaceae
+nordisk stormhatt    : : 
+äkta stormhatt       : : 
+trädgårdsstormhatt   : : 
+röd trolldruva       : : 
+trolldruva           : : 
+våradonis            : : 
+balkansippa          : : 
+vitsippa             : : 
+svavelsippa          : : 
+gulsippa             : : 
+tovsippa             : : 
+sippruta             : : 
+akleja               : : 
+kabbleka             : : 
+vanlig kabbleka      : : 
+revkabbleka          : : 
+alpklematis          : : 
+skogsklematis        : : 
+italiensk klematis   : : 
+riddarsporre         : : 
+åkerriddarsporre     : : 
+stor riddarsporre    : : 
+vintergäck           : : 
+klockjulros          : : 
+orientalisk julros   : : 
+blåsippa             : : 
+råttsvans            : : 
+nipsippa             : : 
+fältsippa            : : 
+mosippa              : : 
+gotlandssippa        : : 
+backsippa            : : 
+smörblomma           : : 
+vanlig smörblomma    : : 
+liten smörblomma     : : 
+parksmörblomma       : : 
+vattenmöja           : : 
+vanlig vattenmöja    : : 
+grodmöja             : : 
+åkerranunkel         : : 
+majsmörblommor       : : 
+knölsmörblomma       : : 
+hjulmöja             : : 
+hårmöja              : : 
+bohusranunkel        : : 
+svalört              : : 
+vanlig svalört       : : 
+ältranunkel          : : 
+jättemöja            : : 
+isranunkel           : : 
+murgrönsmöja         : : 
+jordranunkel         : : 
+ullranunkel          : : 
+borstsmörblomma      : : 
+lappranunkel         : : 
+sjöranunkel          : : 
+fjällsmörblomma      : : 
+gotlandsranunkel     : : 
+vitstjälksmöja       : : 
+sköldmöja            : : 
+penselmöja           : : 
+vitsippsranunkel     : : 
+backsmörblomma       : : 
+ängssmörblomma       : : 
+vanlig backsmörblomma : : 
+luddranunkel         : : 
+dvärgranunkel        : : 
+revsmörblomma        : : 
+strandranunkel       : : 
+sydsmörblomma        : : 
+tiggarranunkel       : : 
+polarsmörblomma      : : 
+fjällruta            : : 
+aklejruta            : : 
+ängsruta             : : 
+kustruta             : : 
+äkta kustruta        : : 
+stor kustruta        : : 
+backruta             : : 
+nordruta             : : 
+vanlig backruta      : : 
+smalruta             : : 
+smörbollar           : : 
+
+#     Lardizabalaceae
+fembladig akebia     : : 
+
+#       Berberidaceae
+häckberberis         : : 
+berberis             : : 
+alpsockblomma        : : 
+mahonia              : : 
+
+#        Papaveraceae
+skelört              : : 
+strandvallmo         : : 
+engelsk vallmo       : : 
+spikvallmo           : : 
+purpurvallmo         : : 
+sibirisk vallmo      : : 
+rågvallmo            : : 
+vanlig rågvallmo     : : 
+blodvallmo           : : 
+orientvallmo         : : 
+jättevallmo          : : 
+fjällvallmo          : : 
+lappvallmo           : : 
+laestadiusvallmo     : : 
+dovrevallmo          : : 
+kornvallmo           : : 
+opievallmo           : : 
+
+#         Fumariaceae
+klängnunneört        : : 
+hålnunneört          : : 
+gotländsk nunneört   : : 
+smånunneört          : : 
+sibirisk nunneört    : : 
+sloknunneört         : : 
+fliknunneört         : : 
+stor nunneört        : : 
+fänrikshjärta        : : 
+vit jordrök          : : 
+jordrök              : : 
+blek jordrök         : : 
+gul nunneört         : : 
+
+#        Brassicaceae
+löktrav              : : 
+grådådra             : : 
+grustrav             : : 
+backtrav             : : 
+fjälltrav            : : 
+vanlig fjälltrav     : : 
+kal fjälltrav        : : 
+fagertrav            : : 
+rockentrav           : : 
+lundtrav             : : 
+kalktrav             : : 
+vanlig lundtrav      : : 
+bergtrav             : : 
+gotlandstrav         : : 
+pepparrot            : : 
+mellangyllen         : : 
+strandgyllen         : : 
+sommargyllen         : : 
+vanlig sommargyllen  : : 
+bangyllen            : : 
+sandvita             : : 
+svartsenap           : : 
+kål                  : : 
+åkerkål              : : 
+fjällkrassing        : : 
+ryssgubbe            : : 
+marviol              : : 
+baltisk marviol      : : 
+dynmarviol           : : 
+atlantisk marviol    : : 
+lindådra             : : 
+sanddådra            : : 
+oljedådra            : : 
+lomme                : : 
+bäckbräsma           : : 
+fjällbräsma          : : 
+tandrot              : : 
+skogsbräsma          : : 
+källbräsma           : : 
+vanlig skogsbräsma   : : 
+bergbräsma           : : 
+lundbräsma           : : 
+strandbräsma         : : 
+ängsbräsma           : : 
+kärrbräsma           : : 
+polarbräsma          : : 
+äkta ängsbräsma      : : 
+sandtrav             : : 
+vanlig sandtrav      : : 
+strandtrav           : : 
+välsk krassing       : : 
+dansk skörbjuggsört  : : 
+skörbjuggsört        : : 
+engelsk skörbjuggsört : : 
+vanlig skörbjuggsört : : 
+hamnkrassing         : : 
+kråkkrassing         : : 
+strandkål            : : 
+stillfrö             : : 
+mursenap             : : 
+sandsenap            : : 
+gulldraba            : : 
+smaldraba            : : 
+dvärgdraba           : : 
+fjälldraba           : : 
+vanlig fjälldraba    : : 
+alpdraba             : : 
+grådraba             : : 
+lappdraba            : : 
+lunddraba            : : 
+sanddraba            : : 
+isdraba              : : 
+bergdraba            : : 
+blekdraba            : : 
+raggdraba            : : 
+nagelört             : : 
+kålsenap             : : 
+åkerkårel            : : 
+storkårel            : : 
+vanlig åkerkårel     : : 
+gyllenlack           : : 
+bergkårel            : : 
+hesperis             : : 
+sorgört              : : 
+stenkrassing         : : 
+blomsteriberis       : : 
+vejde                : : 
+fältkrassing         : : 
+bankrassing          : : 
+vallkrassing         : : 
+bitterkrassing       : : 
+rundkrassing         : : 
+gatkrassing          : : 
+strandkrassing       : : 
+judaspenningar       : : 
+vanliga judaspenningar : : 
+månviol              : : 
+bäckfräne            : : 
+källfräne            : : 
+vinterfräne          : : 
+korndådra            : : 
+vanlig korndådra     : : 
+åkerrättika          : : 
+vanlig åkerrättika   : : 
+stäppsenap           : : 
+vattenfräne          : : 
+mälarfräne           : : 
+vägfräne             : : 
+klotfräne            : : 
+sumpfräne            : : 
+vanlig sumpfräne     : : 
+strandfräne          : : 
+vitsenap             : : 
+åkersenap            : : 
+hamnsenap            : : 
+vallsenap            : : 
+borstsenap           : : 
+vägsenap             : : 
+orientsenap          : : 
+styvsenap            : : 
+kalkkrassing         : : 
+volgasenap           : : 
+sylört               : : 
+sandkrassing         : : 
+penningört           : : 
+backskärvfrö         : : 
+storskärvfrö         : : 
+vanligt backskärvfrö : : 
+vårskärvfrö          : : 
+
+#          Resedaceae
+vitreseda            : : 
+gulreseda            : : 
+färgreseda           : : 
+
+#      Sarraceniaceae
+flugtrumpet          : : 
+
+#         Droseraceae
+storsileshår         : : 
+småsileshår          : : 
+rundsileshår         : : 
+
+#        Crassulaceae
+mongoliskt fetblad   : : 
+kärleksört           : : 
+vanlig kärleksört    : : 
+röd kärleksört       : : 
+hammarbytaklök       : : 
+gyllenfetblad        : : 
+sibiriskt fetblad    : : 
+kaukasiskt fetblad   : : 
+rosenrot             : : 
+vanlig rosenrot      : : 
+gul fetknopp         : : 
+vit fetknopp         : : 
+engelsk fetknopp     : : 
+liten fetknopp       : : 
+tofsfetknopp         : : 
+blek fetknopp        : : 
+lydisk fetknopp      : : 
+stor fetknopp        : : 
+kantig fetknopp      : : 
+klibbig fetknopp     : : 
+taklök               : : 
+fyrling              : : 
+
+#       Saxifragaceae
+gullpudra            : : 
+kustgullpudra        : : 
+polargullpudra       : : 
+klippbräcka          : : 
+gullbräcka           : : 
+knoppbräcka          : : 
+tuvbräcka            : : 
+fjällbrud            : : 
+groddbräcka          : : 
+mandelblomma         : : 
+myrbräcka            : : 
+mossbräcka           : : 
+fjällbräcka          : : 
+oppdalsbräcka        : : 
+purpurbräcka         : : 
+hällebräcka          : : 
+bergbräcka           : : 
+äkta silverbräcka    : : 
+snöbräcka            : : 
+gyllenbräcka         : : 
+stjärnbräcka         : : 
+spädbräcka           : : 
+grusbräcka           : : 
+
+#       Parnassiaceae
+slåtterblomma        : : 
+
+#     Grossulariaceae
+måbär                : : 
+slottsvinbär         : : 
+svarta vinbär        : : 
+survinbär            : : 
+trädgårdsvinbär      : : 
+lappvinbär           : : 
+skogsvinbär          : : 
+krusbär              : : 
+
+#            Rosaceae
+småborre             : : 
+luktsmåborre         : : 
+stjärndaggkåpa       : : 
+fjällkåpa            : : 
+baltisk daggkåpa     : : 
+norddaggkåpa         : : 
+vågdaggkåpa          : : 
+späddaggkåpa         : : 
+vindaggkåpa          : : 
+glatt daggkåpa       : : 
+sammetsdaggkåpa      : : 
+källdaggkåpa         : : 
+sjuhörnig daggkåpa   : : 
+glansdaggkåpa        : : 
+betesdaggkåpa        : : 
+njurdaggkåpa         : : 
+norsk daggkåpa       : : 
+oljedaggkåpa         : : 
+skarptandad daggkåpa : : 
+trubbdaggkåpa        : : 
+hjuldaggkåpa         : : 
+stubbdaggkåpa        : : 
+sarmatisk daggkåpa   : : 
+praktdaggkåpa        : : 
+ängsdaggkåpa         : : 
+valldaggkåpa         : : 
+tärnadaggkåpa        : : 
+skårdaggkåpa         : : 
+kustdaggkåpa         : : 
+sen häggmispel       : : 
+svensk häggmispel    : : 
+kopparhäggmispel     : : 
+prakthäggmispel      : : 
+häggmispel           : : 
+jungfrukam           : : 
+småfruktig jungfrukam : : 
+gåsört               : : 
+vanlig gåsört        : : 
+grönlandsgåsört      : : 
+plymspirea           : : 
+kråkklöver           : : 
+rynkoxbär            : : 
+alvaroxbär           : : 
+rosenoxbär           : : 
+spärroxbär           : : 
+lingonoxbär          : : 
+tyskt oxbär          : : 
+skånskt oxbär        : : 
+häckoxbär            : : 
+svartoxbär           : : 
+przewalskioxbär      : : 
+rött oxbär           : : 
+stäppoxbär           : : 
+ulloxbär             : : 
+rundhagtorn          : : 
+hybridhagtorn        : : 
+trubbhagtorn         : : 
+korallhagtorn        : : 
+spetshagtorn         : : 
+tok                  : : 
+fjällsippa           : : 
+trollsmultron        : : 
+jätteälggräs         : : 
+älggräs              : : 
+brudbröd             : : 
+jordgubbe            : : 
+parksmultron         : : 
+smultron             : : 
+scharlakanssmultron  : : 
+backsmultron         : : 
+rysk nejlikrot       : : 
+sträv nejlikrot      : : 
+amerikansk nejlikrot : : 
+humleblomster        : : 
+vanligt humleblomster : : 
+stort humleblomster  : : 
+nejlikrot            : : 
+apel                 : : 
+vildapel             : : 
+smällspirea          : : 
+gråfingerört         : : 
+revig blodrot        : : 
+femfingerört         : : 
+vasstandad femfingerört : : 
+vanlig femfingerört  : : 
+smal femfingerört    : : 
+liten femfingerört   : : 
+flikig femfingerört  : : 
+stor femfingerört    : : 
+vårfingerört         : : 
+blodrot              : : 
+luddfingerört        : : 
+finsk fingerört      : : 
+späd fingerört       : : 
+mångfingerört        : : 
+klippfingerört       : : 
+lappfingerört        : : 
+norsk fingerört      : : 
+styv fingerört       : : 
+revfingerört         : : 
+raggfingerört        : : 
+backfingerört        : : 
+smultronfingerört    : : 
+grå småfingerört     : : 
+småfingerört         : : 
+tysk fingerört       : : 
+sötkörsbär           : : 
+körsbärsplommon      : : 
+surkörsbär           : : 
+plommon              : : 
+krikon               : : 
+vejksel              : : 
+hägg                 : : 
+nordhägg             : : 
+vanlig hägg          : : 
+glanshägg            : : 
+slån                 : : 
+dvärgmandel          : : 
+virginiahägg         : : 
+finnros              : : 
+åkerros              : : 
+stenros              : : 
+kal stenros          : : 
+hårig stenros        : : 
+damascenerros        : : 
+nyponros             : : 
+hårig nyponros       : : 
+kal nyponros         : : 
+västkustros          : : 
+daggros              : : 
+ryssros              : : 
+kamtjatkaros         : : 
+kanelros             : : 
+bukettros            : : 
+äkta kanelros        : : 
+pimpinellros         : : 
+liten pimpinellros   : : 
+äppelros             : : 
+vresros              : : 
+luddros              : : 
+flikros              : : 
+filtros              : : 
+hartsros             : : 
+nutkahallon          : : 
+hjortron             : : 
+åkerbär              : : 
+bäverbär             : : 
+stenbär              : : 
+hallon               : : 
+prunkhallon          : : 
+blåhallon            : : 
+gyllenbjörnbär       : : 
+hårbjörnbär          : : 
+hjärtbjörnbär        : : 
+fintandat björnbär   : : 
+bohusbjörnbär        : : 
+slätbjörnbär         : : 
+borstbjörnbär        : : 
+knippbjörnbär        : : 
+glandelbjörnbär      : : 
+daggbjörnbär         : : 
+spetsbjörnbär        : : 
+hallandsbjörnbär     : : 
+blekingebjörnbär     : : 
+filtbjörnbär         : : 
+naggbjörnbär         : : 
+bornholmsbjörnbär    : : 
+lindblomsbjörnbär    : : 
+västkustbjörnbär     : : 
+hallonbjörnbär       : : 
+rosenbjörnbär        : : 
+svenskt björnbär     : : 
+lindbjörnbär         : : 
+hasselbjörnbär       : : 
+skageracksbjörnbär   : : 
+vanligt hasselbjörnbär : : 
+polabiskt björnbär   : : 
+sammetsbjörnbär      : : 
+armeniskt björnbär   : : 
+skånebjörnbär        : : 
+smalbjörnbär         : : 
+karakåsbjörnbär      : : 
+glansbjörnbär        : : 
+spirbjörnbär         : : 
+storbjörnbär         : : 
+östgötabjörnbär      : : 
+orustbjörnbär        : : 
+luddbjörnbär         : : 
+flikbjörnbär         : : 
+klobjörnbär          : : 
+bergumsbjörnbär      : : 
+grönbladsbjörnbär    : : 
+norskt björnbär      : : 
+skogsbjörnbär        : : 
+stort skogsbjörnbär  : : 
+vanligt skogsbjörnbär : : 
+åsljungabjörnbär     : : 
+rostbjörnbär         : : 
+sötbjörnbär          : : 
+blomsterbjörnbär     : : 
+uknabjörnbär         : : 
+pyramidbjörnbär      : : 
+raspbjörnbär         : : 
+skuggbjörnbär        : : 
+nålbjörnbär          : : 
+taggbjörnbär         : : 
+nordbjörnbär         : : 
+sprengelsbjörnbär    : : 
+surbjörnbär          : : 
+västerviksbjörnbär   : : 
+rundbladsbjörnbär    : : 
+vitt rundbladsbjörnbär : : 
+smålandsbjörnbär     : : 
+pimpinell            : : 
+äkta pimpinell       : : 
+vingpimpinell        : : 
+blodtopp             : : 
+spetsfingerört       : : 
+dvärgfingerört       : : 
+rönnspirea           : : 
+vitoxel              : : 
+rönn                 : : 
+vanlig rönn          : : 
+nordrönn             : : 
+balkanoxel           : : 
+finnoxel             : : 
+oxel                 : : 
+bergoxel             : : 
+fagerrönn            : : 
+norskoxel            : : 
+klippoxel            : : 
+klasespirea          : : 
+kvastspirea          : : 
+douglasspirea        : : 
+bredspirea           : : 
+storspirea           : : 
+torpspirea           : : 
+blekspirea           : : 
+häckspirea           : : 
+luddspirea           : : 
+
+#            Fabaceae
+getväppling          : : 
+stor getväppling     : : 
+lapsk getväppling    : : 
+strandgetväppling    : : 
+röd getväppling      : : 
+liten getväppling    : : 
+fjällvedel           : : 
+ljus fjällvedel      : : 
+mörk fjällvedel      : : 
+sandvedel            : : 
+kikvedel             : : 
+strandvedel          : : 
+isvedel              : : 
+sötvedel             : : 
+vippvedel            : : 
+smällvedel           : : 
+vidjeginst           : : 
+brokginst            : : 
+harris               : : 
+nålginst             : : 
+tysk ginst           : : 
+hårginst             : : 
+vingginst            : : 
+färgginst            : : 
+liten färgginst      : : 
+gulkronill           : : 
+alpgullregn          : : 
+sydgullregn          : : 
+luddvial             : : 
+sabelvial            : : 
+strandvial           : : 
+vanlig strandvial    : : 
+småbladig strandvial : : 
+kal strandvial       : : 
+hårig strandvial     : : 
+vingvial             : : 
+gökärt               : : 
+vippärt              : : 
+gräsvial             : : 
+kärrvial             : : 
+gulvial              : : 
+praktvial            : : 
+vårvial              : : 
+backvial             : : 
+knölvial             : : 
+vårärt               : : 
+käringtand           : : 
+fjällkäringtand      : : 
+vanlig käringtand    : : 
+foderkäringtand      : : 
+stor käringtand      : : 
+smal käringtand      : : 
+sandlupin            : : 
+blomsterlupin        : : 
+humlelusern          : : 
+sandlusern           : : 
+gullusern            : : 
+blålusern            : : 
+mellanlusern         : : 
+vit sötväppling      : : 
+stor sötväppling     : : 
+strandsötväppling    : : 
+dvärgsötväppling     : : 
+gul sötväppling      : : 
+esparsett            : : 
+stallört             : : 
+puktörne             : : 
+busktörne            : : 
+dvärgserradella      : : 
+fältvedel            : : 
+lappvedel            : : 
+luddvedel            : : 
+ärt                  : : 
+foderärt             : : 
+robinia              : : 
+rosenkronill         : : 
+klöverärt            : : 
+lupinväppling        : : 
+alpklöver            : : 
+harklöver            : : 
+gullklöver           : : 
+jordklöver           : : 
+trådklöver           : : 
+smultronklöver       : : 
+alsikeklöver         : : 
+vanlig alsikeklöver  : : 
+skogsklöver          : : 
+backklöver           : : 
+rödklöver            : : 
+strandrödklöver      : : 
+ängsrödklöver        : : 
+foderrödklöver       : : 
+vitklöver            : : 
+doftklöver           : : 
+brunklöver           : : 
+strimklöver          : : 
+blåväppling          : : 
+ärttörne             : : 
+backvicker           : : 
+kråkvicker           : : 
+buskvicker           : : 
+duvvicker            : : 
+vårvicker            : : 
+gulvicker            : : 
+ärtvicker            : : 
+liten sommarvicker   : : 
+stor sommarvicker    : : 
+häckvicker           : : 
+nordhäckvicker       : : 
+sydhäckvicker        : : 
+skogsvicker          : : 
+luktvicker           : : 
+sparvvicker          : : 
+luddvicker           : : 
+
+#         Oxalidaceae
+harsyra              : : 
+krypoxalis           : : 
+prärieoxalis         : : 
+klöveroxalis         : : 
+
+#         Geraniaceae
+skatnäva             : : 
+svedjenäva           : : 
+duvnäva              : : 
+fliknäva             : : 
+brandnäva            : : 
+glansnäva            : : 
+flocknäva            : : 
+mjuknäva             : : 
+kärrnäva             : : 
+brunnäva             : : 
+ängsnäva             : : 
+sparvnäva            : : 
+skuggnäva            : : 
+stinknäva            : : 
+vanlig stinknäva     : : 
+strandstinknäva      : : 
+blodnäva             : : 
+midsommarblomster    : : 
+vanligt midsommarblomster : : 
+
+#      Zygophyllaceae
+tiggarnöt            : : 
+
+#            Linaceae
+klipplin             : : 
+vildlin              : : 
+dvärglin             : : 
+
+#       Euphorbiaceae
+bantörel             : : 
+vårtörel             : : 
+söttörel             : : 
+vargtörel            : : 
+bredbladig vargtörel : : 
+smalbladig vargtörel : : 
+småtörel             : : 
+revormstörel         : : 
+kärrtörel            : : 
+rävtörel             : : 
+grenbingel           : : 
+skogsbingel          : : 
+
+#        Polygalaceae
+rosettjungfrulin     : : 
+toppjungfrulin       : : 
+jungfrulin           : : 
+vanligt jungfrulin   : : 
+
+#           Aceraceae
+naverlönn            : : 
+lönn                 : : 
+tysklönn             : : 
+
+#    Hippocastanaceae
+hästkastanj          : : 
+
+#       Balsaminaceae
+jättebalsamin        : : 
+springkorn           : : 
+blekbalsamin         : : 
+
+#       Aquifoliaceae
+järnek               : : 
+
+#        Celastraceae
+benved               : : 
+dvärgbenved          : : 
+
+#          Rhamnaceae
+brakved              : : 
+getapel              : : 
+
+#            Vitaceae
+vildvin              : : 
+
+#           Tiliaceae
+lind                 : : 
+parklind             : : 
+bohuslind            : : 
+
+#           Malvaceae
+gråmalva             : : 
+äkta gråmalva        : : 
+rosenmalva           : : 
+mellanmalva          : : 
+myskmalva            : : 
+skär kattost         : : 
+kvarnkattost         : : 
+vit kattost          : : 
+rödmalva             : : 
+vanlig rödmalva      : : 
+
+#       Thymelaeaceae
+tibast               : : 
+
+#        Elaeagnaceae
+silverbuske          : : 
+havtorn              : : 
+
+#          Clusiaceae
+luden johannesört    : : 
+dvärgjohannesört     : : 
+fyrkantig johannesört : : 
+bergjohannesört      : : 
+äkta johannesört     : : 
+hedjohannesört       : : 
+kärrjohannesört      : : 
+
+#           Violaceae
+silverviol           : : 
+åkerviol             : : 
+fjällviol            : : 
+ängsviol             : : 
+norrlandsviol        : : 
+bergviol             : : 
+storviol             : : 
+mossviol             : : 
+buskviol             : : 
+underviol            : : 
+luktviol             : : 
+kärrviol             : : 
+strandviol           : : 
+dvärgviol            : : 
+lundviol             : : 
+skogsviol            : : 
+lappviol             : : 
+sandviol             : : 
+kal sandviol         : : 
+vanlig sandviol      : : 
+skuggviol            : : 
+styvmorsviol         : : 
+klittviol            : : 
+vanlig styvmorsviol  : : 
+sumpviol             : : 
+
+#           Cistaceae
+gotlandssolvända     : : 
+solvända             : : 
+ljus solvända        : : 
+mörk solvända        : : 
+ölandssolvända       : : 
+filthårig ölandssolvända : : 
+äkta ölandssolvända  : : 
+
+#        Tamaricaceae
+klådris              : : 
+hösttamarisk         : : 
+
+#         Elatinaceae
+skaftslamkrypa       : : 
+slamkrypa            : : 
+nordslamkrypa        : : 
+tretalig slamkrypa   : : 
+
+#       Cucurbitaceae
+hundrova             : : 
+röd hundrova         : : 
+
+#          Lythraceae
+rödlånke             : : 
+fackelblomster       : : 
+
+#           Trapaceae
+sjönöt               : : 
+
+#          Onagraceae
+dvärghäxört          : : 
+mellanhäxört         : : 
+stor häxört          : : 
+purpurclarkia        : : 
+amerikansk dunört    : : 
+källdunört           : : 
+dvärgdunört          : : 
+mjölke               : : 
+vit dunört           : : 
+backdunört           : : 
+smaldunört           : : 
+alaskadunört         : : 
+rosendunört          : : 
+fjälldunört          : : 
+mjölkdunört          : : 
+lappdunört           : : 
+grådunört            : : 
+bergdunört           : : 
+mörk dunört          : : 
+kärrdunört           : : 
+luddunört            : : 
+grendunört           : : 
+kantdunört           : : 
+nattljus             : : 
+strävt nattljus      : : 
+jättenattljus        : : 
+smalt nattljus       : : 
+pricknattljus        : : 
+
+#        Haloragaceae
+hårslinga            : : 
+knoppslinga          : : 
+axslinga             : : 
+kransslinga          : : 
+
+#       Hippuridaceae
+mellanhästsvans      : : 
+ishavshästsvans      : : 
+hästsvans            : : 
+
+#           Cornaceae
+kornell              : : 
+videkornell          : : 
+skogskornell         : : 
+hönsbär              : : 
+
+#          Araliaceae
+murgröna             : : 
+storbladig murgröna  : : 
+
+#            Apiaceae
+kirskål              : : 
+vildpersilja         : : 
+liten vildpersilja   : : 
+smal vildpersilja    : : 
+trädgårdsvildpersilja : : 
+stor vildpersilja    : : 
+kvanne               : : 
+fjällkvanne          : : 
+strandkvanne         : : 
+strätta              : : 
+taggkörvel           : : 
+dansk körvel         : : 
+hundkäx              : : 
+selleri              : : 
+krypfloka            : : 
+stjärnflocka         : : 
+bäckmärke            : : 
+jordkastanj          : : 
+smalbladig harört    : : 
+strandnål            : : 
+kummin               : : 
+piggkörvel           : : 
+doftkörvel           : : 
+guldkörvel           : : 
+rotkörvel            : : 
+rysskörvel           : : 
+hårkörvel            : : 
+sprängört            : : 
+smal sprängört       : : 
+vanlig sprängört     : : 
+odört                : : 
+nötkörvel            : : 
+vildmorot            : : 
+silvermartorn        : : 
+martorn              : : 
+rysk martorn         : : 
+skärblad             : : 
+tromsöloka           : : 
+jätteloka            : : 
+björnloka            : : 
+sibirisk björnloka   : : 
+vit björnloka        : : 
+kungsholmsloka       : : 
+spikblad             : : 
+spenört              : : 
+libbsticka           : : 
+strandloka           : : 
+alpkörvel            : : 
+spansk körvel        : : 
+vattenstäkra         : : 
+pipstäkra            : : 
+smalstäkra           : : 
+palsternacka         : : 
+vanlig palsternacka  : : 
+vildpalsternacka     : : 
+persilja             : : 
+backsilja            : : 
+mästerrot            : : 
+kärrsilja            : : 
+stor bockrot         : : 
+bockrot              : : 
+sammetsbockrot       : : 
+vanlig bockrot       : : 
+piploka              : : 
+sårläka              : : 
+nålkörvel            : : 
+äkta nålkörvel       : : 
+krusfrö              : : 
+slidsilja            : : 
+karstsilja           : : 
+säfferot             : : 
+fliksäfferot         : : 
+ängssilja            : : 
+vattenmärke          : : 
+vingloka             : : 
+åkerkörvel           : : 
+rödkörvel            : : 
+
+#       Diapensiaceae
+fjällgröna           : : 
+
+#           Ericaceae
+rosling              : : 
+ripbär               : : 
+mjölon               : : 
+ljung                : : 
+mossljung            : : 
+kantljung            : : 
+finnmyrten           : : 
+ryl                  : : 
+kråkbär              : : 
+nordkråkbär          : : 
+sydkråkbär           : : 
+klockljung           : : 
+krypljung            : : 
+ögonpyrola           : : 
+tallört              : : 
+kal tallört          : : 
+vanlig tallört       : : 
+björkpyrola          : : 
+lappljung            : : 
+grönpyrola           : : 
+klockpyrola          : : 
+klotpyrola           : : 
+vitpyrola            : : 
+sandpyrola           : : 
+norskpyrola          : : 
+vanlig vitpyrola     : : 
+fujirododendron      : : 
+lapsk alpros         : : 
+skvattram            : : 
+dvärgtranbär         : : 
+blåbär               : : 
+tranbär              : : 
+odon                 : : 
+vanligt odon         : : 
+lingon               : : 
+
+#     Theophrastaceae
+bunge                : : 
+
+#         Myrsinaceae
+rödmire              : : 
+knutört              : : 
+strandkrypa          : : 
+skogslysing          : : 
+penningblad          : : 
+praktlysing          : : 
+topplösa             : : 
+strandlysing         : : 
+skogsstjärna         : : 
+
+#         Primulaceae
+sandviva             : : 
+grusviva             : : 
+vattenblink          : : 
+lundviva             : : 
+majviva              : : 
+strandviva           : : 
+bottenviksviva       : : 
+fjällviva            : : 
+smalviva             : : 
+gullviva             : : 
+jordviva             : : 
+
+#      Plumbaginaceae
+trift                : : 
+backtrift            : : 
+mellantrift          : : 
+strandtrift          : : 
+fjälltrift           : : 
+bohusmarrisp         : : 
+marrisp              : : 
+hallandsmarrisp      : : 
+vanlig marrisp       : : 
+
+#            Oleaceae
+ask                  : : 
+liguster             : : 
+syren                : : 
+
+#        Gentianaceae
+huvudarun            : : 
+flockarun            : : 
+topparun             : : 
+kustarun             : : 
+dvärgarun            : : 
+fjällgentiana        : : 
+klockgentiana        : : 
+baggsöta             : : 
+ängsgentiana         : : 
+sen ängsgentiana     : : 
+tidig ängsgentiana   : : 
+blekgentiana         : : 
+kustgentiana         : : 
+fältgentiana         : : 
+sen fältgentiana     : : 
+sätergentiana        : : 
+tidig fältgentiana   : : 
+lappgentiana         : : 
+sumpgentiana         : : 
+
+#       Menyanthaceae
+vattenklöver         : : 
+sjögull              : : 
+
+#         Apocynaceae
+vintergröna          : : 
+tulkört              : : 
+
+#           Rubiaceae
+färgmåra             : : 
+kal korsmåra         : : 
+stormåra             : : 
+gräddmåra            : : 
+snärjmåra            : : 
+vanlig snärjmåra     : : 
+strandsnärjmåra      : : 
+vitmåra              : : 
+stor vattenmåra      : : 
+myskmadra            : : 
+ölandsmåra           : : 
+vattenmåra           : : 
+baltisk vattenmåra   : : 
+vanlig vattenmåra    : : 
+parkmåra             : : 
+gotlandsmåra         : : 
+stenmåra             : : 
+linmåra              : : 
+småsnärjmåra         : : 
+backmåra             : : 
+vanlig backmåra      : : 
+västgötamåra         : : 
+dvärgmåra            : : 
+myskmåra             : : 
+sumpmåra             : : 
+gulmåra              : : 
+vanlig gulmåra       : : 
+åkermadd             : : 
+
+#       Polemoniaceae
+lappblågull          : : 
+blågull              : : 
+
+#      Convolvulaceae
+rosenvinda           : : 
+storvinda            : : 
+snårvinda            : : 
+kustsnårvinda        : : 
+vit snårvinda        : : 
+skär snårvinda       : : 
+åkervinda            : : 
+vanlig åkervinda     : : 
+smalbladig åkervinda : : 
+linsnärja            : : 
+ljungsnärja          : : 
+klöversnärja         : : 
+nässelsnärja         : : 
+vanlig nässelsnärja  : : 
+strandsnärja         : : 
+
+#        Boraginaceae
+fårtunga             : : 
+vanlig fårtunga      : : 
+oxtunga              : : 
+paddfot              : : 
+gurkört              : : 
+italiensk hundtunga  : : 
+hundtunga            : : 
+blåeld               : : 
+stickelfrö           : : 
+piggfrö              : : 
+sminkrot             : : 
+vit sminkrot         : : 
+blå sminkrot         : : 
+stenfrö              : : 
+ostronört            : : 
+åkerförgätmigej      : : 
+fjällförgätmigej     : : 
+brokförgätmigej      : : 
+vanlig brokförgätmigej : : 
+strandförgätmigej    : : 
+sumpförgätmigej      : : 
+falsk strandförgätmigej : : 
+backförgätmigej      : : 
+praktförgätmigej     : : 
+äkta förgätmigej     : : 
+fåblommig förgätmigej : : 
+vårförgätmigej       : : 
+skogsförgätmigej     : : 
+svartnonnea          : : 
+nonnea               : : 
+ormöga               : : 
+hästtunga            : : 
+smalbladig lungört   : : 
+lungört              : : 
+fläcklungört         : : 
+röd lungört          : : 
+fodervallört         : : 
+äkta vallört         : : 
+uppländsk vallört    : : 
+
+#         Verbenaceae
+järnört              : : 
+
+#     Callitrichaceae
+sommarlånke          : : 
+klolånke             : : 
+höstlånke            : : 
+smålånke             : : 
+plattlånke           : : 
+dikeslånke           : : 
+hybridlånke          : : 
+
+#           Lamiaceae
+kritsuga             : : 
+blåsuga              : : 
+hybridsuga           : : 
+revsuga              : : 
+bosyska              : : 
+trattbosyska         : : 
+äkta bosyska         : : 
+drakblomma           : : 
+rysk drakblomma      : : 
+kammynta             : : 
+kalkdån              : : 
+toppdån              : : 
+mjukdån              : : 
+hampdån              : : 
+pipdån               : : 
+jordreva             : : 
+stor jordreva        : : 
+isop                 : : 
+gulplister           : : 
+praktgulplister      : : 
+vanlig gulplister    : : 
+vitplister           : : 
+mjukplister          : : 
+mellanplister        : : 
+flikplister          : : 
+rosenplister         : : 
+rödplister           : : 
+lavendel             : : 
+hjärtstilla          : : 
+äkta hjärtstilla     : : 
+strandklo            : : 
+kransborre           : : 
+vattenmynta          : : 
+vanlig vattenmynta   : : 
+strandmynta          : : 
+åkermynta            : : 
+vanlig åkermynta     : : 
+ädelmynta            : : 
+värmländsk ädelmynta : : 
+småblommig ädelmynta : : 
+gotländsk ädelmynta  : : 
+skånsk ädelmynta     : : 
+gleshårig ädelmynta  : : 
+gråmynta             : : 
+grönmynta            : : 
+hjärtmynta           : : 
+rundmynta            : : 
+kransmynta           : : 
+kattmynta            : : 
+blånepeta            : : 
+kungsmynta           : : 
+praktbrunört         : : 
+flikbrunört          : : 
+brunört              : : 
+klibbsalvia          : : 
+stäppsalvia          : : 
+ängssalvia           : : 
+skogssalvia          : : 
+kranssalvia          : : 
+harmynta             : : 
+bergmynta            : : 
+stor frossört        : : 
+frossört             : : 
+toppfrossört         : : 
+småfrossört          : : 
+åkersyska            : : 
+lammöron             : : 
+humlesuga            : : 
+knölsyska            : : 
+stinksyska           : : 
+druvgamander         : : 
+lökgamander          : : 
+stortimjan           : : 
+backtimjan           : : 
+kryddtimjan          : : 
+
+#          Solanaceae
+spikklubba           : : 
+vit spikklubba       : : 
+bolmört              : : 
+bocktörne            : : 
+bredbladigt bocktörne : : 
+dårört               : : 
+amerikansk nattskatta : : 
+besksöta             : : 
+nattskatta           : : 
+vanlig nattskatta    : : 
+bägarnattskatta      : : 
+röd nattskatta       : : 
+gul nattskatta       : : 
+
+#       Orobanchaceae
+svarthö              : : 
+strandögontröst      : : 
+klapperögontröst     : : 
+fjällögontröst       : : 
+kärrögontröst        : : 
+tromsögontröst       : : 
+ljungögontröst       : : 
+grå ögontröst        : : 
+hybridögontröst      : : 
+finnögontröst        : : 
+ängsögontröst        : : 
+stor ögontröst       : : 
+lappögontröst        : : 
+brun ögontröst       : : 
+skottlandsögontröst  : : 
+vanlig ögontröst     : : 
+vätögontröst         : : 
+uddögontröst         : : 
+svensk ögontröst     : : 
+späd ögontröst       : : 
+vätteros             : : 
+pukvete              : : 
+korskovall           : : 
+natt och dag         : : 
+ängskovall           : : 
+guldgul ängskovall   : : 
+vanlig ängskovall    : : 
+skogskovall          : : 
+strandrödtoppa       : : 
+åkerrödtoppa         : : 
+rödtoppa             : : 
+timjansnyltrot       : : 
+ametistsnyltrot      : : 
+klintsnyltrot        : : 
+murgrönssnyltrot     : : 
+berberissnyltrot     : : 
+klöversnyltrot       : : 
+fibblesnyltrot       : : 
+röllikesnyltrot      : : 
+tistelsnyltrot       : : 
+brandspira           : : 
+fjällspira           : : 
+lappspira            : : 
+gullspira            : : 
+kärrspira            : : 
+nordspira            : : 
+höstspira            : : 
+vanlig kärrspira     : : 
+kung Karls spira     : : 
+granspira            : : 
+vanlig granspira     : : 
+ängsskallra          : : 
+fjällskallra         : : 
+äkta ängsskallra     : : 
+smalskallra          : : 
+höskallra            : : 
+åkerskallra          : : 
+höstskallra          : : 
+äkta höskallra       : : 
+
+#    Scrophulariaceae
+småsporre            : : 
+murreva              : : 
+liten fingerborgsblomma : : 
+fingerborgsblomma    : : 
+spjutsporre          : : 
+äkta spjutsporre     : : 
+ävjebrodd            : : 
+jättesporre          : : 
+ginstsporre          : : 
+strimsporre          : : 
+mellansporre         : : 
+gulsporre            : : 
+gyckelblomma         : : 
+brokgyckelblomma     : : 
+kal gyckelblomma     : : 
+tuvgyckelblomma      : : 
+kalvnos              : : 
+guldflenört          : : 
+flenört              : : 
+vårflenört           : : 
+franskt kungsljus    : : 
+ölandskungsljus      : : 
+grenigt kungsljus    : : 
+mörkt kungsljus      : : 
+läkekungsljus        : : 
+praktkungsljus       : : 
+kungsljus            : : 
+åkerveronika         : : 
+fjällveronika        : : 
+vanlig fjällveronika : : 
+högfjällsveronika    : : 
+vattenveronika       : : 
+fältveronika         : : 
+praktveronika        : : 
+bäckveronika         : : 
+dikesveronika        : : 
+teveronika           : : 
+trådveronika         : : 
+klippveronika        : : 
+murgrönsveronika     : : 
+äkta murgrönsveronika : : 
+skuggveronika        : : 
+strandveronika       : : 
+bredbladig strandveronika : : 
+smalbladig strandveronika : : 
+hällveronika         : : 
+skogsveronika        : : 
+ärenpris             : : 
+luddveronika         : : 
+pilgrimsveronika     : : 
+trädgårdsveronika    : : 
+glansveronika        : : 
+alvarveronika        : : 
+dyveronika           : : 
+lappveronika         : : 
+majveronika          : : 
+axveronika           : : 
+klibbveronika        : : 
+vårveronika          : : 
+
+#      Globulariaceae
+bergskrabba          : : 
+
+#    Lentibulariaceae
+fjälltätört          : : 
+dvärgtätört          : : 
+tätört               : : 
+sydbläddra           : : 
+dybläddra            : : 
+dvärgbläddra         : : 
+blekbläddra          : : 
+sumpbläddra          : : 
+vattenbläddra        : : 
+
+#      Plantaginaceae
+sandkämpar           : : 
+strandkämpar         : : 
+svartkämpar          : : 
+vanliga svartkämpar  : : 
+groblad              : : 
+åkergroblad          : : 
+gårdsgroblad         : : 
+kustgroblad          : : 
+gulkämpar            : : 
+vanliga gulkämpar    : : 
+rödkämpar            : : 
+dvärgkämpar          : : 
+strandpryl           : : 
+
+#           Adoxaceae
+desmeknopp           : : 
+sommarfläder         : : 
+fläder               : : 
+druvfläder           : : 
+vanlig druvfläder    : : 
+parkolvon            : : 
+olvon                : : 
+
+#      Caprifoliaceae
+blåtry               : : 
+vanlig blåtry        : : 
+rysk blåtry          : : 
+kaprifol             : : 
+skärmtry             : : 
+vildkaprifol         : : 
+skogstry             : : 
+snöbär               : : 
+
+#         Linnaeaceae
+linnea               : : 
+
+#       Valerianaceae
+pipört               : : 
+småvänderot          : : 
+läkevänderot         : : 
+flädervänderot       : : 
+hårvänderot          : : 
+strandvänderot       : : 
+äkta flädervänderot  : : 
+sommarklynne         : : 
+vårklynne            : : 
+
+#         Dipsacaceae
+alpjättevädd         : : 
+jättevädd            : : 
+sträv kardvädd       : : 
+åkervädd             : : 
+luktvädd             : : 
+fältvädd             : : 
+ängsvädd             : : 
+
+#       Campanulaceae
+hjärtklocka          : : 
+skogsklocka          : : 
+toppklocka           : : 
+ängstoppklocka       : : 
+prakttoppklocka      : : 
+mjölkklocka          : : 
+hässleklocka         : : 
+vanlig hässleklocka  : : 
+mariaklocka          : : 
+ängsklocka           : : 
+stor blåklocka       : : 
+knölklocka           : : 
+rapunkelklocka       : : 
+skredblåklocka       : : 
+liten blåklocka      : : 
+nässelklocka         : : 
+fjällklocka          : : 
+blåmunkar            : : 
+dvärgspegel          : : 
+notblomster          : : 
+blårapunkel          : : 
+blekrapunkel         : : 
+vitrapunkel          : : 
+
+#          Asteraceae
+kamröllika           : : 
+röllika              : : 
+vanlig röllika       : : 
+fjällröllika         : : 
+nysört               : : 
+vanlig nysört        : : 
+sträv ambrosia       : : 
+pärleternell         : : 
+fjällkattfot         : : 
+grå fjällkattfot     : : 
+kattfot              : : 
+grönkattfot          : : 
+lappkattfot          : : 
+åkerkulla            : : 
+vanlig åkerkulla     : : 
+kamomillkulla        : : 
+färgkulla            : : 
+stor kardborre       : : 
+liten kardborre      : : 
+lundkardborre        : : 
+ullkardborre         : : 
+fjällarnika          : : 
+vägarnika            : : 
+slåttergubbe         : : 
+klubbfibbla          : : 
+malört               : : 
+fältmalört           : : 
+bottnisk malört      : : 
+vanlig fältmalört    : : 
+alvarmalört          : : 
+stenmalört           : : 
+sandmalört           : : 
+gråbo                : : 
+strandgråbo          : : 
+vanlig gråbo         : : 
+höstaster            : : 
+videaster            : : 
+sibirisk aster       : : 
+tusensköna           : : 
+nickskära            : : 
+grönskära            : : 
+brunskära            : : 
+piggtistel           : : 
+krustistel           : : 
+nicktistel           : : 
+olymptistel          : : 
+silvertistel         : : 
+spåtistel            : : 
+långbladig spåtistel : : 
+kortbladig spåtistel : : 
+kamklint             : : 
+gul kamklint         : : 
+blåklint             : : 
+banklint             : : 
+rödklint             : : 
+bergklint            : : 
+svartklint           : : 
+finnklint            : : 
+väddklint            : : 
+sandklint            : : 
+kamkulla             : : 
+torta                : : 
+parksallat           : : 
+cikoria              : : 
+jordtistel           : : 
+åkertistel           : : 
+bantistel            : : 
+brudborste           : : 
+kåltistel            : : 
+kärrtistel           : : 
+bäcktistel           : : 
+vägtistel            : : 
+kanadabinka          : : 
+skånefibbla          : : 
+grönfibbla           : : 
+sprötfibbla          : : 
+vallfibbla           : : 
+kärrfibbla           : : 
+klasefibbla          : : 
+helgonfibbla         : : 
+sibirisk fibbla      : : 
+klofibbla            : : 
+alvarfibbla          : : 
+hällfibbla           : : 
+vanlig klofibbla     : : 
+gullborste           : : 
+klostergemsrot       : : 
+grå bolltistel       : : 
+bolltistel           : : 
+gråbinka             : : 
+vanlig gråbinka      : : 
+kalbinka             : : 
+brunbinka            : : 
+sommarbinka          : : 
+blå sommarbinka      : : 
+rosenbinka           : : 
+svartbinka           : : 
+vitbinka             : : 
+fjällbinka           : : 
+hampflockel          : : 
+gulgrå ullört        : : 
+klotullört           : : 
+gängel               : : 
+hårgängel            : : 
+gullkrage            : : 
+norsknoppa           : : 
+fjällnoppa           : : 
+skogsnoppa           : : 
+sumpnoppa            : : 
+höstsolros           : : 
+hedblomster          : : 
+flockfibbla          : : 
+åkerfibbla           : : 
+slåtterfibbla        : : 
+rotfibbla            : : 
+luddkrissla          : : 
+svärdkrissla         : : 
+ålandsrot            : : 
+krissla              : : 
+taggsallat           : : 
+harkål               : : 
+vanlig harkål        : : 
+stor harkål          : : 
+höstfibbla           : : 
+gulbrun höstfibbla   : : 
+vanlig höstfibbla    : : 
+mörk höstfibbla      : : 
+kal höstfibbla       : : 
+svart höstfibbla     : : 
+sommarfibbla         : : 
+strimfibbla          : : 
+prästkrage           : : 
+ullört               : : 
+spenslig ullört      : : 
+gatkamomill          : : 
+kamomill             : : 
+uppsalasallat        : : 
+karlsösallat         : : 
+älvsallat            : : 
+sandsallat           : : 
+skogssallat          : : 
+ulltistel            : : 
+vitskråp             : : 
+fjällskråp           : : 
+pestskråp            : : 
+bitterskråp          : : 
+spjutskråp           : : 
+bitterfibbla         : : 
+rödfibbla            : : 
+vanlig rödfibbla     : : 
+brandfibbla          : : 
+hårig brandfibbla    : : 
+glatt brandfibbla    : : 
+ängsfibbla           : : 
+kvastfibbla          : : 
+styvhårig kvastfibbla : : 
+mjukhårig kvastfibbla : : 
+vätfibbla            : : 
+äkta vätfibbla       : : 
+sydbergsfibbla       : : 
+blåfibbla            : : 
+revig blåfibbla      : : 
+äkta blåfibbla       : : 
+nordlig kvastfibbla  : : 
+gaffelfibbla         : : 
+svenskfibbla         : : 
+revfibbla            : : 
+gråfibbla            : : 
+vanlig gråfibbla     : : 
+mattfibbla           : : 
+nickfibbla           : : 
+vitnoppa             : : 
+elfenbenstistel      : : 
+loppört              : : 
+höstrudbeckia        : : 
+fjällskära           : : 
+svinrot              : : 
+vattenstånds         : : 
+hampstånds           : : 
+flikstånds           : : 
+boerstånds           : : 
+knappstånds          : : 
+alvarstånds          : : 
+stånds               : : 
+glesstånds           : : 
+gullstånds           : : 
+parkstånds           : : 
+stenkorsört          : : 
+bergkorsört          : : 
+vårkorsört           : : 
+klibbkorsört         : : 
+korsört              : : 
+vanlig korsört       : : 
+strandmalört         : : 
+baltisk strandmalört : : 
+vanlig strandmalört  : : 
+ängsskära            : : 
+skålört              : : 
+mariatistel          : : 
+kanadensiskt gullris : : 
+höstgullris          : : 
+gullris              : : 
+lappgullris          : : 
+vanligt gullris      : : 
+åkermolke            : : 
+vanlig åkermolke     : : 
+kalmolke             : : 
+klappermolke         : : 
+svinmolke            : : 
+vanlig svinmolke     : : 
+kålmolke             : : 
+strandmolke          : : 
+balsamblad           : : 
+renfanekrage         : : 
+röllikekrage         : : 
+mattram              : : 
+renfana              : : 
+vanlig renfana       : : 
+snytmaskros          : : 
+toppmaskros          : : 
+sorgmaskros          : : 
+enfärgad maskros     : : 
+mörk maskros         : : 
+penselmaskros        : : 
+spinkmaskros         : : 
+gaddmaskros          : : 
+Holmgrens maskros    : : 
+parvelmaskros        : : 
+liten kärrmaskros    : : 
+stegmaskros          : : 
+dunmaskros           : : 
+Ostenfelds maskros   : : 
+krummaskros          : : 
+borstmaskros         : : 
+vårmaskros           : : 
+dystermaskros        : : 
+gluggmaskros         : : 
+nordmaskros          : : 
+Steenhoffs maskros   : : 
+filtmaskros          : : 
+triangelmaskros      : : 
+rosettmaskros        : : 
+praktmaskros         : : 
+lapplandsmaskros     : : 
+tåtmaskros           : : 
+svarttandad maskros  : : 
+Gelerts maskros      : : 
+Nordstedts maskros   : : 
+gotlandsmaskros      : : 
+knoppmaskros         : : 
+mörk tegelmaskros    : : 
+stickmaskros         : : 
+hällmaskros          : : 
+glappmaskros         : : 
+parkmaskros          : : 
+solmaskros           : : 
+falkmaskros          : : 
+oslomaskros          : : 
+tegelmaskros         : : 
+blågrå maskros       : : 
+gutemaskros          : : 
+sotmaskros           : : 
+karelsk maskros      : : 
+backmaskros          : : 
+spädmaskros          : : 
+bårdmaskros          : : 
+fransmaskros         : : 
+pyttemaskros         : : 
+parnassmaskros       : : 
+blymaskros           : : 
+grusmaskros          : : 
+brunmaskros          : : 
+bödamaskros          : : 
+skevmaskros          : : 
+rubinmaskros         : : 
+ölandsmaskros        : : 
+skånemaskros         : : 
+fanömaskros          : : 
+österlensmaskros     : : 
+tofsmaskros          : : 
+alvarmaskros         : : 
+trådmaskros          : : 
+stenmaskros          : : 
+hollandsmaskros      : : 
+Bökmans maskros      : : 
+lövmaskros           : : 
+ängsmaskros          : : 
+grönsvart maskros    : : 
+Marklunds maskros    : : 
+brittmaskros         : : 
+kvadratmaskros       : : 
+daggmaskros          : : 
+hjulmaskros          : : 
+bredskaftad fläckmaskros : : 
+dalslandsmaskros     : : 
+fläckmaskros         : : 
+leverfläcksmaskros   : : 
+kvällsmaskros        : : 
+nattmaskros          : : 
+dvärgmaskros         : : 
+pysslingmaskros      : : 
+sydmaskros           : : 
+östersjömaskros      : : 
+saffransmaskros      : : 
+jämtlandsmaskros     : : 
+kalkmaskros          : : 
+smalfjällig strandmaskros : : 
+sumpmaskros          : : 
+Langes maskros       : : 
+vätmaskros           : : 
+slätmaskros          : : 
+sankmaskros          : : 
+flottmaskros         : : 
+strandmaskros        : : 
+västgötamaskros      : : 
+ogräsmaskros         : : 
+jyllandsmaskros      : : 
+atlantmaskros        : : 
+fjällmaskros         : : 
+strålöga             : : 
+fältnocka            : : 
+kärrnocka            : : 
+gotländsk haverrot   : : 
+stor haverrot        : : 
+äkta haverrot        : : 
+ängshaverrot         : : 
+småhaverrot          : : 
+vanlig ängshaverrot  : : 
+kustbaldersbrå       : : 
+nordbaldersbrå       : : 
+baldersbrå           : : 
+strandaster          : : 
+hästhov              : : 
+verbesina            : : 
+gullfrö              : : 
+
+#           Acoraceae
+kalmus               : : 
+
+#       Nartheciaceae
+myrlilja             : : 
+
+#             Araceae
+munkhätta            : : 
+fläckig munkhätta    : : 
+missne               : : 
+skunkkalla           : : 
+vit skunkkalla       : : 
+guldkolv             : : 
+
+#           Lemnaceae
+kupandmat            : : 
+andmat               : : 
+korsandmat           : : 
+stor andmat          : : 
+
+#          Butomaceae
+blomvass             : : 
+
+#        Alismataceae
+grässvalting         : : 
+gotlandssvalting     : : 
+svalting             : : 
+småsvalting          : : 
+flocksvalting        : : 
+revsvalting          : : 
+flytsvalting         : : 
+trubbpilblad         : : 
+pilblad              : : 
+
+#    Hydrocharitaceae
+vattenpest           : : 
+smal vattenpest      : : 
+dyblad               : : 
+sjönajas             : : 
+havsnajas            : : 
+vattenaloe           : : 
+
+#    Scheuchzeriaceae
+kallgräs             : : 
+
+#       Juncaginaceae
+havssälting          : : 
+kärrsälting          : : 
+
+#    Potamogetonaceae
+tätnate              : : 
+spetsnate            : : 
+rostnate             : : 
+gropnate             : : 
+källnate             : : 
+bandnate             : : 
+krusnate             : : 
+trådnate             : : 
+uddnate              : : 
+gräsnate             : : 
+grovnate             : : 
+gäddnate             : : 
+trubbnate            : : 
+borstnate            : : 
+ålnate               : : 
+bäcknate             : : 
+långnate             : : 
+spädnate             : : 
+styvnate             : : 
+knölnate             : : 
+slidnate             : : 
+
+#          Ruppiaceae
+skruvnating          : : 
+hårnating            : : 
+
+#         Zosteraceae
+smal bandtång        : : 
+bandtång             : : 
+dvärgbandtång        : : 
+
+#    Zannichelliaceae
+hårsärv              : : 
+storsärv             : : 
+skaftsärv            : : 
+småsärv              : : 
+
+#       Tofieldiaceae
+kärrlilja            : : 
+björnbrodd           : : 
+
+#        Colchicaceae
+tidlösa              : : 
+
+#       Melanthiaceae
+nysrot               : : 
+vit nysrot           : : 
+
+#         Trilliaceae
+ormbär               : : 
+
+#           Liliaceae
+kejsarkrona          : : 
+kungsängslilja       : : 
+vårlök               : : 
+dvärgvårlök          : : 
+ängsvårlök           : : 
+lundvårlök           : : 
+luddvårlök           : : 
+brandlilja           : : 
+vanlig brandlilja    : : 
+tigerlilja           : : 
+krollilja            : : 
+vildtulpan           : : 
+
+#         Orchidaceae
+göknycklar           : : 
+kärrnycklar          : : 
+salepsrot            : : 
+norna                : : 
+stor skogslilja      : : 
+vit skogslilja       : : 
+röd skogslilja       : : 
+dvärgyxne            : : 
+korallrot            : : 
+guckusko             : : 
+blodnycklar          : : 
+ängsnycklar          : : 
+vaxnycklar           : : 
+lappnycklar          : : 
+skogsnycklar         : : 
+Jungfru Marie nycklar : : 
+majnycklar           : : 
+strandnycklar        : : 
+Adam och Eva         : : 
+mossnycklar          : : 
+sumpnycklar          : : 
+grönkulla            : : 
+purpurknipprot       : : 
+skogsknipprot        : : 
+vanlig skogsknipprot : : 
+kärrknipprot         : : 
+kal knipprot         : : 
+skogsfru             : : 
+knärot               : : 
+brudsporre           : : 
+vanlig brudsporre    : : 
+praktsporre          : : 
+brunkulla            : : 
+luktsporre           : : 
+brudkulla            : : 
+myggblomster         : : 
+honungsblomster      : : 
+gulyxne              : : 
+spindelblomster      : : 
+tvåblad              : : 
+knottblomster        : : 
+krutbrännare         : : 
+nästrot              : : 
+flugblomster         : : 
+Sankt Pers nycklar   : : 
+johannesnycklar      : : 
+alpnycklar           : : 
+nattviol             : : 
+ängsnattviol         : : 
+skogsnattviol        : : 
+grönvit nattviol     : : 
+lappfela             : : 
+vityxne              : : 
+fjällyxne            : : 
+skruvax              : : 
+
+#           Iridaceae
+snökrokus            : : 
+vårkrokus            : : 
+svärdslilja          : : 
+dansk iris           : : 
+brokiris             : : 
+gräslilja            : : 
+
+#        Asparagaceae
+sparris              : : 
+
+#       Anthericaceae
+stor sandlilja       : : 
+liten sandlilja      : : 
+
+#           Alliaceae
+rosenlök             : : 
+lök                  : : 
+klipplök             : : 
+backlök              : : 
+snödroppslök         : : 
+gräslök              : : 
+alvargräslök         : : 
+skärgårdsgräslök     : : 
+trädgårdsgräslök     : : 
+jättegräslök         : : 
+skogslök             : : 
+kantlök              : : 
+ramslök              : : 
+sandlök              : : 
+purpursandlök        : : 
+blek sandlök         : : 
+majlök               : : 
+
+#      Amaryllidaceae
+snödroppe            : : 
+snöklocka            : : 
+pingstlilja          : : 
+påsklilja            : : 
+
+#       Hyacinthaceae
+italiensk blåstjärna : : 
+engelsk klockhyacint : : 
+dvärghyacint         : : 
+pärlhyacint          : : 
+skymningsstjärna     : : 
+spärrmorgonstjärna   : : 
+aftonstjärna         : : 
+morgonstjärna        : : 
+porslinshyacint      : : 
+tuvig blåstjärna     : : 
+tidig blåstjärna     : : 
+vårstjärna           : : 
+stor vårstjärna      : : 
+persisk blåstjärna   : : 
+liten vårstjärna     : : 
+rysk blåstjärna      : : 
+
+#     Convallariaceae
+liljekonvalj         : : 
+ekorrbär             : : 
+stjärnrams           : : 
+storrams             : : 
+jätterams            : : 
+getrams              : : 
+kransrams            : : 
+
+#           Juncaceae
+myrtåg               : : 
+nordtåg              : : 
+torvtåg              : : 
+vanlig myrtåg        : : 
+svarttåg             : : 
+fjälltåg             : : 
+östersjötåg          : : 
+mellantåg            : : 
+ryltåg               : : 
+vanlig ryltåg        : : 
+stortåg              : : 
+polartåg             : : 
+vägtåg               : : 
+löktåg               : : 
+vanlig löktåg        : : 
+atlanttåg            : : 
+huvudtåg             : : 
+bruntåg              : : 
+stubbtåg             : : 
+knapptåg             : : 
+veketåg              : : 
+svärdtåg             : : 
+trådtåg              : : 
+salttåg              : : 
+vanlig salttåg       : : 
+blåtåg               : : 
+strandtåg            : : 
+pysslingtåg          : : 
+dvärgtåg             : : 
+grodtåg              : : 
+borsttåg             : : 
+dytåg                : : 
+trubbtåg             : : 
+syltåg               : : 
+klynnetåg            : : 
+lapptåg              : : 
+vanlig lapptåg       : : 
+snöfryle             : : 
+bågfryle             : : 
+vanlig bågfryle      : : 
+polarfryle           : : 
+knippfryle           : : 
+hedfryle             : : 
+backfryle            : : 
+vitfryle             : : 
+ängsfryle            : : 
+säterfryle           : : 
+vanlig ängsfryle     : : 
+blekfryle            : : 
+vippfryle            : : 
+vårfryle             : : 
+axfryle              : : 
+svartfryle           : : 
+storfryle            : : 
+fjällfryle           : : 
+
+#          Cyperaceae
+plattsäv             : : 
+rödsäv               : : 
+vasstarr             : : 
+brunstarr            : : 
+tagelstarr           : : 
+norrlandsstarr       : : 
+renstarr             : : 
+sandstarr            : : 
+finnstarr            : : 
+svartstarr           : : 
+svedstarr            : : 
+brokstarr            : : 
+styvstarr            : : 
+vanlig styvstarr     : : 
+nickstarr            : : 
+hednickstarr         : : 
+kärrnickstarr        : : 
+klubbstarr           : : 
+fjällklubbstarr      : : 
+gråstarr             : : 
+vanlig gråstarr      : : 
+grov gråstarr        : : 
+hårstarr             : : 
+äkta hårstarr        : : 
+huvudstarr           : : 
+vårstarr             : : 
+tuvstarr             : : 
+strängstarr          : : 
+grönstarr            : : 
+trindstarr           : : 
+vanlig trindstarr    : : 
+stor trindstarr      : : 
+vispstarr            : : 
+nålstarr             : : 
+spädstarr            : : 
+glesstarr            : : 
+plattstarr           : : 
+långstarr            : : 
+stjärnstarr          : : 
+bunkestarr           : : 
+vanlig bunkestarr    : : 
+rankstarr            : : 
+backstarr            : : 
+segstarr             : : 
+slankstarr           : : 
+knagglestarr         : : 
+sotstarr             : : 
+isstarr              : : 
+klapperstarr         : : 
+klotstarr            : : 
+österbottensstarr    : : 
+hartmansstarr        : : 
+myrstarr             : : 
+grusstarr            : : 
+kolstarr             : : 
+ängsstarr            : : 
+ålandsstarr          : : 
+vanlig ängsstarr     : : 
+ripstarr             : : 
+nordstarr            : : 
+trådstarr            : : 
+slakstarr            : : 
+jämtstarr            : : 
+näbbstarr            : : 
+ölandsstarr          : : 
+dystarr              : : 
+vitstarr             : : 
+repestarr            : : 
+norskstarr           : : 
+lämmelstarr          : : 
+sumpstarr            : : 
+bågstarr             : : 
+borststarr           : : 
+lundstarr            : : 
+mörk snårstarr       : : 
+staggstarr           : : 
+hundstarr            : : 
+styltstarr           : : 
+vanlig hundstarr     : : 
+tuvad hundstarr      : : 
+taigastarr           : : 
+fjällstarr           : : 
+trubbstarr           : : 
+fågelstarr           : : 
+blankstarr           : : 
+harstarr             : : 
+snårstarr            : : 
+strandstarr          : : 
+åsstarr              : : 
+blekstarr            : : 
+hirsstarr            : : 
+vippstarr            : : 
+lappstarr            : : 
+taggstarr            : : 
+frösöstarr           : : 
+pillerstarr          : : 
+slokstarr            : : 
+loppstarr            : : 
+prickstarr           : : 
+myggstarr            : : 
+skärmstarr           : : 
+älvstarr             : : 
+jättestarr           : : 
+flaskstarr           : : 
+rundstarr            : : 
+dvärgstarr           : : 
+klippstarr           : : 
+glansstarr           : : 
+piggstarr            : : 
+gölstarr             : : 
+slaktoppsstarr       : : 
+skogsstarr           : : 
+tågstarr             : : 
+luddstarr            : : 
+kanadastarr          : : 
+saltstarr            : : 
+slidstarr            : : 
+blåsstarr            : : 
+ärtstarr             : : 
+ävjestarr            : : 
+liten ärtstarr       : : 
+vanlig ärtstarr      : : 
+rävstarr             : : 
+ag                   : : 
+dvärgag              : : 
+nålsäv               : : 
+veksäv               : : 
+dysäv                : : 
+knappsäv             : : 
+bottnisk knappsäv    : : 
+nordknappsäv         : : 
+sydknappsäv          : : 
+dvärgsäv             : : 
+tagelsäv             : : 
+agnsäv               : : 
+alvaragnsäv          : : 
+bottnisk agnsäv      : : 
+vanlig agnsäv        : : 
+baltisk agnsäv       : : 
+ängsull              : : 
+vanlig ängsull       : : 
+myrull               : : 
+kärrull              : : 
+gräsull              : : 
+lappull              : : 
+rostull              : : 
+polarull             : : 
+tuvull               : : 
+flytsäv              : : 
+borstsäv             : : 
+enaxig sävstarr      : : 
+fleraxig sävstarr    : : 
+vitag                : : 
+brunag               : : 
+säv                  : : 
+havssäv              : : 
+blåsäv               : : 
+axag                 : : 
+knappag              : : 
+bågsäv               : : 
+skogssäv             : : 
+snip                 : : 
+tuvsäv               : : 
+hedsäv               : : 
+
+#           Typhaceae
+plattbladig igelknopp : : 
+igelknopp            : : 
+storigelknopp        : : 
+sotigelknopp         : : 
+vanlig storigelknopp : : 
+glansigelknopp       : : 
+klotigelknopp        : : 
+gyttrad igelknopp    : : 
+flotagräs            : : 
+fjälligelknopp       : : 
+dvärgigelknopp       : : 
+smalkaveldun         : : 
+bredkaveldun         : : 
+
+#             Poaceae
+kamvete              : : 
+brunven              : : 
+rödven               : : 
+köseven              : : 
+storven              : : 
+fjällven             : : 
+kvarnven             : : 
+krypven              : : 
+bergven              : : 
+vittåtel             : : 
+vårtåtel             : : 
+gulkavle             : : 
+svartkavle           : : 
+kärrkavle            : : 
+renkavle             : : 
+ängskavle            : : 
+fjällkavle           : : 
+vanlig ängskavle     : : 
+sandrör              : : 
+östersjörör          : : 
+sandlosta            : : 
+taklosta             : : 
+fjällvårbrodd        : : 
+vårbrodd             : : 
+alvarkösa            : : 
+kösa                 : : 
+hänggräs             : : 
+älvhänggräs          : : 
+knylhavre            : : 
+vanlig knylhavre     : : 
+flyghavre            : : 
+havre                : : 
+storhavre            : : 
+purrhavre            : : 
+radgräs              : : 
+backskafting         : : 
+lundskafting         : : 
+darrgräs             : : 
+strävlosta           : : 
+raklosta             : : 
+foderlosta           : : 
+skugglosta           : : 
+renlosta             : : 
+brinklosta           : : 
+luddlosta            : : 
+vanlig luddlosta     : : 
+strandlosta          : : 
+kvarnlosta           : : 
+finlosta             : : 
+spädlosta            : : 
+ängslosta            : : 
+råglosta             : : 
+piprör               : : 
+grenrör              : : 
+ängsrör              : : 
+skogsrör             : : 
+bergrör              : : 
+lapprör              : : 
+brunrör              : : 
+madrör               : : 
+piggrör              : : 
+källgräs             : : 
+styvgröe             : : 
+sloklosta            : : 
+sötgräs              : : 
+borsttåtel           : : 
+kamäxing             : : 
+hundäxing            : : 
+vanlig hundäxing     : : 
+lundäxing            : : 
+knägräs              : : 
+fjälltåtel           : : 
+gultåtel             : : 
+tuvtåtel             : : 
+vanlig tuvtåtel      : : 
+älvtåtel             : : 
+kruståtel            : : 
+fjällkruståtel       : : 
+vanlig kruståtel     : : 
+sjötåtel             : : 
+fingerhirs           : : 
+blodhirs             : : 
+äkta blodhirs        : : 
+hönshirs             : : 
+fjällelm             : : 
+liten fjällelm       : : 
+stor fjällelm        : : 
+lundelm              : : 
+brantelm             : : 
+vanlig lundelm       : : 
+klarälvselm          : : 
+lappelm              : : 
+strandkvickrot       : : 
+kvickrot             : : 
+blågrå kvickrot      : : 
+vanlig kvickrot      : : 
+kärleksgräs          : : 
+skogssvingel         : : 
+gråsvingel           : : 
+rörsvingel           : : 
+vanlig rörsvingel    : : 
+vallsvingel          : : 
+hårdsvingel          : : 
+finsvingel           : : 
+långsvingel          : : 
+skuggsvingel         : : 
+fårsvingel           : : 
+sandsvingel          : : 
+ängssvingel          : : 
+rödsvingel           : : 
+fjällsvingel         : : 
+tuvsvingel           : : 
+daggsvingel          : : 
+bågsvingel           : : 
+vanlig rödsvingel    : : 
+groddsvingel         : : 
+vanlig groddsvingel  : : 
+blågrönt mannagräs   : : 
+mannagräs            : : 
+kvarngröe            : : 
+glesgröe             : : 
+jättegröe            : : 
+skånskt mannagräs    : : 
+strimgröe            : : 
+ängshavre            : : 
+luddhavre            : : 
+fjällmyskgräs        : : 
+nordmyskgräs         : : 
+älvmyskgräs          : : 
+ryskt myskgräs       : : 
+strandmyskgräs       : : 
+ängsmyskgräs         : : 
+luddtåtel            : : 
+lentåtel             : : 
+skogskorn            : : 
+ekorrkorn            : : 
+vildkorn             : : 
+vanligt vildkorn     : : 
+ängskorn             : : 
+korn                 : : 
+tofsäxing            : : 
+stor tofsäxing       : : 
+fin tofsäxing        : : 
+grön tofsäxing       : : 
+vildris              : : 
+strandråg            : : 
+kanadaråg            : : 
+italienskt rajgräs   : : 
+engelskt rajgräs     : : 
+linrepe              : : 
+styvrepe             : : 
+dårrepe              : : 
+grusslok             : : 
+bergslok             : : 
+lundslok             : : 
+hässlebrodd          : : 
+sandbrodd            : : 
+blåtåtel             : : 
+stagg                : : 
+buketthirs           : : 
+ormax                : : 
+rörflen              : : 
+vanlig rörflen       : : 
+snögräs              : : 
+dovresnögräs         : : 
+fjälltimotej         : : 
+sandtimotej          : : 
+flentimotej          : : 
+timotej              : : 
+vanlig timotej       : : 
+vildtimotej          : : 
+vass                 : : 
+fjällgröe            : : 
+vitgröe              : : 
+polargröe            : : 
+tuvgröe              : : 
+tornegröe            : : 
+knölgröe             : : 
+parkgröe             : : 
+berggröe             : : 
+blågröe              : : 
+härjedalsgröe        : : 
+jämtlandsgröe        : : 
+vekgröe              : : 
+lundgröe             : : 
+sengröe              : : 
+ängsgröe             : : 
+nordgröe             : : 
+smalgröe             : : 
+smågröe              : : 
+vanligt ängsgröe     : : 
+silvergröe           : : 
+storgröe             : : 
+trampgröe            : : 
+kärrgröe             : : 
+vanligt kärrgröe     : : 
+saltgräs             : : 
+grått saltgräs       : : 
+revigt saltgräs      : : 
+kasgräs              : : 
+älväxing             : : 
+kavelhirs            : : 
+vanlig kavelhirs     : : 
+fjädergräs           : : 
+gullhavre            : : 
+fjällhavre           : : 
+vanlig fjällhavre    : : 
+venhavre             : : 
+lapptåtel            : : 
+ekorrsvingel         : : 
+råttsvingel          : : 
+amerikansk ekorrsvingel : : 
+}
