@@ -1,7 +1,12 @@
 -*- text -*-
 
+groblad 1.1 (2005-01-18):
+  - groblad: temporary files have names ending in '.txt', so
+    that emacs works better.
+  - groblad_report: output formatting fixes.
+
 groblad 1.0 (2005-01-06):
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.1 2005-01-06 21:22:56 grahn Exp $
+$Id: NEWS,v 1.2 2005-01-18 20:41:55 grahn Exp $
 $Name:  $
