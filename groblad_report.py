@@ -1,18 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.4 2005-01-17 21:02:24 grahn Exp $
+# $Id: groblad_report.py,v 1.5 2005-01-31 20:48:59 grahn Exp $
 #
-# Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
+# Copyright (c) 2004, 2005 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
 #
 
 import re
-import os
-import os.path
-import getopt
 import sys
-import md5
 import fileinput
 from geese import segrid
 
