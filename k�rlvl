@@ -5,7 +5,7 @@
 #          Thomas Karlsson,
 #          Naturhistoriska riksmuseet
 # 
-# $Id: kärlvl,v 1.1 2004-08-08 21:13:42 grahn Exp $
+# $Id: kärlvl,v 1.2 2004-08-09 07:32:26 grahn Exp $
 # 
 # Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -17,8 +17,26 @@
 # 000000 hybrids (mostly, also eight forms)
 # 0000   variants, and 29 'trade names'
 # 00     subspecies, and one 'trade name'
+#
+# - Genera start the 2nd column with a <B>.
+# - Families start the 2nd column with stupid font size tricks.
+# - Names below the species level start the 2nd column with
+#   even more stupid font color tricks.
+# - Status letters are "abt?- ".
+#
+# The taxonomic order is 
+# falat1.htm falat1b.htm falat2.htm falat2b.htm falat3.htm
+# falat3b.htm falat3c.htm falat4.htm falat5.htm falat5b.htm
+# falat6.htm falat7.htm falat7b.htm falat8.htm falat9.htm
+# falat9b.htm falat10.htm falat11.htm falat11b.htm falat12.htm
+# falat13.htm falat14.htm falat14b.htm falat14c.htm falat15.htm
+# falat15b.htm falat16.htm falat17.htm falat18.htm falat18b.htm
+#
+#
 
 use strict;
+
+my ($genus, $species);
 
 while(<>) {
     chomp;
@@ -29,6 +47,20 @@ while(<>) {
 
     my ($dummy, $char, $latin, $se) = map {s|</td>||; $_} @bits;
 
-    print "$se\n";
-
+    next if $latin =~ m|^<A HREF|;
+    next if $char eq ' ' and $latin =~ m|^<font size|;
+    if($char eq ' ' and $latin =~ m|^<B>(.+?)</B>|) {
+	$genus = $1;
+	next;
+    }
+    if($latin =~ m|^<FONT COLOR.+?FONT>(.+)|) {
+	my $ssp = $1;
+	$ssp =~ s|\s*[([:upper:]].+||;
+	print "$genus $species $ssp\n";
+    }
+    else {
+	$latin =~ s|\s*[([:upper:]].+||;
+	$species = $latin;
+	print "$genus $species\n";
+    }
 }
