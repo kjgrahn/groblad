@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.1 2005-01-02 11:34:24 grahn Exp $
+# $Id: groblad_report.py,v 1.2 2005-01-06 19:38:37 grahn Exp $
 #
 # Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -103,6 +103,7 @@ for s in f.readlines():
 for sp in species:
     name = sp.trivial
     if not seen.has_key(name): continue
+    del seen[name]
     print '.XP'
     print sp
     print ':'
@@ -116,3 +117,9 @@ for sp in species:
             print '%s.' % p.plants[name] 
         print r'\(em'
     print '.'
+
+# At this point 'seen' may contain a number of names
+# which aren't good species. Print them as a warning.
+
+for name in seen.keys():
+    print >>sys.stderr, 'unknown species:', name
