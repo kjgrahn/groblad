@@ -1,12 +1,11 @@
 #!/usr/bin/perl -w
 #
-# $Id: groblad.pl,v 1.1 2004-08-12 17:47:28 grahn Exp $
+# $Id: groblad.pl,v 1.2 2004-08-14 21:13:44 grahn Exp $
 # $Name:  $
 #
-# gavia_stellata.pl - interactively adding
-# excursions to the default .gab file
+# groblad - interactively editing botanical observations
 #
-# Copyright (c) 1999--2004 Jörgen Grahn <jgrahn@algonet.se>
+# Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -17,8 +16,6 @@
 # 2. Redistributions in binary form must reproduce the above copyright
 #    notice, this list of conditions and the following disclaimer in the
 #    documentation and/or other materials provided with the distribution.
-# 3. The name of the author may not be used to endorse or promote products
-#    derived from this software without specific prior written permission.
 # 
 # THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' ...etc
 #
@@ -35,15 +32,15 @@ getopts('f:') and
     my $obsbok = shift
     or die "usage: $0 [-f template] file\n";
 
-my $template = "INSTALLBASE/lib/gavia/default";
-my $hometempl = glob "~/.gavia_template";
+my $template = "INSTALLBASE/lib/groblad/default";
+my $hometempl = glob "~/.flora";
 $template = $hometempl
     if -f $hometempl;
 $template = $opt_f
     if defined $opt_f;
 
-my $tmpname0 = "/tmp/gavia_stellata.tmp0.$$";
-my $tmpname1 = "/tmp/gavia_stellata.tmp1.$$";
+my $tmpname0 = "/tmp/groblad.tmp0.$$";
+my $tmpname1 = "/tmp/groblad.tmp1.$$";
 
 my $editor = "emacs";
 
@@ -123,7 +120,7 @@ if(system("$editor $tmpname1")) {
     die;
 }
 
-my ($smax, $nmax) = syntaxcheck($tmpname1);
+my $smax = syntaxcheck($tmpname1);
 # avoid too much jaggedness
 $smax = 17 if $smax<17;
 
@@ -133,9 +130,14 @@ open BOOK, ">>$obsbok"
     or unlink $tmpname1, die "cannot append to $obsbok: $!\n";
 
 while(<TMP1>) {
-    if(/^([\wåäö][a-zåäö ]*?)\s*:(.*?):\s*(\d*)\s*:(.*)/i) {
+    if(/^([\wåäö][a-zåäö ]*?)\s*:(.*?):(.*)/i) {
 
-	printf BOOK "%-${smax}s :%s: %${nmax}s:%s\n", $1, $2, $3, $4;
+	printf BOOK "%-${smax}s :%s:%s\n", $1, $2, $3;
+	next;
+    }
+    if(/^\s+(.+)/i) {
+
+	printf BOOK "%-${smax}s     %s\n", "", $1;
 	next;
     }
 
@@ -160,14 +162,16 @@ exit 0;
 sub syntaxcheck {
     my $file = shift;
     my %species;
-    my ($smax, $nmax) = (0,0);
+    my $smax = 0;
 
-    open SPECIES, "INSTALLBASE/lib/gavia/species"
-	or return ($smax, $nmax);
+    open SPECIES, "INSTALLBASE/lib/groblad/species"
+	or return $smax;
 
     while(<SPECIES>) {
 	chomp;
-	$species{$1} = 1 if /^\s*\d{3}\s+(.+)/;
+	next if /^\s*\#/;
+	next if /^\s*$/;
+	$species{$1} = 1 if /^(.+?)(\s*?)\(/;
     }
     close SPECIES;
 
@@ -176,8 +180,9 @@ sub syntaxcheck {
 	chomp;
 
 	next if /^(coordinate|observers|comments)\s*:/i;
-	next if /^\s+/;
+	next if /^\s*$/;
 	next if /^\#/;
+	next if /^\s+\S/;
 	next if /^[{}]\s*$/;
 	next if /^\}\s*\{\s*$/;
 	if(/^(place|date)\s*:\s*(.*)/i) {
@@ -186,18 +191,17 @@ sub syntaxcheck {
 	    }
 	    next;
 	}
-	if(/^(([a-zåäö ]+?))\s*:.*?:\s*(\d*)\s*:/i) {
-	    print STDERR "warning: species '$2' is unknown/misspelled\n"
-		unless defined($species{$2});
-	    my ($s, $n) = (length $1, length $3);
+	if(/^([a-zåäö ]+?)\s*:.*?:/i) {
+	    print STDERR "warning: species '$1' is unknown/misspelled\n"
+		unless defined($species{$1});
+	    my $s = length $1;
 	    $smax = ($s > $smax)? $s: $smax;
-	    $nmax = ($n > $nmax)? $n: $nmax;
 	    next;
 	}
 	print STDERR "warning: malformed line\n   $_\n";
     }
     close FILE;
-    return ($smax, $nmax);
+    return $smax;
 }
 
 
