@@ -1,0 +1,131 @@
+.\" $Id: groblad.5,v 1.1 2005-01-06 21:22:56 grahn Exp $
+.\" 
+.\"
+.TH grahn 5 "JAN 2005" Groblad "User Manuals"
+.
+.
+.
+.SH "NAME"
+groblad \- botanical observation file format
+.
+.SH "DESCRIPTION"
+This manual page describes the file format used by the
+.I groblad
+set of tools for maintaining botanical observations.
+The format is based on (but distinct from!)
+the paper field lists used during the census which ended up as
+.IR "V\(:asterg\(:otlands Flora" ,
+and on the text file format of the
+.I gavia
+bird observation utilities.
+.
+.
+.SH "BASIC SYNTAX"
+All files use the ISO 8859-1 character set.
+Blank lines and comment lines, introduced by a
+.IR # ,
+are ignored.
+.P
+A field may be broken into several lines, as long as all lines but the
+first are indented with whitespace.
+The break and indent counts as one space character.
+Thus, these two fields are identical:
+.IP
+.ft CW
+.nf
+Comment: East of the Equator, but left of center.
+Comment: East of
+         the Equator, but
+         left of center.
+.fi
+.
+.
+.SH "LOCALITIES"
+A
+.I groblad
+file consists of a series of species lists, each for a specific
+locality and date
+(although nothing prevents you from revisiting a place and adding
+to an older list).
+Each looks like
+.IP
+.ft CW
+.nf
+{
+excursion fields
+}{
+species fields
+}
+.fi
+.P
+Excursion fields are
+.IP
+.ft CW
+.nf
+place: <place description>
+coordinate: <coordinate>
+date: <yyyy-mm-dd>
+observers: <names of any persons involved>
+comments: <anything else you want to note>
+.fi
+.LP
+The coordinate should be given in
+.IR "Rikets N\(:at" ,
+aka the
+.IR "Swedish Grid",
+with as many significant digits as you feel like.
+.
+.
+.SH "SPECIES"
+Species fields have the format
+.IP
+.ft CW
+<species name>: <mark>: <comment>
+.LP
+The species name should be one of those defined by the file
+.IR INSTALLBASE/lib/groblad/species .
+.P
+A listed species must have a non-blank mark (by convention, a single
+.B #
+is used)
+or have a non empty comment field.
+Otherwise, it's regarded as
+.I not
+included in the listing.
+.
+.
+.SH "EXAMPLE"
+.IP
+.ft CW
+.nf
+{
+place        : åkerkant O om Stora Bäckabo
+coordinate   : 64547 13695
+date         : 2004-08-22
+observers    : JöG
+comments     : 
+}{
+vattenpilört :#: blommande i åkern (inte så vanligt på Falbygden
+                 om jag minns rätt)
+sminkrot     :#: åtminstone några stora exemplar, som vid Agnestad
+}
+.fi
+.
+.SH "FILES"
+.TP
+.I INSTALLBASE/lib/groblad/species
+The list of accepted species, subspecies, hybrids and forms.
+This list is based on a subset of
+Karlsson, T.
+1997:
+Svenska kärlväxter.
+Svensk Bot. Tidskr. 91: 241\-560.
+.RI ( http://www2.nrm.se/fbo/chk/ ).
+.
+.SH "AUTHOR"
+J\(:orgen Grahn \fI<jgrahn@algonet.se>
+.
+.
+.SH "SEE ALSO"
+.BR groblad (1),
+.BR gavia (5).

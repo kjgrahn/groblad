@@ -1,0 +1,88 @@
+.\" $Id: groblad.1,v 1.1 2005-01-06 21:22:56 grahn Exp $
+.\" 
+.\"
+.TH groblad 1 "JAN 2005" Groblad "User Manuals"
+.
+.
+.SH "NAME"
+groblad \- record botanical observations
+.
+.SH "SYNOPSIS"
+.B groblad
+.RB [ \-f
+.IR template ]
+.I file
+.
+.SH "DESCRIPTION"
+.B groblad
+makes it convenient to record 
+botanical observations into a text file
+for future reference.
+.P
+Observations are grouped as a list of the species seen at a specific place and time.
+The format and fields are based on
+the paper field lists used during the census which ended up as
+.IR "V\(:asterg\(:otlands Flora" ,
+and on the
+.I gavia
+bird observation utilities (see
+.BR gavia (1),
+.BR gavia (5),
+.BR gavia_stellata (1)).
+.P
+The basic idea is to fill in a template (using a text editor of your choice, which
+.IR groblad
+starts for you).
+When you exit the editor, the observations are trimmed, syntax-checked,
+and appended to
+.IR file .
+.
+.SH "OPTIONS"
+.IP \-f\ \fItemplate
+The template to start from.
+If this option is not given, your personal template
+.I ~/.flora
+or the default template
+.I lib/groblad/default
+is used instead.
+.
+.SH "FILES"
+.TP
+.I ~/.flora
+Personal excursion template file, on the format specified by
+.BR groblad (5).
+.TP
+.I lib/groblad/default
+Global excursion template file, used if the personal template isn't
+available
+and none has been given using the
+.B \-f
+flag.
+.TP
+.I INSTALLBASE/lib/groblad/species
+The list of accepted species, subspecies, hybrids and forms.
+This list is based on a subset of
+Karlsson, T.
+1997:
+Svenska kärlväxter.
+Svensk Bot. Tidskr. 91: 241\-560.
+.RI ( http://www2.nrm.se/fbo/chk/ ).
+.
+.SH "ENVIRONMENT"
+.IP GAVIAEDITOR
+Specifies the editor to use.
+If not set,
+.I VISUAL
+or
+.I EDITOR
+is used instead.
+If none of these are set, the default is
+.BR emacs (1).
+.
+.SH "AUTHOR"
+J\(:orgen Grahn \fI<jgrahn@algonet.se>
+.
+.SH "SEE ALSO"
+.BR groblad_report (1),
+.BR groblad (5),
+.BR gavia (1).
