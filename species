@@ -1,4 +1,4 @@
-# $Id: species,v 1.1 2004-08-14 21:14:22 grahn Exp $ -*- text -*-
+# $Id: species,v 1.2 2005-01-06 19:38:20 grahn Exp $ -*- text -*-
 #
 #
 
@@ -4674,7 +4674,7 @@ sankmaskros		(Taraxacum pseudosuecicum)
 flottmaskros		(Taraxacum subalpinum)
 strandmaskros		(Taraxacum suecicum)
 västgötamaskros		(Taraxacum vestrogothicum)
-<B>ogräsmaskrosor</B>	       <A HREF="tararud.htm" TARGET="lista">Till småarter</A> (Taraxacum <)
+ogräsmaskros		(Taraxacum sect. Ruderalia)
 jyllandsmaskros		(Taraxacum cimbricum)
 atlantmaskros		(Taraxacum spectabile)
 fjällmaskros		(Taraxacum croceum)
