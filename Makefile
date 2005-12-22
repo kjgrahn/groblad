@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.2 2005-01-06 21:22:56 grahn Exp $
+# $Id: Makefile,v 1.3 2005-12-22 22:42:33 grahn Exp $
 
 SHELL = /bin/sh
 
@@ -9,7 +9,7 @@ all: _groblad.1 _groblad.5 _groblad_report.1
 all: default species
 
 .PHONY: install
-install:
+install: all
 	install -m555 _groblad.pl $(INSTALLBASE)/bin/groblad
 	install -m555 _groblad_report.py $(INSTALLBASE)/bin/groblad_report
 	install -d $(INSTALLBASE)/lib/groblad
