@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.5 2005-01-31 20:48:59 grahn Exp $
+# $Id: groblad_report.py,v 1.6 2006-10-19 21:24:02 grahn Exp $
 #
 # Copyright (c) 2004, 2005 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -75,9 +75,12 @@ for s in lines:
         if name=='place':
             place.place = value
         elif name=='coordinate':
-            place.coordinate = apply(segrid.Point,
-                                     map(int,
-                                         value.split()))
+            try:
+                place.coordinate = apply(segrid.Point,
+                                         map(int,
+                                             value.split()))
+            except ValueError:
+                print >>sys.stderr, 'bad coordinate', value, 'ignored'
         elif name=='date':
             place.date = value
         elif name=='observers':
