@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.6 2006-10-19 21:24:02 grahn Exp $
+# $Id: groblad_report.py,v 1.7 2007-09-26 21:16:34 grahn Exp $
 #
-# Copyright (c) 2004, 2005 Jörgen Grahn <jgrahn@algonet.se>
+# Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
 #
 
 import re
 import sys
 import fileinput
-from geese import segrid
+
 
 class Species:
     def __init__(self, trivial, latin):
@@ -29,6 +29,52 @@ class Place:
         self.plants = {}
     def contains(self, species):
         return self.plants.has_key(species)
+
+class Point:
+    """A point in the Rikets Nät.
+    """
+    def __init__(self, north, east):
+        """Create a point based on its north and east values.
+
+        Any input resolution can be used and it is unified here to
+        one-metre resolution. Thus, the following are equivalent:
+
+        Point(64457,     13620)
+        Point(6445700,   1362000)
+        Point(6445700.0, 1362000.0)
+
+        However, the original resolution is remembered for printing
+        purposes.
+        """
+        i = 1
+        while north < 1000000:
+            i *= 10
+            north *= 10
+            east *= 10
+        self.north = north
+        self.east = east
+        self.resolution = i
+    def __str__(self):
+        ne = (self.north / self.resolution,
+              self.east / self.resolution)
+        return 'Point(%d, %d)' % ne
+    def __cmp__(self, other):
+        return cmp((self.north, self.east),
+                   (other.north, other.east))
+    def tstr(self, kind=0):
+        """Return the point as a troff(1) source string, with
+        point size changing commands as appropriate.
+        """
+        acc = []
+        for n in (self.north, self.east):
+            n /= self.resolution
+            n = str(n)
+            if kind==0:
+                acc.append(r'\s-2%s\s0%s' % (n[:2], n[2:]))
+            else:
+                acc.append(r'\s-2%s\s0' % n)
+        return ' '.join(acc)
+
 
 lines = []
 headerre = re.compile(r'^(\w+)\s*:\s*(.+)')
@@ -76,9 +122,7 @@ for s in lines:
             place.place = value
         elif name=='coordinate':
             try:
-                place.coordinate = apply(segrid.Point,
-                                         map(int,
-                                             value.split()))
+                place.coordinate = apply(Point, map(int, value.split()))
             except ValueError:
                 print >>sys.stderr, 'bad coordinate', value, 'ignored'
         elif name=='date':
