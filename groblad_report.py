@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.8 2007-09-26 21:22:46 grahn Exp $
+# $Id: groblad_report.py,v 1.9 2007-09-26 21:30:56 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -75,6 +75,20 @@ class Point:
                 acc.append(r'\s-2%s\s0' % n)
         return ' '.join(acc)
 
+def the_species():
+    """Pull the species list from file. Returned as
+    an ordered list of Species instances.
+    """
+    species = []
+    speciesre = re.compile(r'^(.+?)\s*\((.+)\)')
+    f = open('INSTALLBASE/lib/groblad/species', 'r')
+    for s in f.readlines():
+        m = speciesre.match(s)
+        if m:
+            trivial, latin = m.groups()
+            species.append(Species(trivial, latin))
+    return species
+
 
 if __name__ == "__main__":
     lines = []
@@ -137,16 +151,7 @@ if __name__ == "__main__":
         else:
             pass
 
-    species = []
-    speciesre = re.compile(r'^(.+?)\s*\((.+)\)')
-    f = open('INSTALLBASE/lib/groblad/species', 'r')
-    for s in f.readlines():
-        m = speciesre.match(s)
-        if m:
-            trivial, latin = m.groups()
-            species.append(Species(trivial, latin))
-
-    for sp in species:
+    for sp in the_species():
         name = sp.trivial
         if not seen.has_key(name): continue
         del seen[name]
