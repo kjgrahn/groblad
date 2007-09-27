@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.9 2007-09-26 21:30:56 grahn Exp $
+# $Id: groblad_report.py,v 1.10 2007-09-27 21:30:01 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -9,7 +9,6 @@
 
 import re
 import sys
-import fileinput
 
 
 class Species:
@@ -89,14 +88,26 @@ def the_species():
             species.append(Species(trivial, latin))
     return species
 
+def fileinput(names):
+    """Line generator, from a seqyence of file names.
+    Similar to fileinput.input, but doesn't suck.
+    Empty sequence means standard input.
+    """
+    did_files = False
+    for name in names:
+        did_files = True
+        f = open(name, 'r')
+        for s in f: yield s
+    if did_files: return
+    for s in sys.stdin: yield s
 
-if __name__ == "__main__":
+def parse_files(log, names):
+    """Parse the files named by sequence 'names'
+    and return a tuple: list of Place instances,
+    and a dictionary of seen species.
+    """
     lines = []
-    headerre = re.compile(r'^(\w+)\s*:\s*(.+)')
-    plantre1 = re.compile(r'^(.+?)\s*:\S:\s*(.*)')
-    plantre2 = re.compile(r'^(.+?)\s*:.:\s*(.+)')
-
-    for s in fileinput.input():
+    for s in fileinput(names):
         s = s.rstrip()
         if s=='': continue
         if s[0]=='#': continue
@@ -106,10 +117,13 @@ if __name__ == "__main__":
             lines.append(s)
 
     places = []
-    place = None
-    plants = None
     seen = {}
 
+    headerre = re.compile(r'^(\w+)\s*:\s*(.+)')
+    plantre1 = re.compile(r'^(.+?)\s*:\S:\s*(.*)')
+    plantre2 = re.compile(r'^(.+?)\s*:.:\s*(.+)')
+    place = None
+    plants = None
     for s in lines:
         if s=='{':
             place = Place()
@@ -139,7 +153,7 @@ if __name__ == "__main__":
                 try:
                     place.coordinate = apply(Point, map(int, value.split()))
                 except ValueError:
-                    print >>sys.stderr, 'bad coordinate', value, 'ignored'
+                    log('bad coordinate %s ignored\n' % value)
             elif name=='date':
                 place.date = value
             elif name=='observers':
@@ -147,9 +161,28 @@ if __name__ == "__main__":
             elif name=='comments':
                 pass
             else:
-                print >>sys.stderr, 'hey, what\'s this?', s
+                log('hey, what\'s this? %s\n' % s)
         else:
             pass
+    return places, seen
+
+
+if __name__ == "__main__":
+    import getopt
+    import os.path
+
+    prog = os.path.split(sys.argv[0])[1]
+    usage = 'usage: %s ... file ...' % prog
+    try:
+        opts, files = getopt.getopt(sys.argv[1:], '')
+    except getopt.GetoptError, s:
+        print >>sys.stderr, s
+        print >>sys.stderr, usage
+        sys.exit(1)
+
+    log = sys.stderr.write
+
+    places, seen = parse_files(log, files)
 
     for sp in the_species():
         name = sp.trivial
@@ -178,4 +211,4 @@ if __name__ == "__main__":
     # which aren't good species. Print them as a warning.
 
     for name in seen.keys():
-        print >>sys.stderr, 'unknown species:', name
+        log('unknown species: %s\n' % name)
