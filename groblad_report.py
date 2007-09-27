@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.13 2007-09-27 21:51:20 grahn Exp $
+# $Id: groblad_report.py,v 1.14 2007-09-27 22:28:02 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -192,6 +192,62 @@ def use_ms(w, places, seen):
             ss.append(s)
         w('\n\\(em\n'.join(ss))
         w('\n.\n')
+
+def use_sundh(w, places, seen):
+    """Like use_ms, but a different layout.
+    """
+    # x Art           x År
+    # x Latin?          Leg
+    #   Församling      Nyfynd
+    #   Kommun          Återfynd
+    #   Landskap        Antal
+    # x Lokal           Biotop
+    # x Koordinat
+    # x Koordinat
+    #   Noggrannhet
+    w('.TS H\n'
+      'allbox;\n'
+      'lllllllllllllll.\n')
+    w('\t'.join(['art',
+                 '',
+                 'församling',
+                 'kommun',
+                 'landskap',
+                 'lokal',
+                 'koordinat',
+                 'koordinat',
+                 'noggrannhet',
+                 'år',
+                 'leg',
+                 'nyfynd',
+                 'återfynd',
+                 'antal',
+                 'biotop']))
+    w('\n'
+      '.TH\n')
+    for sp in the_species():
+        name = sp.trivial
+        if not seen.has_key(name): continue
+        del seen[name]
+        for p in places:
+            if not p.contains(name): continue
+            row = [sp.trivial, sp.latin, '', '', '', p.place]
+            if p.coordinate:
+                row += [str(p.coordinate.north),
+                        str(p.coordinate.east),
+                        '']
+            else:
+                row += ['', '', '']
+            try:
+                year = p.date[:4]
+                int(year)
+                row += [year]
+            except:
+                row += ['']
+            row += ['', '', '', '', '']
+            w('\t'.join(row))
+            w('\n')
+    w('.TE\n')
 
 if __name__ == "__main__":
     import getopt
