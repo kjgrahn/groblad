@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.12 2007-09-27 21:48:05 grahn Exp $
+# $Id: groblad_report.py,v 1.13 2007-09-27 21:51:20 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -198,17 +198,20 @@ if __name__ == "__main__":
     import os.path
 
     prog = os.path.split(sys.argv[0])[1]
-    usage = 'usage: %s [--tbl | --sundh] file ...' % prog
+    usage = 'usage: %s [--ms | --sundh | --svalan] file ...' % prog
 
     log = sys.stderr.write
-    use_sundh = False
+    layout = use_ms
     try:
         opts, files = getopt.getopt(sys.argv[1:],
                                     '',
-                                    ['tbl',
-                                     'sundh'])
+                                    ['ms',
+                                     'sundh',
+                                     'svalan'])
         for opt, val in opts:
-            use_sundh = (opt=='--sundh')
+            if opt=='--sundh': layout = use_sundh
+            elif opt=='--svalan': layout = use_svalan
+            elif opt=='--ms': layout = use_ms
     except getopt.GetoptError, s:
         print >>sys.stderr, s
         print >>sys.stderr, usage
@@ -217,7 +220,7 @@ if __name__ == "__main__":
     places, seen = parse_files(log, files)
 
     w = sys.stdout.write
-    use_ms(w, places, seen)
+    layout(w, places, seen)
 
     # At this point 'seen' may contain a number of names
     # which aren't good species. Print them as a warning.
