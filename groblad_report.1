@@ -1,7 +1,7 @@
-.\" $Id: groblad_report.1,v 1.1 2005-01-06 21:22:56 grahn Exp $
+.\" $Id: groblad_report.1,v 1.2 2007-09-27 21:40:18 grahn Exp $
 .\" 
 .\"
-.TH groblad_report 1 "JAN 2005" Groblad "User Manuals"
+.TH groblad_report 1 "SEP 2007" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -9,8 +9,12 @@ groblad_report \- pretty-print botanical observations
 .
 .SH "SYNOPSIS"
 .B groblad_report
-.I file
-\&...
+.RB [ --ms
+|
+.B --svalan
+|
+.BR --sundh ]
+.RI [ file ...]
 .
 .SH "DESCRIPTION"
 .B groblad_report
@@ -29,6 +33,27 @@ Some basic syntax checking is performed.
 Among other things, species which are unknown are skipped,
 and result in warnings.
 .
+.SH "OPTIONS"
+.
+.IP --ms
+Generate troff \-ms source for a nicely formatted list of observations
+by species, and in systematic order.
+This is the default.
+.
+.IP --sundh
+Generate troff source with
+.BR tbl (1)
+tables, one line per finding.
+Since
+.B tbl
+input is TAB-separated data, this happens to be compatible with
+certain Microsoft Excel-fixated computer systems.
+.
+.IP --svalan
+Like
+.BR --sundh ,
+but with slightly different and quite a lot more useless columns.
+.
 .SH "FILES"
 .TP
 .I INSTALLBASE/lib/groblad/species
@@ -41,4 +66,5 @@ J\(:orgen Grahn \fI<jgrahn@algonet.se>
 .SH "SEE ALSO"
 .BR groblad (1),
 .BR groblad (5),
-.BR troff (1).
+.BR troff (1),
+.BR tbl (1).
