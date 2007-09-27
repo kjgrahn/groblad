@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.11 2007-09-27 21:45:27 grahn Exp $
+# $Id: groblad_report.py,v 1.12 2007-09-27 21:48:05 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -166,6 +166,32 @@ def parse_files(log, names):
             pass
     return places, seen
 
+def use_ms(w, places, seen):
+    """Layout, writing with 'w' from 'places',
+    while consuming 'seen'.
+    """
+    for sp in the_species():
+        name = sp.trivial
+        if not seen.has_key(name): continue
+        del seen[name]
+        w('.XP\n')
+        w('%s:\n' % sp)
+        ss = []
+        for p in places:
+            if not p.contains(name): continue
+            if p.coordinate:
+                s = '%s\n(%s).' % (p.place, p.coordinate.tstr())
+            else:
+                s = '%s.' % p.place
+            if p.date and p.observers:
+                s += '\n%s %s.' % (p.observers, p.date)
+            if p.plants[name] != '':
+                s += '\n%s' % p.plants[name]
+            if s[-1] != '.':
+                s += '.'
+            ss.append(s)
+        w('\n\\(em\n'.join(ss))
+        w('\n.\n')
 
 if __name__ == "__main__":
     import getopt
@@ -191,28 +217,7 @@ if __name__ == "__main__":
     places, seen = parse_files(log, files)
 
     w = sys.stdout.write
-    for sp in the_species():
-        name = sp.trivial
-        if not seen.has_key(name): continue
-        del seen[name]
-        w('.XP\n')
-        w('%s:\n' % sp)
-        ss = []
-        for p in places:
-            if not p.contains(name): continue
-            if p.coordinate:
-                s = '%s\n(%s).' % (p.place, p.coordinate.tstr())
-            else:
-                s = '%s.' % p.place
-            if p.date and p.observers:
-                s += '\n%s %s.' % (p.observers, p.date)
-            if p.plants[name] != '':
-                s += '\n%s' % p.plants[name]
-            if s[-1] != '.':
-                s += '.'
-            ss.append(s)
-        w('\n\\(em\n'.join(ss))
-        w('\n.\n')
+    use_ms(w, places, seen)
 
     # At this point 'seen' may contain a number of names
     # which aren't good species. Print them as a warning.
