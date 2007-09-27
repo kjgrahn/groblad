@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.10 2007-09-27 21:30:01 grahn Exp $
+# $Id: groblad_report.py,v 1.11 2007-09-27 21:45:27 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -172,24 +172,31 @@ if __name__ == "__main__":
     import os.path
 
     prog = os.path.split(sys.argv[0])[1]
-    usage = 'usage: %s ... file ...' % prog
+    usage = 'usage: %s [--tbl | --sundh] file ...' % prog
+
+    log = sys.stderr.write
+    use_sundh = False
     try:
-        opts, files = getopt.getopt(sys.argv[1:], '')
+        opts, files = getopt.getopt(sys.argv[1:],
+                                    '',
+                                    ['tbl',
+                                     'sundh'])
+        for opt, val in opts:
+            use_sundh = (opt=='--sundh')
     except getopt.GetoptError, s:
         print >>sys.stderr, s
         print >>sys.stderr, usage
         sys.exit(1)
 
-    log = sys.stderr.write
-
     places, seen = parse_files(log, files)
 
+    w = sys.stdout.write
     for sp in the_species():
         name = sp.trivial
         if not seen.has_key(name): continue
         del seen[name]
-        print '.XP'
-        print '%s:' % sp
+        w('.XP\n')
+        w('%s:\n' % sp)
         ss = []
         for p in places:
             if not p.contains(name): continue
@@ -204,8 +211,8 @@ if __name__ == "__main__":
             if s[-1] != '.':
                 s += '.'
             ss.append(s)
-        print '\n\\(em\n'.join(ss)
-        print '.'
+        w('\n\\(em\n'.join(ss))
+        w('\n.\n')
 
     # At this point 'seen' may contain a number of names
     # which aren't good species. Print them as a warning.
