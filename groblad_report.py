@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.14 2007-09-27 22:28:02 grahn Exp $
+# $Id: groblad_report.py,v 1.15 2007-10-01 22:14:30 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -196,15 +196,6 @@ def use_ms(w, places, seen):
 def use_sundh(w, places, seen):
     """Like use_ms, but a different layout.
     """
-    # x Art           x År
-    # x Latin?          Leg
-    #   Församling      Nyfynd
-    #   Kommun          Återfynd
-    #   Landskap        Antal
-    # x Lokal           Biotop
-    # x Koordinat
-    # x Koordinat
-    #   Noggrannhet
     w('.TS H\n'
       'allbox;\n'
       'lllllllllllllll.\n')
@@ -248,6 +239,77 @@ def use_sundh(w, places, seen):
             w('\t'.join(row))
             w('\n')
     w('.TE\n')
+
+def use_svalan(w, places, seen):
+    """Like use_sundh, but a different set of crap.
+    """
+    w('.TS H\n'
+      'allbox;\n'
+      'lrllllrrrlll llllllllllllllllllllllllllllll.\n')
+    w('\t'.join(['art',
+                 'antal',
+                 'enhet',
+                 'antal substrat',
+                 'stadium',
+                 'lokalnamn',
+                 'nord',
+                 'ost',
+                 'noggrannhet',
+                 'startdatum',
+                 'slutdatum',
+                 'kommentar',
+
+                 'det/conf',
+                 'samling',
+                 'accessionsnr',
+                 'substrat - lista',
+                 'substrat - text',
+                 'biotop - lista',
+                 'biotop - text',
+                 'trädslag - lista',
+                 'trädslag - text',
+                 'ej återfunnen',
+                 'andrahandsuppgift',
+                 'osäker bestämning',
+                 'utplanterad eller införd',
+                 'intressant notering',
+                 'dölj',
+                 'skydda lokalangivelse',
+                 'rapportera till Rrk',
+                 'ej funnen',
+                 'undersökt i mikroskop',
+                 'syfte',
+                 'medobs 1',
+                 'medobs 2',
+                 'medobs 3',
+                 'medobs 4',
+                 'medobs 5',
+                 'medobs 6',
+                 'medobs 7',
+                 'medobs 8',
+                 'medobs 9',
+                 'medobs 10']))
+    w('\n'
+      '.TH\n')
+    for sp in the_species():
+        name = sp.trivial
+        if not seen.has_key(name): continue
+        del seen[name]
+        for p in places:
+            if not p.contains(name): continue
+            row = [sp.trivial, '', '', '', '', p.place]
+            if p.coordinate:
+                row += [str(p.coordinate.north),
+                        str(p.coordinate.east),
+                        '']
+            else:
+                row += ['', '', '']
+            row += [p.date, p.date, p.plants[name]]
+            row += [''] * 30
+            w('\t'.join(row))
+            w('\n')
+    w('.TE\n')
+
 
 if __name__ == "__main__":
     import getopt

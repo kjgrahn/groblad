@@ -1,5 +1,8 @@
 -*- text -*-
 
+groblad 1.3 (2007-10-02):
+  - 'gavia_report --svalan' for another tabular output.
+
 groblad 1.2 (2007-09-28):
   - 'gavia_report --sundh' for tabular output.
 
@@ -14,5 +17,5 @@ groblad 1.1 (2005-01-18):
 groblad 1.0 (2005-01-06):
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.4 2007-09-27 22:30:05 grahn Exp $
+$Id: NEWS,v 1.5 2007-10-01 22:14:30 grahn Exp $
 $Name:  $
