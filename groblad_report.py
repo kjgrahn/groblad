@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.15 2007-10-01 22:14:30 grahn Exp $
+# $Id: groblad_report.py,v 1.16 2007-11-04 16:09:53 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -198,16 +198,16 @@ def use_sundh(w, places, seen):
     """
     w('.TS H\n'
       'allbox;\n'
-      'lllllllllllllll.\n')
+      'l lfI lp4 lp4 lp4 l lp-2 lp-2 l l l l l l l.\n')
     w('\t'.join(['art',
                  '',
-                 'församling',
+                 'förs.',
                  'kommun',
                  'landskap',
                  'lokal',
-                 'koordinat',
-                 'koordinat',
-                 'noggrannhet',
+                 'nord',
+                 'ost',
+                 'fel',
                  'år',
                  'leg',
                  'nyfynd',
