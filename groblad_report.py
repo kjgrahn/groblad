@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.16 2007-11-04 16:09:53 grahn Exp $
+# $Id: groblad_report.py,v 1.17 2007-12-02 12:11:32 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -88,18 +88,37 @@ def the_species():
             species.append(Species(trivial, latin))
     return species
 
-def fileinput(names):
+class FileInput:
     """Line generator, from a seqyence of file names.
-    Similar to fileinput.input, but doesn't suck.
+    Similar to fileinput.input, but doesn't suck,
+    and handles continuation lines.
     Empty sequence means standard input.
     """
-    did_files = False
-    for name in names:
-        did_files = True
-        f = open(name, 'r')
-        for s in f: yield s
-    if did_files: return
-    for s in sys.stdin: yield s
+    def __init__(self, names):
+        self._names = list(names)
+        if not self._names:
+            # XXX kludge
+            self._names = [sys.stdin]
+
+    def err(self, s):
+        """Print an error/warning to stderr, with current
+        file/line number prepended
+        """
+        sys.stderr.write('%s:%d: ' % (self._currfile, self._currline))
+
+    def input(self):
+        for name in self._names:
+            if name is sys.stdin:
+                f = sys.stdin
+            else:
+                f = open(name, 'r')
+            self._currfile = f.name
+            self._currline = 1
+            for s in f:
+                yield s
+                self._currline += 1
+            if f is not sys.stdin:
+                f.close()
 
 def parse_files(log, names):
     """Parse the files named by sequence 'names'
@@ -107,7 +126,7 @@ def parse_files(log, names):
     and a dictionary of seen species.
     """
     lines = []
-    for s in fileinput(names):
+    for s in FileInput(names).input():
         s = s.rstrip()
         if s=='': continue
         if s[0]=='#': continue
