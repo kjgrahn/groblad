@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.17 2007-12-02 12:11:32 grahn Exp $
+# $Id: groblad_report.py,v 1.18 2007-12-02 12:39:56 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -106,6 +106,11 @@ class FileInput:
         """
         sys.stderr.write('%s:%d: ' % (self._currfile, self._currline))
 
+    def _yfrags(self):
+        s = ' '.join([ f.strip() for f in self._frags ]) + '\n'
+        self._frags = []
+        return s 
+
     def input(self):
         for name in self._names:
             if name is sys.stdin:
@@ -114,9 +119,21 @@ class FileInput:
                 f = open(name, 'r')
             self._currfile = f.name
             self._currline = 1
+            self._frags = []
             for s in f:
-                yield s
+                if s.isspace():
+                    if self._frags:
+                        yield self._yfrags()
+                    yield s
+                elif s[0].isspace():
+                    self._frags.append(s)
+                else:
+                    if self._frags:
+                        yield self._yfrags()
+                    self._frags.append(s)
                 self._currline += 1
+            if self._frags:
+                yield self._yfrags()
             if f is not sys.stdin:
                 f.close()
 
@@ -125,16 +142,6 @@ def parse_files(log, names):
     and return a tuple: list of Place instances,
     and a dictionary of seen species.
     """
-    lines = []
-    for s in FileInput(names).input():
-        s = s.rstrip()
-        if s=='': continue
-        if s[0]=='#': continue
-        if s[0] in ' \t':
-            lines[-1] = lines[-1] + ' ' + s.strip()
-        else:
-            lines.append(s)
-
     places = []
     seen = {}
 
@@ -143,7 +150,12 @@ def parse_files(log, names):
     plantre2 = re.compile(r'^(.+?)\s*:.:\s*(.+)')
     place = None
     plants = None
-    for s in lines:
+
+    for s in FileInput(names).input():
+        s = s.rstrip()
+        if s=='': continue
+        if s[0]=='#': continue
+
         if s=='{':
             place = Place()
             continue
