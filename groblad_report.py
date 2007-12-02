@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.18 2007-12-02 12:39:56 grahn Exp $
+# $Id: groblad_report.py,v 1.19 2007-12-02 12:44:51 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
 # All rights reserved.
@@ -105,6 +105,7 @@ class FileInput:
         file/line number prepended
         """
         sys.stderr.write('%s:%d: ' % (self._currfile, self._currline))
+        sys.stderr.write(s)
 
     def _yfrags(self):
         s = ' '.join([ f.strip() for f in self._frags ]) + '\n'
@@ -137,7 +138,7 @@ class FileInput:
             if f is not sys.stdin:
                 f.close()
 
-def parse_files(log, names):
+def parse_files(names):
     """Parse the files named by sequence 'names'
     and return a tuple: list of Place instances,
     and a dictionary of seen species.
@@ -151,7 +152,10 @@ def parse_files(log, names):
     place = None
     plants = None
 
-    for s in FileInput(names).input():
+    fi = FileInput(names)
+    log = fi.err
+
+    for s in fi.input():
         s = s.rstrip()
         if s=='': continue
         if s[0]=='#': continue
@@ -366,7 +370,7 @@ if __name__ == "__main__":
         print >>sys.stderr, usage
         sys.exit(1)
 
-    places, seen = parse_files(log, files)
+    places, seen = parse_files(files)
 
     w = sys.stdout.write
     layout(w, places, seen)
