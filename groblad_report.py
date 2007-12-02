@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.19 2007-12-02 12:44:51 grahn Exp $
+# $Id: groblad_report.py,v 1.20 2007-12-02 14:51:50 grahn Exp $
 #
-# Copyright (c) 2004, 2005, 2007 Jörgen Grahn <jgrahn@algonet.se>
+# Copyright (c) 2004, 2005, 2007 Jörgen Grahn
 # All rights reserved.
 #
 
@@ -146,14 +146,18 @@ def parse_files(names):
     places = []
     seen = {}
 
-    headerre = re.compile(r'^(\w+)\s*:\s*(.+)')
-    plantre1 = re.compile(r'^(.+?)\s*:\S:\s*(.*)')
-    plantre2 = re.compile(r'^(.+?)\s*:.:\s*(.+)')
     place = None
     plants = None
 
     fi = FileInput(names)
     log = fi.err
+
+    class State:
+        H = 'header'
+        L = 'listing'
+        O = 'other'
+
+    state = State.O
 
     for s in fi.input():
         s = s.rstrip()
@@ -161,44 +165,73 @@ def parse_files(names):
         if s[0]=='#': continue
 
         if s=='{':
-            place = Place()
+            if state is not State.O:
+                log('error: unexpected "{"\n')
+            else:
+                place = Place()
+                state = State.H
             continue
         if s=='}':
-            places.append(place)
-            place = None
-            plants = None
+            if state is not State.L:
+                log('error: unexpected "}"\n')
+            else:
+                places.append(place)
+                place = None
+                plants = None
+                state = State.O
             continue
         if s=='}{':
-            plants = place.plants
+            if state is not State.H:
+                log('error: unexpected "}{"\n')
+            else:
+                plants = place.plants
+                state = State.L
             continue
-        if plants != None:
-            for rex in (plantre1, plantre2):
-                m = rex.match(s)
-                if m:
-                    name, comment = m.groups()
+
+        if state is State.L:
+            pp = [ x.strip() for x in s.split(':', 2) ]
+            if len(pp)!=3 or not pp[0]:
+                log('error: not a species line "%s"\n' % s)
+            else:
+                name, mark, comment = pp
+                if mark or comment:
                     plants[name] = comment
                     seen[name] = 1
             continue
-        m = headerre.match(s)
-        if m:
-            name, value = m.groups()
+
+        if state is State.H:
+            pp = [ x.strip() for x in s.split(':', 1) ]
+            if len(pp)!=2 or not pp[0]:
+                log('error: bad header line "%s"\n' % s)
+                continue
+            name, value = pp
             if name=='place':
                 place.place = value
+                if not value:
+                    log('error: "place" is a mandatory field\n')
             elif name=='coordinate':
                 try:
-                    place.coordinate = apply(Point, map(int, value.split()))
+                    if value:
+                        place.coordinate = apply(Point, map(int, value.split()))
                 except ValueError:
                     log('bad coordinate %s ignored\n' % value)
             elif name=='date':
                 place.date = value
+                if not value:
+                    log('error: "date" is a mandatory field\n')
             elif name=='observers':
                 place.observers = value
             elif name=='comments':
                 pass
             else:
-                log('hey, what\'s this? %s\n' % s)
-        else:
-            pass
+                log('warning: unknown header "%s"\n' % name)
+            continue
+
+        log('error: unexpected line "%s"\n' % s)
+
+    if state is not State.O:
+        log('unexpected end of file in %s\n' % state)
+
     return places, seen
 
 def use_ms(w, places, seen):

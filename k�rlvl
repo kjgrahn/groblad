@@ -5,9 +5,9 @@
 #          Thomas Karlsson,
 #          Naturhistoriska riksmuseet
 # 
-# $Id: kärlvl,v 1.7 2004-08-22 20:16:19 grahn Exp $
+# $Id: kärlvl,v 1.8 2007-12-02 14:51:50 grahn Exp $
 # 
-# Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
+# Copyright (c) 2004 Jörgen Grahn
 # All rights reserved.
 
 # All this assumes that the format doesn't change, of course.  But it

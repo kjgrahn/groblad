@@ -1,11 +1,11 @@
 #!/usr/bin/perl -w
 #
-# $Id: groblad.pl,v 1.3 2005-01-08 21:08:48 grahn Exp $
+# $Id: groblad.pl,v 1.4 2007-12-02 14:51:49 grahn Exp $
 # $Name:  $
 #
 # groblad - interactively editing botanical observations
 #
-# Copyright (c) 2004 Jörgen Grahn <jgrahn@algonet.se>
+# Copyright (c) 2004 Jörgen Grahn
 # All rights reserved.
 # 
 # Redistribution and use in source and binary forms, with or without
