@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.20 2007-12-02 14:51:50 grahn Exp $
+# $Id: groblad_report.py,v 1.21 2008-10-13 19:16:19 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn
 # All rights reserved.
@@ -213,7 +213,7 @@ def parse_files(names):
                 try:
                     if value:
                         place.coordinate = apply(Point, map(int, value.split()))
-                except ValueError:
+                except (ValueError, TypeError):
                     log('bad coordinate %s ignored\n' % value)
             elif name=='date':
                 place.date = value
@@ -294,7 +294,7 @@ def use_sundh(w, places, seen):
             if p.coordinate:
                 row += [str(p.coordinate.north),
                         str(p.coordinate.east),
-                        '']
+                        str(p.coordinate.resolution)]
             else:
                 row += ['', '', '']
             try:
@@ -369,7 +369,7 @@ def use_svalan(w, places, seen):
             if p.coordinate:
                 row += [str(p.coordinate.north),
                         str(p.coordinate.east),
-                        '']
+                        str(p.coordinate.resolution)]
             else:
                 row += ['', '', '']
             row += [p.date, p.date, p.plants[name]]

@@ -1,5 +1,11 @@
 -*- text -*-
 
+ - groblad_report --sundh/svalan: fill in the RT90 coordinate
+   accuracy. Groblad uses the standard RT90 notation for accuracy --
+   dropping digits to the right. This now gets translated; 64445 13717
+   ends up as 6444500 1371700 100. (Or should that be 6444550 1371750
+   100? Never mind.)
+
 groblad 1.4 (2007-12-02):
  - groblad_report: improved syntax checking (earlier versions were
    quite sloppy and silently accepted many huge problems)
@@ -21,5 +27,5 @@ groblad 1.1 (2005-01-18):
 groblad 1.0 (2005-01-06):
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.6 2007-12-02 15:03:01 grahn Exp $
+$Id: NEWS,v 1.7 2008-10-13 19:16:18 grahn Exp $
 $Name:  $
