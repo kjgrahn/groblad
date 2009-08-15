@@ -1,7 +1,8 @@
 -*- text -*-
 
- - groblad_report: when the RT90 coordinate claims 1m resolution,
-   say 5m instead, to make Svalan happy.
+ - groblad_report: changes to simplify import to Svalan (--svalan):
+   - when the RT90 coordinate claims 1m resolution, say 5m instead
+   - do not sort the list in taxonomical order, keep places together
 
 groblad 1.5 (2008-10-13):
  - groblad_report --sundh/svalan: fill in the RT90 coordinate
@@ -31,5 +32,5 @@ groblad 1.1 (2005-01-18):
 groblad 1.0 (2005-01-06):
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.9 2009-08-15 08:16:46 grahn Exp $
+$Id: NEWS,v 1.10 2009-08-15 09:42:14 grahn Exp $
 $Name:  $

@@ -1,7 +1,7 @@
-.\" $Id: groblad_report.1,v 1.5 2007-12-02 14:51:50 grahn Exp $
+.\" $Id: groblad_report.1,v 1.6 2009-08-15 09:42:14 grahn Exp $
 .\" 
 .\"
-.TH groblad_report 1 "SEP 2007" Groblad "User Manuals"
+.TH groblad_report 1 "AUG 2009" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -55,7 +55,11 @@ groblad_report --sundh file | groff -ms -t > file.ps
 .IP --svalan
 Like
 .BR --sundh ,
-but with slightly different and quite a lot more useless columns.
+but with slightly different and quite a lot more useless columns,
+and no taxonomical ordering.
+This matches the text file (\[lq]Excel\[rq]) import format currently used by
+.IR "Rapportsystemet f\(:or v\(:axter" ,
+.IR \[fo]http://www.artportalen.se/plants/\[fc] .
 .
 .SH "FILES"
 .TP
@@ -64,7 +68,7 @@ The list of accepted species, subspecies, hybrids and forms,
 and their scientific names (which are included in the output).
 .
 .SH "AUTHOR"
-J\(:orgen Grahn \fI<grahn@snipabacken.se>
+J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
 .
 .SH "SEE ALSO"
 .BR groblad (1),

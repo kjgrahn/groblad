@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.22 2009-08-15 08:16:46 grahn Exp $
+# $Id: groblad_report.py,v 1.23 2009-08-15 09:42:14 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn
 # All rights reserved.
@@ -310,7 +310,8 @@ def use_sundh(w, places, seen):
     w('.TE\n')
 
 def use_svalan(w, places, seen):
-    """Like use_sundh, but a different set of crap.
+    """Like use_sundh, but a different set of crap and no
+    taxonomical ordering.
     """
     w('.TS H\n'
       'allbox;\n'
@@ -360,12 +361,17 @@ def use_svalan(w, places, seen):
                  'medobs 10']))
     w('\n'
       '.TH\n')
+    seen.clear()
+    spp = {}
     for sp in the_species():
-        name = sp.trivial
-        if not seen.has_key(name): continue
-        del seen[name]
-        for p in places:
-            if not p.contains(name): continue
+        spp[sp.trivial] = sp
+        spp[sp.latin] = sp
+    for p in places:
+        for name, desc in p.plants.items():
+            if not spp.has_key(name):
+                seen[name]=1
+                continue
+            sp = spp[name]
             row = [sp.trivial, '', '', '', '', p.place]
             if p.coordinate:
                 row += [str(p.coordinate.north),
@@ -373,7 +379,7 @@ def use_svalan(w, places, seen):
                         str(p.coordinate.resolution)]
             else:
                 row += ['', '', '']
-            row += [p.date, p.date, p.plants[name]]
+            row += [p.date, p.date, desc]
             row += [''] * 30
             w('\t'.join(row))
             w('\n')
