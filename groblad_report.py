@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.21 2008-10-13 19:16:19 grahn Exp $
+# $Id: groblad_report.py,v 1.22 2009-08-15 08:16:46 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn
 # All rights reserved.
@@ -43,7 +43,8 @@ class Point:
         Point(6445700.0, 1362000.0)
 
         However, the original resolution is remembered for printing
-        purposes.
+        purposes -- except a 1m resolution is fuzzed to 5m because
+        Svalan doesn't accept anything less.
         """
         i = 1
         while north < 1000000:
@@ -52,7 +53,7 @@ class Point:
             east *= 10
         self.north = north
         self.east = east
-        self.resolution = i
+        self.resolution = max(i, 5)
     def __str__(self):
         ne = (self.north / self.resolution,
               self.east / self.resolution)

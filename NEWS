@@ -1,5 +1,8 @@
 -*- text -*-
 
+ - groblad_report: when the RT90 coordinate claims 1m resolution,
+   say 5m instead, to make Svalan happy.
+
 groblad 1.5 (2008-10-13):
  - groblad_report --sundh/svalan: fill in the RT90 coordinate
    accuracy. Groblad uses the standard RT90 notation for accuracy --
@@ -28,5 +31,5 @@ groblad 1.1 (2005-01-18):
 groblad 1.0 (2005-01-06):
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.8 2008-10-13 19:25:10 grahn Exp $
+$Id: NEWS,v 1.9 2009-08-15 08:16:46 grahn Exp $
 $Name:  $
