@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 #
-# $Id: groblad.pl,v 1.4 2007-12-02 14:51:49 grahn Exp $
+# $Id: groblad.pl,v 1.5 2009-08-16 07:17:25 grahn Exp $
 # $Name:  $
 #
 # groblad - interactively editing botanical observations
@@ -180,6 +180,7 @@ sub syntaxcheck {
 	chomp;
 
 	next if /^(coordinate|observers|comments)\s*:/i;
+	next if /^(status)\s*:/i;
 	next if /^\s*$/;
 	next if /^\#/;
 	next if /^\s+\S/;

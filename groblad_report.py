@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.23 2009-08-15 09:42:14 grahn Exp $
+# $Id: groblad_report.py,v 1.24 2009-08-16 07:17:25 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007 Jörgen Grahn
 # All rights reserved.
@@ -222,7 +222,7 @@ def parse_files(names):
                     log('error: "date" is a mandatory field\n')
             elif name=='observers':
                 place.observers = value
-            elif name=='comments':
+            elif name in ('comments', 'status'):
                 pass
             else:
                 log('warning: unknown header "%s"\n' % name)
