@@ -1,4 +1,4 @@
-.\" $Id: groblad_report.1,v 1.7 2010-03-18 22:54:47 grahn Exp $
+.\" $Id: groblad_report.1,v 1.8 2010-03-18 23:07:10 grahn Exp $
 .
 .ss 12 0
 .
@@ -11,18 +11,21 @@ groblad_report \- pretty-print botanical observations
 .SH "SYNOPSIS"
 .B groblad_report
 .RB [ --ms ]
-.RI [ file
-\&...]
+.RI [ file ]
+\&...
 .br
 .B groblad_report
 .B --sundh
-.RI [ file
-\&...]
+.RI [ file ]
+\&...
 .br
 .B groblad_report
 .B --svalan
-.RI [ file
-\&...]
+.RB [ --me
+.IR name ]
+\&...
+.RI [ file ]
+\&...
 .
 .SH "DESCRIPTION"
 .B groblad_report
@@ -68,6 +71,13 @@ and no taxonomical ordering.
 This matches the text file (\[lq]Excel\[rq]) import format currently used by
 .IR "Rapportsystemet f\(:or v\(:axter" ,
 .IR \[fo]http://www.artportalen.se/plants/\[fc] .
+.
+.IP --me
+Only useful with
+.BR --svalan .
+Give a name of the reporter (i.e. yourself), to distinguish him from co-observers.
+May be given multiple times, if different names or spellings are given in the input.
+.
 .
 .SH "FILES"
 .TP
