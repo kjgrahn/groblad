@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.24 2009-08-16 07:17:25 grahn Exp $
+# $Id: groblad_report.py,v 1.25 2010-03-19 22:21:42 grahn Exp $
 #
-# Copyright (c) 2004, 2005, 2007 Jörgen Grahn
+# Copyright (c) 2004, 2005, 2007, 2010 Jörgen Grahn
 # All rights reserved.
 #
 
@@ -28,6 +28,21 @@ class Place:
         self.plants = {}
     def contains(self, species):
         return self.plants.has_key(species)
+
+class Alias:
+    def __init__(self):
+        self._aa = []
+    def append(self, name):
+        name = r'\b%s\b' % re.escape(name)
+        self._aa.append(re.compile(name))
+    def unalias(self, s):
+        """Remove all aliases from string 's', and
+        strip exposed whitespace. A bit crude; doesn't
+        remove superfluous commas and stuff like that.
+        """
+        for a in self._aa:
+            s = a.sub('', s)
+        return s.strip()
 
 class Point:
     """A point in the Rikets Nät.
@@ -235,7 +250,7 @@ def parse_files(names):
 
     return places, seen
 
-def use_ms(w, places, seen):
+def use_ms(w, places, seen, _):
     """Layout, writing with 'w' from 'places',
     while consuming 'seen'.
     """
@@ -262,7 +277,7 @@ def use_ms(w, places, seen):
         w('\n\\(em\n'.join(ss))
         w('\n.\n')
 
-def use_sundh(w, places, seen):
+def use_sundh(w, places, seen, _):
     """Like use_ms, but a different layout.
     """
     w('.TS H\n'
@@ -309,7 +324,7 @@ def use_sundh(w, places, seen):
             w('\n')
     w('.TE\n')
 
-def use_svalan(w, places, seen):
+def use_svalan(w, places, seen, aliases):
     """Like use_sundh, but a different set of crap and no
     taxonomical ordering.
     """
@@ -349,6 +364,7 @@ def use_svalan(w, places, seen):
                  'ej funnen',
                  'undersökt i mikroskop',
                  'syfte',
+
                  'medobs 1',
                  'medobs 2',
                  'medobs 3',
@@ -367,6 +383,9 @@ def use_svalan(w, places, seen):
         spp[sp.trivial] = sp
         spp[sp.latin] = sp
     for p in places:
+        observers = ''
+        if p.observers:
+            observers = aliases.unalias(p.observers)
         for name, desc in p.plants.items():
             if not spp.has_key(name):
                 seen[name]=1
@@ -380,7 +399,9 @@ def use_svalan(w, places, seen):
             else:
                 row += ['', '', '']
             row += [p.date, p.date, desc]
-            row += [''] * 30
+            row += [''] * 20
+            row += [observers]
+            row += [''] * 9
             w('\t'.join(row))
             w('\n')
     w('.TE\n')
@@ -391,20 +412,23 @@ if __name__ == "__main__":
     import os.path
 
     prog = os.path.split(sys.argv[0])[1]
-    usage = 'usage: %s [--ms | --sundh | --svalan] file ...' % prog
+    usage = 'usage: %s [--ms | --sundh | --svalan] [--me name] file ...' % prog
 
     log = sys.stderr.write
     layout = use_ms
+    me = Alias()
     try:
         opts, files = getopt.getopt(sys.argv[1:],
                                     '',
                                     ['ms',
                                      'sundh',
-                                     'svalan'])
+                                     'svalan',
+                                     'me='])
         for opt, val in opts:
             if opt=='--sundh': layout = use_sundh
             elif opt=='--svalan': layout = use_svalan
             elif opt=='--ms': layout = use_ms
+            elif opt=='--me': me.append(val)
     except getopt.GetoptError, s:
         print >>sys.stderr, s
         print >>sys.stderr, usage
@@ -413,7 +437,7 @@ if __name__ == "__main__":
     places, seen = parse_files(files)
 
     w = sys.stdout.write
-    layout(w, places, seen)
+    layout(w, places, seen, me)
 
     # At this point 'seen' may contain a number of names
     # which aren't good species. Print them as a warning.
