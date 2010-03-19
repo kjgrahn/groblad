@@ -1,4 +1,4 @@
-# $Id: species,v 1.4 2010-03-18 22:48:51 grahn Exp $ -*- text -*-
+# $Id: species,v 1.5 2010-03-19 21:44:58 grahn Exp $ -*- text -*-
 #
 # The list is in taxonomical order, and each line is on the form
 #   common name  (scientific name)
@@ -2921,6 +2921,7 @@ selleri			(Apium graveolens)
 krypfloka		(Apium inundatum)
 fränefloka		(Apium nodiflorum)
 stjärnflocka		(Astrantia major)
+stjärnfloka		(Astrantia major)
 bäckmärke		(Berula erecta)
 strålkoriander		(Bifora radians)
 			(Bowlesia incana)
@@ -4686,6 +4687,7 @@ flottmaskros		(Taraxacum subalpinum)
 strandmaskros		(Taraxacum suecicum)
 västgötamaskros		(Taraxacum vestrogothicum)
 ogräsmaskros		(Taraxacum sect. Ruderalia)
+ogräsmaskrosor		(Taraxacum sect. Ruderalia)
 jyllandsmaskros		(Taraxacum cimbricum)
 atlantmaskros		(Taraxacum spectabile)
 fjällmaskros		(Taraxacum croceum)
