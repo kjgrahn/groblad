@@ -1,4 +1,11 @@
--*- text -*-
+Major changes to groblad by version, latest first:
+
+groblad 1.7 (2010-03-19):
+ - the species list: include a few commonly used synonyms
+   (e.g. "tussilago" for "hästhov", and some where Västergötlands
+   Flora deviates from Karlsson 1997).
+ - groblad_report: include observers in the --svalan report, and
+   exclude yourself with the --me option.
 
 groblad 1.6 (2009-08-16):
  - accept 'Status' as an additional excursion field, for e.g.
@@ -35,5 +42,5 @@ groblad 1.1 (2005-01-18):
 groblad 1.0 (2005-01-06):
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.11 2009-08-16 07:17:25 grahn Exp $
+$Id: NEWS,v 1.12 2010-03-19 22:33:33 grahn Exp $
 $Name:  $
