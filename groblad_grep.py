@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_grep.py,v 1.2 2010-03-22 22:07:16 grahn Exp $
+# $Id: groblad_grep.py,v 1.3 2010-03-22 22:25:52 grahn Exp $
 #
 # Copyright (c) 2010 Jörgen Grahn
 # All rights reserved.
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     import os.path
 
     prog = os.path.split(sys.argv[0])[1]
-    usage = 'usage: %s [-v] [-e pattern] ... file ...' % prog
+    usage = 'usage: %s [-v] -e pattern ... file ...' % prog
 
     log = sys.stderr.write
     invert = False

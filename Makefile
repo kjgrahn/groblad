@@ -1,11 +1,11 @@
-# $Id: Makefile,v 1.4 2010-03-22 22:02:24 grahn Exp $
+# $Id: Makefile,v 1.5 2010-03-22 22:25:52 grahn Exp $
 
 SHELL = /bin/sh
 
 INSTALLBASE = /usr/local
 
 all: _groblad.pl _groblad_report.py
-all: _groblad.1 _groblad.5 _groblad_report.1
+all: _groblad.1 _groblad.5 _groblad_report.1 _groblad_grep.1
 all: groblad_grep.py
 all: default species
 
@@ -19,6 +19,7 @@ install: all
 	install -m644 default $(INSTALLBASE)/lib/groblad
 	install -m644 _groblad.1 $(INSTALLBASE)/man/man1/groblad.1
 	install -m644 _groblad_report.1 $(INSTALLBASE)/man/man1/groblad_report.1
+	install -m644 _groblad_grep.1 $(INSTALLBASE)/man/man1/groblad_grep.1
 	install -m644 _groblad.5 $(INSTALLBASE)/man/man5/groblad.5
 
 $(INSTALLBASE)/lib/groblad:
@@ -36,7 +37,8 @@ _groblad_report.1: groblad_report.1
 	sed "s|INSTALLBASE|$(INSTALLBASE)|" <$< >$@
 
 clean:
-	$(RM) _groblad.pl _groblad_report.py _groblad.1 _groblad.5 _groblad_report.1
+	$(RM) _groblad.pl _groblad_report.py
+	$(RM) _groblad.1 _groblad.5 _groblad_report.1 _groblad_grep.1
 
 love:
 	@echo "not war?"

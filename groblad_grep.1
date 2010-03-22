@@ -1,0 +1,55 @@
+.\" $Id: groblad_grep.1,v 1.1 2010-03-22 22:25:52 grahn Exp $
+.
+.ss 12 0
+.
+.TH groblad_grep 1 "MAR 2010" Groblad "User Manuals"
+.
+.
+.SH "NAME"
+groblad_grep \- grep botanical observations
+.
+.SH "SYNOPSIS"
+.B groblad_grep
+.RB [ \-v ]
+.RB [ \-e
+.IR pattern ]
+\&...
+.RI [ file ]
+\&...
+.
+.SH "DESCRIPTION"
+.B groblad_grep
+works like
+.BR grep(1),
+but on
+.BR groblad (5))
+entries rather than lines of text.
+You feed it files, or standard input,
+and it outputs only the entries matching one of the search patterns,
+or those not matching.
+.
+.SH "OPTIONS"
+.
+.IP "\-e \fIpattern"
+A string or, more generally, regex to search for.
+.
+.IP \-v
+Invert the search, so that only entries without matches are selected.
+.
+.SH "EXAMPLES"
+.
+.IP "\fIgroblad_grep \-e JoG file"
+Grep entries containing the string
+.IR JoG .
+.
+.IP "\fIgroblad_grep \-e JoG file | groblad_grep \-ve J\(:oG | "
+The same, but exclude any entries containing
+.IR J\(:oG .
+.
+.SH "AUTHOR"
+J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
+.
+.SH "SEE ALSO"
+.BR groblad (5),
+.BR groblad (1),
+.BR grep (1).
