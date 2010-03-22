@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_grep.py,v 1.1 2010-03-22 22:02:24 grahn Exp $
+# $Id: groblad_grep.py,v 1.2 2010-03-22 22:07:16 grahn Exp $
 #
 # Copyright (c) 2010 Jörgen Grahn
 # All rights reserved.
@@ -36,15 +36,14 @@ def subgrep(f, pat, invert, out):
             # }
             buf.append(s)
             inside = False
-            if match(buf, pat): out.writelines(buf)
-    out.writelines(buf)
+            if match(buf, pat, invert): out.writelines(buf)
 
 def ggrep(files, pat, invert, out):
     for f in files:
         if f=='-':
             f = sys.stdin
         else:
-            f = open('f', 'r')
+            f = open(f, 'r')
         subgrep(f, pat, invert, out)
 
 
@@ -63,8 +62,8 @@ if __name__ == "__main__":
     try:
         opts, files = getopt.getopt(sys.argv[1:], 've:')
         for opt, val in opts:
-            if opt=='v': invert=True
-            elif opt=='e': pat.append(re.compile(val).search)
+            if opt=='-v': invert=True
+            elif opt=='-e': pat.append(re.compile(val).search)
         if not pat:
             raise ValueError('no pattern specified')
         if not files:
