@@ -1,5 +1,9 @@
 Major changes to groblad by version, latest first:
 
+groblad 1.9 (2010-04-01):
+ - groblad_report --fv, a variation of --svalan for people who are Floraväktare
+   and still want to report as usual.
+
 groblad 1.8 (2010-03-22):
  - new utility groblad_grep(1) - grep botanical observations.
 
@@ -45,5 +49,5 @@ groblad 1.1 (2005-01-18):
 groblad 1.0 (2005-01-06):
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.13 2010-03-22 22:25:52 grahn Exp $
+$Id: NEWS,v 1.14 2010-04-01 19:49:43 grahn Exp $
 $Name:  $

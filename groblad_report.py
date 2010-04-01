@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.25 2010-03-19 22:21:42 grahn Exp $
+# $Id: groblad_report.py,v 1.26 2010-04-01 19:49:43 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007, 2010 Jörgen Grahn
 # All rights reserved.
@@ -324,7 +324,7 @@ def use_sundh(w, places, seen, _):
             w('\n')
     w('.TE\n')
 
-def use_svalan(w, places, seen, aliases):
+def use_svalan(w, places, seen, aliases, fv=False):
     """Like use_sundh, but a different set of crap and no
     taxonomical ordering.
     """
@@ -400,11 +400,15 @@ def use_svalan(w, places, seen, aliases):
                 row += ['', '', '']
             row += [p.date, p.date, desc]
             row += [''] * 20
+            if fv: row.append('')
             row += [observers]
             row += [''] * 9
             w('\t'.join(row))
             w('\n')
     w('.TE\n')
+
+def use_svalan_fv(w, places, seen, aliases):
+    return use_svalan(w, places, seen, aliases, True)
 
 
 if __name__ == "__main__":
@@ -412,7 +416,7 @@ if __name__ == "__main__":
     import os.path
 
     prog = os.path.split(sys.argv[0])[1]
-    usage = 'usage: %s [--ms | --sundh | --svalan] [--me name] file ...' % prog
+    usage = 'usage: %s [--ms | --sundh | --svalan | --fv] [--me name] file ...' % prog
 
     log = sys.stderr.write
     layout = use_ms
@@ -423,10 +427,12 @@ if __name__ == "__main__":
                                     ['ms',
                                      'sundh',
                                      'svalan',
+                                     'fv',
                                      'me='])
         for opt, val in opts:
             if opt=='--sundh': layout = use_sundh
             elif opt=='--svalan': layout = use_svalan
+            elif opt=='--fv': layout = use_svalan_fv
             elif opt=='--ms': layout = use_ms
             elif opt=='--me': me.append(val)
     except getopt.GetoptError, s:
