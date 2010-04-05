@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.7 2010-04-05 14:33:31 grahn Exp $
+# $Id: Makefile,v 1.8 2010-04-05 15:41:39 grahn Exp $
 
 SHELL = /bin/sh
 
@@ -45,6 +45,9 @@ falat18.html\
 falat18b.html
 	( for f in $^ ; do w3m -cols 2000 -dump $$f ; done) >$@
 
+species_raw: falat kärlvl
+	./kärlvl falat | col >$@
+
 .PHONY: install
 install: all
 	install -m555 _groblad.pl $(INSTALLBASE)/bin/groblad
@@ -75,6 +78,7 @@ _groblad_report.1: groblad_report.1
 clean:
 	$(RM) _groblad.pl _groblad_report.py
 	$(RM) _groblad.1 _groblad.5 _groblad_report.1
+	$(RM) species_raw
 	$(RM) falat
 	$(RM) falat*.html
 

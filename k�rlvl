@@ -5,7 +5,7 @@
 #          Thomas Karlsson,
 #          Naturhistoriska riksmuseet
 # 
-# $Id: kärlvl,v 1.9 2010-04-05 14:33:31 grahn Exp $
+# $Id: kärlvl,v 1.10 2010-04-05 15:41:39 grahn Exp $
 # 
 # Copyright (c) 2004, 2010 Jörgen Grahn
 # All rights reserved.
@@ -34,10 +34,10 @@ sub out($$$) {
     return if $stat =~ /[?-]/;
 
     if(defined $sv) {
-	printf "%-22s (%s)\n", $sv, $lat;
+	printf "%-23s (%s)\n", $sv, $lat;
     }
     else {
-	printf "%-22s  %s\n", '', $lat;
+	printf "%-23s (%s)\n", '', $lat;
     }
 }
 
@@ -104,7 +104,7 @@ while(<>) {
  	next;
     }
 
-    # print "xxx $_";
+    print STDERR "skipped: $_";
 }
 
 __END__
