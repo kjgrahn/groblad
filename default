@@ -158,10 +158,6 @@ idegran              : :
 
 #          Salicaceae
 silverpoppel         : : 
-jämtlandspoppel      : : 
-ontariopoppel        : : 
-balsampoppel         : : 
-sorgpoppel           : : 
 kanadapoppel         : : 
 gråpoppel            : : 
 svartpoppel          : : 
@@ -1011,7 +1007,6 @@ daggros              : :
 ryssros              : : 
 kamtjatkaros         : : 
 kanelros             : : 
-bukettros            : : 
 äkta kanelros        : : 
 pimpinellros         : : 
 liten pimpinellros   : : 
@@ -1792,11 +1787,6 @@ strandmynta          : :
 åkermynta            : : 
 vanlig åkermynta     : : 
 ädelmynta            : : 
-värmländsk ädelmynta : : 
-småblommig ädelmynta : : 
-gotländsk ädelmynta  : : 
-skånsk ädelmynta     : : 
-gleshårig ädelmynta  : : 
 gråmynta             : : 
 grönmynta            : : 
 hjärtmynta           : : 
@@ -2043,7 +2033,6 @@ hjärtklocka          : :
 skogsklocka          : : 
 toppklocka           : : 
 ängstoppklocka       : : 
-prakttoppklocka      : : 
 mjölkklocka          : : 
 hässleklocka         : : 
 vanlig hässleklocka  : : 
@@ -2356,7 +2345,6 @@ Marklunds maskros    : :
 brittmaskros         : : 
 kvadratmaskros       : : 
 daggmaskros          : : 
-hjulmaskros          : : 
 bredskaftad fläckmaskros : : 
 dalslandsmaskros     : : 
 fläckmaskros         : : 
