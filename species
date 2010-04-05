@@ -1,4 +1,13 @@
-# $Id: species,v 1.10 2010-04-05 19:24:23 grahn Exp $ -*- text -*-
+# $Id: species,v 1.11 2010-04-05 19:50:13 grahn Exp $ -*- text -*-
+#
+# This list is based on a subset of
+# Karlsson, T. 1997: Svenska kärlväxter. Svensk Bot. Tidskr. 91: 241-560.
+# or rather the online version http://www2.nrm.se/fbo/chk/ (JAN 2004).
+#
+# Taxa marked - or ? have been excluded, as have some trade names etc.
+# Some synonyms have been added.
+#
+# ---
 #
 # The list is in taxonomical order, and each line is on the form
 #   common name  (scientific name)
