@@ -1,5 +1,8 @@
 Major changes to groblad by version, latest first:
 
+ - groblad_report: for export to Artportalen, by default include
+   species even if they're not known to groblad.
+
  - Bug fix. Groblad 1.6 broke 'groblad_report --ms', by making many
    coordinates print insanely and obviously incorrectly.
 
@@ -71,5 +74,5 @@ groblad 1.0 (2005-01-06):
 
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.17 2010-08-29 09:11:49 grahn Exp $
+$Id: NEWS,v 1.18 2010-08-29 10:13:09 grahn Exp $
 $Name:  $

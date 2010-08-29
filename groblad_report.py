@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.27 2010-08-29 09:11:49 grahn Exp $
+# $Id: groblad_report.py,v 1.28 2010-08-29 10:13:09 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007, 2010 Jörgen Grahn
 # All rights reserved.
@@ -252,7 +252,7 @@ def parse_files(names):
 
     return places, seen
 
-def use_ms(w, places, seen, _):
+def use_ms(w, places, seen, _, __):
     """Layout, writing with 'w' from 'places',
     while consuming 'seen'.
     """
@@ -279,7 +279,7 @@ def use_ms(w, places, seen, _):
         w('\n\\(em\n'.join(ss))
         w('\n.\n')
 
-def use_sundh(w, places, seen, _):
+def use_sundh(w, places, seen, _, __):
     """Like use_ms, but a different layout.
     """
     w('.TS H\n'
@@ -326,7 +326,7 @@ def use_sundh(w, places, seen, _):
             w('\n')
     w('.TE\n')
 
-def use_svalan(w, places, seen, aliases, fv=False):
+def use_svalan(w, places, seen, aliases, strict, fv=False):
     """Like use_sundh, but a different set of crap and no
     taxonomical ordering.
     """
@@ -389,10 +389,14 @@ def use_svalan(w, places, seen, aliases, fv=False):
         if p.observers:
             observers = aliases.unalias(p.observers)
         for name, desc in p.plants.items():
-            if not spp.has_key(name):
+            if spp.has_key(name):
+                sp = spp[name]
+            else:
                 seen[name]=1
-                continue
-            sp = spp[name]
+                if strict:
+                    continue
+                else:
+                    sp = Species(name, '')
             row = [sp.trivial, '', '', '', '', p.place]
             if p.coordinate:
                 row += [str(p.coordinate.north),
@@ -409,8 +413,8 @@ def use_svalan(w, places, seen, aliases, fv=False):
             w('\n')
     w('.TE\n')
 
-def use_svalan_fv(w, places, seen, aliases):
-    return use_svalan(w, places, seen, aliases, True)
+def use_svalan_fv(w, places, seen, aliases, strict):
+    return use_svalan(w, places, seen, aliases, strict, True)
 
 
 if __name__ == "__main__":
@@ -422,10 +426,11 @@ if __name__ == "__main__":
 
     log = sys.stderr.write
     layout = use_ms
+    strict = False
     me = Alias()
     try:
         opts, files = getopt.getopt(sys.argv[1:],
-                                    '',
+                                    's',
                                     ['ms',
                                      'sundh',
                                      'svalan',
@@ -436,19 +441,25 @@ if __name__ == "__main__":
             elif opt=='--svalan': layout = use_svalan
             elif opt=='--fv': layout = use_svalan_fv
             elif opt=='--ms': layout = use_ms
+            elif opt=='-s': strict = True
             elif opt=='--me': me.append(val)
     except getopt.GetoptError, s:
         print >>sys.stderr, s
         print >>sys.stderr, usage
         sys.exit(1)
 
+    if layout not in (use_svalan, use_svalan_fv):
+        strict = True
+
     places, seen = parse_files(files)
 
     w = sys.stdout.write
-    layout(w, places, seen, me)
+    layout(w, places, seen, me, strict)
 
     # At this point 'seen' may contain a number of names
     # which aren't good species. Print them as a warning.
 
     for name in seen.keys():
         log('unknown species: %s\n' % name)
+    if seen and not strict:
+        log('(unknown species included anyway)\n')

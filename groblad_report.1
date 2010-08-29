@@ -1,8 +1,12 @@
-.\" $Id: groblad_report.1,v 1.9 2010-04-01 19:49:43 grahn Exp $
+.\" $Id: groblad_report.1,v 1.10 2010-08-29 10:13:09 grahn Exp $
 .
 .ss 12 0
+.ss 12 0
+.de BP
+.IP \\fB\\$*
+..
 .
-.TH groblad_report 1 "APR 2010" Groblad "User Manuals"
+.TH groblad_report 1 "AUG 2010" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -23,6 +27,7 @@ groblad_report \- pretty-print botanical observations
 .RB [ --svalan
 |
 .BR --fv ]
+.RB [ \-s ]
 .RB [ --me
 .IR name ]
 \&...
@@ -48,12 +53,12 @@ and result in warnings.
 .
 .SH "OPTIONS"
 .
-.IP --ms
+.BP --ms
 Generate troff \-ms source for a nicely formatted list of observations
 by species, and in systematic order.
 This is the default.
 .
-.IP --sundh
+.BP --sundh
 Generate troff source with
 .BR tbl (1)
 tables, one line per finding.
@@ -65,16 +70,17 @@ Use for example as:
 .IP
 groblad_report --sundh file | groff -ms -t > file.ps
 .
-.IP --svalan
+.BP --svalan
 Like
 .BR --sundh ,
 but with slightly different and quite a lot more useless columns,
 and no taxonomical ordering.
 This matches the text file (\[lq]Excel\[rq]) import format currently used by
+.IR Artportalen ;
 .IR "Rapportsystemet f\(:or v\(:axter" ,
 .IR \[fo]http://www.artportalen.se/plants/\[fc] .
 .
-.IP --fv
+.BP --fv
 Like
 .BR --svalan ,
 but for people who are dubbed
@@ -82,7 +88,20 @@ but for people who are dubbed
 It's probably undocumented, but these people seem to have an additional column
 in their text file input forms.
 .
-.IP --me
+.BP \-s
+Exclude species not known to groblad, instead of bringing them in and hoping they
+are accepted by
+.I Artportalen
+anyway.
+Only useful with
+.B --svalan
+and
+.BR --fv ;
+the other output options use taxonomical ordering and/or want to print the latin name.
+.IP
+This used to be the default.
+.
+.BP --me\ \fIname
 Only useful with
 .B --svalan
 and
