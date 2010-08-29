@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.8 2010-04-05 15:41:39 grahn Exp $
+# $Id: Makefile,v 1.9 2010-08-29 08:08:15 grahn Exp $
 
 SHELL = /bin/sh
 
@@ -64,15 +64,7 @@ install: all
 $(INSTALLBASE)/lib/groblad:
 	install -d $@
 
-_groblad.pl: groblad.pl
-	sed "s|INSTALLBASE|$(INSTALLBASE)|" <$< >$@
-_groblad_report.py: groblad_report.py
-	sed "s|INSTALLBASE|$(INSTALLBASE)|" <$< >$@
-_groblad.1: groblad.1
-	sed "s|INSTALLBASE|$(INSTALLBASE)|" <$< >$@
-_groblad.5: groblad.5
-	sed "s|INSTALLBASE|$(INSTALLBASE)|" <$< >$@
-_groblad_report.1: groblad_report.1
+_%: %
 	sed "s|INSTALLBASE|$(INSTALLBASE)|" <$< >$@
 
 clean:
