@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_report.py,v 1.26 2010-04-01 19:49:43 grahn Exp $
+# $Id: groblad_report.py,v 1.27 2010-08-29 09:11:49 grahn Exp $
 #
 # Copyright (c) 2004, 2005, 2007, 2010 Jörgen Grahn
 # All rights reserved.
@@ -81,8 +81,10 @@ class Point:
         point size changing commands as appropriate.
         """
         acc = []
+        res = self.resolution
+        if res==5: res = 1
         for n in (self.north, self.east):
-            n /= self.resolution
+            n /= res
             n = str(n)
             if kind==0:
                 acc.append(r'\s-2%s\s0%s' % (n[:2], n[2:]))
