@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.6 2011-07-16 16:41:13 grahn Exp $
+# $Id: groblad_fv.py,v 1.7 2011-07-16 17:02:27 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -133,6 +133,7 @@ class Record(object):
         """
         antal = re.compile(r'(\d+)\s*(.*)')
         noggrannhet = re.compile(r'(\d+) m')
+        rt90 = re.compile(r'([67]\d+)\s+(1[2-8]\d+)')
 
     def __init__(self, log):
         self._log = log
@@ -188,6 +189,27 @@ class Record(object):
                 v['enhet'] = m.group(2)
         if v.has_key('enhet'):
             v['enhet'] = self._enhet.get(v['enhet'])
+
+        # canonize coordinates
+        k = 'koordinat'
+        if v.has_key('nordkoordinat') or v.has_key('ostkoordinat') or v.has_key('noggrannhet'):
+            if v.has_key(k):
+                self._log('warning: ignoring superfluous "%s: %s"\n' % (k, v[k]))
+        elif not v.has_key(k):
+            self._log('warning: no coordinate info present\n')
+        else:
+            m = self.Re.rt90.match(v[k])
+            if not m:
+                self._log('warning: bad RT90 coordinate %s\n' % v[k])
+            else:
+                p = Point(int(m.group(1)), int(m.group(2)))
+                v['nordkoordinat'] = '%d' % p.north
+                v['ostkoordinat'] =  '%d' % p.east
+                v['noggrannhet'] =  '%d m' % p.resolution
+
+        # canonize dates
+        if v.has_key('startdatum') and not v.has_key('slutdatum'):
+            v['slutdatum'] = v['startdatum']
 
         # canonize the binary fields
         for k in ('ej återfunnen', 'andrahandsuppgift', 'osäker bestämning',
