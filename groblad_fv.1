@@ -1,9 +1,11 @@
-.\" $Id: groblad_fv.1,v 1.1 2011-07-16 10:46:40 grahn Exp $
+.\" $Id: groblad_fv.1,v 1.2 2011-07-16 12:08:16 grahn Exp $
 .
 .ss 12 0
 .de BP
 .IP \\fB\\$*
 ..
+.
+.ds + [+]
 .
 .TH groblad_fv 1 "JUL 2011" Groblad "User Manuals"
 .
@@ -11,7 +13,9 @@
 .SH "NAME"
 groblad_fv \- report botanical observations to Artportalen
 .
+.
 .SH "SYNOPSIS"
+.
 .B groblad_fv
 .I file
 \&...
@@ -21,6 +25,7 @@ groblad_fv \- report botanical observations to Artportalen
 .br
 .B groblad_fv
 .B --version
+.
 .
 .SH "DESCRIPTION"
 .
@@ -41,6 +46,194 @@ and editable text file format and the tab-separated format accepted by the so-ca
 .
 However, it also simplifies some tedious aspects like calculation of coordinate accuracy
 and end date, and performs some syntax checks.
+.
+.
+.SS "Input file format"
+.
+The input is a text file, with records being a series
+.B "field name : value"
+lines. Records are separated by blank lines.
+Lines which start with
+.B #
+are comments and are thus ignored.
+.
+.PP
+Fields generally map 1:1 to the \[lq]Excel import\[rq] columns, but you don't have to list every one
+of them, they don't have to appear in any specific order, and some have sane defaults.
+.PP
+The fields are as follows. The numbered ones are \[lq]Excel import\[rq] columns; others are
+my invention and translate to columns.
+The descriptions are my interpretation of the documentation in the official Excel template and/or the
+user guide. I provide them here for convenience only, and it's not complete documentation.
+.PP
+Things which are extensions in
+.BR groblad_fv (1)
+are marked \*+.
+.
+.BP  1.\~Artnamn
+A name for the taxon, or
+.B saknas
+if it is not known by Artportalen.
+.
+.BP  2.\~Antal
+.BP  3.\~Enhet
+.B Antal
+and
+.B Enhet
+belong together.
+The latter is one of
+.BR "buskar" ,
+.BR "m2" ,
+.BR "plantor" ,
+.BR "träd" ,
+.BR "skott" ,
+.BR "strån" ,
+.BR "tuvor" ,
+.BR "stjälkar" ,
+.BR "bladskivor" ,
+.BR "stänglar" ,
+.BR "dm2" ,
+.BR "cm2" ,
+.BR "kapslar" ,
+.BR "kolonier" ,
+.BR "bålar" ,
+.BR "mycel" ,
+.BR "fruktkroppar" .
+.BP
+\*+ You can also use names in singularis, and proper typography like
+.BR m² ,
+.BR dm² ,
+.BR cm² .
+.BP
+\*+ You can skip the separate
+.B Enhet
+field and just say e.g.
+.IR "Antal: 1 stängel" .
+.
+.BP  4.\~Antal\~substrat
+Mostly for epiphytes, I suppose.
+.
+.BP  5.\~Stadium
+One of
+.BR "Vilstadium" ,
+.BR "Knoppbristning" ,
+.BR "Fullt utvecklade blad" ,
+.BR "Blomknopp" ,
+.BR "Blomning" ,
+.BR "Överblommad" ,
+.BR "I frukt" ,
+.BR "Frukt-/fröspridning" ,
+.BR "Gulnande löv/blad" ,
+.BR "Bladfällning, vissnar" ,
+.BR "Vinterståndare" .
+There are plenty of others, but those are not applicable to fanerogams.
+.
+.BP  6.\~Lokalnamn
+Place name. Vaguely described as
+.IR "\[lq]helst ett geografiskt namn och därefter avstånd och riktning vid behov\[rq]" .
+.
+.BP  7.\~Nordkoordinat/latitud
+.
+.BP  8.\~Ostkoordinat/longitud
+.
+.BP  9.\~Noggrannhet
+These three together form the coordinate.
+.B Noggrannhet
+is one of
+.BR "5\ m" ,
+.BR "10\ m" ,
+.BR "25\ m" ,
+.BR "50\ m" ,
+.BR "100\ m" ,
+.BR "250\ m" ,
+.BR "500\ m" ,
+.BR "1000\ m" ,
+.BR "2500\ m" ,
+.BR "5000\ m" .
+That's right; you can't specify 1m resolution.
+.
+.BP \*+\ Koordinat
+A simpler way to specify a RT90 coordinate in the traditional format, where the
+number of digits implicitly specifies the accuracy. For example,
+.I "Koordinat:\ 644501\ 136330"
+is the same thing as specifying
+.IR 6445010 ,
+.IR 1363300 ,
+.IR 10\ m .
+.
+.BP 10.\~Startdatum
+.
+.BP 11.\~Slutdatum
+These two are on the form
+.BR "2007\-04\-17" .
+\*+ If you omit
+.B Slutdatum
+it is copied from
+.BR Startdatum .
+.
+.BP 12.\~Kommentar
+Information which cannot be given in other fields.
+.
+.BP 13.\~Det/conf
+Who determined or confirmed which taxon it was, and when.
+.
+.BP 14.\~Samling
+The user guide and the Excel sheet give conflicting documentation for this one.
+Both agree that you can say
+.B "Eget"
+(you have a specimen in your private herbarium) or
+.BR "Annat" .
+The Excel sheet also lists
+.BR "NRM, Sthlm" ;
+.BR "Göteborg" ;
+.BR "Lund" ;
+.BR "Uppsala" ;
+.BR "Uppsala, SLU" ;
+.BR "Umeå" .
+.
+.BP 15.\~Accessionsnr
+Relates to the ID given to the collect in
+.BR Samling .
+.
+.BP 16.\~Substrat\~\-\~lista
+.
+.BP 17.\~Substrat\~\-\~text
+.
+.BP 18.\~Biotop\~\-\~lista
+.
+.BP 19.\~Biotop\~\-\~text
+.
+.BP 20.\~Trädslag\~\-\~lista
+.
+.BP 21.\~Trädslag\~\-\~text
+.
+.BP 22.\~Ej\~återfunnen
+.
+.BP 23.\~Andrahandsuppgift
+.
+.BP 24.\~Osäker\~bestämning
+.
+.BP 25.\~Utplanterad\~eller\~införd
+.
+.BP 26.\~Intressant\~notering
+.
+.BP 27.\~Dölj
+.
+.BP 28.\~Skydda\~lokalangivelse
+.
+.BP 29.\~Rapportera\~till\~Rrk
+.
+.BP 30.\~Ej\~funnen
+.
+.BP 31.\~Undersökt\~i\~mikroskop
+.
+.BP 32.\~Syfte
+.
+.BP 33.\~Floraväktarlokal
+.
+.BP 34\-43.\~Medobs
+.
+.
 .
 .SH "OPTIONS"
 .
