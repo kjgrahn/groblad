@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.1 2011-07-16 13:22:38 grahn Exp $
+# $Id: groblad_fv.py,v 1.2 2011-07-16 14:35:13 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -60,50 +60,73 @@ class Point:
         return ' '.join(acc)
 
 
+def cvs_says(dollarname='$Name:  $'):
+    """Parse a CVS tag name according to the convention
+    'product_name-major-minor-subminor-...'
+    into a tuple: the name and the dot-delimited version number.
+    
+    Both become 'unknown' if the CVS tag isn't what we'd like it to be.
+    """
+    import re
+    m = re.match(r'\$'r'Name:\s+(.+?)-(\d+(-\d+)*)\D', dollarname)
+    if not m: return ('unknown', 'unknown')
+    return m.group(1), m.group(2).replace('-', '.')
+
+
+class Record(object):
+    """A single record, which gets appended to and finally converted and printed.
+    """
+
+
+def process(f, out, log):
+    """Handle one input file 'f', writing to 'out' and logging errors to 'log'.
+    """
+    r = Record(out, log)
+    line = 0
+    for s in f:
+        line += 1
+        s = s.rstrip()
+        if not s:
+            r.dump()
+            r = Record(out, log)
+        elif s[0] == '#':
+            continue
+        elif s[0] in ' \t':
+            r.continuation(line, s)
+        else:
+            field, val = s.split(':', 1)
+            field = field.lower().strip()
+            val = val.lstrip()
+            r.append(line, field, val)
+    r.dump()
+
 
 if __name__ == "__main__":
     import getopt
     import os.path
 
     prog = os.path.split(sys.argv[0])[1]
-    usage = 'usage: %s [--ms | --sundh | --svalan | --fv] [--me name] file ...' % prog
+    usage = 'usage: %s file ...' % prog
 
     log = sys.stderr.write
-    layout = use_ms
-    strict = False
-    me = Alias()
     try:
-        opts, files = getopt.getopt(sys.argv[1:],
-                                    's',
-                                    ['ms',
-                                     'sundh',
-                                     'svalan',
-                                     'fv',
-                                     'me='])
+        opts, files = getopt.getopt(sys.argv[1:], '',
+                                    ['version', 'help'])
         for opt, val in opts:
-            if opt=='--sundh': layout = use_sundh
-            elif opt=='--svalan': layout = use_svalan
-            elif opt=='--fv': layout = use_svalan_fv
-            elif opt=='--ms': layout = use_ms
-            elif opt=='-s': strict = True
-            elif opt=='--me': me.append(val)
+            if opt=='--help':
+                print usage
+                sys.exit(0)
+            elif opt=='--version':
+                groblad, ver = cvs_says()
+                print '%s, part of %s %s' % (prog, groblad, ver)
+                print 'Copyright (c) 2011 Jörgen Grahn. All rights reserved.'
+                sys.exit(0)
     except getopt.GetoptError, s:
         print >>sys.stderr, s
         print >>sys.stderr, usage
         sys.exit(1)
 
-    if layout not in (use_svalan, use_svalan_fv):
-        strict = True
-
-    places, seen = parse_files(files)
-
-    w = sys.stdout.write
-    layout(w, places, seen, me, strict)
-
-    # At this point 'seen' may contain a number of names
-    # which aren't good species. Print them as a warning.
-
-    for name in seen.keys():
-        log('unknown species: %s\n' % name)
-    if seen and not strict:
-        log('(unknown species included anyway)\n')
+    for f in files:
+        process(open(f, 'r'), sys.stdout, log)
+    if not f:
+        process(sys.stdin, sys.stdout, log)
