@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.10 2011-07-16 18:11:45 grahn Exp $
+# $Id: groblad_fv.py,v 1.11 2011-07-16 18:54:37 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -215,12 +215,40 @@ class Record(object):
                        ['Rönn'],
                        ['Salix'],
                        ['Annat trivialt lövträd'])
+    _noggrannhet = Synonymous(['5 m', '5m'],
+                              ['10 m', '10m'],
+                              ['25 m', '25m'],
+                              ['50 m', '50m'],
+                              ['100 m', '100m'],
+                              ['250 m', '250m'],
+                              ['500 m', '500m'],
+                              ['1000 m', '1000m'],
+                              ['2500 m', '2500m'],
+                              ['5000 m', '5000m'])
+    _stadium = Synonymous(['Vilstadium'],
+                          ['Knoppbristning'],
+                          ['Fullt utvecklade blad'],
+                          ['Blomknopp'],
+                          ['Blomning'],
+                          ['Överblommad'],
+                          ['I frukt'],
+                          ['Frukt-/fröspridning'],
+                          ['Gulnande löv/blad'],
+                          ['Bladfällning, vissnar'],
+                          ['Vinterståndare'])
+    _samling = Synonymous(['Eget'],
+                          ['Annat'],
+                          ['NRM, Sthlm'],
+                          ['Göteborg'],
+                          ['Lund'],
+                          ['Uppsala'],
+                          ['Uppsala, SLU'],
+                          ['Umeå'])
 
     class Re:
         """Just a container for some useful REs.
         """
         antal = re.compile(r'(\d+)\s*(.*)')
-        noggrannhet = re.compile(r'(\d+) m')
         rt90 = re.compile(r'([67]\d+)\s+(1[2-8]\d+)')
 
     def __init__(self, log):
@@ -270,13 +298,18 @@ class Record(object):
         v = self._v
 
         # canonize antal/enhet
-        if not v.has_key('enhet'):
+        k = 'enhet'
+        if not v.has_key(k):
             m = self.Re.antal.match(v.get('antal', ''))
             if m:
                 v['antal'] = m.group(1)
-                v['enhet'] = m.group(2)
-        if v.has_key('enhet'):
-            v['enhet'] = self._enhet.get(v['enhet'])
+                v[k] = m.group(2)
+        if v.has_key(k):
+            s = self._enhet.get(v[k])
+            if not s:
+                self._log.warning('%s is not a valid choice for field "%s"' % (v[k], k))
+            else:
+                v[k] = s
 
         # canonize coordinates
         k = 'koordinat'
@@ -299,6 +332,11 @@ class Record(object):
         if v.has_key('startdatum') and not v.has_key('slutdatum'):
             v['slutdatum'] = v['startdatum']
 
+        # canonize various multi-selection fields
+        self._canonize('stadium', self._stadium)
+        self._canonize('noggrannhet', self._noggrannhet)
+        self._canonize('samling', self._samling)
+
         # canonize those crazy descriptive fields
         self._canonize_trinity('substrat - lista', 'substrat - text', 'substrat', self._substrat)
         self._canonize_trinity('biotop - lista', 'biotop - text', 'biotop', self._biotop)
@@ -317,6 +355,26 @@ class Record(object):
             del v['nordkoordinat']
             del v['ostkoordinat']
             del v['noggrannhet']
+
+        # warn for mandatory fields missing
+        for k in ('artnamn', 'startdatum', 'slutdatum'):
+            if not v.has_key(k):
+                self._log.warning('mandatory field "%s" missing' % k)
+        if v.has_key('floraväktarlokal'):
+            return
+        for k in ('lokalnamn', 'nordkoordinat', 'ostkoordinat', 'noggrannhet'):
+            if not v.has_key(k):
+                self._log.warning('mandatory field "%s" missing' % k)
+
+    def _canonize(self, field, synonyms):
+        "helper"
+        s = self._v.get(field)
+        if s:
+            ss = synonyms.get(s)
+            if not ss:
+                self._log.warning('%s is not a valid choice for field "%s"' % (s, field))
+            else:
+                self._v[field] = ss
 
     def _canonize_trinity(self, list, text, both, synonyms):
         """Helper for the substrat/biotop/trädslag fields
@@ -337,7 +395,7 @@ class Record(object):
             if ss:
                 v[list] = ss
             else:
-                v[text] = ss
+                v[text] = s
 
     def dump(self, out):
         if not self._v:
