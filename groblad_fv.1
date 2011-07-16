@@ -1,4 +1,4 @@
-.\" $Id: groblad_fv.1,v 1.4 2011-07-16 13:13:50 grahn Exp $
+.\" $Id: groblad_fv.1,v 1.5 2011-07-16 14:40:26 grahn Exp $
 .
 .ss 12 0
 .de BP
@@ -59,6 +59,8 @@ lines. Records are separated by blank lines.
 Lines which start with
 .B #
 are comments and are thus ignored.
+You may break lines for readability, but then you have to indent the following lines with at least
+one space or TAB.
 .
 .PP
 Fields generally map 1:1 to the \[lq]Excel import\[rq] columns, but you don't have to list every one
@@ -136,8 +138,12 @@ Place name. Vaguely described as
 .IR "\[lq]helst ett geografiskt namn och därefter avstånd och riktning vid behov\[rq]" .
 .
 .BP  7.\~Nordkoordinat/latitud
+Synonym
+.BR Nordkoordinat .
 .
 .BP  8.\~Ostkoordinat/longitud
+Synonym
+.BR Ostkoordinat .
 .
 .BP  9.\~Noggrannhet
 These three together form the coordinate.
@@ -371,6 +377,30 @@ field and fields related to coordinates are ignored (and not checked for concist
 .BP 34\-43.\~Medobs
 Observers, apart from yourself. You can specify up to ten observers
 this way (by repeating this field).
+.
+.
+.SH "EXAMPLE"
+.nf
+\fBArtnamn:\fP brudborste
+\fBLokalnamn:\fP vägskäl N om Lindö
+\fBKoordinat:\fP 643832 136518
+\fBStartdatum:\fP 2011-06-23
+\fBBiotop:\fP Blandskog
+\fBKommentar:\fP ett litet sterilt bestånd
+
+\fBArtnamn:\fP tistelsnyltrot
+\fBAntal:\fP 235 stänglar
+\fBFloraväktarlokal:\fP OV-Fal-1633
+# these four are ignored and only included for reference:
+\fBLokalnamn:\fP MÖSSEBERGSPARKEN, Friggeråker f:g
+\fBNordkoordinat:\fP 6453355
+\fBOstkoordinat:\fP 1367055
+\fBNoggrannhet:\fP 100 m
+\fBStartdatum:\fP 2011-07-12
+\fBKommentar:\fP Inventerades. Separat kartskiss. V om sanatoriet 159,
+    i övrigt 76. Men se även OV-Fal-1646.
+    I allmänhet storväxta där de fanns.
+.fi
 .
 .
 .
