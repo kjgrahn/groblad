@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.4 2011-07-16 15:40:55 grahn Exp $
+# $Id: groblad_fv.py,v 1.5 2011-07-16 16:23:49 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -73,6 +73,16 @@ def cvs_says(dollarname='$Name:  $'):
     return m.group(1), m.group(2).replace('-', '.')
 
 
+class Synonymous(object):
+    """Takes a sequence of sequences of strings, and turns it into
+    case-insensitive synonyms.  E.g. [['foo', 'bar', 'baz']] makes
+    'foo', 'FOO', 'bAr' and 'baz' synonyms, with 'foo' being the
+    canonical form.
+    """
+    def __init__(self, *v):
+        pass
+
+
 class Record(object):
     """A single record, which gets appended to and finally converted and printed.
     """
@@ -94,6 +104,30 @@ class Record(object):
     _extension = ('koordinat', 'substrat', 'biotop', 'trädslag', 'obsid')
     _repeatable = ('medobs', )
 
+    _enhet = Synonymous(['buskar', 'buske'],
+                        ['m2', 'm²'],
+                        ['plantor', 'planta'],
+                        ['träd'],
+                        ['skott'],
+                        ['strån', 'strå'],
+                        ['tuvor', 'tuva'],
+                        ['stjälkar', 'stjälk'],
+                        ['bladskivor', 'bladskiva'],
+                        ['stänglar', 'stängel'],
+                        ['dm2', 'dm²'],
+                        ['cm2', 'cm²'],
+                        ['kapslar', 'kapsel'],
+                        ['kolonier', 'koloni'],
+                        ['bålar', 'bål'],
+                        ['mycel'],
+                        ['fruktkroppar', 'fruktkropp'])
+
+    class Re:
+        """Just a container for some useful REs.
+        """
+        antal = re.compile(r'(\d+)\s*(.*)')
+        noggrannhet = re.compile(r'(\d+) m')
+
     def __init__(self, log):
         self._log = log
         self._v = {}
@@ -108,7 +142,7 @@ class Record(object):
         if field not in self._official and field not in self._extension:
             self._log('warning: line %d: skipping unknown field "%s"\n' % (lineno, field))
             return
-        # Early lazy exit for empty fields. Skips a few warnings XXX.
+        # Early lazy exit for empty fields. Skips a few warnings though. XXX.
         if not val:
             return
         v = self._v
@@ -137,8 +171,36 @@ class Record(object):
         else:
             self._v[cont] += val
 
+    def canonize(self):
+        v = self._v
+
+        # canonize antal/enhet
+        if not v.has_key('enhet'):
+            m = self.Re.antal.match(v.get('antal', ''))
+            if m:
+                v['antal'] = m.group(1)
+                v['enhet'] = m.group(2)
+
+        # canonize the binary fields
+        for k in ('ej återfunnen', 'andrahandsuppgift', 'osäker bestämning',
+                  'utplanterad eller införd', 'intressant notering', 'dölj', 'skydda lokalangivelse',
+                  'rapportera till rrk', 'ej funnen', 'undersökt i mikroskop'):
+            if v.get(k):
+                v[k] = 'X'
+
     def dump(self, out):
-        pass
+        self.canonize()
+        for k in self._official:
+            if k in self._repeatable:
+                continue
+            s = self._v.get(k)
+            if s:
+                out.write('%-10s: %s\n' % (k, s))
+        for k in self._repeatable:
+            v = self._v.get(k, [])
+            for s in v:
+                out.write('%-10s: %s\n' % (k, s))
+        out.write('\n')
 
 
 def process(f, out, log):
