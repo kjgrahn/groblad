@@ -1,4 +1,4 @@
-.\" $Id: groblad_fv.1,v 1.5 2011-07-16 14:40:26 grahn Exp $
+.\" $Id: groblad_fv.1,v 1.6 2011-07-16 15:04:00 grahn Exp $
 .
 .ss 12 0
 .de BP
@@ -377,6 +377,25 @@ field and fields related to coordinates are ignored (and not checked for concist
 .BP 34\-43.\~Medobs
 Observers, apart from yourself. You can specify up to ten observers
 this way (by repeating this field).
+\*+ Synonym
+.BR Medobservatör .
+.
+.BP \*+\~Obsid
+The numerical ID of this observation in Artportalen.
+Unlike the others, you fill this in
+.I after
+you have reported.
+It serves as proof that you have reported this, and you get a warning when you
+run such an observation through
+.B groblad_fv
+a second time.
+Unfortunately, finding out what ID your observation gets is tedious.
+You may say something bland like
+.B yes
+or
+.B reported
+here, meaning \[lq]yes, I have entered this one but I can't be bothered to find
+out which ID it got\[rq].
 .
 .
 .SH "EXAMPLE"

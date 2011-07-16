@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.2 2011-07-16 14:35:13 grahn Exp $
+# $Id: groblad_fv.py,v 1.3 2011-07-16 15:04:00 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -76,19 +76,31 @@ def cvs_says(dollarname='$Name:  $'):
 class Record(object):
     """A single record, which gets appended to and finally converted and printed.
     """
+    def __init__(self, log):
+        self._log = log
+    def append(self, lineno, field, val):
+        """Shovel a new 'field: val' into the record. The field name is trimmed,
+        lowercased and complete already; 'val' may be appended to later.
+        """
+        pass
+    def continuation(self, lineno, val):
+        "more data for the last append()ed field"
+        pass
+    def dump(self, out):
+        pass
 
 
 def process(f, out, log):
     """Handle one input file 'f', writing to 'out' and logging errors to 'log'.
     """
-    r = Record(out, log)
+    r = Record(log)
     line = 0
     for s in f:
         line += 1
         s = s.rstrip()
         if not s:
-            r.dump()
-            r = Record(out, log)
+            r.dump(out)
+            r = Record(log)
         elif s[0] == '#':
             continue
         elif s[0] in ' \t':
@@ -98,7 +110,7 @@ def process(f, out, log):
             field = field.lower().strip()
             val = val.lstrip()
             r.append(line, field, val)
-    r.dump()
+    r.dump(out)
 
 
 if __name__ == "__main__":
