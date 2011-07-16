@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.3 2011-07-16 15:04:00 grahn Exp $
+# $Id: groblad_fv.py,v 1.4 2011-07-16 15:40:55 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -76,16 +76,67 @@ def cvs_says(dollarname='$Name:  $'):
 class Record(object):
     """A single record, which gets appended to and finally converted and printed.
     """
+    _official = ('artnamn', 'antal', 'enhet', 'antal substrat',
+                 'stadium', 'lokalnamn',
+                 'nordkoordinat/latitud', 'ostkoordinat/longitud', 'noggrannhet',
+                 'startdatum', 'slutdatum',
+                 'kommentar', 'det/conf', 'samling', 'accessionsnr',
+                 'substrat - lista', 'substrat - text',
+                 'biotop - lista', 'biotop - text',
+                 'trädslag - lista', 'trädslag - text',
+                 'ej återfunnen', 'andrahandsuppgift', 'osäker bestämning',
+                 'utplanterad eller införd', 'intressant notering', 'dölj', 'skydda lokalangivelse',
+                 'rapportera till rrk', 'ej funnen', 'undersökt i mikroskop',
+                 'syfte', 'floraväktarlokal', 'medobs')
+    _synonym = { 'nordkoordinat': 'nordkoordinat/latitud',
+                 'ostkoordinat': 'ostkoordinat/longitud',
+                 'medobservatör': 'medobs' }
+    _extension = ('koordinat', 'substrat', 'biotop', 'trädslag', 'obsid')
+    _repeatable = ('medobs', )
+
     def __init__(self, log):
         self._log = log
+        self._v = {}
+        self._cont = None
+
     def append(self, lineno, field, val):
         """Shovel a new 'field: val' into the record. The field name is trimmed,
-        lowercased and complete already; 'val' may be appended to later.
+        lowercased and complete already; 'val' is trimmed and may be appended to later.
         """
-        pass
+        self._cont = None
+        field = self._synonym.get(field, field)
+        if field not in self._official and field not in self._extension:
+            self._log('warning: line %d: skipping unknown field "%s"\n' % (lineno, field))
+            return
+        # Early lazy exit for empty fields. Skips a few warnings XXX.
+        if not val:
+            return
+        v = self._v
+        if field in self._repeatable:
+            if v.has_key(field):
+                v[field].append(val)
+            else:
+                v[field] = [val]
+            self._cont = field
+        else:
+            if v.has_key(field):
+                self._log('warning: line %d: skipping duplicate field "%s"\n' % (lineno, field))
+                return
+            v[field] = val
+            self._cont = field
+
     def continuation(self, lineno, val):
         "more data for the last append()ed field"
-        pass
+        val = ' ' + val
+        cont = self._cont
+        if not cont:
+            self._log('warning: line %d: unexpected continuation line skipped\n' % lineno)
+            return
+        if cont in self._repeatable:
+            self._v[cont][-1] += val
+        else:
+            self._v[cont] += val
+
     def dump(self, out):
         pass
 
@@ -104,7 +155,7 @@ def process(f, out, log):
         elif s[0] == '#':
             continue
         elif s[0] in ' \t':
-            r.continuation(line, s)
+            r.continuation(line, s.lstrip())
         else:
             field, val = s.split(':', 1)
             field = field.lower().strip()
