@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.8 2011-07-16 17:37:05 grahn Exp $
+# $Id: groblad_fv.py,v 1.9 2011-07-16 18:08:17 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -127,6 +127,94 @@ class Record(object):
                         ['bålar', 'bål'],
                         ['mycel'],
                         ['fruktkroppar', 'fruktkropp'])
+    _substrat = Synonymous(['Marken'],
+                           ['Brandplats'],
+                           ['Sand'],
+                           ['Lera'],
+                           ['Kalkrik jord'],
+                           ['Näringsrik jord'],
+                           ['Näringsfattig jord'],
+                           ['Annan mark'],
+                           ['Ved'],
+                           ['Levande träd'],
+                           ['Högstubbe/dött träd'],
+                           ['Låga'],
+                           ['Stubbe'],
+                           ['Övrig död ved'],
+                           ['Annan ved'],
+                           ['Andra växter'],
+                           ['Levande kärlväxter'],
+                           ['Kottar/nötter/ollon'],
+                           ['Lövförna'],
+                           ['Barrförna'],
+                           ['Övriga växtrester'],
+                           ['Andra växter'],
+                           ['Spillning'],
+                           ['Älgspillning'],
+                           ['Rådjursspillning'],
+                           ['Hare/kaninspillning'],
+                           ['Hästspillning'],
+                           ['Kospillning'],
+                           ['Fårspillning'],
+                           ['Annan djurspillning'])
+    _biotop = Synonymous(['Skogsmark'],
+                         ['Ädellövskog'],
+                         ['Triviallövskog'],
+                         ['Blandskog'],
+                         ['Tallskog'],
+                         ['Granskog'],
+                         ['Hässle'],
+                         ['Hygge'],
+                         ['Annan skogsmark'],
+                         ['Ängs- och betesmark'],
+                         ['Öppen buskmark'],
+                         ['Buskbärande mark'],
+                         ['Trädbärande mark'],
+                         ['Annan ängs-/betesmark'],
+                         ['Våtmark'],
+                         ['Rikkärr'],
+                         ['Fattigkärr'],
+                         ['Mosse'],
+                         ['Strand'],
+                         ['Annan våtmark'],
+                         ['Kalfjäll'],
+                         ['Rik fjällhed'],
+                         ['Fattig fjällhed'],
+                         ['Videsnår'],
+                         ['Människoskapad'],
+                         ['Åker'],
+                         ['Allé'],
+                         ['Park/kyrkogård/gräsmatta'],
+                         ['Gårdsmiljö'],
+                         ['Ruderatmark'],
+                         ['Annan människoskapad'])
+    _tree = Synonymous(['Barrträd'],
+                       ['En'],
+                       ['Gran'],
+                       ['Lärk'],
+                       ['Tall'],
+                       ['Annat barrträd'],
+                       ['Ädellövträd'],
+                       ['Alm'],
+                       ['Ask'],
+                       ['Avenbok'],
+                       ['Bok'],
+                       ['Ek'],
+                       ['Fågelbär'],
+                       ['Hassel'],
+                       ['Hästkastanj'],
+                       ['Lind'],
+                       ['Lönn'],
+                       ['Annat ädellövträd'],
+                       ['Triviallövträd'],
+                       ['Apel'],
+                       ['Asp'],
+                       ['Björk'],
+                       ['Gråal/klibbal'],
+                       ['Oxel'],
+                       ['Rönn'],
+                       ['Salix'],
+                       ['Annat trivialt lövträd'])
 
     class Re:
         """Just a container for some useful REs.
@@ -211,6 +299,11 @@ class Record(object):
         if v.has_key('startdatum') and not v.has_key('slutdatum'):
             v['slutdatum'] = v['startdatum']
 
+        # canonize those crazy descriptive fields
+        self._canonize_trinity('substrat - lista', 'substrat - text', 'substrat', self._substrat)
+        self._canonize_trinity('biotop - lista', 'biotop - text', 'biotop', self._biotop)
+        self._canonize_trinity('trädslag - lista', 'trädslag - text', 'trädslag', self._tree)
+
         # canonize the binary fields
         for k in ('ej återfunnen', 'andrahandsuppgift', 'osäker bestämning',
                   'utplanterad eller införd', 'intressant notering', 'dölj', 'skydda lokalangivelse',
@@ -218,8 +311,39 @@ class Record(object):
             if v.get(k):
                 v[k] = 'X'
 
+        # clean away stuff incompatibe with floraväktarlokal
+        if v.has_key('floraväktarlokal'):
+            del v['lokalnamn']
+            del v['nordkoordinat']
+            del v['ostkoordinat']
+            del v['noggrannhet']
+
+    def _canonize_trinity(self, list, text, both, synonyms):
+        """Helper for the substrat/biotop/trädslag fields
+        """
+        v = self._v
+        s = v.get(list)
+        if s:
+            ss = synonyms.get(s)
+            if not ss:
+                self._log.warning('%s is not a valid choice for field "%s"' % (s, list))
+            else:
+                v[list] = ss
+        s = v.get(both)
+        if s:
+            if v.has_key(list) or v.has_key(text):
+                self._log.warning('the "%s" field trumps "%s" or "%s"' % (both, list, text))
+            ss = synonyms.get(s)
+            if ss:
+                v[list] = ss
+            else:
+                v[text] = ss
+
     def dump(self, out):
         self.canonize()
+        obsid = self._v.get('obsid')
+        if obsid:
+            self._log.warning('the observation seems to have been reported before, as obsid %s' % obsid)
         for k in self._official:
             if k in self._repeatable:
                 continue
