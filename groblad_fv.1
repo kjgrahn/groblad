@@ -1,0 +1,62 @@
+.\" $Id: groblad_fv.1,v 1.1 2011-07-16 10:46:40 grahn Exp $
+.
+.ss 12 0
+.de BP
+.IP \\fB\\$*
+..
+.
+.TH groblad_fv 1 "JUL 2011" Groblad "User Manuals"
+.
+.
+.SH "NAME"
+groblad_fv \- report botanical observations to Artportalen
+.
+.SH "SYNOPSIS"
+.B groblad_fv
+.I file
+\&...
+.br
+.B groblad_fv
+.B --help
+.br
+.B groblad_fv
+.B --version
+.
+.SH "DESCRIPTION"
+.
+.B groblad_fv
+is similar to
+.BR groblad_report (1),
+but uses another input format and is better suited for few, detailed reports to
+.I Artportalen
+rather than mass-imports of many observations.
+The latter are unsuitable for reports in the scope of
+.BR Florav\(:akteriet ,
+since these cannot currently (2010\-2011) be edited once they have been submitted.
+.
+.PP
+It's perhaps simplest understood as a simple transformation between a human-readable
+and editable text file format and the tab-separated format accepted by the so-called
+\[lq]Excel import\[rq] feature of Artportalen.
+.
+However, it also simplifies some tedious aspects like calculation of coordinate accuracy
+and end date, and performs some syntax checks.
+.
+.SH "OPTIONS"
+.
+None.
+.
+.
+.SH "AUTHOR"
+J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
+.
+.SH "SEE ALSO"
+.BR groblad_report (1).
+.PP
+.RB \[fo] http://www.artportalen.se/plants/plants_mall_ver81114.xls \[fc]
+\- the official annotated Excel template, current in July, 2011.
+.PP
+.RB \[fo] http://www.artportalen.se/plants/anvandarhandledning.pdf \[fc]
+\- the official user guide,
+.IR "Anv\(:andarhandledning f\(:or rapportsystemet f\(:or v\(:axter och svampar" .
+Artdatabanken SLU 2008.
