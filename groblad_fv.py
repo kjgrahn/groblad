@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.5 2011-07-16 16:23:49 grahn Exp $
+# $Id: groblad_fv.py,v 1.6 2011-07-16 16:41:13 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -80,7 +80,13 @@ class Synonymous(object):
     canonical form.
     """
     def __init__(self, *v):
-        pass
+        self._v = {}
+        for syn in v:
+            canon = syn[0]
+            for s in syn:
+                self._v[s.lower()] = canon
+    def get(self, s, default=None):
+        return self._v.get(s.lower(), default)
 
 
 class Record(object):
@@ -88,7 +94,7 @@ class Record(object):
     """
     _official = ('artnamn', 'antal', 'enhet', 'antal substrat',
                  'stadium', 'lokalnamn',
-                 'nordkoordinat/latitud', 'ostkoordinat/longitud', 'noggrannhet',
+                 'nordkoordinat', 'ostkoordinat', 'noggrannhet',
                  'startdatum', 'slutdatum',
                  'kommentar', 'det/conf', 'samling', 'accessionsnr',
                  'substrat - lista', 'substrat - text',
@@ -98,9 +104,9 @@ class Record(object):
                  'utplanterad eller införd', 'intressant notering', 'dölj', 'skydda lokalangivelse',
                  'rapportera till rrk', 'ej funnen', 'undersökt i mikroskop',
                  'syfte', 'floraväktarlokal', 'medobs')
-    _synonym = { 'nordkoordinat': 'nordkoordinat/latitud',
-                 'ostkoordinat': 'ostkoordinat/longitud',
-                 'medobservatör': 'medobs' }
+    _synonym = Synonymous(['nordkoordinat', 'nordkoordinat/latitud'],
+                          ['ostkoordinat', 'ostkoordinat/longitud'],
+                          ['medobs', 'medobservatör'])
     _extension = ('koordinat', 'substrat', 'biotop', 'trädslag', 'obsid')
     _repeatable = ('medobs', )
 
@@ -180,6 +186,8 @@ class Record(object):
             if m:
                 v['antal'] = m.group(1)
                 v['enhet'] = m.group(2)
+        if v.has_key('enhet'):
+            v['enhet'] = self._enhet.get(v['enhet'])
 
         # canonize the binary fields
         for k in ('ej återfunnen', 'andrahandsuppgift', 'osäker bestämning',
