@@ -1,4 +1,4 @@
-.\" $Id: groblad_report.1,v 1.10 2010-08-29 10:13:09 grahn Exp $
+.\" $Id: groblad_report.1,v 1.11 2011-07-16 13:13:50 grahn Exp $
 .
 .ss 12 0
 .ss 12 0
@@ -6,7 +6,7 @@
 .IP \\fB\\$*
 ..
 .
-.TH groblad_report 1 "AUG 2010" Groblad "User Manuals"
+.TH groblad_report 1 "JUL 2011" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -87,6 +87,13 @@ but for people who are dubbed
 .IR florav\(:aktare .
 It's probably undocumented, but these people seem to have an additional column
 in their text file input forms.
+.IP
+Note that this is currently unsuitable for reporting when acting as a
+.IR florav\(:aktare ,
+due to weaknesses in Artportalen.
+See
+.BR groblad_fv (1)
+for an alternative.
 .
 .BP \-s
 Exclude species not known to groblad, instead of bringing them in and hoping they
@@ -122,5 +129,6 @@ J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
 .SH "SEE ALSO"
 .BR groblad (1),
 .BR groblad (5),
+.BR groblad_fv (1),
 .BR troff (1),
 .BR tbl (1).
