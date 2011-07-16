@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.7 2011-07-16 17:02:27 grahn Exp $
+# $Id: groblad_fv.py,v 1.8 2011-07-16 17:37:05 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -140,14 +140,14 @@ class Record(object):
         self._v = {}
         self._cont = None
 
-    def append(self, lineno, field, val):
+    def append(self, field, val):
         """Shovel a new 'field: val' into the record. The field name is trimmed,
         lowercased and complete already; 'val' is trimmed and may be appended to later.
         """
         self._cont = None
         field = self._synonym.get(field, field)
         if field not in self._official and field not in self._extension:
-            self._log('warning: line %d: skipping unknown field "%s"\n' % (lineno, field))
+            self._log.warning('skipping unknown field "%s"' % field)
             return
         # Early lazy exit for empty fields. Skips a few warnings though. XXX.
         if not val:
@@ -161,17 +161,17 @@ class Record(object):
             self._cont = field
         else:
             if v.has_key(field):
-                self._log('warning: line %d: skipping duplicate field "%s"\n' % (lineno, field))
+                self._log.warning('skipping duplicate field "%s"' % field)
                 return
             v[field] = val
             self._cont = field
 
-    def continuation(self, lineno, val):
+    def continuation(self, val):
         "more data for the last append()ed field"
         val = ' ' + val
         cont = self._cont
         if not cont:
-            self._log('warning: line %d: unexpected continuation line skipped\n' % lineno)
+            self._log.warning('unexpected continuation line skipped')
             return
         if cont in self._repeatable:
             self._v[cont][-1] += val
@@ -194,13 +194,13 @@ class Record(object):
         k = 'koordinat'
         if v.has_key('nordkoordinat') or v.has_key('ostkoordinat') or v.has_key('noggrannhet'):
             if v.has_key(k):
-                self._log('warning: ignoring superfluous "%s: %s"\n' % (k, v[k]))
+                self._log.warning('ignoring superfluous "%s: %s"' % (k, v[k]))
         elif not v.has_key(k):
-            self._log('warning: no coordinate info present\n')
+            self._log.warning('no coordinate info present')
         else:
             m = self.Re.rt90.match(v[k])
             if not m:
-                self._log('warning: bad RT90 coordinate %s\n' % v[k])
+                self._log.warning('bad RT90 coordinate %s' % v[k])
             else:
                 p = Point(int(m.group(1)), int(m.group(2)))
                 v['nordkoordinat'] = '%d' % p.north
@@ -233,13 +233,30 @@ class Record(object):
         out.write('\n')
 
 
+class Log(object):
+    """Logging problems (error, warning) with source file and line number to some file.
+    """
+    def __init__(self, srcname, out):
+        self._src = srcname
+        self._line = 0
+        self._out = out
+    def newline(self):
+        self._line += 1
+    def _msg(self, heading, s):
+        self.out.write('%s:%d: %s: %s\n' % (self._src, self._line, heading, s))
+    def error(self, s):
+        self._msg('error', s)
+    def warning(self, s):
+        self._msg('warning', s)
+
+
 def process(f, out, log):
     """Handle one input file 'f', writing to 'out' and logging errors to 'log'.
     """
+    log = Log(f.name, log)
     r = Record(log)
-    line = 0
     for s in f:
-        line += 1
+        log.newline()
         s = s.rstrip()
         if not s:
             r.dump(out)
@@ -247,12 +264,12 @@ def process(f, out, log):
         elif s[0] == '#':
             continue
         elif s[0] in ' \t':
-            r.continuation(line, s.lstrip())
+            r.continuation(s.lstrip())
         else:
             field, val = s.split(':', 1)
             field = field.lower().strip()
             val = val.lstrip()
-            r.append(line, field, val)
+            r.append(field, val)
     r.dump(out)
 
 
@@ -263,7 +280,6 @@ if __name__ == "__main__":
     prog = os.path.split(sys.argv[0])[1]
     usage = 'usage: %s file ...' % prog
 
-    log = sys.stderr.write
     try:
         opts, files = getopt.getopt(sys.argv[1:], '',
                                     ['version', 'help'])
@@ -282,6 +298,6 @@ if __name__ == "__main__":
         sys.exit(1)
 
     for f in files:
-        process(open(f, 'r'), sys.stdout, log)
+        process(open(f, 'r'), sys.stdout, sys.stderr)
     if not f:
-        process(sys.stdin, sys.stdout, log)
+        process(sys.stdin, sys.stdout, sys.stderr)
