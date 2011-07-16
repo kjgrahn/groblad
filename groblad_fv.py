@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.9 2011-07-16 18:08:17 grahn Exp $
+# $Id: groblad_fv.py,v 1.10 2011-07-16 18:11:45 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -340,6 +340,9 @@ class Record(object):
                 v[text] = ss
 
     def dump(self, out):
+        if not self._v:
+            # normal case, do nothing
+            return
         self.canonize()
         obsid = self._v.get('obsid')
         if obsid:
@@ -367,7 +370,7 @@ class Log(object):
     def newline(self):
         self._line += 1
     def _msg(self, heading, s):
-        self.out.write('%s:%d: %s: %s\n' % (self._src, self._line, heading, s))
+        self._out.write('%s:%d: %s: %s\n' % (self._src, self._line, heading, s))
     def error(self, s):
         self._msg('error', s)
     def warning(self, s):
@@ -423,5 +426,5 @@ if __name__ == "__main__":
 
     for f in files:
         process(open(f, 'r'), sys.stdout, sys.stderr)
-    if not f:
+    if not files:
         process(sys.stdin, sys.stdout, sys.stderr)
