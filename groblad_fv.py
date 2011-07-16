@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: iso-8859-1 -*-
 #
-# $Id: groblad_fv.py,v 1.11 2011-07-16 18:54:37 grahn Exp $
+# $Id: groblad_fv.py,v 1.12 2011-07-16 21:36:10 grahn Exp $
 #
 # Copyright (c) 2011 Jörgen Grahn
 # All rights reserved.
@@ -317,7 +317,8 @@ class Record(object):
             if v.has_key(k):
                 self._log.warning('ignoring superfluous "%s: %s"' % (k, v[k]))
         elif not v.has_key(k):
-            self._log.warning('no coordinate info present')
+            if not v.has_key('floraväktarlokal'):
+                self._log.warning('no coordinate info present')
         else:
             m = self.Re.rt90.match(v[k])
             if not m:
@@ -349,12 +350,12 @@ class Record(object):
             if v.get(k):
                 v[k] = 'X'
 
-        # clean away stuff incompatibe with floraväktarlokal
+        # clean away stuff incompatible with floraväktarlokal
         if v.has_key('floraväktarlokal'):
-            del v['lokalnamn']
-            del v['nordkoordinat']
-            del v['ostkoordinat']
-            del v['noggrannhet']
+            for k in ('lokalnamn',
+                      'nordkoordinat', 'ostkoordinat',
+                      'noggrannhet'):
+                if v.has_key(k): del v[k]
 
         # warn for mandatory fields missing
         for k in ('artnamn', 'startdatum', 'slutdatum'):
@@ -408,14 +409,12 @@ class Record(object):
         for k in self._official:
             if k in self._repeatable:
                 continue
-            s = self._v.get(k)
-            if s:
-                out.write('%-10s: %s\n' % (k, s))
+            out.write(k, self._v.get(k, ''))
         for k in self._repeatable:
             v = self._v.get(k, [])
             for s in v:
-                out.write('%-10s: %s\n' % (k, s))
-        out.write('\n')
+                out.write(k, s)
+        out.end()
 
 
 class Log(object):
@@ -458,18 +457,50 @@ def process(f, out, log):
     r.dump(out)
 
 
+class DebugOut(object):
+    """Output records as heading: value.
+    """
+    def __init__(self, f):
+        self._w = f.write
+    def write(self, key, val):
+        if val:
+            self._w('%-20s: %s\n' % (key, val))
+    def end(self):
+        self._w('\n')
+
+
+class CSVOut(object):
+    """Output in the intended TAB-separated values format.
+    Assumes, of course, that the caller knows to write() in
+    the exact right sequence.
+    """
+    def __init__(self, f):
+        self._w = f.write
+        self._prefix = ''
+    def write(self, key, val):
+        self._w('%s%s' % (self._prefix, val))
+        self._prefix = '\t'
+    def end(self):
+        self._w('\n')
+        self._prefix = ''
+
+
 if __name__ == "__main__":
     import getopt
     import os.path
 
     prog = os.path.split(sys.argv[0])[1]
-    usage = 'usage: %s file ...' % prog
+    usage = 'usage: %s [-d] file ...' % prog
+
+    out = CSVOut(sys.stdout)
 
     try:
-        opts, files = getopt.getopt(sys.argv[1:], '',
+        opts, files = getopt.getopt(sys.argv[1:], 'd',
                                     ['version', 'help'])
         for opt, val in opts:
-            if opt=='--help':
+            if opt=='-d':
+                out = DebugOut(sys.stdout)
+            elif opt=='--help':
                 print usage
                 sys.exit(0)
             elif opt=='--version':
@@ -483,6 +514,6 @@ if __name__ == "__main__":
         sys.exit(1)
 
     for f in files:
-        process(open(f, 'r'), sys.stdout, sys.stderr)
+        process(open(f, 'r'), out, sys.stderr)
     if not files:
-        process(sys.stdin, sys.stdout, sys.stderr)
+        process(sys.stdin, out, sys.stderr)

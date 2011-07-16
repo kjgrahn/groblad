@@ -1,4 +1,4 @@
-.\" $Id: groblad_fv.1,v 1.7 2011-07-16 16:41:13 grahn Exp $
+.\" $Id: groblad_fv.1,v 1.8 2011-07-16 21:36:10 grahn Exp $
 .
 .ss 12 0
 .de BP
@@ -17,6 +17,7 @@ groblad_fv \- report botanical observations to Artportalen
 .SH "SYNOPSIS"
 .
 .B groblad_fv
+.RB [ \-d ]
 .I file
 \&...
 .br
@@ -51,7 +52,16 @@ The converted data is printed to standard output. You then copy & paste it into 
 as documented (\[lq]Excel import\[rq]).
 .
 .
-.SS "Input file format"
+.SH "OPTIONS"
+.
+.BP \-d
+Debug output; output in
+.B "field name : value"
+format instead of the TAB-separated Excel import format.
+This is mainly useful because the latter format is difficult to read and verify.
+.
+.
+.SH "INPUT FILE FORMAT"
 .
 The input is a text file, with records being a series
 .B "field name : value"
@@ -59,7 +69,7 @@ lines. Records are separated by blank lines.
 Lines which start with
 .B #
 are comments and are thus ignored.
-You may break lines for readability, but then you have to indent the following lines with at least
+You may break lines for readability; then you have to indent the following lines with at least
 one space or TAB.
 .
 .PP
@@ -420,12 +430,6 @@ out which ID it got\[rq].
     i övrigt 76. Men se även OV-Fal-1646.
     I allmänhet storväxta där de fanns.
 .fi
-.
-.
-.
-.SH "OPTIONS"
-.
-None.
 .
 .
 .SH "AUTHOR"
