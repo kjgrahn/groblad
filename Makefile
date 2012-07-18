@@ -10,40 +10,39 @@ all: groblad_grep.py
 all: groblad_fv.py groblad_fv.1
 all: default species
 
-falat%.html: falat%.htm
+karlsson/falat%.html: karlsson/falat%.htm
 	perl -pe 's/ width=".+?"//g' <$< >$@
 
-falat:\
-falat1.html\
-falat1b.html\
-falat2.html\
-falat2b.html\
-falat3.html\
-falat3b.html\
-falat3c.html\
-falat4.html\
-falat5.html\
-falat5b.html\
-falat6.html\
-falat7.html\
-falat7b.html\
-falat8.html\
-falat9.html\
-falat9b.html\
-falat10.html\
-falat11.html\
-falat11b.html\
-falat12.html\
-falat13.html\
-falat14.html\
-falat14b.html\
-falat14c.html\
-falat15.html\
-falat15b.html\
-falat16.html\
-falat17.html\
-falat18.html\
-falat18b.html
+falat: karlsson/falat1.html
+falat: karlsson/falat1b.html
+falat: karlsson/falat2.html
+falat: karlsson/falat2b.html
+falat: karlsson/falat3.html
+falat: karlsson/falat3b.html
+falat: karlsson/falat3c.html
+falat: karlsson/falat4.html
+falat: karlsson/falat5.html
+falat: karlsson/falat5b.html
+falat: karlsson/falat6.html
+falat: karlsson/falat7.html
+falat: karlsson/falat7b.html
+falat: karlsson/falat8.html
+falat: karlsson/falat9.html
+falat: karlsson/falat9b.html
+falat: karlsson/falat10.html
+falat: karlsson/falat11.html
+falat: karlsson/falat11b.html
+falat: karlsson/falat12.html
+falat: karlsson/falat13.html
+falat: karlsson/falat14.html
+falat: karlsson/falat14b.html
+falat: karlsson/falat14c.html
+falat: karlsson/falat15.html
+falat: karlsson/falat15b.html
+falat: karlsson/falat16.html
+falat: karlsson/falat17.html
+falat: karlsson/falat18.html
+falat: karlsson/falat18b.htm
 	( for f in $^ ; do w3m -cols 2000 -dump $$f ; done) >$@
 
 species_raw: falat kärlvl
@@ -75,7 +74,7 @@ clean:
 	$(RM) _groblad.1 _groblad.5 _groblad_report.1
 	$(RM) species_raw
 	$(RM) falat
-	$(RM) falat*.html
+	$(RM) karlsson/falat*.html
 
 love:
 	@echo "not war?"
