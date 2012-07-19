@@ -1,0 +1,197 @@
+@
+0  = Stam
+1  = Klass
+2  = Ordning
+3  = Familj
+4  = Släkte
+5  = Art
+6  = Underart
+7  = Varietet
+8  = Hybrid
+9  = Vetenskapligt namn
+10 = Auktor
+11 = Svenskt namn
+@
+0  = Pinophyta
+9  = Pinophyta
+@
+1  = Pinopsida
+9  = Pinopsida
+11 = barrväxter
+@
+2  = Pinales
+9  = Pinales
+10 = Gorozh.
+11 = tallordningen
+@
+3  = Pinaceae
+9  = Pinaceae
+10 = Spreng.
+11 = tallväxter
+@
+4  = Larix
+9  = Larix
+10 = Mill.
+11 = lärkar
+@
+5  = Larix decidua
+9  = Larix decidua
+10 = Mill.
+11 = lärk
+@
+6  = Larix decidua subsp. decidua
+9  = Larix decidua subsp. decidua
+11 = europeisk lärk
+@
+6  = Larix decidua subsp. polonica
+9  = Larix decidua subsp. polonica
+10 = (Racib. ex Wóycicki) Domin
+11 = polsk lärk
+@
+4  = Picea
+9  = Picea
+10 = A. Dietr.
+11 = granar
+@
+5  = Picea abies
+9  = Picea abies
+10 = (L.) H. Karst.
+11 = gran
+@
+6  = Picea abies subsp. abies
+9  = Picea abies subsp. abies
+11 = vanlig gran
+@
+6  = Picea abies subsp. obovata
+9  = Picea abies subsp. obovata
+10 = (Ledeb.) Domin
+11 = altaigran
+@
+6  = Picea abies subsp. × fennica
+9  = Picea abies subsp. × fennica
+10 = (Regel) Parfenov
+11 = finngran
+@
+5  = Picea sitchensis
+9  = Picea sitchensis
+10 = (Bong.) Carrière
+11 = sitkagran
+@
+4  = Pinus
+9  = Pinus
+10 = L.
+11 = tallar
+@
+5  = Pinus mugo
+9  = Pinus mugo
+10 = Turra
+11 = bergtall
+@
+6  = Pinus mugo subsp. mugo
+9  = Pinus mugo subsp. mugo
+11 = vanlig bergtall
+@
+6  = Pinus mugo subsp. uncinata
+9  = Pinus mugo subsp. uncinata
+10 = (Ramond) Domin
+11 = fransk bergtall
+@
+6  = Pinus mugo subsp. × rotundata
+9  = Pinus mugo subsp. × rotundata
+10 = (Link) Janch. & H. Neumayer
+11 = alptall
+@
+8  = Pinus mugo × sylvestris
+9  = Pinus mugo × sylvestris
+11 = bergtall × tall
+@
+5  = Pinus strobus
+9  = Pinus strobus
+10 = L.
+11 = weymouthtall
+@
+5  = Pinus sylvestris
+9  = Pinus sylvestris
+10 = L.
+11 = tall
+@
+7  = Pinus sylvestris var. lapponica
+9  = Pinus sylvestris var. lapponica
+10 = Fr. ex Hartm.
+11 = lapptall
+@
+7  = Pinus sylvestris var. sylvestris
+9  = Pinus sylvestris var. sylvestris
+11 = vanlig tall
+@
+4  = Abies
+9  = Abies
+10 = Mill.
+11 = ädelgranar
+@
+5  = Abies alba
+9  = Abies alba
+10 = Mill.
+11 = silvergran
+@
+8  = Abies alba × concolor
+9  = Abies alba × concolor
+11 = silvergran × coloradogran
+@
+5  = Abies nordmanniana
+9  = Abies nordmanniana
+10 = (Steven) Spach
+11 = nordmannsgran
+@
+6  = Abies nordmanniana subsp. nordmanniana
+9  = Abies nordmanniana subsp. nordmanniana
+11 = vanlig nordmannsgran
+@
+5  = Abies pinsapo
+9  = Abies pinsapo
+10 = Boiss.
+11 = spanskgran
+@
+2  = Cupressales
+9  = Cupressales
+10 = Link
+11 = cypressordningen
+@
+3  = Cupressaceae
+9  = Cupressaceae
+10 = Gray
+11 = cypressväxter
+@
+4  = Juniperus
+9  = Juniperus
+10 = L.
+11 = enar
+@
+5  = Juniperus communis
+9  = Juniperus communis
+10 = L.
+11 = en
+@
+7  = Juniperus communis var. saxatilis
+9  = Juniperus communis var. saxatilis
+10 = Pall.
+11 = fjäll-en
+@
+7  = Juniperus communis var. communis
+9  = Juniperus communis var. communis
+11 = vanlig en
+@
+3  = Taxaceae
+9  = Taxaceae
+10 = Gray
+11 = idegransväxter
+@
+4  = Taxus
+9  = Taxus
+10 = L.
+11 = idegranar
+@
+5  = Taxus baccata
+9  = Taxus baccata
+10 = L.
+11 = idegran
