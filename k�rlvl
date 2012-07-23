@@ -13,11 +13,24 @@
 use strict;
 
 
+sub ssp($) {
+    my ($s) = @_;
+    $s =~ s/subsp\./ssp./g;
+    return $s;
+}
+
+
 # Perform the conversion for one file; print to stdout
 #
 # The columns unfortunately have different meanings in
 # e.g. 'Lycopodiophyta' and 'Magnoliophyta'.  So we have to read the
 # headings (the first row) before we can process the taxa.
+#
+# Also unfortunately, some columns are duplicated with the same name
+# but different meanings. E.g. 'Art' can be the latin species name if
+# the taxon is a species, but a second copy of the column can be the
+# latin species name above a ssp, form, and so on.
+# Solved by ignoring duplicate columns encountered.
 #
 # The result is:
 #
@@ -44,42 +57,57 @@ sub convert($) {
 	last if /^@/ and %headings;
 	next if /^@/;
 	/^(\d+)\s+=\s+(.+)/ or die;
-	$headings{$2} = $1;
+	$headings{$2} = $1 unless defined $headings{$2};
     }
 
     my $header = $headings{'Familj'} or die;
     my $sv = $headings{'Svenskt namn'} or die;
-    my %la;
+    my @la;
     foreach ('Artkomplex',
 	     'Sektion',
 	     'Art',
 	     'Underart',
 	     'Varietet',
 	     'Hybrid') {
-	$la{$headings{$_}}=1 if defined $headings{$_};
+	push @la, $headings{$_} if defined $headings{$_};
     }
 
-    #print %la; print "\n"; return;
+    #print @la; print "\n"; return;
 
-    my %CLEAR;
+    my %CLEAR = ($sv => '-');
     my %row;
 
     while(<F>) {
 	chomp;
 
 	if(/^@/) {
+
+	    next unless %row;
+
 	    if(defined $row{$header}) {
-		printf "# %s\n", $row{$header};
-		printf "  %s\n", $row{11};
+		printf "\n# %s\n", $row{$header};
+	    }
+
+	    foreach (@la) {
+		next unless defined $row{$_};
+		printf "%-23s (%s)\n", $row{$sv}, $row{$_};
+		last;
 	    }
 
 	    %row = %CLEAR;
-	    defined $row{$header} and die;
 	    next;
 	}
 
 	/^(\d+)\s+=\s+(.+)/ or die;
-	$row{$1} = $2;
+	$row{$1} = ssp $2;
+    }
+
+    if(%row) {
+	foreach (@la) {
+	    next unless defined $row{$_};
+	    printf "%-23s (%s)\n", $row{$sv}, $row{$_};
+	    last;
+	}
     }
 
     close F;
