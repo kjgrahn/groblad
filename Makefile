@@ -45,8 +45,17 @@ falat: karlsson/falat18.html
 falat: karlsson/falat18b.htm
 	( for f in $^ ; do w3m -cols 2000 -dump $$f ; done) >$@
 
-species_raw: falat kärlvl
-	./kärlvl falat | col >$@
+species_raw: kärlvl
+species_raw: dyntaxa/Lycopodiophyta
+species_raw: dyntaxa/Equisetophyta
+species_raw: dyntaxa/Pteridophyta
+species_raw: dyntaxa/Pinophyta
+species_raw: dyntaxa/Magnoliophyta
+	./kärlvl dyntaxa/Lycopodiophyta \
+	dyntaxa/Equisetophyta \
+	dyntaxa/Pteridophyta \
+	dyntaxa/Pinophyta \
+	dyntaxa/Magnoliophyta | unexpand -a >$@
 
 .PHONY: install
 install: all

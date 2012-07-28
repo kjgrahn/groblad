@@ -14,6 +14,10 @@
 #
 # Common name synonyms are simply listed on their own line; they are
 # synonyms because they share the same scientific name.
+#
+# Note the capitalization. A few common names include capitals,
+# e.g. Jungfru Marie nycklar. Capitalizing all of them would lose
+# this information.
 
 # Lycopodiaceae
 fjällummer		(Diphasiastrum alpinum)
