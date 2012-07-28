@@ -11,6 +11,7 @@
 #
 
 use strict;
+use Getopt::Std;
 
 
 sub ssp($) {
@@ -45,8 +46,8 @@ sub ssp($) {
 #
 # 'Svenskt namn' - used if it exists
 #
-sub convert($) {
-    my ($file) = @_;
+sub convert($$$) {
+    my ($justhyb, $nohyb, $file) = @_;
 
     my %headings;
 
@@ -63,12 +64,17 @@ sub convert($) {
     my $header = $headings{'Familj'} or die;
     my $sv = $headings{'Svenskt namn'} or die;
     my @la;
-    foreach ('Artkomplex',
-	     'Sektion',
-	     'Art',
-	     'Underart',
-	     'Varietet',
-	     'Hybrid') {
+
+    # Which taxonomic levels to include.
+    my @levels = ('Artkomplex',
+		  'Sektion',
+		  'Art',
+		  'Underart',
+		  'Varietet');
+    @levels = () if $justhyb;
+    push @levels, 'Hybrid' unless $nohyb;
+
+    foreach (@levels) {
 	push @la, $headings{$_} if defined $headings{$_};
     }
 
@@ -114,8 +120,13 @@ sub convert($) {
 }
 
 
+my %opts;
+getopts('hH', \%opts) or die "usage: $0 -[Hh] file ...\n";
+
 foreach (@ARGV) {
-    convert $_;
+    convert(defined $opts{'h'},
+	    defined $opts{'H'},
+	    $_);
 }
 
 __END__
