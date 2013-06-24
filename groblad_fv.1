@@ -64,7 +64,9 @@ as documented (\[lq]Excel import\[rq]).
 .BP \-d
 Debug output; output in
 .B "field name : value"
-format instead of the TAB-separated Excel import format.
+format (suitable as input to
+.B groblad_fv
+itself!) instead of the usual TAB-separated Excel import format.
 This is mainly useful because the latter format is difficult to read and verify.
 .
 .
@@ -161,7 +163,7 @@ Vaguely described in the earlier release of Artportalen as
 .IR "\[lq]helst ett geografiskt namn och därefter avstånd och riktning vid behov\[rq]" .
 The current version provides no guidelines at all, as far as I can tell.
 .
-.SS "Ost, Nord, Noggrannhet"
+.SS "Nord, Ost, Noggrannhet"
 .
 These three fields together form the coordinate.
 .B Noggrannhet
@@ -173,15 +175,27 @@ is one of
 5, 10, 25, 50, 75, 100, 125, 150, 200,
 250, 300, 400, 500, 750, 1000, 1500,
 2000, 2500, 3000, 5000.
-That's right; you can't specify 1m resolution, but you can specify
-\[lq]it was at this place, or at least no more than three days' walk from there, ya know?\[rq].
+That's right; you can't specify 1m resolution, but you can specify 3 kilometers.
 .
 .EP
+The space in
+.B Noggrannhet
+can be skipped, e.g.
+.IR 10m .
+.EP
 Synonyms (old, unfortunate names kept for backwards-compatibility):
-.BR Ostkoordinat ,
-.BR Ostkoordinat/longitud ,
 .BR Nordkoordinat ,
-.BR Nordkoordinat/latitud .
+.BR Nordkoordinat/latitud ,
+.BR Ostkoordinat ,
+.BR Ostkoordinat/longitud .
+.
+.PP
+Artportalen (even the new version) sometimes confuses the order of these fields, which should be read Nord\-Ost.
+That doesn't matter much here, but please make a point of specifying
+.B Nord
+first (or simply use
+.B Koordinat
+below).
 .
 .SS "\*+ Koordinat"
 .
@@ -192,6 +206,8 @@ is the same thing as specifying
 .IR 6445010 ,
 .IR 1363300 ,
 .IR 10\ m .
+Note that the full 7-digit form still only promises (from Artportalen's point of view)
+a 5m resolution.
 .
 .SS "Startdatum, Slutdatum"
 .
@@ -294,6 +310,19 @@ Synonyms, for backwards-compatibility reasons:
 is offered as an alternative to the ungrammatical
 .BR Biotop-beskrivning .
 .
+.PP
+.I Note:
+The full list of biotopes is not available here, since it's not documented and not available
+through the Excel template.  It's very long in the web interface and not possible to
+extract.
+This means anything you write will be treated as free text for now.
+The same goes for
+.B "Art som substrat"
+and
+.B Substrat
+below.
+It is unclear how you're supposed to use these with the Excel import in practice.
+.
 .SS "Art som substrat, Art som substrat beskrivning"
 .
 Mostly for epiphytes, I suppose.
@@ -352,11 +381,14 @@ The synonym is provided strictly for backwards-compatibility reasons.
 Date of determination.
 .
 .SS "Beskrivning artbestämning"
-Unclear.
+A bit unclear.
 There is a
-.B Beskrivning
+.I Beskrivning
 in the web form, but it relates somehow to the collection,
 not the determination.
+However, help text in the official Excel template confirms that this field relates
+to the determination, when the fixed fields are not enough to explain it
+(e.g. several people helped; people who are not registered users helped).
 .
 .SS "Bekräftad av"
 Determination
