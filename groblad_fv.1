@@ -2,12 +2,17 @@
 .
 .ss 12 0
 .de BP
-.IP \\fB\\$*
+.IP "\\fB\\$*"
 ..
 .
-.ds + [+]
+.ds + \fR[+]\fP
+.ds x \fR[\[OK]]\fP
 .
-.TH groblad_fv 1 "JUL 2011" Groblad "User Manuals"
+.de EP
+.IP \fB\*+ 4x
+..
+.
+.TH groblad_fv 1 "JUN 2013" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -36,14 +41,16 @@ is similar to
 but uses another input format and is better suited for few, detailed reports to
 .I Artportalen
 rather than mass-imports of many observations.
+.ig
 The latter are unsuitable for reports in the scope of
 .BR Florav\(:akteriet ,
 since these cannot currently (2010\-2011) be edited once they have been submitted.
+..
 .
 .PP
 It's perhaps simplest understood as a simple transformation between a human-readable
 and editable text file format and the tab-separated format accepted by the so-called
-\[lq]Excel import\[rq] feature of Artportalen.
+\[lq]Importera fynd från Excel\[rq] feature of Artportalen.
 .
 However, it also simplifies some tedious aspects like calculation of coordinate accuracy
 and end date, and performs some syntax checks.
@@ -76,102 +83,108 @@ one space or TAB.
 Fields generally map 1:1 to the \[lq]Excel import\[rq] columns, but you don't have to list every one
 of them, they don't have to appear in any specific order, and some have sane defaults.
 .PP
-The fields are as follows. The numbered ones are \[lq]Excel import\[rq] columns; others are
-my invention and translate to columns.
+The fields are as follows. Most are predefined \[lq]Excel import\[rq] columns; others are
+my invention and translate to such columns.
 The descriptions are my interpretation of the documentation in the official Excel template and/or the
-user guide. I provide them here for convenience only, and it's not complete documentation.
+user guide. I provide them here for convenience only; they do not replace official documentation
+(although the official documentation is somewhat lacking at the time of this writing).
 .PP
-Things which are extensions in
+Fields marked \*x are \[lq]checkboxes\[rq] in the web interface.
+Here you say
+.B X
+(\*+ or any other non-empty text)
+to check the box.
+.PP
+Fields, field names or features which are extensions in
 .BR groblad_fv (1)
 are marked \*+.
 .
-.BP  1.\~Artnamn
+.
+.SS "Artnamn"
+.
 A name for the taxon, or
 .B saknas
 if it is not known by Artportalen.
 .
-.BP  2.\~Antal
-.BP  3.\~Enhet
+.SS "Antal, Enhet"
+.
 .B Antal
 and
 .B Enhet
 belong together.
 The latter is one of
-.BR "buskar" ,
-.BR "m2" ,
-.BR "plantor" ,
-.BR "träd" ,
-.BR "skott" ,
-.BR "strån" ,
-.BR "tuvor" ,
-.BR "stjälkar" ,
-.BR "bladskivor" ,
-.BR "stänglar" ,
-.BR "dm2" ,
-.BR "cm2" ,
-.BR "kapslar" ,
-.BR "kolonier" ,
-.BR "bålar" ,
-.BR "mycel" ,
-.BR "fruktkroppar" .
-.BP
-\*+ You can also use names in singularis, and proper typography like
-.BR m² ,
-.BR dm² ,
-.BR cm² .
-.BP
-\*+ You can skip the separate
+.IP
+.nf
+.ft I
+Plantor/tuvor, \*+ plantor, tuvor, buskar, träd
+Stjälkar/strån, \*+ stjälkar, strån, stänglar, skott
+m2, \*+ m²
+dm2, \*+ dm²
+cm2, \*+ cm²
+.fi
+.
+.EP
+You can also use names in singularis.
+.
+.EP
+You can skip the separate
 .B Enhet
 field and just say e.g.
 .IR "Antal: 1 stängel" .
 .
-.BP  4.\~Antal\~substrat
-Mostly for epiphytes, I suppose.
+.SS "Ålder-Stadium, \*+ Stadium"
 .
-.BP  5.\~Stadium
 One of
-.BR "Vilstadium" ,
-.BR "Knoppbristning" ,
-.BR "Fullt utvecklade blad" ,
-.BR "Blomknopp" ,
-.BR "Blomning" ,
-.BR "Överblommad" ,
-.BR "I frukt" ,
-.BR "Frukt-/fröspridning" ,
-.BR "Gulnande löv/blad" ,
-.BR "Bladfällning, vissnar" ,
-.BR "Vinterståndare" .
-There are plenty of others, but those are not applicable to fanerogams.
+.IR "Vilstadium" ;
+.IR "Knoppbristning" ;
+.IR "Fullt utvecklade blad" ;
+.IR "Blomknopp" ;
+.IR "Blomning" ;
+.IR "Överblommad" ;
+.IR "I frukt" ;
+.IR "Frukt-/fröspridning" ;
+.IR "Gulnande löv/blad" ;
+.IR "Bladfällning, vissnar" ;
+.IR "Vinterståndare" .
 .
-.BP  6.\~Lokalnamn
-Place name. Vaguely described as
+.SS "Kön"
+.
+Sex/gender:
+.I Hane
+or
+.IR Hona .
+Obviously not applicable to the majority of plants.
+.
+.SS "Lokalnamn"
+Place name.
+Vaguely described in the earlier release of Artportalen as
 .IR "\[lq]helst ett geografiskt namn och därefter avstånd och riktning vid behov\[rq]" .
+The current version provides no guidelines at all, as far as I can tell.
 .
-.BP  7.\~Nordkoordinat
-Synonym
+.SS "Ost, Nord, Noggrannhet"
+.
+These three fields together form the coordinate.
+.B Noggrannhet
+is specified as
+.IR N\~\fBm ,
+where
+.I N
+is one of
+5, 10, 25, 50, 75, 100, 125, 150, 200,
+250, 300, 400, 500, 750, 1000, 1500,
+2000, 2500, 3000, 5000.
+That's right; you can't specify 1m resolution, but you can specify
+\[lq]it was at this place, or at least no more than three days' walk from there, ya know?\[rq].
+.
+.EP
+Synonyms (old, unfortunate names kept for backwards-compatibility):
+.BR Ostkoordinat ,
+.BR Ostkoordinat/longitud ,
+.BR Nordkoordinat ,
 .BR Nordkoordinat/latitud .
 .
-.BP  8.\~Ostkoordinat
-Synonym
-.BR Ostkoordinat/longitud .
+.SS "\*+ Koordinat"
 .
-.BP  9.\~Noggrannhet
-These three together form the coordinate.
-.B Noggrannhet
-is one of
-.BR "5\ m" ,
-.BR "10\ m" ,
-.BR "25\ m" ,
-.BR "50\ m" ,
-.BR "100\ m" ,
-.BR "250\ m" ,
-.BR "500\ m" ,
-.BR "1000\ m" ,
-.BR "2500\ m" ,
-.BR "5000\ m" .
-That's right; you can't specify 1m resolution.
-.
-.BP \*+\ Koordinat
 A simpler way to specify a RT90 coordinate in the traditional format, where the
 number of digits implicitly specifies the accuracy. For example,
 .I "Koordinat:\ 644501\ 136330"
@@ -180,41 +193,188 @@ is the same thing as specifying
 .IR 1363300 ,
 .IR 10\ m .
 .
-.BP 10.\~Startdatum
+.SS "Startdatum, Slutdatum"
 .
-.BP 11.\~Slutdatum
-These two are on the form
-.BR "2007\-04\-17" .
-\*+ If you omit
+These two are on the ISO date format (e.g.
+.IR "2007\-04\-17" ).
+.
+.EP
+If you omit
 .B Slutdatum
 it is copied from
 .BR Startdatum .
 .
-.BP 12.\~Kommentar
+.SS "Starttid, Sluttid"
+.
+Like
+.BR Startdatum / Slutdatum ,
+but giving the time of day.
+Unclear which time formats are supported, but e.g.
+.I 06:02
+is legal.
+.
+.SS "Publik kommentar, \*+ Kommentar"
+.
 Information which cannot be given in other fields.
 .
-.BP 13.\~Det/conf
-Who determined or confirmed which taxon it was, and when.
+.SS "Intressant notering \*x"
 .
-.BP 14.\~Samling
-The user guide and the Excel sheet give conflicting documentation for this one.
-Both agree that you can say
-.B "Eget"
-(you have a specimen in your private herbarium) or
-.BR "Annat" .
-The Excel sheet also lists
-.BR "NRM, Sthlm" ;
-.BR "Göteborg" ;
-.BR "Lund" ;
-.BR "Uppsala" ;
-.BR "Uppsala, SLU" ;
-.BR "Umeå" .
+Supposedly refers to the
+.B "Publik kommentar"
+text, not the observation itself \- but I cannot guarantee
+it's used that way in practice.
 .
-.BP 15.\~Accessionsnr
-Relates to the ID given to the collect in
-.BR Samling .
+.SS "Privat kommentar"
 .
-.PP
+Unclear exactly what this means, but the text is obviously intended
+to be visible to the owner of the entry, and not visible to the unwashed masses.
+As for other kinds of users, we don't know.
+.
+.SS "Ej återfunnen \*x"
+.
+\[lq]I tried, but failed to find it.\[rq]
+Unclear if this is implied to suggest that the species
+.I did
+grow at this place at some point.
+\*+
+There used to be a distinct
+.B "Ej funnen"
+field which made no such suggestion, but it is gone in the current version
+and I have chosen to map it to this one.
+.IP
+I guess that in the light of rather subtle nuances of meaning and lacking documentation,
+existing practice is what really decides the matter.
+What that practice is or will be, I don't know.
+.
+.SS "Dölj fyndet t.o.m."
+.
+Make the observation invisible to anyone but the people involved and trusted users,
+until the specified date.
+.
+.SS "\*+ Dölj, Skydda lokalangivelse"
+These were fields in the previous version of Artportalen.
+Since they weren't well documented and it's unclear whether they map to any
+.I current
+mechanism, they are no longer legal; supplying one of these fields
+with a non-empty value is an error.
+.
+.SS "Andrahand \*x, \*+ Andrahandsuppgift"
+.
+The user making the report didn't actually take part in the observation.
+.
+.SS "Osäker artbestämning \*x, \*+ Osäker bestämning"
+.
+Uncertain determination.
+.
+.SS "Ospontan \*x"
+.
+Explained in the manual as
+.IR "\[lq]... om arten antas vara ospontan, d.v.s. förrymd, introducerad eller av osäkert ursprung\[rq]" ,
+whatever that means.
+.EP
+Synonym:
+.B "Utplanterad eller införd"
+for backwards-compatibility reasons only.
+.
+.SS "Biotop, Biotop-beskrivning, \*+ Biotopbeskrivning"
+.
+Biotope category, from a very long fixed list or
+(the second keyword)
+explained in free form.
+Apparently you're only supposed to provide one or the other, not both.
+.EP
+.B Biotop
+can be used in both cases, although this won't catch misspelled fixed descriptions,
+or new ones suddenly being allowed.
+.EP
+Synonyms, for backwards-compatibility reasons:
+.BR Biotop\~\-\~lista ,
+.BR Biotop\~\-\~text .
+.B Biotopbeskrivning
+is offered as an alternative to the ungrammatical
+.BR Biotop-beskrivning .
+.
+.SS "Art som substrat, Art som substrat beskrivning"
+.
+Mostly for epiphytes, I suppose.
+.EP
+Same more generalized treatment for
+.B Art\~som\~substrat
+as for
+.BR Biotop .
+.EP
+Synonyms, for backwards-compatibility reasons:
+.BR Trädslag\~\-\~lista ,
+.BR Trädslag\~\-\~text ,
+.BR Trädslag .
+.
+.SS "Substrat, Substrat-beskrivning, \*+ Substratbeskrivning"
+.
+Mostly for epiphytes, I suppose.
+.EP
+Same more generalized treatment for
+.B Substrat
+as for
+.BR Biotop .
+.EP
+Synonyms:
+.BR Substrat\~\-\~lista ,
+.BR Substrat\~\-\~text ,
+.BR Substratbeskrivning .
+.
+.SS "\*+ Antal substrat"
+Ignored; kept for backwards-compatibility.
+.
+.SS "Offentlig samling"
+Collected and present at one of a few major public herbaria.
+.
+.SS "Privat samling"
+Collected and present in a certain user's herbarium.
+.EP
+The value
+.I Eget
+implies the user's own collection.
+.
+.SS "\*+ Samling"
+The obvious combination of
+.B "Offentlig samling"
+and
+.BR "Privat samling" .
+.
+.SS "Samlings-nummer, \*+ Samlingsnummer, \*+ Accessionsnr"
+Collection number.
+.
+.SS "Artbestämd av, \*+ Det/conf"
+Determined by this user.
+The synonym is provided strictly for backwards-compatibility reasons.
+.
+.SS "Bestämningsdatum"
+Date of determination.
+.
+.SS "Beskrivning artbestämning"
+Unclear.
+There is a
+.B Beskrivning
+in the web form, but it relates somehow to the collection,
+not the determination.
+.
+.SS "Bekräftad av"
+Determination
+.I "confirmed by"
+this user.
+.
+.SS "Med-observatör, \*+ Medobs, \*+ Medobservatör"
+Another user who took part in the observation, not including the
+user reporting it.
+You can specify up to ten observers
+this way (by repeating this field).
+.
+.SS "\*+ Rapportera till Rrk, Undersökt i mikroskop, Syfte"
+Ignored; kept for backwards-compatibility.
+.
+.
+.ig
+
 The following three come in two versions:
 pick a predefined name, or write your own description.
 You can also specify both if you're feeling ambitious.
@@ -333,64 +493,21 @@ Unclear what this field really means; it's probably a substrate thing for epiphy
 mentions it as if it's the species of trees growing at the place.
 It's uncommon for a place to have only one species of tree though ...
 .
-.PP
-The few following fields are checkboxes in the normal Artportalen input interface.
-Here you say
-.B X
-(\*+ or any other non-empty text)
-to check the box.
+..
 .
-.BP 22.\~Ej\~återfunnen
-Not found, even though this is a known locality.
-.
-.BP 23.\~Andrahandsuppgift
-.
-.BP 24.\~Osäker\~bestämning
-.
-.BP 25.\~Utplanterad\~eller\~införd
-A bit unclear what this really means. The Excel sheet says
-.IR "\[lq]Införd/ospontan. T. ex. importerad med livsmedel eller virke.\[rq]" .
-.
-.BP 26.\~Intressant\~notering
-.
-.BP 27.\~Dölj
-Unclear exactly what this means. The user guide mentions that sensitive species are automatically
-semi-hidden.
-.
-.BP 28.\~Skydda\~lokalangivelse
-Unclear exactly what this means.
-.
-.BP 29.\~Rapportera\~till\~Rrk
-Not applicable.
-.
-.BP 30.\~Ej\~funnen
-Not found, and not known from this locality. Compare with
-.B "Ej\~återfunnen"
-above.
-.
-.BP 31.\~Undersökt\~i\~mikroskop
-.
-.BP 32.\~Syfte
-I can't be bothered to understand what this means.
-Doesn't seem to be applicable to
-.BR Florav\(:akteriet .
-.
-.BP 33.\~Floraväktarlokal
-If you're reporting as part of 
+.SS "\*+ Floraväktarlokal"
+If, in the earlier release of Artportalen, you were reporting as part of 
 .B Florav\(:akteriet
-for an already existing locality, you must give its ID here, e.g.
+for an already existing locality, you gave its ID here, e.g.
 .IR OV-Fal-1329 .
 \*+ In this case the
 .B Lokalnamn
-field and fields related to coordinates are ignored (and not checked for concistency).
+field and fields related to coordinates were ignored (and not checked for consistency).
+.PP
+The current (June, 2013) version of Artportalen does not support this field
+or this kind of work in general, so the field is ignored.
 .
-.BP 34\-43.\~Medobs
-Observers, apart from yourself. You can specify up to ten observers
-this way (by repeating this field).
-\*+ Synonym
-.BR Medobservatör .
-.
-.BP \*+\~Obsid
+.SS "\*+ Obsid"
 The numerical ID of this observation in Artportalen.
 Unlike the others, you fill this in
 .I after
@@ -416,7 +533,7 @@ out which ID it got\[rq].
 \fBStartdatum:\fP 2011-06-23
 \fBBiotop:\fP Blandskog
 \fBKommentar:\fP ett litet sterilt bestånd
-
+.ig
 \fBArtnamn:\fP tistelsnyltrot
 \fBAntal:\fP 235 stänglar
 \fBFloraväktarlokal:\fP OV-Fal-1633
@@ -429,6 +546,7 @@ out which ID it got\[rq].
 \fBKommentar:\fP Inventerades. Separat kartskiss. V om sanatoriet 159,
     i övrigt 76. Men se även OV-Fal-1646.
     I allmänhet storväxta där de fanns.
+..
 .fi
 .
 .
@@ -438,10 +556,66 @@ J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
 .SH "SEE ALSO"
 .BR groblad_report (1).
 .PP
-.RB \[fo] http://www.artportalen.se/plants/plants_mall_ver81114.xls \[fc]
-\- the official annotated Excel template, current in July, 2011.
+.RB \[fo] https://www.artportalen.se/Download/SightingTemplate \[fc]
+\- the official Excel template.
+Version 3.00, current in June, 2013.
+.PP
+.RB \[fo] https://www.artportalen.se/Download/UserGuide \[fc]
+.IR "Artportalen: rapportsystem f\(:or v\(:axter, djur och svampar" .
+\- the official user guide.
+Artdatabanken SLU 2013.
 .PP
 .RB \[fo] http://www.artportalen.se/plants/anvandarhandledning.pdf \[fc]
-\- the official user guide,
+\- the official user guide for the earlier version in use until May, 2013.
 .IR "Anv\(:andarhandledning f\(:or rapportsystemet f\(:or v\(:axter och svampar" .
 Artdatabanken SLU 2008.
+.
+.
+.ig
+artnamn
+antal
+enhet
+ålder-stadium		stadium
+kön
+lokalnamn
+ost			ostkoordinat	ostkoordinat/longitud
+nord			nordkoordinat	nordkoordinat/latitud
+noggrannhet
++koordinat
+startdatum
+slutdatum
+starttid
+sluttid
+publik kommentar	kommentar
+intressant notering
+privat kommentar
+ej återfunnen		ej funnen
+dölj fyndet t.o.m.
++dölj
++skydda lokalangivelse
+andrahand		andrahandsuppgift
+osäker artbestämning	osäker bestämning
+ospontan		utplanterad eller införd
+biotop			biotop - lista
+biotop-beskrivning	biotopbeskrivning	biotop - text
+art som substrat	trädslag - lista	trädslag
+art som substrat beskrivning			trädslag - text
+substrat		substrat - lista
+substrat-beskrivning	substratbeskrivning	substrat - text
++antal substrat
+offentlig samling
+privat samling
++samling
+samlings-nummer		samlingsnummer	accessionsnr
+artbestämd av		det/conf
+bestämningsdatum
+beskrivning artbestämning
+bekräftad av
+med-observatör		medobs		medobservatör
++rapportera till rrk
++undersökt i mikroskop
++syfte
++floraväktarlokal
++obsid
+
+..
