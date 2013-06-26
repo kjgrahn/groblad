@@ -13,3 +13,8 @@ into a black hole is a waste of time.
   Excel sheet).  The correct order for SWEREF99 and RT90 is
   north--east, not east--north.
 
+- An Excel import which goes wrong may complain "Förväntade
+  kolumnhuvuden saknas" with (a) no further explanation and (b) no
+  link to the documentation describing what the kolumnhuvuden should
+  look like. (In my case they were space-separated rather than
+  TAB-separated).
