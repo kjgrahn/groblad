@@ -18,3 +18,6 @@ into a black hole is a waste of time.
   link to the documentation describing what the kolumnhuvuden should
   look like. (In my case they were space-separated rather than
   TAB-separated).
+
+- Excel import/granskning: adjusting the taxon name and other data
+  is much more painful and time-consuming than in the previous version.

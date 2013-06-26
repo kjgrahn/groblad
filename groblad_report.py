@@ -333,50 +333,41 @@ def use_svalan(w, places, seen, aliases, strict):
     w('.TS H\n'
       'allbox;\n'
       'lrllllrrrlll llllllllllllllllllllllllllllll.\n')
-    w('\t'.join(['art',
+    w('\t'.join(['artnamn',
                  'antal',
                  'enhet',
-                 'antal substrat',
-                 'stadium',
+                 'ålder-stadium',
+                 'kön',
                  'lokalnamn',
-                 'nord',
                  'ost',
+                 'nord',
                  'noggrannhet',
                  'startdatum',
                  'slutdatum',
-                 'kommentar',
-
-                 'det/conf',
-                 'samling',
-                 'accessionsnr',
-                 'substrat - lista',
-                 'substrat - text',
-                 'biotop - lista',
-                 'biotop - text',
-                 'trädslag - lista',
-                 'trädslag - text',
-                 'ej återfunnen',
-                 'andrahandsuppgift',
-                 'osäker bestämning',
-                 'utplanterad eller införd',
+                 'starttid',
+                 'sluttid',
+                 'publik kommentar',
                  'intressant notering',
-                 'dölj',
-                 'skydda lokalangivelse',
-                 'rapportera till Rrk',
-                 'ej funnen',
-                 'undersökt i mikroskop',
-                 'syfte',
-
-                 'medobs 1',
-                 'medobs 2',
-                 'medobs 3',
-                 'medobs 4',
-                 'medobs 5',
-                 'medobs 6',
-                 'medobs 7',
-                 'medobs 8',
-                 'medobs 9',
-                 'medobs 10']))
+                 'privat kommentar',
+                 'ej återfunnen',
+                 'dölj fyndet t.o.m.',
+                 'andrahand',
+                 'osäker artbestämning',
+                 'ospontan',
+                 'biotop',
+                 'biotop-beskrivning',
+                 'art som substrat',
+                 'art som substrat beskrivning',
+                 'substrat',
+                 'substrat-beskrivning',
+                 'offentlig samling',
+                 'privat samling',
+                 'samlings-nummer',
+                 'artbestämd av',
+                 'bestämningsdatum',
+                 'beskrivning artbestämning',
+                 'bekräftad av',
+                 'med-observatör']))
     w('\n'
       '.TH\n')
     seen.clear()
@@ -399,12 +390,12 @@ def use_svalan(w, places, seen, aliases, strict):
                     sp = Species(name, '')
             row = [sp.trivial, '', '', '', '', p.place]
             if p.coordinate:
-                row += [str(p.coordinate.north),
-                        str(p.coordinate.east),
+                row += [str(p.coordinate.east),
+                        str(p.coordinate.north),
                         str(p.coordinate.resolution)]
             else:
                 row += ['', '', '']
-            row += [p.date, p.date, desc]
+            row += [p.date, p.date, '', '', desc]
             row += [''] * 20
             row += [observers]
             row += [''] * 9
