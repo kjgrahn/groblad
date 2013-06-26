@@ -6,7 +6,7 @@
 .IP \\fB\\$*
 ..
 .
-.TH groblad_report 1 "JUL 2011" Groblad "User Manuals"
+.TH groblad_report 1 "JUN 2013" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -24,9 +24,7 @@ groblad_report \- pretty-print botanical observations
 \&...
 .br
 .B groblad_report
-.RB [ --svalan
-|
-.BR --fv ]
+.RB --svalan
 .RB [ \-s ]
 .RB [ --me
 .IR name ]
@@ -80,39 +78,20 @@ This matches the text file (\[lq]Excel\[rq]) import format currently used by
 .IR "Rapportsystemet f\(:or v\(:axter" ,
 .IR \[fo]http://www.artportalen.se/plants/\[fc] .
 .
-.BP --fv
-Like
-.BR --svalan ,
-but for people who are dubbed
-.IR florav\(:aktare .
-It's probably undocumented, but these people seem to have an additional column
-in their text file input forms.
-.IP
-Note that this is currently unsuitable for reporting when acting as a
-.IR florav\(:aktare ,
-due to weaknesses in Artportalen.
-See
-.BR groblad_fv (1)
-for an alternative.
-.
 .BP \-s
 Exclude species not known to groblad, instead of bringing them in and hoping they
 are accepted by
 .I Artportalen
 anyway.
 Only useful with
-.B --svalan
-and
-.BR --fv ;
+.BR --svalan ;
 the other output options use taxonomical ordering and/or want to print the latin name.
 .IP
 This used to be the default.
 .
 .BP --me\ \fIname
 Only useful with
-.B --svalan
-and
-.BR --fv .
+.BR --svalan .
 Give a name of the reporter (i.e. yourself), to distinguish him from co-observers.
 May be given multiple times, if different names or spellings are given in the input.
 .
