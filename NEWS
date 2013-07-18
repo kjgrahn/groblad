@@ -1,5 +1,18 @@
 Major changes to groblad by version, latest first:
 
+groblad 2.0 (2013-06-26):
+
+ - Updated to work (kind of) with the version of Artportalen released
+   in May, 2013 (and version 3.00 of its Excel import mechanism).
+   This applies to both groblad_report(1) and groblad_fv(1).
+
+ - "Floraväkteri" support dropped for now, since the feature was (as
+   far as I can tell) removed from Artportalen in the May update.
+   If the feature reappears there, it will do so here, too.
+
+ - Pretty much untested so far, in particular the more exotic fields
+   supported by groblad_fv(1).
+
 groblad 1.12 (2011-07-16):
 
  - new utility 'groblad_fv' for reporting to Artportalen, mainly as part
@@ -81,5 +94,3 @@ groblad 1.0 (2005-01-06):
 
   - First real release.
 _________________________________________
-$Id: NEWS,v 1.20 2011-07-16 19:05:51 grahn Exp $
-$Name:  $

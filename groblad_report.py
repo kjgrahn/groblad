@@ -3,7 +3,7 @@
 #
 # $Id: groblad_report.py,v 1.28 2010-08-29 10:13:09 grahn Exp $
 #
-# Copyright (c) 2004, 2005, 2007, 2010 Jörgen Grahn
+# Copyright (c) 2004, 2005, 2007, 2010, 2013 Jörgen Grahn
 # All rights reserved.
 #
 
@@ -326,57 +326,48 @@ def use_sundh(w, places, seen, _, __):
             w('\n')
     w('.TE\n')
 
-def use_svalan(w, places, seen, aliases, strict, fv=False):
+def use_svalan(w, places, seen, aliases, strict):
     """Like use_sundh, but a different set of crap and no
     taxonomical ordering.
     """
     w('.TS H\n'
       'allbox;\n'
       'lrllllrrrlll llllllllllllllllllllllllllllll.\n')
-    w('\t'.join(['art',
+    w('\t'.join(['artnamn',
                  'antal',
                  'enhet',
-                 'antal substrat',
-                 'stadium',
+                 'ålder-stadium',
+                 'kön',
                  'lokalnamn',
-                 'nord',
                  'ost',
+                 'nord',
                  'noggrannhet',
                  'startdatum',
                  'slutdatum',
-                 'kommentar',
-
-                 'det/conf',
-                 'samling',
-                 'accessionsnr',
-                 'substrat - lista',
-                 'substrat - text',
-                 'biotop - lista',
-                 'biotop - text',
-                 'trädslag - lista',
-                 'trädslag - text',
-                 'ej återfunnen',
-                 'andrahandsuppgift',
-                 'osäker bestämning',
-                 'utplanterad eller införd',
+                 'starttid',
+                 'sluttid',
+                 'publik kommentar',
                  'intressant notering',
-                 'dölj',
-                 'skydda lokalangivelse',
-                 'rapportera till Rrk',
-                 'ej funnen',
-                 'undersökt i mikroskop',
-                 'syfte',
-
-                 'medobs 1',
-                 'medobs 2',
-                 'medobs 3',
-                 'medobs 4',
-                 'medobs 5',
-                 'medobs 6',
-                 'medobs 7',
-                 'medobs 8',
-                 'medobs 9',
-                 'medobs 10']))
+                 'privat kommentar',
+                 'ej återfunnen',
+                 'dölj fyndet t.o.m.',
+                 'andrahand',
+                 'osäker artbestämning',
+                 'ospontan',
+                 'biotop',
+                 'biotop-beskrivning',
+                 'art som substrat',
+                 'art som substrat beskrivning',
+                 'substrat',
+                 'substrat-beskrivning',
+                 'offentlig samling',
+                 'privat samling',
+                 'samlings-nummer',
+                 'artbestämd av',
+                 'bestämningsdatum',
+                 'beskrivning artbestämning',
+                 'bekräftad av',
+                 'med-observatör']))
     w('\n'
       '.TH\n')
     seen.clear()
@@ -399,22 +390,18 @@ def use_svalan(w, places, seen, aliases, strict, fv=False):
                     sp = Species(name, '')
             row = [sp.trivial, '', '', '', '', p.place]
             if p.coordinate:
-                row += [str(p.coordinate.north),
-                        str(p.coordinate.east),
+                row += [str(p.coordinate.east),
+                        str(p.coordinate.north),
                         str(p.coordinate.resolution)]
             else:
                 row += ['', '', '']
-            row += [p.date, p.date, desc]
+            row += [p.date, p.date, '', '', desc]
             row += [''] * 20
-            if fv: row.append('')
             row += [observers]
             row += [''] * 9
             w('\t'.join(row))
             w('\n')
     w('.TE\n')
-
-def use_svalan_fv(w, places, seen, aliases, strict):
-    return use_svalan(w, places, seen, aliases, strict, True)
 
 
 if __name__ == "__main__":
@@ -422,7 +409,7 @@ if __name__ == "__main__":
     import os.path
 
     prog = os.path.split(sys.argv[0])[1]
-    usage = 'usage: %s [--ms | --sundh | --svalan | --fv] [--me name] file ...' % prog
+    usage = 'usage: %s [--ms | --sundh | --svalan] [-s] [--me name] file ...' % prog
 
     log = sys.stderr.write
     layout = use_ms
@@ -434,12 +421,10 @@ if __name__ == "__main__":
                                     ['ms',
                                      'sundh',
                                      'svalan',
-                                     'fv',
                                      'me='])
         for opt, val in opts:
             if opt=='--sundh': layout = use_sundh
             elif opt=='--svalan': layout = use_svalan
-            elif opt=='--fv': layout = use_svalan_fv
             elif opt=='--ms': layout = use_ms
             elif opt=='-s': strict = True
             elif opt=='--me': me.append(val)
@@ -448,7 +433,7 @@ if __name__ == "__main__":
         print >>sys.stderr, usage
         sys.exit(1)
 
-    if layout not in (use_svalan, use_svalan_fv):
+    if layout not in (use_svalan, ):
         strict = True
 
     places, seen = parse_files(files)

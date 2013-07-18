@@ -1,0 +1,36 @@
+# -*- Makefile -*-
+#
+# These exist for test purposes, and aren't
+# necessarily examples of good reports.
+
+Artnamn         : strandlummer
+Lokalnamn    	: dike utmed O kanten av Stubbängen, Korrarp
+Koordinat	: 643652 138772
+Startdatum	: 2012-06-20
+Antal		: 10 plantor
+Kommentar : I dike mellan skog och igenväxande lycka, med tätört och rundsileshår.
+
+Artnamn         : strandlummer
+Lokalnamn    	: dike utmed O kanten av Stubbängen, Korrarp
+Koordinat	: 64365 13877
+Startdatum	: 2012-06-20
+Starttid	: 16.02
+Antal		: 1 dm²
+Stadium		: Blomning
+Kommentar : I dike mellan skog och igenväxande lycka, med
+            tätört och
+            rundsileshår.
+medobservatör   : Arne Jackson
+medobservatör	: Kurt Åhl
+andrahand	: ja
+
+Artnamn         : guldkörvel
+Lokalnamn    	: Särögatan, gångstig utanför Botaniska trädgårdens ekonomibyggnader
+Koordinat	: 640196 127017
+Startdatum	: 2013-06-25
+Starttid	: 
+Antal		: 
+Stadium		: Blomning
+Kommentar : flera bestånd, i stängslet mot Botaniska -- och
+            i häck mot tomterna.  Angiven i VgF.
+

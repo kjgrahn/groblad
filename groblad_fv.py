@@ -3,7 +3,7 @@
 #
 # $Id: groblad_fv.py,v 1.12 2011-07-16 21:36:10 grahn Exp $
 #
-# Copyright (c) 2011 Jörgen Grahn
+# Copyright (c) 2011, 2013 Jörgen Grahn
 # All rights reserved.
 #
 
@@ -43,21 +43,6 @@ class Point:
     def __cmp__(self, other):
         return cmp((self.north, self.east),
                    (other.north, other.east))
-    def tstr(self, kind=0):
-        """Return the point as a troff(1) source string, with
-        point size changing commands as appropriate.
-        """
-        acc = []
-        res = self.resolution
-        if res==5: res = 1
-        for n in (self.north, self.east):
-            n /= res
-            n = str(n)
-            if kind==0:
-                acc.append(r'\s-2%s\s0%s' % (n[:2], n[2:]))
-            else:
-                acc.append(r'\s-2%s\s0' % n)
-        return ' '.join(acc)
 
 
 def cvs_says(dollarname='$Name:  $'):
@@ -92,139 +77,72 @@ class Synonymous(object):
 class Record(object):
     """A single record, which gets appended to and finally converted and printed.
     """
-    _official = ('artnamn', 'antal', 'enhet', 'antal substrat',
-                 'stadium', 'lokalnamn',
-                 'nordkoordinat', 'ostkoordinat', 'noggrannhet',
+    _official = ('artnamn', 'antal', 'enhet',
+                 'ålder-stadium', 'kön', 'lokalnamn',
+                 'ost', 'nord', 'noggrannhet',
                  'startdatum', 'slutdatum',
-                 'kommentar', 'det/conf', 'samling', 'accessionsnr',
-                 'substrat - lista', 'substrat - text',
-                 'biotop - lista', 'biotop - text',
-                 'trädslag - lista', 'trädslag - text',
-                 'ej återfunnen', 'andrahandsuppgift', 'osäker bestämning',
-                 'utplanterad eller införd', 'intressant notering', 'dölj', 'skydda lokalangivelse',
-                 'rapportera till rrk', 'ej funnen', 'undersökt i mikroskop',
-                 'syfte', 'floraväktarlokal', 'medobs')
-    _synonym = Synonymous(['nordkoordinat', 'nordkoordinat/latitud'],
-                          ['ostkoordinat', 'ostkoordinat/longitud'],
-                          ['medobs', 'medobservatör'])
-    _extension = ('koordinat', 'substrat', 'biotop', 'trädslag', 'obsid')
-    _repeatable = ('medobs', )
+                 'starttid', 'sluttid',
+                 'publik kommentar', 'intressant notering', 'privat kommentar',
+                 'ej återfunnen',
+                 'dölj fyndet t.o.m.',
+                 'andrahand', 'osäker artbestämning', 'ospontan',
+                 'biotop', 'biotop-beskrivning',
+                 'art som substrat', 'art som substrat beskrivning',
+                 'substrat', 'substrat-beskrivning',
+                 'offentlig samling', 'privat samling', 'samlings-nummer',
+                 'artbestämd av', 'bestämningsdatum',
+                 'beskrivning artbestämning', 'bekräftad av',
+                 'med-observatör')
+    _synonym = Synonymous(['ålder-stadium', 'stadium'],
+                          ['ost', 'ostkoordinat', 'ostkoordinat/longitud'],
+                          ['nord', 'nordkoordinat', 'nordkoordinat/latitud'],
+                          ['publik kommentar', 'kommentar'],
+                          ['ej återfunnen', 'ej funnen'],
+                          ['andrahand', 'andrahandsuppgift'],
+                          ['osäker artbestämning', 'osäker bestämning'],
+                          ['ospontan', 'utplanterad eller införd'],
+                          ['biotop', 'biotop - lista'],
+                          ['biotop-beskrivning', 'biotopbeskrivning', 'biotop - text'],
+                          ['art som substrat', 'trädslag - lista', 'trädslag'],
+                          ['art som substrat beskrivning', 'trädslag - text'],
+                          ['substrat', 'substrat - lista'],
+                          ['substrat-beskrivning', 'substratbeskrivning', 'substrat - text'],
+                          ['samlings-nummer', 'samlingsnummer', 'accessionsnr'],
+                          ['artbestämd av', 'det/conf'],
+                          ['med-observatör', 'medobs', 'medobservatör'])
+    _extension = ('koordinat',
+                  'dölj', 'skydda lokalangivelse',
+                  'antal substrat', 'samling',
+                  'rapportera till rrk', 'undersökt i mikroskop', 'syfte',
+                  'floraväktarlokal', 'obsid')
+    _unsupptd  = ('dölj', 'skydda lokalangivelse',
+                  'antal substrat', 'samling',
+                  'rapportera till rrk', 'undersökt i mikroskop', 'syfte',
+                  'floraväktarlokal', 'obsid')
+    _binary    = ('ej återfunnen', 'andrahand', 'osäker artbestämning',
+                  'ospontan', 'intressant notering', 'dölj', 'skydda lokalangivelse',
+                  'rapportera till rrk', 'undersökt i mikroskop')
+    _repeatable = ('med-observatör', )
 
-    _enhet = Synonymous(['buskar', 'buske'],
+    _enhet = Synonymous(['plantor/tuvor', 'plantor', 'tuvor', 'buskar', 'träd',
+                         'planta', 'tuva', 'buske'],
+                        ['stjälkar/strån', 'stjälkar', 'strån', 'stänglar', 'skott',
+                         'stjälk', 'strå', 'stängel'],
                         ['m2', 'm²'],
-                        ['plantor', 'planta'],
-                        ['träd'],
-                        ['skott'],
-                        ['strån', 'strå'],
-                        ['tuvor', 'tuva'],
-                        ['stjälkar', 'stjälk'],
-                        ['bladskivor', 'bladskiva'],
-                        ['stänglar', 'stängel'],
                         ['dm2', 'dm²'],
-                        ['cm2', 'cm²'],
-                        ['kapslar', 'kapsel'],
-                        ['kolonier', 'koloni'],
-                        ['bålar', 'bål'],
-                        ['mycel'],
-                        ['fruktkroppar', 'fruktkropp'])
-    _substrat = Synonymous(['Marken'],
-                           ['Brandplats'],
-                           ['Sand'],
-                           ['Lera'],
-                           ['Kalkrik jord'],
-                           ['Näringsrik jord'],
-                           ['Näringsfattig jord'],
-                           ['Annan mark'],
-                           ['Ved'],
-                           ['Levande träd'],
-                           ['Högstubbe/dött träd'],
-                           ['Låga'],
-                           ['Stubbe'],
-                           ['Övrig död ved'],
-                           ['Annan ved'],
-                           ['Andra växter'],
-                           ['Levande kärlväxter'],
-                           ['Kottar/nötter/ollon'],
-                           ['Lövförna'],
-                           ['Barrförna'],
-                           ['Övriga växtrester'],
-                           ['Andra växter'],
-                           ['Spillning'],
-                           ['Älgspillning'],
-                           ['Rådjursspillning'],
-                           ['Hare/kaninspillning'],
-                           ['Hästspillning'],
-                           ['Kospillning'],
-                           ['Fårspillning'],
-                           ['Annan djurspillning'])
-    _biotop = Synonymous(['Skogsmark'],
-                         ['Ädellövskog'],
-                         ['Triviallövskog'],
-                         ['Blandskog'],
-                         ['Tallskog'],
-                         ['Granskog'],
-                         ['Hässle'],
-                         ['Hygge'],
-                         ['Annan skogsmark'],
-                         ['Ängs- och betesmark'],
-                         ['Öppen buskmark'],
-                         ['Buskbärande mark'],
-                         ['Trädbärande mark'],
-                         ['Annan ängs-/betesmark'],
-                         ['Våtmark'],
-                         ['Rikkärr'],
-                         ['Fattigkärr'],
-                         ['Mosse'],
-                         ['Strand'],
-                         ['Annan våtmark'],
-                         ['Kalfjäll'],
-                         ['Rik fjällhed'],
-                         ['Fattig fjällhed'],
-                         ['Videsnår'],
-                         ['Människoskapad'],
-                         ['Åker'],
-                         ['Allé'],
-                         ['Park/kyrkogård/gräsmatta'],
-                         ['Gårdsmiljö'],
-                         ['Ruderatmark'],
-                         ['Annan människoskapad'])
-    _tree = Synonymous(['Barrträd'],
-                       ['En'],
-                       ['Gran'],
-                       ['Lärk'],
-                       ['Tall'],
-                       ['Annat barrträd'],
-                       ['Ädellövträd'],
-                       ['Alm'],
-                       ['Ask'],
-                       ['Avenbok'],
-                       ['Bok'],
-                       ['Ek'],
-                       ['Fågelbär'],
-                       ['Hassel'],
-                       ['Hästkastanj'],
-                       ['Lind'],
-                       ['Lönn'],
-                       ['Annat ädellövträd'],
-                       ['Triviallövträd'],
-                       ['Apel'],
-                       ['Asp'],
-                       ['Björk'],
-                       ['Gråal/klibbal'],
-                       ['Oxel'],
-                       ['Rönn'],
-                       ['Salix'],
-                       ['Annat trivialt lövträd'])
+                        ['cm2', 'cm²'])
+    _substrat = Synonymous()
+    _biotop = Synonymous()
+    _tree = Synonymous()
     _noggrannhet = Synonymous(['5 m', '5m'],
-                              ['10 m', '10m'],
-                              ['25 m', '25m'],
-                              ['50 m', '50m'],
-                              ['100 m', '100m'],
-                              ['250 m', '250m'],
-                              ['500 m', '500m'],
-                              ['1000 m', '1000m'],
-                              ['2500 m', '2500m'],
-                              ['5000 m', '5000m'])
+                              ['10 m', '10m'], ['25 m', '25m'],
+                              ['50 m', '50m'], ['75 m', '75m'],
+                              ['100 m', '100m'], ['125 m', '125m'], ['150 m', '150m'],
+                              ['200 m', '200m'], ['250 m', '250m'], ['300 m', '300m'],
+                              ['400 m', '400m'], ['500 m', '500m'], ['750 m', '750m'],
+                              ['1000 m', '1000m'], ['1500 m', '1500m'],
+                              ['2000 m', '2000m'], ['2500 m', '2500m'],
+                              ['3000 m', '3000m'], ['5000 m', '5000m'])
     _stadium = Synonymous(['Vilstadium'],
                           ['Knoppbristning'],
                           ['Fullt utvecklade blad'],
@@ -238,12 +156,21 @@ class Record(object):
                           ['Vinterståndare'])
     _samling = Synonymous(['Eget'],
                           ['Annat'],
-                          ['NRM, Sthlm'],
-                          ['Göteborg'],
-                          ['Lund'],
-                          ['Uppsala'],
-                          ['Uppsala, SLU'],
-                          ['Umeå'])
+                          ['Lund-Botaniska/Zoologiska museet'],
+                          ['Göteborgs naturhistoriska museum (GNM)'],
+                          ['Göteborg-Herbarium GB'],
+                          ['Stockholm-Naturhistoriska riksmuseet'],
+                          ['Uppsala-Evolutionsmuseet'],
+                          ['Uppsala-SLU'],
+                          ['Umeå-Herbarium UME'],
+                          ['Oskarshamn-Herbarium OHN'],
+                          ['Visby-Herbarium VI'],
+                          ['Örebro-Herbarium OREB'],
+                          ['Lycksele skogsmuseum'],
+                          ['Regionmuseet Kristianstad'],
+                          ['Helsingfors'],
+                          ['Köpenhamn'],
+                          ['Oslo'])
 
     class Re:
         """Just a container for some useful REs.
@@ -313,7 +240,7 @@ class Record(object):
 
         # canonize coordinates
         k = 'koordinat'
-        if v.has_key('nordkoordinat') or v.has_key('ostkoordinat') or v.has_key('noggrannhet'):
+        if v.has_key('nord') or v.has_key('ost') or v.has_key('noggrannhet'):
             if v.has_key(k):
                 self._log.warning('ignoring superfluous "%s: %s"' % (k, v[k]))
         elif not v.has_key(k):
@@ -325,16 +252,18 @@ class Record(object):
                 self._log.warning('bad RT90 coordinate %s' % v[k])
             else:
                 p = Point(int(m.group(1)), int(m.group(2)))
-                v['nordkoordinat'] = '%d' % p.north
-                v['ostkoordinat'] =  '%d' % p.east
+                v['nord'] = '%d' % p.north
+                v['ost'] =  '%d' % p.east
                 v['noggrannhet'] =  '%d m' % p.resolution
 
-        # canonize dates
-        if v.has_key('startdatum') and not v.has_key('slutdatum'):
-            v['slutdatum'] = v['startdatum']
+        # canonize time ranges
+        for a, b in (('startdatum', 'slutdatum'),
+                     ('starttid', 'sluttid')):
+            if v.has_key(a) and not v.has_key(b):
+                v[b] = v[a]
 
         # canonize various multi-selection fields
-        self._canonize('stadium', self._stadium)
+        self._canonize('ålder-stadium', self._stadium)
         self._canonize('noggrannhet', self._noggrannhet)
         self._canonize('samling', self._samling)
 
@@ -344,14 +273,12 @@ class Record(object):
         self._canonize_trinity('trädslag - lista', 'trädslag - text', 'trädslag', self._tree)
 
         # canonize the binary fields
-        for k in ('ej återfunnen', 'andrahandsuppgift', 'osäker bestämning',
-                  'utplanterad eller införd', 'intressant notering', 'dölj', 'skydda lokalangivelse',
-                  'rapportera till rrk', 'ej funnen', 'undersökt i mikroskop'):
+        for k in self._binary:
             if v.get(k):
                 v[k] = 'X'
 
         # clean away stuff incompatible with floraväktarlokal
-        if v.has_key('floraväktarlokal'):
+        if False and v.has_key('floraväktarlokal'):
             for k in ('lokalnamn',
                       'nordkoordinat', 'ostkoordinat',
                       'noggrannhet'):
@@ -361,9 +288,9 @@ class Record(object):
         for k in ('artnamn', 'startdatum', 'slutdatum'):
             if not v.has_key(k):
                 self._log.warning('mandatory field "%s" missing' % k)
-        if v.has_key('floraväktarlokal'):
+        if False and v.has_key('floraväktarlokal'):
             return
-        for k in ('lokalnamn', 'nordkoordinat', 'ostkoordinat', 'noggrannhet'):
+        for k in ('lokalnamn', 'nord', 'ost', 'noggrannhet'):
             if not v.has_key(k):
                 self._log.warning('mandatory field "%s" missing' % k)
 
@@ -399,22 +326,38 @@ class Record(object):
                 v[text] = s
 
     def dump(self, out):
+        """Check the record for validity (and log errors if needed),
+        then write it to 'out' using different strategies depending on
+        'out'.
+        """
         if not self._v:
             # normal case, do nothing
             return
         self.canonize()
-        obsid = self._v.get('obsid')
-        if obsid:
-            self._log.warning('the observation seems to have been reported before, as obsid %s' % obsid)
-        for k in self._official:
-            if k in self._repeatable:
-                continue
-            out.write(k, self._v.get(k, ''))
-        for k in self._repeatable:
-            v = self._v.get(k, [])
-            for s in v:
-                out.write(k, s)
-        out.end()
+        for k in self._unsupptd:
+            v = self._v.get(k)
+            if v:
+                self._log.warning('the field "%s" is supported but '
+                                  'will not be converted. ("%s: %s")' % (k, k, v))
+        if out.by_field:
+            for k in self._official:
+                if k in self._repeatable:
+                    continue
+                out.write(k, self._v.get(k, ''))
+            for k in self._repeatable:
+                v = self._v.get(k, [])
+                for s in v:
+                    out.write(k, s)
+            out.end()
+        else:
+            if out.wants_heading():
+                out.write(self._official)
+            acc = [ self._v.get(x, '') for x in self._official
+                    if x not in self._repeatable]
+            for k in self._repeatable:
+                v = self._v.get(k, [])
+                acc += v
+            out.write(acc)
 
 
 class Log(object):
@@ -458,31 +401,44 @@ def process(f, out, log):
 
 
 class DebugOut(object):
-    """Output records as heading: value.
+    """Output records as "heading: value" lines,
+    using a write(key, value) and end() interface.
     """
+    by_field = True
     def __init__(self, f):
         self._w = f.write
+        self._records_written = 0
+        self._at_bor = True
     def write(self, key, val):
+        if self._at_bor and self._records_written:
+            self._w('\n')
+            self._at_bor = False
         if val:
             self._w('%-20s: %s\n' % (key, val))
     def end(self):
-        self._w('\n')
+        self._at_bor = True
+        self._records_written += 1
 
 
 class CSVOut(object):
-    """Output in the intended TAB-separated values format.
+    """Output in the intended TAB-separated values format,
+    using a write(sequence of values) interface.
+    Furthermore, you can ask it if it wants a table heading
+    written, since Artportalen needs one of those.
+
     Assumes, of course, that the caller knows to write() in
     the exact right sequence.
     """
+    by_field = False
     def __init__(self, f):
         self._w = f.write
-        self._prefix = ''
-    def write(self, key, val):
-        self._w('%s%s' % (self._prefix, val))
-        self._prefix = '\t'
-    def end(self):
-        self._w('\n')
-        self._prefix = ''
+        self._records_written = 0
+    def wants_heading(self):
+        return self._records_written==0
+    def write(self, vals):
+        s = '\t'.join(vals)
+        self._w('%s\n' % s)
+        self._records_written += 1
 
 
 if __name__ == "__main__":
@@ -506,7 +462,7 @@ if __name__ == "__main__":
             elif opt=='--version':
                 groblad, ver = cvs_says()
                 print '%s, part of %s %s' % (prog, groblad, ver)
-                print 'Copyright (c) 2011 Jörgen Grahn. All rights reserved.'
+                print 'Copyright (c) 2011, 2013 Jörgen Grahn. All rights reserved.'
                 sys.exit(0)
     except getopt.GetoptError, s:
         print >>sys.stderr, s

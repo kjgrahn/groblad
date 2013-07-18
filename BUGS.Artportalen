@@ -1,0 +1,27 @@
+For my personal use: bug report and complaints for Artportalen, as the
+plant part looks in June, 2013.  These have mostly not been reported
+anywhere; I wait for a response to the first one below.  Reporting
+into a black hole is a waste of time.
+
+						-- Jörgen Grahn
+
+- My complaint that bug reports go into a black hole; that neither you
+  nor anyone else can see them after they have been reported.
+  [Submitted in June 2013]
+
+- North/East coordinates are mixed up in the input fields (web and
+  Excel sheet).  The correct order for SWEREF99 and RT90 is
+  north--east, not east--north.
+
+- An Excel import which goes wrong may complain "Förväntade
+  kolumnhuvuden saknas" with (a) no further explanation and (b) no
+  link to the documentation describing what the kolumnhuvuden should
+  look like. (In my case they were space-separated rather than
+  TAB-separated).
+
+- Excel import/granskning: adjusting the taxon name and other data
+  is much more painful and time-consuming than in the previous version.
+
+- The "minimized listing" of search results is described as
+  "compressed", but actually it wastes more space than the
+  "detailed listing"!
