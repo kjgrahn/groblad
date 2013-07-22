@@ -2,8 +2,11 @@
 .\" 
 .\"
 .ss 12 0
+.de BP
+.IP \\fB\\$*
+..
 .
-.TH groblad 5 "JUN 2013" Groblad "User Manuals"
+.TH groblad 5 "JUL 2013" Groblad "User Manuals"
 .
 .
 .
@@ -51,7 +54,7 @@ Comment: East of
 .SH "LOCALITIES"
 A
 .I groblad
-file consists of a series of species lists, each for a specific
+file consists of a series of field lists, each for a specific
 locality and date
 (although nothing prevents you from revisiting a place and adding
 to an older list).
@@ -60,45 +63,70 @@ Each looks like
 .ft CW
 .nf
 {
-excursion fields
+header fields
 }{
-species fields
+taxa
 }
 .fi
-.P
-Excursion fields are
-.IP
-.ft CW
-.nf
-place: <place description>
-coordinate: <coordinate>
-date: <yyyy-mm-dd>
-observers: <names of any persons involved>
-comments: <anything else you want to note>
-status: <metadata, e.g. if this excursion has been reported
-        or published>
-.fi
-.LP
-The coordinate should be given in
-.IR "Rikets N\(:at" ,
+.SH "Header fields"
+.
+.BP place
+The place or locality concerned.
+.
+.BP coordinate
+The coordinate of the place in
+.IR "\s-1RT90\s0\ 2.5\ gon\ V" ,
 aka the
+.I "Rikets N\(:at"
+or
 .IR "Swedish Grid",
-with as many significant digits as you feel like.
+with as many significant digits as you feel suitable.
+For example,
+.I "6436786\ 1385918"
+is a point with 1m resolution on the parking lot of Utv\(:angstorp
+parish church.  With 10 m resolution that is
+.IR "643679\ 138592" ;
+with 100m resolution
+.IR "64368\ 13859" .
+.
+.BP
+Different coordinate systems like
+.I "\s-1SWEREF\ 99\ TM\s0"
+may be supported in the future.
+.
+.BP date
+The date, preferably in ISO format, as
+.IR yyyy-mm-dd .
+.
+.BP observers
+The person or persons responsible for this field list.
+.
+.BP comments
+Anything else worth noting which does not concern a specific sighting.
+.
+.BP status
+Metadata, e.g. if this excursion has been reported
+or published.
+.
+.PP
+Other header fields may be added, but might cause tools to issue a warning.
 .
 .
-.SH "SPECIES"
-Species fields have the format
+.SH "Taxa"
+Taxa fields have the format
 .IP
 .ft CW
-<species name>: <mark>: <comment>
+<taxon name>: <mark>: <comment>
 .LP
 The species name should be one of those defined by the file
-.IR INSTALLBASE/lib/groblad/species .
+.I INSTALLBASE/lib/groblad/species
+or
+.IR INSTALLBASE/lib/groblad/synonyms .
 .P
 A listed species must have a non-blank mark (by convention, a single
 .B #
 is used)
-or have a non empty comment field.
+or have a nonempty comment field.
 Otherwise, it's regarded as
 .I not
 included in the listing.
@@ -124,13 +152,14 @@ sminkrot     :#: åtminstone några stora exemplar, som vid Agnestad
 .SH "FILES"
 .TP
 .I INSTALLBASE/lib/groblad/species
-The list of accepted species, subspecies, hybrids and forms.
-This list is based on a subset of
-Karlsson, T.
-1997:
-Svenska kärlväxter.
-Svensk Bot. Tidskr. 91: 241\-560.
-.RI ( http://www2.nrm.se/fbo/chk/ ).
+The list of accepted species, subspecies, hybrids and so on.
+This list is based on Dyntaxa,
+.IR \[fo]http://www.dyntaxa.se\[fc] .
+.
+.TP
+.I INSTALLBASE/lib/groblad/synonyms
+A list of synonyms to the accepted names, for cases when the author
+prefers an alternate spelling or a dialectal name.
 .
 .SH "AUTHOR"
 J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
