@@ -1,0 +1,56 @@
+#!/usr/bin/perl -w
+#
+# Copyright (c) 2012 Jörgen Grahn
+# All rights reserved.
+#
+# Convert Excel files to text, using py_xls2txt(1)
+# from Roman V. Kiseliov's pyexcelerator. Additionally:
+#
+# py_xls2txt creates lines like:
+#   (row, column) = text
+# but for diffability reasons I turn that into
+#   column = text
+# with a single @ line before the row's first entry
+#
+# Latin-1 characters are shown as escape sequences: \xe5.
+# I translate these to latin-1.
+#
+# Sheet names and stuff like that is skipped.
+#
+use strict;
+
+sub unescape($) {
+    $_ = shift;
+    while(/(.*?)(\\x(..))(.*)/) {
+	my ($pre, $dd, $post) = ($1, $3, $4);
+	$dd = chr(hex($dd));
+	$_ = "$pre$dd$post";
+    }
+    return $_;
+}
+
+
+# Perform the conversion for one file; print to stdout
+#
+sub convert($) {
+    my ($file) = @_;
+    my $n;
+
+    open(F, '-|', "zcat -f '$file' | py_xls2txt /dev/stdin") or die;
+    while(<F>) {
+	next unless /^\((\d+), (\d+)\) = (.+)/;
+	chomp;
+	my ($row, $column, $text) = ($1, $2, $3);
+	if(not defined $n or $row != $n) {
+	    print "@\n";
+	    $n = $row;
+	}
+	printf("%-2d = %s\n", $column, unescape $text);
+    }
+    close F;
+}
+
+
+foreach (@ARGV) {
+    convert $_;
+}

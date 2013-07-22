@@ -1,0 +1,23 @@
+# Common name synonyms for taxa in the main taxon list 'species'.
+#
+# The syntax is the same, but
+# - the swedish names here must not already be
+#   attached to latin names in 'species'
+# - the latin names here must exist in 'species'
+#
+# The synonyms here are ones that can be generally accepted,
+# but it's basically just the ones I happen to want or need.
+
+röda vinbär		(Ribes rubrum)
+skogsnäva		(Geranium sylvaticum)
+stjärnfloka		(Astrantia major)
+videört			(Lysimachia vulgaris)
+ögontröst		(Euphrasia stricta var. brevipila)
+äkta kardvädd		(Dipsacus fullonum)
+ullig kardborre		(Arctium tomentosum)
+ogräsmaskros		(Taraxacum sect. Ruderalia)
+tussilago		(Tussilago farfara)
+liljekonvalje		(Convallaria majalis)
+kaveldun		(Typha latifolia)
+majsmörblommor		(Ranunculus auricomus)
+majsmörblomma		(Ranunculus auricomus)
