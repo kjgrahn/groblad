@@ -5,11 +5,6 @@
 
 SHELL=/bin/bash
 
-INSTALLBASE = /usr/local
-
-version.c: Makefile mkversion
-	./mkversion groblad_{name=Groblad,version=XXX,prefix=$(INSTALLBASE)} $@
-
 all: groblad
 all: groblad_cat
 all: groblad_grep
@@ -18,6 +13,11 @@ all: _groblad.1 _groblad.5 _groblad_report.1 groblad_grep.1
 all: groblad_grep.py
 all: groblad_fv.py groblad_fv.1
 all: default species
+
+INSTALLBASE = /usr/local
+
+version.c: Makefile mkversion
+	./mkversion groblad_{name=Groblad,version=XXX,prefix=$(INSTALLBASE)} $@
 
 libgavia.a: contstream.o
 libgavia.a: files...o
