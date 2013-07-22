@@ -3,7 +3,7 @@
 # kärlvl - extract straight taxon lists from dyntaxa/*, in turn
 #          extracted and converted from <https://www.dyntaxa.se>.
 # 
-# Copyright (c) 2012 Jörgen Grahn
+# Copyright (c) 2012, 2013 Jörgen Grahn
 # All rights reserved.
 #
 # usage: kärlvl file ...
@@ -21,33 +21,12 @@ sub ssp($) {
 }
 
 
-# Perform the conversion for one file; print to stdout
+# Perform the conversion for one file; print to stdout.
+# Assumes certain columns exist, most importantly
+# 'Taxonkategori' and 'Vetenskapligt namn'.
 #
-# The columns unfortunately have different meanings in
-# e.g. 'Lycopodiophyta' and 'Magnoliophyta'.  So we have to read the
-# headings (the first row) before we can process the taxa.
-#
-# Also unfortunately, some columns are duplicated with the same name
-# but different meanings. E.g. 'Art' can be the latin species name if
-# the taxon is a species, but a second copy of the column can be the
-# latin species name above a ssp, form, and so on.
-# Solved by ignoring duplicate columns encountered.
-#
-# The result is:
-#
-# 'Familj' - turned into a section heading
-#
-# 'Artkomplex'
-# 'Sektion'
-# 'Art'
-# 'Underart'
-# 'Varietet'
-# 'Hybrid' - turned into the Latin name
-#
-# 'Svenskt namn' - used if it exists
-#
-sub convert($$$) {
-    my ($justhyb, $nohyb, $file) = @_;
+sub convert($) {
+    my ($file) = @_;
 
     my %headings;
 
@@ -61,26 +40,20 @@ sub convert($$$) {
 	$headings{$2} = $1 unless defined $headings{$2};
     }
 
-    my $header = $headings{'Familj'} or die;
+    my $id = $headings{'TaxonId'};
+    my $la = $headings{'Vetenskapligt namn'} or die;
     my $sv = $headings{'Svenskt namn'} or die;
-    my @la;
+    my $level = $headings{'Taxonkategori'} or die;
 
-    # Which taxonomic levels to include.
-    my @levels = ('Artkomplex',
-		  'Sektion',
-		  'Art',
-		  'Underart',
-		  'Varietet');
-    @levels = () if $justhyb;
-    push @levels, 'Hybrid' unless $nohyb;
+    # Which taxonomic levels (categories) to include.
+    my %taxon_levels = ('Sektion' => 1,
+			'Art' => 1,
+			'Underart' => 1,
+			'Varietet' => 1,
+			'Form' => 1,
+			'Hybrid' => 1);
 
-    foreach (@levels) {
-	push @la, $headings{$_} if defined $headings{$_};
-    }
-
-    #print @la; print "\n"; return;
-
-    my %CLEAR = ($sv => '-');
+    my %CLEAR;
     my %row;
 
     while(<F>) {
@@ -90,14 +63,15 @@ sub convert($$$) {
 
 	    next unless %row;
 
-	    if(defined $row{$header}) {
-		printf "\n# %s\n", $row{$header};
-	    }
+	    $row{$sv} = '-' unless defined $row{$sv};
 
-	    foreach (@la) {
-		next unless defined $row{$_};
-		printf "%-23s (%s)\n", $row{$sv}, $row{$_};
-		last;
+	    if($row{$level} eq 'Familj') {
+		printf "\n# %s\n", $row{$la};
+	    }
+	    elsif(defined $taxon_levels{$row{$level}}) {
+		printf("%-23s (%s)\n",
+		       $row{$sv},
+		       $row{$la});
 	    }
 
 	    %row = %CLEAR;
@@ -108,12 +82,11 @@ sub convert($$$) {
 	$row{$1} = ssp $2;
     }
 
-    if(%row) {
-	foreach (@la) {
-	    next unless defined $row{$_};
-	    printf "%-23s (%s)\n", $row{$sv}, $row{$_};
-	    last;
-	}
+    if(%row and defined $taxon_levels{$row{$level}}) {
+	$row{$sv} = '-' unless defined $row{$sv};
+	printf("%-23s (%s)\n",
+	       $row{$sv},
+	       $row{$la});
     }
 
     close F;
@@ -121,12 +94,10 @@ sub convert($$$) {
 
 
 my %opts;
-getopts('hH', \%opts) or die "usage: $0 -[Hh] file ...\n";
+getopts('', \%opts) or die "usage: $0 file ...\n";
 
 foreach (@ARGV) {
-    convert(defined $opts{'h'},
-	    defined $opts{'H'},
-	    $_);
+    convert($_);
 }
 
 __END__
