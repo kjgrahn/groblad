@@ -1,0 +1,47 @@
+#!/usr/bin/perl -w
+#
+# mkversion - convert version numbers etc to C source
+#
+# Does not touch the file if its content would not change. This makes
+# it suitable for use in Makefiles.
+#
+# Copyright (c) 2010, 2013 Jörgen Grahn
+# All rights reserved.
+
+use strict;
+use Getopt::Std;
+
+my $usage = "usage: $0 name=value ... file\n";
+getopts('') or die $usage;
+$#ARGV>=0 or die $usage;
+
+my $file = pop @ARGV;
+
+my %vars;
+foreach (@ARGV) {
+    /(.+?)=(.*)/ or die "malformed assignment $_\n";
+    $vars{$1} = $2;
+}
+
+my $matches = 0;
+if(open FD, "<$file") {
+
+    while(<FD>) {
+	if(/^const char\* (\w+).+?return \"(.+?)\"/) {
+	    $matches++ if defined $vars{$1} and $vars{$1} eq $2;
+	}
+    }
+    close FD or die;
+}
+
+exit 0 if $matches == keys %vars;
+
+# file needs updating
+my ($key, $val);
+open FD, ">$file" or die "cannot open '$file' for writing: $!\n";
+while (($key, $val) = each %vars) {
+    print FD "const char* $key(void) { return \"$val\"; }\n";
+}
+close FD or die;
+
+exit 0;
