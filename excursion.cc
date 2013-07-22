@@ -39,11 +39,11 @@ namespace {
     {
 	const std::string known[] = {
 	    "place",
+	    "coordinate",
 	    "date",
-	    "time",
 	    "observers",
-	    "weather",
 	    "comments",
+	    "status",
 	};
 	const std::string* const end = known + sizeof known/sizeof known[0];
 	return std::find(known, end, name) != end;
@@ -94,8 +94,7 @@ bool Excursion::add_header_cont(const char* a, size_t alen)
  */
 bool Excursion::add_sighting(Taxa& spp,
 			     const char* a, size_t alen,
-			     const char* b, size_t blen,
-			     const char* c, size_t clen)
+			     const char* b, size_t blen)
 {
     const std::string name(a, alen);
     TaxonId id = spp.find(name);
@@ -105,8 +104,7 @@ bool Excursion::add_sighting(Taxa& spp,
     }
 
     sightings.push_back(Sighting(id, name,
-				 std::string(b, blen),
-				 std::string(c, clen)));
+				 std::string(b, blen)));
     return familiar;
 }
 
@@ -299,8 +297,8 @@ bool get(Files& is, std::ostream& errstream,
 		return true;
 	    }
 
-	    /* species : marker : n : comment
-	     * a       c        d   e        b
+	    /* species : marker : comment
+	     * a       c        d        b
 	     */
 	    c = std::find(a, b, ':');
 	    if(c==b) {
@@ -312,35 +310,28 @@ bool get(Files& is, std::ostream& errstream,
 		err.sighting(s);
 		continue;
 	    }
-	    const char* e = std::find(d+1, b, ':');
-	    if(e==b) {
-		err.sighting(s);
-		continue;
-	    }
 
-	    /* species : marker : n : comment
-	     * a      .  c     .  d.  e      b
+	    /* species : marker : comment
+	     * a      .  c     .  d      b
 	     */
 	    const char* ae = trimr(a, c);
 	    c = ws(c+1, b);
 	    const char* ce = trimr(c, d);
 	    d = ws(d+1, b);
-	    const char* de = trimr(d, e);
-	    e = ws(e+1, b);
+	    const char* de = trimr(d, b);
 	    if(a==ae) {
 		err.sighting(s);
 		continue;
 	    }
-	    if(c==ce && d==de && e==b) {
+	    if(c==ce && d==de) {
 		/* unfilled */
 		continue;
 	    }
 
-	    /* [a, ae) : marker : [d, de) : [e, b) */
+	    /* [a, ae) : marker : [d, de) */
 	    if(!ex.add_sighting(spp,
 				a, ae-a,
-				d, de-d,
-				e, b-e)) {
+				d, de-d)) {
 		err.warn_sighting(a, ae-a);
 	    }
 	}

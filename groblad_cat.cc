@@ -31,43 +31,13 @@
 
 #include "files...h"
 #include "taxa.h"
-#include "excursion.hh"
-#include "mbox.h"
+#include "excursion.h"
 
 
 extern "C" {
-    const char* gavia_name();
-    const char* gavia_version();
-    const char* gavia_prefix();
-}
-
-
-namespace {
-
-    /**
-     * Pipe through gavia_gab2roff etc.
-     */
-    FILE* popen(char kind)
-    {
-	const char* fmt;
-	switch(kind) {
-	case 't':
-	default:
-	    return 0;
-	case 'm':
-	    fmt = "mbox"; break;
-	case 'h':
-	    fmt = "html"; break;
-	case 'r':
-	    fmt = "roff"; break;
-	}
-
-	std::string cmd = gavia_prefix();
-	cmd += "/bin/gavia_gab2";
-	cmd += fmt;
-
-	return ::popen(cmd.c_str(), "w");
-    }
+    const char* groblad_name();
+    const char* groblad_version();
+    const char* groblad_prefix();
 }
 
 
@@ -77,12 +47,12 @@ int main(int argc, char ** argv)
 
     const string prog = argv[0];
     const string usage = string("usage: ")
-	+ prog + " [-gthmr] [-cx] file ...\n"
+	+ prog + " [-cx] file ...\n"
 	"       "
 	+ prog + " --check file ...\n"
 	"       "
 	+ prog + " --version";
-    const char optstring[] = "gthmrcx";
+    const char optstring[] = "gcx";
     const struct option long_options[] = {
 	{"check", 0, 0, 'C'},
 	{"version", 0, 0, 'V'},
@@ -101,15 +71,6 @@ int main(int argc, char ** argv)
 			    optstring,
 			    &long_options[0], 0)) != -1) {
 	switch(ch) {
-	case 'g':
-	case 'h':
-	case 'm':
-	case 'r':
-	    outfmt = ch;
-	    break;
-	case 't':
-	    outfmt = 'g';
-	    break;
 	case 'c':
 	    sort_spp = false;
 	    break;
@@ -121,8 +82,8 @@ int main(int argc, char ** argv)
 	    break;
 	case 'V':
 	    std::cout << prog << ", part of "
-		      << gavia_name() << ' ' << gavia_version() << "\n"
-		      << "Copyright (c) 1999 - 2013 Jörgen Grahn\n";
+		      << groblad_name() << ' ' << groblad_version() << "\n"
+		      << "Copyright (c) 2004 - 2013 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':
@@ -143,15 +104,11 @@ int main(int argc, char ** argv)
     std::ifstream species(Taxa::species_file().c_str());
     Taxa taxa(species, std::cerr);
 
-    if(outfmt=='g' || outfmt=='m') {
+    if(outfmt=='g') {
 	Excursion ex;
 	unsigned n = 0;
 	while(get(files, std::cerr, taxa, ex)) {
 	    if(n++) std::cout << '\n';
-
-	    if(outfmt == 'm') {
-		std::cout << MboxHeader(ex) << '\n';
-	    }
 
 	    ex.put(std::cout, sort_spp);
 	}
@@ -160,26 +117,6 @@ int main(int argc, char ** argv)
 	Excursion ex;
 	while(get(files, std::cerr, taxa, ex)) {
 	    ;
-	}
-    }
-    else {
-	FILE* const f = popen(outfmt);
-	if(!f) {
-	    std::cerr << prog
-		      << ": error: failed to open output formatter for '"
-		      << outfmt << "': exiting\n";
-	    return 1;
-	}
-
-	Excursion ex;
-	while(get(files, std::cerr, taxa, ex)) {
-	    if(!ex.put(f, sort_spp)) break;
-	}
-
-	if(pclose(f)==-1) {
-	    std::cerr << prog
-		      << ": error: output formatter failed\n";
-	    return 1;
 	}
     }
 

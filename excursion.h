@@ -41,10 +41,10 @@ class Taxa;
 class Files;
 
 /**
- * An excursion, as it appears in a gavia(5) file but as an internal
- * representation.  Still, does not destroy information found in
- * a well-formed excursion, e.g. the ordering of species and unknown
- * header fields.
+ * An excursion, or field list, as it appears in a groblad(5) file but
+ * as an internal representation.  Still, does not destroy information
+ * found in a well-formed excursion, e.g. the ordering of taxa and
+ * unknown header fields.
  *
  * Does not destroy /much/ anyway. What's not preserved is:
  * - unseen (unmarked and no numbers or comment given) species
@@ -52,6 +52,10 @@ class Files;
  * - spacing and alignment (but line breaks/continuations are preserved,
  *   as just an '\n')
  * - # comments
+ *
+ * The terminology is off because it's copied from Gavia.  An
+ * excursion there is a period of time perhaps visiting several
+ * localities; a field list here covers one locality.
  */
 class Excursion
 {
@@ -65,16 +69,13 @@ public:
     struct Sighting {
 	Sighting(TaxonId sp,
 		 const std::string& name,
-		 const std::string& number,
 		 const std::string& comment)
 	    : sp(sp),
 	      name(name),
-	      number(number),
 	      comment(comment)
 	{}
 	TaxonId sp;
 	std::string name;
-	std::string number;
 	std::string comment;
 	bool operator< (const Sighting& other) const {
 	    return sp < other.sp;
@@ -89,8 +90,7 @@ public:
 
     bool add_sighting(Taxa& spp,
 		      const char* a, size_t alen,
-		      const char* b, size_t blen,
-		      const char* c, size_t clen);
+		      const char* b, size_t blen);
     bool add_sighting_cont(const char* a, size_t alen);
     bool finalize();
 

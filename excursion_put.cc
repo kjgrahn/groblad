@@ -86,27 +86,24 @@ namespace {
     /**
      * Printing a Sighting as
      *
-     * <    m    >   < n >
-     * taxon      :#:  nnn: text text text
-     *                      text text ...
+     * <    m    >
+     * taxon      :#: text text text
+     *                text text ...
      */
     struct PrintSighting {
-	PrintSighting(std::ostream& os, size_t m, size_t n)
+	PrintSighting(std::ostream& os, size_t m)
 	    : os(os),
-	      m(m),
-	      n(n)
+	      m(m)
 	{}
 	void operator() (const Excursion::Sighting& val);
 	std::ostream& os;
 	const size_t m;
-	const size_t n;
     };
 
     void PrintSighting::operator() (const Excursion::Sighting& val)
     {
-	indent::ljust(os, val.name, m) << ":#:";
-	indent::rjust(os, val.number, n) << ": ";
-	indent::andjust(os, val.comment, m+3+n+2) << '\n';
+	indent::ljust(os, val.name, m) << ":#: ";
+	indent::andjust(os, val.comment, m+4) << '\n';
     }
 }
 
@@ -139,9 +136,8 @@ std::ostream& Excursion::put(std::ostream& os,
 
     os << "}{\n";
     m = std::max(indent, max_name(ss.begin(), ss.end()) + 1);
-    n = max_number(ss.begin(), ss.end()) + 1;
     std::for_each(ss.begin(), ss.end(),
-		  PrintSighting(os, m, n));
+		  PrintSighting(os, m));
 
     return os << "}\n";
 }

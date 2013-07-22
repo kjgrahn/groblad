@@ -120,7 +120,7 @@ std::vector<TaxonId> Taxa::match(const Regex& re) const
 }
 
 
-extern "C" const char* gavia_prefix();
+extern "C" const char* groblad_prefix();
 
 /**
  * The path to the file containing the default list of taxa.  Quite
@@ -129,7 +129,7 @@ extern "C" const char* gavia_prefix();
  */
 std::string Taxa::species_file()
 {
-    std::string s = gavia_prefix();
+    std::string s = groblad_prefix();
     s += "/lib/gavia/species";
     return s;
 }

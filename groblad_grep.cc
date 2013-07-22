@@ -30,13 +30,13 @@
 
 #include "files...h"
 #include "taxa.h"
-#include "excursion.hh"
-#include "regex.hh"
+#include "excursion.h"
+#include "regex.h"
 
 
 extern "C" {
-    const char* gavia_name();
-    const char* gavia_version();
+    const char* groblad_name();
+    const char* groblad_version();
 }
 
 
@@ -99,8 +99,8 @@ int main(int argc, char ** argv)
 	    break;
 	case 'V':
 	    std::cout << prog << ", part of "
-		      << gavia_name() << ' ' << gavia_version() << "\n"
-		      << "Copyright (c) 2000-2008, 2013 Jörgen Grahn\n";
+		      << groblad_name() << ' ' << groblad_version() << "\n"
+		      << "Copyright (c) 2013 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':

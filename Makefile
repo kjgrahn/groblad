@@ -132,14 +132,19 @@ love:
 # DO NOT DELETE
 
 md5.o: md5.h
+contstream.o: contstream.h
 date.o: date.h
 editor.o: editor.h
-excursion.o: taxa.h taxon.h lineparse.h files...h
-excursion_put.o: indent.h
+excursion.o: excursion.h taxon.h date.h taxa.h lineparse.h files...h
+excursion_put.o: excursion.h taxon.h date.h indent.h
 files...o: files...h
 filetest.o: filetest.h
+groblad_cat.o: files...h taxa.h taxon.h excursion.h date.h
+groblad.o: taxa.h taxon.h files...h excursion.h date.h lineparse.h editor.h
+groblad.o: filetest.h md5pp.h md5.h
+groblad_grep.o: files...h taxa.h taxon.h excursion.h date.h regex.h
 indent.o: indent.h
 md5pp.o: md5pp.h md5.h
-regex.o: ./regex.h
+regex.o: regex.h
 taxa.o: taxa.h taxon.h lineparse.h
-taxon.o: taxon.h
+taxon.o: taxon.h regex.h

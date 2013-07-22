@@ -38,7 +38,7 @@
 
 #include "taxa.h"
 #include "files...h"
-#include "excursion.hh"
+#include "excursion.h"
 #include "lineparse.h"
 #include "editor.h"
 #include "filetest.h"
@@ -46,9 +46,9 @@
 
 
 extern "C" {
-    const char* gavia_name();
-    const char* gavia_version();
-    const char* gavia_prefix();
+    const char* groblad_name();
+    const char* groblad_version();
+    const char* groblad_prefix();
 }
 
 
@@ -70,7 +70,7 @@ namespace {
 
 
     /**
-     * Invent a temporary file name "/tmp/gavia_stellata.pid.gavia."
+     * Invent a temporary file name "/tmp/groblad.pid.gavia."
      * I'd rather not do this by hand, but the numerous library
      * functions are, as always, either deprecated or unsuitable.
      */
@@ -78,7 +78,7 @@ namespace {
     {
 	char buf[50];
 	std::snprintf(buf, sizeof buf,
-		      "/tmp/gavia_stellata.%x.gavia",
+		      "/tmp/groblad.%x.gavia",
 		      unsigned(getpid()));
 	return buf;
     }
@@ -345,8 +345,8 @@ int main(int argc, char ** argv)
 	    break;
 	case 'V':
 	    std::cout << prog << ", part of "
-		      << gavia_name() << ' ' << gavia_version() << "\n"
-		      << "Copyright (c) 1999 - 2013 Jörgen Grahn\n";
+		      << groblad_name() << ' ' << groblad_version() << "\n"
+		      << "Copyright (c) 2004 - 2013 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':
@@ -377,10 +377,10 @@ int main(int argc, char ** argv)
     }
 
     if(extemplate.empty()) {
-	extemplate = tilde(".gavia_template");
+	extemplate = tilde(".flora");
 	if(!filetest::readable(extemplate)) {
-	    extemplate = gavia_prefix();
-	    extemplate += "/lib/gavia/default";
+	    extemplate = groblad_prefix();
+	    extemplate += "/lib/groblad/default";
 	}
     }
 

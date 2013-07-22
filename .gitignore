@@ -1,0 +1,8 @@
+*.[oa]
+*.bak
+groblad_cat
+groblad_grep
+groblad
+version.c
+TAGS
+_*
