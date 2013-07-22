@@ -36,7 +36,7 @@ All files use the ISO 8859-1 character set.
 Blank lines and comment lines, introduced by a
 .IR # ,
 are ignored.
-.P
+.PP
 A field may be broken into several lines, as long as all lines but the
 first are indented with whitespace.
 The break and indent counts as one space character.
@@ -118,11 +118,16 @@ Taxa fields have the format
 .ft CW
 <taxon name>: <mark>: <comment>
 .LP
-The species name should be one of those defined by the file
-.I INSTALLBASE/lib/groblad/species
-or
-.IR INSTALLBASE/lib/groblad/synonyms .
-.P
+The taxon name should be one of those defined by the file
+.IR INSTALLBASE/lib/groblad/species :
+a common name or a scientific name.
+Additionally, all genus names are available for use as
+.I genus
+.BR sp ,
+for example
+.BR "Potentilla sp" .
+.
+.PP
 A listed species must have a non-blank mark (by convention, a single
 .B #
 is used)
@@ -149,17 +154,16 @@ sminkrot     :#: åtminstone några stora exemplar, som vid Agnestad
 }
 .fi
 .
+.
 .SH "FILES"
 .TP
 .I INSTALLBASE/lib/groblad/species
 The list of accepted species, subspecies, hybrids and so on.
 This list is based on Dyntaxa,
-.IR \[fo]http://www.dyntaxa.se\[fc] .
-.
-.TP
-.I INSTALLBASE/lib/groblad/synonyms
-A list of synonyms to the accepted names, for cases when the author
+.IR \[fo]http://www.dyntaxa.se\[fc] ,
+plus some synonyms for cases when the author
 prefers an alternate spelling or a dialectal name.
+.
 .
 .SH "AUTHOR"
 J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]

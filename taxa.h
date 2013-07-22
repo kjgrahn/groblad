@@ -39,7 +39,7 @@ class Regex;
 
 /**
  * A "species list": a list of taxa in roughly taxonomical order with
- * - a swedish name (in lowercase)
+ * - a swedish name (in mostly lowercase)
  * - a scientific name (optional)
  * - a number of synonyms (optional)
  * - an implicit order within the list

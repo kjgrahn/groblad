@@ -1,4 +1,3 @@
-# $Id: species,v 1.11 2010-04-05 19:50:13 grahn Exp $ -*- text -*-
 #
 # This list is based on data retrieved from
 #
@@ -14,8 +13,9 @@
 #
 #   common name  (scientific name)
 #   -            (scientific name)  for taxa with no swedish name
+#   = name                          a synonym for the previous name
 #
-# Common name synonyms are not listed here, but see 'synonyms'.
+# Common name synonyms don't originate with Dyntaxa, but are my additions.
 #
 # Note the capitalization. A few common names include capitals,
 # e.g. Jungfru Marie nycklar. Capitalizing all of them would mean
@@ -260,6 +260,8 @@ natalsparris		(Asparagus densiflorus)
 klättersparris		(Asparagus falcatus)
 ampellilja		(Chlorophytum comosum)
 liljekonvalj		(Convallaria majalis)
+= liljekonvalje
+= konvalj
 blek stjärnhyacint	(Camassia cusickii)
 svärmorstunga		(Sansevieria trifasciata)
 doftdracena		(Dracaena fragrans)
@@ -766,6 +768,7 @@ gles igelknopp × dvärgigelknopp (Sparganium emersum × natans)
 fjälligelknopp × dvärgigelknopp (Sparganium hyperboreum × natans)
 smalkaveldun		(Typha angustifolia)
 bredkaveldun		(Typha latifolia)
+= kaveldun
 smalkaveldun × bredkaveldun (Typha angustifolia × latifolia)
 kanelkaveldun		(Typha laxmannii)
 
@@ -2800,6 +2803,7 @@ vanlig vattenmöja	(Ranunculus aquatilis var. aquatilis)
 grodmöja		(Ranunculus aquatilis var. diffusus)
 vattenmöja × vitstjälksmöja (Ranunculus aquatilis × peltatus ssp. baudotii)
 majsmörblomma		(Ranunculus auricomus)
+= majsmörblommor
 -			(Ranunculus abortificus)
 -			(Ranunculus acarpellophorus)
 -			(Ranunculus acrifoliiformis)
@@ -3463,6 +3467,7 @@ svarta vinbär		(Ribes nigrum)
 alpvinbär		(Ribes petraeum)
 kaukasiskt vinbär × alpvinbär (Ribes biebersteinii × petraeum)
 trädgårdsvinbär		(Ribes rubrum)
+= röda vinbär
 rosenrips		(Ribes sanguineum)
 skogsvinbär		(Ribes spicatum)
 lappvinbär		(Ribes spicatum ssp. lapponicum)
@@ -5025,6 +5030,7 @@ klibbnäva		(Geranium rotundifolium)
 blodnäva		(Geranium sanguineum)
 ryssnäva		(Geranium sibiricum)
 midsommarblomster	(Geranium sylvaticum)
+= skogsnäva
 alpnäva			(Geranium rivulare)
 blanknäva		(Geranium nodosum)
 liten flocknäva		(Geranium × cantabrigiense)
@@ -5865,6 +5871,7 @@ penningblad		(Lysimachia nummularia)
 praktlysing		(Lysimachia punctata)
 topplösa		(Lysimachia thyrsiflora)
 strandlysing		(Lysimachia vulgaris)
+= videört
 skogsstjärna		(Lysimachia europaea)
 strandkrypa		(Lysimachia maritima)
 guldlysing		(Lysimachia ciliata)
@@ -6564,6 +6571,8 @@ hybridögontröst		(Euphrasia nemorosa × stricta)
 ängsögontröst × svensk ögontröst (Euphrasia officinalis ssp. monticola × stricta var. suecica)
 stor ögontröst × glandelögontröst (Euphrasia officinalis ssp. pratensis × stricta var. brevipila)
 glandelögontröst	(Euphrasia stricta var. brevipila)
+= ögontröst
+= vanlig ögontröst
 vätögontröst		(Euphrasia stricta var. gotlandica)
 uddögontröst		(Euphrasia stricta var. stricta)
 späd ögontröst		(Euphrasia stricta var. tenuis)
@@ -6931,6 +6940,7 @@ björnrot		(Meum athamanticum)
 alpkörvel		(Molopospermum peleponnesiacum)
 odört			(Conium maculatum)
 stjärnflocka		(Astrantia major)
+= stjärnfloka
 kaukasisk stjärnflocka	(Astrantia maxima)
 spiskummin		(Cuminum cyminum)
 skärblad		(Falcaria vulgaris)
@@ -6965,6 +6975,7 @@ rumänsk jättevädd	(Cephalaria transsylvanica)
 -			(Cephalaria aristata)
 linnea			(Linnaea borealis)
 kardvädd		(Dipsacus fullonum)
+= äkta kardvädd
 flikig kardvädd		(Dipsacus laciniatus)
 vävarkarda		(Dipsacus sativus)
 sträv kardvädd		(Dipsacus strigosus)
@@ -7133,6 +7144,7 @@ stor kardborre × lundkardborre (Arctium lappa × nemorosum)
 liten kardborre × lundkardborre (Arctium minus × nemorosum)
 kaukasisk kardborre	(Arctium palladini)
 ullkardborre		(Arctium tomentosum)
+= ullig kardborre
 stor kardborre × ullkardborre (Arctium lappa × tomentosum)
 liten kardborre × ullkardborre (Arctium minus × tomentosum)
 lundkardborre × ullkardborre (Arctium nemorosum × tomentosum)
@@ -9205,6 +9217,7 @@ flottmaskros		(Taraxacum subalpinum)
 bayersk maskros		(Taraxacum bavaricum)
 kustmaskros		(Taraxacum fennobalticum)
 ogräsmaskrosor		(Taraxacum sect. Taraxacum)
+= ogräsmaskros
 svartkantad maskros	(Taraxacum atrimarginatum)
 gärsnäsmaskros		(Taraxacum accedens)
 pagodmaskros		(Taraxacum acervatulum)
@@ -9628,6 +9641,7 @@ knappbaldersbrå		(Tripleurospermum disciforme)
 strandaster		(Tripolium pannonicum)
 strandaster		(Tripolium pannonicum ssp. tripolium)
 hästhov			(Tussilago farfara)
+= tussilago
 skrifttistel		(Tyrimnus leucographus)
 verbesina		(Verbesina encelioides)
 verbesina		(Verbesina encelioides ssp. encelioides)
