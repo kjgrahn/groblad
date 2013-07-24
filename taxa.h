@@ -45,6 +45,8 @@ class Regex;
  * - an implicit order within the list
  * - an implicit numerical ID
  *
+ * Genera are also available, as e.g. "Primula sp".
+ *
  * Such a list is typically initialized from a text file, but there
  * are provisions for adding to it.
  */
@@ -58,6 +60,7 @@ public:
     const Taxon& operator[] (TaxonId id) const;
 
     std::vector<TaxonId> match(const Regex& re) const;
+    std::ostream& put(std::ostream& os) const;
 
     static std::string species_file();
 
@@ -65,6 +68,8 @@ private:
     std::vector<Taxon> v;
     typedef std::tr1::unordered_map<std::string, TaxonId> Map;
     Map m;
+
+    void map(const std::string& name, TaxonId id, std::ostream& err);
 };
 
 #endif

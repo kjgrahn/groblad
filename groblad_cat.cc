@@ -51,10 +51,13 @@ int main(int argc, char ** argv)
 	"       "
 	+ prog + " --check file ...\n"
 	"       "
+	+ prog + " --taxa\n"
+	"       "
 	+ prog + " --version";
     const char optstring[] = "gcx";
     const struct option long_options[] = {
 	{"check", 0, 0, 'C'},
+	{"taxa", 0, 0, 'T'},
 	{"version", 0, 0, 'V'},
 	{"help", 0, 0, 'H'},
 	{0, 0, 0, 0}
@@ -63,6 +66,7 @@ int main(int argc, char ** argv)
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);
 
+    bool just_list_taxa = false;
     bool sort_spp = false;
     char outfmt = 'g';
 
@@ -76,6 +80,9 @@ int main(int argc, char ** argv)
 	    break;
 	case 'x':
 	    sort_spp = true;
+	    break;
+	case 'T':
+	    just_list_taxa = true;
 	    break;
 	case 'C':
 	    outfmt = '-';
@@ -104,7 +111,10 @@ int main(int argc, char ** argv)
     std::ifstream species(Taxa::species_file().c_str());
     Taxa taxa(species, std::cerr);
 
-    if(outfmt=='g') {
+    if(just_list_taxa) {
+	taxa.put(std::cout);
+    }
+    else if(outfmt=='g') {
 	Excursion ex;
 	unsigned n = 0;
 	while(get(files, std::cerr, taxa, ex)) {

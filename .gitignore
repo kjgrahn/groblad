@@ -6,4 +6,5 @@ groblad
 version.c
 TAGS
 _*
+*.pyc
 species_raw
