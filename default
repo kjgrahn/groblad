@@ -96,8 +96,6 @@ fjällbräken          : :
 majbräken            : : 
 alpstenbräken        : : 
 stenbräken           : : 
-fjällstenbräken      : : 
-vanlig stenbräken    : : 
 finbräken            : : 
 ryssbräken           : : 
 ekbräken             : : 
@@ -383,7 +381,6 @@ kermesbär            : :
 deltasidenblomma     : : 
 vinterportlak        : : 
 vårsköna             : : 
-vanlig vårsköna      : : 
 källört              : : 
 vanlig källört       : : 
 vårtkällört          : : 
@@ -649,7 +646,6 @@ jättevallmo          : :
 fjällvallmo          : : 
 lappvallmo           : : 
 laestadiusvallmo     : : 
-dovrevallmo          : : 
 kornvallmo           : : 
 opievallmo           : : 
 
@@ -822,7 +818,6 @@ gyllenfetblad        : :
 sibiriskt fetblad    : : 
 kaukasiskt fetblad   : : 
 rosenrot             : : 
-vanlig rosenrot      : : 
 gul fetknopp         : : 
 vit fetknopp         : : 
 engelsk fetknopp     : : 
@@ -958,11 +953,8 @@ smällspirea          : :
 gråfingerört         : : 
 revig blodrot        : : 
 femfingerört         : : 
-vasstandad femfingerört : : 
 vanlig femfingerört  : : 
-smal femfingerört    : : 
 liten femfingerört   : : 
-flikig femfingerört  : : 
 stor femfingerört    : : 
 vårfingerört         : : 
 blodrot              : : 
@@ -1010,7 +1002,6 @@ kamtjatkaros         : :
 kanelros             : : 
 äkta kanelros        : : 
 pimpinellros         : : 
-liten pimpinellros   : : 
 äppelros             : : 
 vresros              : : 
 luddros              : : 
@@ -1049,7 +1040,6 @@ svenskt björnbär     : :
 lindbjörnbär         : : 
 hasselbjörnbär       : : 
 skageracksbjörnbär   : : 
-vanligt hasselbjörnbär : : 
 polabiskt björnbär   : : 
 sammetsbjörnbär      : : 
 armeniskt björnbär   : : 
@@ -1256,7 +1246,6 @@ vanlig stinknäva     : :
 strandstinknäva      : : 
 blodnäva             : : 
 midsommarblomster    : : 
-vanligt midsommarblomster : : 
 
 #      Zygophyllaceae
 tiggarnöt            : : 
@@ -1445,7 +1434,6 @@ ishavshästsvans      : :
 hästsvans            : : 
 
 #           Cornaceae
-kornell              : : 
 videkornell          : : 
 skogskornell         : : 
 hönsbär              : : 
@@ -1786,7 +1774,6 @@ vattenmynta          : :
 vanlig vattenmynta   : : 
 strandmynta          : : 
 åkermynta            : : 
-vanlig åkermynta     : : 
 ädelmynta            : : 
 gråmynta             : : 
 grönmynta            : : 
@@ -1998,9 +1985,7 @@ olvon                : :
 
 #      Caprifoliaceae
 blåtry               : : 
-vanlig blåtry        : : 
-rysk blåtry          : : 
-kaprifol             : : 
+äkta kaprifol        : : 
 skärmtry             : : 
 vildkaprifol         : : 
 skogstry             : : 
@@ -2014,7 +1999,6 @@ pipört               : :
 småvänderot          : : 
 läkevänderot         : : 
 flädervänderot       : : 
-hårvänderot          : : 
 strandvänderot       : : 
 äkta flädervänderot  : : 
 sommarklynne         : : 
@@ -2387,7 +2371,7 @@ baldersbrå           : :
 strandaster          : : 
 hästhov              : : 
 verbesina            : : 
-gullfrö              : : 
+ljust gullfrö        : : 
 
 #           Acoraceae
 kalmus               : : 
@@ -2653,7 +2637,6 @@ veketåg              : :
 svärdtåg             : : 
 trådtåg              : : 
 salttåg              : : 
-vanlig salttåg       : : 
 blåtåg               : : 
 strandtåg            : : 
 pysslingtåg          : : 
@@ -2935,7 +2918,6 @@ sötgräs              : :
 borsttåtel           : : 
 kamäxing             : : 
 hundäxing            : : 
-vanlig hundäxing     : : 
 lundäxing            : : 
 knägräs              : : 
 fjälltåtel           : : 
@@ -2962,7 +2944,6 @@ lappelm              : :
 strandkvickrot       : : 
 kvickrot             : : 
 blågrå kvickrot      : : 
-vanlig kvickrot      : : 
 kärleksgräs          : : 
 skogssvingel         : : 
 gråsvingel           : : 

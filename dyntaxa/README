@@ -47,6 +47,11 @@ feeding it through xls2txt.
     13 = Sort
     14 = Hybrid
 
+The TaxonId is affected by some Excel pecularity; it's obvious (but
+undocumented) that it's intended as a decimal integer with no leading
+zeros, but it's presented with one decimal (nnnn.0) by xls2txt.  How
+Microsoft Excel presents it, I cannot tell.
+
 And the families are, in order:
 
 Lycopodiaceae       Cannaceae          Ulmaceae          Gentianaceae
@@ -99,5 +104,4 @@ Poaceae             Betulaceae         Polemoniaceae
 Arecaceae           Fagaceae           Styracaceae
 
 Finally, the URL to a taxon seems to be <https://www.dyntaxa.se/taxon/info/id>,
-where 'id' is the first part of the TaxonId (e.g. 220711 if the TaxonId
-is 220711.0.).
+where 'id' is the TaxonId (e.g. 220711).
