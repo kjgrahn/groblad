@@ -131,6 +131,5 @@ std::string Taxa::species_file()
 {
     std::string s = groblad_prefix();
     s += "/lib/gavia/species";
-    s = "species";
     return s;
 }
