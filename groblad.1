@@ -1,9 +1,7 @@
-.\" $Id: groblad.1,v 1.5 2010-08-29 08:08:15 grahn Exp $
-.\" 
-.\"
 .ss 12 0
+.hw gro-blad
 .
-.TH groblad 1 "JAN 2005" Groblad "User Manuals"
+.TH groblad 1 "JUL 2013" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -24,14 +22,10 @@ for future reference.
 Observations are grouped as a list of the species seen at a specific place and time.
 The format and fields are based on
 the paper field lists used during the census which ended up as
-.IR "V\(:asterg\(:otlands Flora" ,
-and on the
-.I gavia
-bird observation utilities (see
-.BR gavia (1),
-.BR gavia (5),
-.BR gavia_stellata (1)).
-.P
+.IR "V\(:asterg\(:otlands Flora" .
+See
+.BR groblad (5).
+.PP
 The basic idea is to fill in a template (using a text editor of your choice, which
 .IR groblad
 starts for you).
@@ -41,20 +35,22 @@ and appended to
 .
 .SH "OPTIONS"
 .IP \-f\ \fItemplate
-The template to start from.
-If this option is not given, your personal template
+Use
+.I template
+instead of
 .I ~/.flora
-or the default template
-.I INSTALLBASE/lib/groblad/default
-is used instead.
+or
+.IR INSTALLBASE/lib/groblad/default .
 .
 .SH "FILES"
 .TP
 .I ~/.flora
-Personal excursion template file, on the format specified by
-.BR groblad (5).
+Personal excursion template file. May contain only a subset of
+all species. Fields, e.g.
+.IR observers ,
+may be pre-filled.
 .TP
-.I INSTALLBASE/lib/groblad/default
+.I INSTALLBASE/lib/gavia/default
 Global excursion template file, used if the personal template isn't
 available
 and none has been given using the
@@ -62,13 +58,11 @@ and none has been given using the
 flag.
 .TP
 .I INSTALLBASE/lib/groblad/species
-The list of accepted species, subspecies, hybrids and forms.
-This list is based on a subset of
-Karlsson, T.
-1997:
-Svenska kärlväxter.
-Svensk Bot. Tidskr. 91: 241\-560.
-.RI ( http://www2.nrm.se/fbo/chk/ ).
+The list of supported taxa and their taxonomic ordering.
+Used by
+.B groblad
+only to issue warnings about misspelled species names;
+you may in fact use any name you choose.
 .
 .SH "ENVIRONMENT"
 .IP GAVIAEDITOR
@@ -85,6 +79,5 @@ If none of these are set, the default is
 J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
 .
 .SH "SEE ALSO"
-.BR groblad_report (1),
 .BR groblad (5),
-.BR gavia (1).
+.BR groblad_report (1).

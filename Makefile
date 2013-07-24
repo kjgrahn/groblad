@@ -9,8 +9,7 @@ all: groblad
 all: groblad_cat
 all: groblad_grep
 all: _groblad.pl _groblad_report.py
-all: _groblad.1 _groblad.5 _groblad_report.1 groblad_grep.1
-all: groblad_grep.py
+all: _groblad.1 _groblad.5 _groblad_report.1 _groblad_grep.1
 all: groblad_fv.py groblad_fv.1
 all: default species
 
@@ -62,7 +61,7 @@ install: all
 	install -m644 default $(INSTALLBASE)/lib/groblad
 	install -m644 _groblad.1 $(INSTALLBASE)/man/man1/groblad.1
 	install -m644 _groblad_report.1 $(INSTALLBASE)/man/man1/groblad_report.1
-	install -m644 groblad_grep.1 $(INSTALLBASE)/man/man1/
+	install -m644 _groblad_grep.1 $(INSTALLBASE)/man/man1/groblad_grep.1
 	install -m644 groblad_fv.1 $(INSTALLBASE)/man/man1/
 	install -m644 _groblad.5 $(INSTALLBASE)/man/man5/groblad.5
 

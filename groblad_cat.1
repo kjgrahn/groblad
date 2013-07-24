@@ -1,0 +1,74 @@
+.ss 12 0
+.de BP
+.IP \\fB\\$*
+..
+.TH groblad_cat 1 "JUL 2013" Groblad "User Manuals"
+.SH "NAME"
+groblad_cat \- concatenate and print Groblad files
+.SH "SYNOPSIS"
+.B groblad_cat
+.RB [ \-cx ]
+.I file
+\&...
+.br
+.B groblad_cat --check
+.I file
+\&...
+.br
+.B groblad_cat --taxa
+.br
+.B groblad_cat --version
+.br
+.B groblad_cat --help
+.SH "DESCRIPTION"
+.B groblad_cat
+concatenates one or more Groblad files
+\- see
+.BR groblad (5)
+\-
+given on the command line.
+A dash '\-' denotes standard input.
+Standard input is also used if no
+book files are mentioned.
+The resulting aggregate book is then written to
+standard output.
+.PP
+Meanwhile, syntax checking is performed and errors (if any)
+are written to standard error.
+.PP
+Also, the output is normalized in the sense that:
+.IP \- 3x
+it is reindented
+.IP \-
+taxa not marked as seen are removed
+.IP \-
+commented-out text is removed.
+.
+.SH "OPTIONS"
+.
+.BP --check
+Don't output anything; just check the input for errors.
+.
+.BP --taxa
+Don't output anything; just list the recognized taxa.
+.BP \-c
+Output the taxa in the order they appear in the input (default).
+.BP \-x
+Output the species according to the taxonomic ordering specified by
+.IR INSTALLBASE/lib/groblad/species .
+.BP --version
+Print version information and exit.
+.BP --help
+Print a brief help text and exit.
+.SH "FILES"
+.TP
+.I INSTALLBASE/lib/groblad/species
+The list of supported taxa and their taxonomic ordering.
+.SH "AUTHOR"
+J\(:orgen Grahn
+.IR \[fo]grahn+src@snipabacken.se\[fc] .
+.SH "SEE ALSO"
+.BR groblad (5),
+.BR groblad_grep (1),
+.BR groblad_sort (1),
+.BR groblad_stat (1).

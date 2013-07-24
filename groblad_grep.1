@@ -1,40 +1,63 @@
-.\" $Id: groblad_grep.1,v 1.2 2010-08-29 08:02:54 grahn Exp $
-.
 .ss 12 0
-.
-.TH groblad_grep 1 "AUG 2010" Groblad "User Manuals"
-.
+.de BP
+.IP \\fB\\$*
+..
+.TH groblad_grep 1 "JUN 2013" Groblad "User Manuals"
 .
 .SH "NAME"
-groblad_grep \- grep botanical observations
+groblad_grep \- filter botanical observations through regular expression
 .
 .SH "SYNOPSIS"
 .B groblad_grep
 .RB [ \-v ]
-.RB [ \-e
-.IR pattern ]
+.I pattern
+.I file
 \&...
-.RI [ file ]
-\&...
+.br
+.B groblad_grep --version
+.br
+.B groblad_grep --help
 .
 .SH "DESCRIPTION"
 .B groblad_grep
-works like
-.BR grep (1),
-but on
+filters one or more Groblad files
+\- see
 .BR groblad (5)
-entries rather than lines of text.
-You feed it files, or standard input,
-and it outputs only the entries matching one of the search patterns,
-or those not matching.
+\-
+given on the command line.
+A dash '\-' denotes standard input.
+Standard input is also used if no
+book files are mentioned.
+The result is written to standard output.
+.PP
+A
+.BR groblad (5)
+file contains field lists.
+Any field list matching the
+.BR regex (7)
+regular expression
+.I pattern
+is included, unless
+.B \-v
+is given and the matching field lists are instead excluded.
+.PP
+The match is applied to the headers, taxon names and comments.
+Taxon names aren't matched only verbatim, but also against
+synonyms and scientific names.
+For example, the pattern
+.I Carex
+will match any field list containing a Carex species.
 .
 .SH "OPTIONS"
-.
-.IP "\-e \fIpattern"
-A string or, more generally, regex to search for.
-.
-.IP \-v
-Invert the search, so that only entries without matches are selected.
+.BP \-v
+Inverts handling,
+so that field lists
+.I not
+matching the pattern are passed through.
+.BP --version
+Print version information and exit.
+.BP --help
+Print a brief help text and exit.
 .
 .SH "EXAMPLES"
 .
@@ -46,10 +69,18 @@ Grep entries containing the string
 The same, but exclude any entries containing
 .IR J\(:oG .
 .
+.SH "FILES"
+.TP
+.I INSTALLBASE/lib/groblad/species
+The list of supported taxa and their taxonomic ordering.
+.
 .SH "AUTHOR"
-J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
+J\(:orgen Grahn
+.IR \[fo]grahn+src@snipabacken.se\[fc] .
 .
 .SH "SEE ALSO"
+.BR groblad_cat (1),
 .BR groblad (5),
 .BR groblad (1),
-.BR grep (1).
+.BR grep (1),
+.BR regex (7).
