@@ -2,7 +2,9 @@
 .de BP
 .IP \\fB\\$*
 ..
-.TH groblad_cat 1 "JUL 2013" Groblad "User Manuals"
+.hw gro-blad
+.
+.TH groblad_cat 1 "AUG 2013" Groblad "User Manuals"
 .SH "NAME"
 groblad_cat \- concatenate and print Groblad files
 .SH "SYNOPSIS"
@@ -33,7 +35,7 @@ book files are mentioned.
 The resulting aggregate book is then written to
 standard output.
 .PP
-Meanwhile, syntax checking is performed and errors (if any)
+Meanwhile, syntax checking is performed and errors and warnings (if any)
 are written to standard error.
 .PP
 Also, the output is normalized in the sense that:
@@ -54,7 +56,7 @@ Don't output anything; just list the recognized taxa.
 .BP \-c
 Output the taxa in the order they appear in the input (default).
 .BP \-x
-Output the species according to the taxonomic ordering specified by
+Output the species according to the taxonomic ordering defined by
 .IR INSTALLBASE/lib/groblad/species .
 .BP --version
 Print version information and exit.
@@ -63,12 +65,13 @@ Print a brief help text and exit.
 .SH "FILES"
 .TP
 .I INSTALLBASE/lib/groblad/species
-The list of supported taxa and their taxonomic ordering.
+The list of recognized taxa and their taxonomic ordering.
 .SH "AUTHOR"
 J\(:orgen Grahn
 .IR \[fo]grahn+src@snipabacken.se\[fc] .
 .SH "SEE ALSO"
 .BR groblad (5),
 .BR groblad_grep (1),
-.BR groblad_sort (1),
-.BR groblad_stat (1).
+.BR groblad (1),
+.BR groblad_report (1),
+.BR groblad_fv (1).

@@ -1,8 +1,9 @@
 .ss 12 0
 .de BP
 .IP \\fB\\$*
+.hw gro-blad
 ..
-.TH groblad_grep 1 "JUN 2013" Groblad "User Manuals"
+.TH groblad_grep 1 "AUG 2013" Groblad "User Manuals"
 .
 .SH "NAME"
 groblad_grep \- filter botanical observations through regular expression
@@ -61,11 +62,11 @@ Print a brief help text and exit.
 .
 .SH "EXAMPLES"
 .
-.IP "\fIgroblad_grep \-e JoG file"
+.IP "\fIgroblad_grep JoG file"
 Grep entries containing the string
 .IR JoG .
 .
-.IP "\fIgroblad_grep \-e JoG file | groblad_grep \-ve J\(:oG | "
+.IP "\fIgroblad_grep JoG file | groblad_grep \-v J\(:oG | "
 The same, but exclude any entries containing
 .IR J\(:oG .
 .
@@ -79,8 +80,10 @@ J\(:orgen Grahn
 .IR \[fo]grahn+src@snipabacken.se\[fc] .
 .
 .SH "SEE ALSO"
-.BR groblad_cat (1),
 .BR groblad (5),
+.BR groblad_cat (1),
 .BR groblad (1),
+.BR groblad_report (1),
+.BR groblad_fv (1),
 .BR grep (1),
 .BR regex (7).
