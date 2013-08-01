@@ -67,18 +67,3 @@ void Files::open()
     }
     lineno = 1;
 }
-
-
-#if 0
-int main(int argc, char** argv)
-{
-    Files files(&argv[1], &argv[argc]);
-
-    std::string s;
-    while(files.getline(s)) {
-	std::cout << files.position() << ": " << s << '\n';
-    }
-
-    return 0;
-}
-#endif

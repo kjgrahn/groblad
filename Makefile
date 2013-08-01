@@ -8,10 +8,18 @@ SHELL=/bin/bash
 all: groblad
 all: groblad_cat
 all: groblad_grep
-all: _groblad.pl _groblad_report.py
-all: _groblad.1 _groblad.5 _groblad_report.1 _groblad_grep.1
-all: groblad_fv.py groblad_fv.1
-all: default species
+all: build/groblad_report.py
+all: build/groblad_fv.py
+
+all: build/groblad.1
+all: build/groblad.5
+all: groblad_cat.1
+all: groblad_grep.1
+all: build/groblad_report.1
+all: build/groblad_fv.1
+
+all: default
+all: species
 
 INSTALLBASE = /usr/local
 
@@ -52,23 +60,19 @@ species_raw: dyntaxa/Tracheophyta
 
 .PHONY: install
 install: all
-	install -m555 _groblad.pl $(INSTALLBASE)/bin/groblad
-	install -m555 _groblad_report.py $(INSTALLBASE)/bin/groblad_report
-	install -m555 groblad_grep.py $(INSTALLBASE)/bin/groblad_grep
-	install -m555 groblad_fv.py $(INSTALLBASE)/bin/groblad_fv
+	install -m555 groblad{,_cat,_grep} $(INSTALLBASE)/bin/
+	install -m555 build/groblad_report.py $(INSTALLBASE)/bin/groblad_report
+	install -m555 build/groblad_fv.py $(INSTALLBASE)/bin/groblad_fv
+	install -m644 build/*.1 $(INSTALLBASE)/man/man1/
+	install -m644 build/*.5 $(INSTALLBASE)/man/man5/
 	install -d $(INSTALLBASE)/lib/groblad
 	install -m644 species $(INSTALLBASE)/lib/groblad
 	install -m644 default $(INSTALLBASE)/lib/groblad
-	install -m644 _groblad.1 $(INSTALLBASE)/man/man1/groblad.1
-	install -m644 _groblad_report.1 $(INSTALLBASE)/man/man1/groblad_report.1
-	install -m644 _groblad_grep.1 $(INSTALLBASE)/man/man1/groblad_grep.1
-	install -m644 groblad_fv.1 $(INSTALLBASE)/man/man1/
-	install -m644 _groblad.5 $(INSTALLBASE)/man/man5/groblad.5
 
 $(INSTALLBASE)/lib/groblad:
 	install -d $@
 
-_%: %
+build/%: %
 	sed "s|INSTALLBASE|$(INSTALLBASE)|" <$< >$@
 
 .PHONY: tags
@@ -82,11 +86,16 @@ depend:
 
 .PHONY: clean
 clean:
+	$(RM) groblad
+	$(RM) groblad_cat
+	$(RM) groblad_grep
+	$(RM) build/groblad_report.py
+	$(RM) build/groblad_fv.py
+	$(RM) build/*.[15]
 	$(RM) *.o lib*.a
+	$(RM) *.pyc
 	$(RM) version.c
 	$(RM) Makefile.bak
-	$(RM) _groblad.pl _groblad_report.py
-	$(RM) _groblad.1 _groblad.5 _groblad_report.1
 	$(RM) species_raw
 
 love:

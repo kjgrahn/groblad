@@ -1,10 +1,11 @@
-*.[oa]
-*.bak
+*.o
+lib*.a
+Makefile.bak
+groblad
 groblad_cat
 groblad_grep
-groblad
+build/*
 version.c
 TAGS
-_*
 *.pyc
 species_raw
