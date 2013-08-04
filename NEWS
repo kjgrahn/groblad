@@ -1,5 +1,13 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.1 (2013-08-04):
+
+ - Duplicates removed from the species list.  These were mostly common
+   names applied to both a species and its most common subspecies or
+   variety.
+
+ - Some more synonyms/aliases introduced.
+
 groblad 3.0 (2013-08-02):
 
  - The list of species/taxa replaced.  It used to be based on Karlsson
