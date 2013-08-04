@@ -13,8 +13,8 @@ all: build/groblad_fv.py
 
 all: build/groblad.1
 all: build/groblad.5
-all: groblad_cat.1
-all: groblad_grep.1
+all: build/groblad_cat.1
+all: build/groblad_grep.1
 all: build/groblad_report.1
 all: build/groblad_fv.1
 
