@@ -125,7 +125,7 @@ int main(int argc, char ** argv)
     }
     else if(outfmt=='-') {
 	Excursion ex;
-	while(get(files, std::cerr, taxa, ex)) {
+	while(get(files, std::cout, taxa, ex)) {
 	    ;
 	}
     }
