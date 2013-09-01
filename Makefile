@@ -31,7 +31,9 @@ libgavia.a: files...o
 libgavia.a: taxon.o
 libgavia.a: taxa.o
 libgavia.a: date.o
+libgavia.a: coordinate.o
 libgavia.a: excursion.o
+libgavia.a: excursion_check.o
 libgavia.a: excursion_put.o
 libgavia.a: indent.o
 libgavia.a: regex.o
@@ -105,9 +107,11 @@ love:
 
 md5.o: md5.h
 contstream.o: contstream.h
+coordinate.o: coordinate.h
 date.o: date.h
 editor.o: editor.h
 excursion.o: excursion.h taxon.h date.h taxa.h lineparse.h files...h
+excursion_check.o: excursion.h taxon.h date.h taxa.h files...h coordinate.h
 excursion_put.o: excursion.h taxon.h date.h indent.h
 files...o: files...h
 filetest.o: filetest.h

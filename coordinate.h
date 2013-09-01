@@ -25,39 +25,22 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef GAVIA_DATE_H
-#define GAVIA_DATE_H
-
-#include <iosfwd>
-
-struct tm;
+#ifndef GROBLAD_COORDINATE_H
+#define GROBLAD_COORDINATE_H
 
 /**
- * A parsing of the Gavia date: header, mostly to provide equality and
- * ordering.  Since this header is free-form, with a few suggested
- * date formats, there are lots of heuristics here.
- *
- * This class does not preserve the actual text of the header.
+ * A parsing of the coordinate: header. For now, its purpose is mostly
+ * to detect and warn for malformed coordinates and other common
+ * errors, such as swapping the north/east components.
  */
-class Date {
+class Coordinate {
 public:
-    Date() : val(0) {}
-    Date(const char* a, const char* b);
-    bool operator== (const Date& other) const { return val==other.val; }
-    bool operator< (const Date& other) const  { return val<other.val; }
-    bool empty() const { return !val; }
-
-    struct tm tm() const;
-    std::ostream& put(std::ostream& os) const;
+    Coordinate(const char* a, const char* b);
+    bool valid() const { return north; }
 
 private:
-    unsigned val;
+    unsigned north;
+    unsigned east;
 };
-
-inline
-std::ostream& operator<< (std::ostream& os, const Date& date)
-{
-    return date.put(os);
-}
 
 #endif

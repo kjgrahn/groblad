@@ -5,6 +5,10 @@
  */
 #include "files...h"
 
+namespace {
+    static const std::string std_in = "<stdin>";
+}
+
 
 /**
  * The input position, on the traditional "file:line"
@@ -15,9 +19,17 @@
  */
 Files::Position Files::position() const
 {
-    static const std::string stdin = "<stdin>";
+    return Position(*f=="-" ? std_in : *f, lineno);
+}
 
-    return Position(*f=="-" ? stdin : *f, lineno);
+
+/**
+ * Like position(), but reports on the previous line.  The result is
+ * wrong if we're on the first line, but this isn't worth fixing.
+ */
+Files::Position Files::prev_position() const
+{
+    return Position(*f=="-" ? std_in : *f, lineno-1);
 }
 
 

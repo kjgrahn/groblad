@@ -33,24 +33,6 @@
 #include <tr1/unordered_set>
 
 
-namespace {
-
-    bool known_header(const std::string& name)
-    {
-	const std::string known[] = {
-	    "place",
-	    "coordinate",
-	    "date",
-	    "observers",
-	    "comments",
-	    "status",
-	};
-	const std::string* const end = known + sizeof known/sizeof known[0];
-	return std::find(known, end, name) != end;
-    }
-}
-
-
 void Excursion::swap(Excursion& other)
 {
     headers.swap(other.headers);
@@ -61,16 +43,14 @@ void Excursion::swap(Excursion& other)
 
 
 /**
- * Add a header. Returns false if the header name isn't familiar
- * (but adds it anyway).
+ * Simply add a header.
  */
-bool Excursion::add_header(const char* a, size_t alen,
+void Excursion::add_header(const char* a, size_t alen,
 			   const char* b, size_t blen)
 {
     const Header h(std::string(a, alen),
 		   std::string(b, blen));
     headers.push_back(h);
-    return known_header(h.name);
 }
 
 
@@ -194,7 +174,6 @@ namespace {
 	void sighting(const std::string& s) { general(s); }
 	void trailer();
 
-	void warn_header(const char* s, size_t len);
 	void warn_sighting(const char* s, size_t len);
 
 	std::ostream& errstream;
@@ -209,12 +188,6 @@ namespace {
     void Errlog::trailer()
     {
 	errstream << files.position() << ": trailing partial excursion ignored\n";
-    }
-
-    void Errlog::warn_header(const char* s, size_t len)
-    {
-	errstream << files.position() << ": unfamiliar header field \"";
-	errstream.write(s, len) << "\"\n";
     }
 
     void Errlog::warn_sighting(const char* s, size_t len)
@@ -264,6 +237,8 @@ bool get(Files& is, std::ostream& errstream,
 	else if(state==HEADERS && c==a) {
 
 	    if(a+2==b && a[0]=='}' && a[1]=='{') {
+		check_last_header(ex, is, errstream);
+		check_headers(ex, is, errstream);
 		state = SIGHTINGS;
 		continue;
 	    }
@@ -277,10 +252,10 @@ bool get(Files& is, std::ostream& errstream,
 	    const char* d = trimr(a, c);
 	    c = ws(c+1, b);
 
+	    check_last_header(ex, is, errstream);
+
 	    /* [a, d) : [c, b) */
-	    if(!ex.add_header(a, d-a, c, b-c)) {
-		err.warn_header(a, d-a);
-	    }
+	    ex.add_header(a, d-a, c, b-c);
 	}
 	else if(state==HEADERS) {
 
@@ -292,6 +267,8 @@ bool get(Files& is, std::ostream& errstream,
 	else if(state==SIGHTINGS && c==a) {
 
 	    if(a+1==b && *a=='}') {
+		check_last_sighting(ex, is, errstream);
+		check_sightings(ex, spp, is, errstream);
 		ex.finalize();
 		ex.swap(excursion);
 		return true;
@@ -327,6 +304,8 @@ bool get(Files& is, std::ostream& errstream,
 		/* unfilled */
 		continue;
 	    }
+
+	    check_last_sighting(ex, is, errstream);
 
 	    /* [a, ae) : marker : [d, de) */
 	    if(!ex.add_sighting(spp,

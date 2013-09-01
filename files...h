@@ -44,6 +44,7 @@ public:
 	const unsigned line;
     };
     Position position() const;
+    Position prev_position() const;
 
 private:
     Files(const Files&);

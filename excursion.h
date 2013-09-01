@@ -65,6 +65,7 @@ public:
 	    : name(name), value(value) {}
 	std::string name;
 	std::string value;
+	bool empty() const { return value.empty(); }
     };
     struct Sighting {
 	Sighting(TaxonId sp,
@@ -84,7 +85,7 @@ public:
 
     void swap(Excursion& other);
 
-    bool add_header(const char* a, size_t alen,
+    void add_header(const char* a, size_t alen,
 		    const char* b, size_t blen);
     bool add_header_cont(const char* a, size_t alen);
 
@@ -118,6 +119,15 @@ private:
     Sightings sightings;
 };
 
+
+void check_headers(const Excursion& ex,
+		   const Files& is, std::ostream& err);
+void check_sightings(const Excursion& ex, Taxa& taxa,
+		     const Files& is, std::ostream& err);
+void check_last_header(const Excursion& ex,
+		       const Files& is, std::ostream& err);
+void check_last_sighting(const Excursion& ex,
+			 const Files& is, std::ostream& err);
 
 bool get(Files& is, std::ostream& errstream,
 	 Taxa& spp, Excursion& excursion);
