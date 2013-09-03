@@ -1,5 +1,14 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.2 (2013-09-04):
+
+ - Better input syntax checking.  Warn for things like:
+   - missing important headers
+   - malformed coordinates
+   - duplicates in the taxon lists
+
+ - One more synonym (vassarv).
+
 groblad 3.1 (2013-08-04):
 
  - Duplicates removed from the species list.  These were mostly common
