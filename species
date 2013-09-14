@@ -645,7 +645,9 @@ kallgräs		(Scheuchzeria palustris)
 
 # Juncaginaceae
 havssälting		(Triglochin maritima)
+= Triglochin maritimum
 kärrsälting		(Triglochin palustris)
+= Triglochin palustre
 
 # Potamogetonaceae
 spetsnate		(Potamogeton acutifolius)
@@ -1334,6 +1336,7 @@ kärrgröe		(Poa trivialis)
 pärlgröe		(Poa trivialis ssp. sylvicola)
 vanligt kärrgröe	(Poa trivialis ssp. trivialis)
 vekgröe			(Poa flexuosa)
+= Poa laxa
 isgröe			(Poa abbreviata)
 rakgröe			(Poa hartzii)
 knutshögröe		(Poa lindebergii)
@@ -3358,9 +3361,12 @@ dillpion		(Paeonia tenuifolia)
 
 # Crassulaceae
 cirkelfetblad		(Hylotelephium anacampseros)
+= Sedum anacampseros
 mongoliskt fetblad	(Hylotelephium ewersii)
+= Sedum ewersii
 kinesisk kärleksört	(Hylotelephium spectabile)
 kärleksört		(Hylotelephium telephium)
+= Sedum telephium
 höstkärleksört		(Hylotelephium spectabile × telephium)
 vanlig kärleksört	(Hylotelephium telephium ssp. maximum)
 röd kärleksört		(Hylotelephium telephium ssp. telephium)
@@ -3368,9 +3374,13 @@ finsk kärleksört	(Hylotelephium telephium ssp. ruprechtii)
 liten kärleksört	(Hylotelephium cauticola)
 japansk kärleksört	(Hylotelephium sieboldii)
 gyllenfetblad		(Phedimus aizoon)
+= Sedum aizoon
 sibiriskt fetblad	(Phedimus hybridus)
+= Sedum hybridum
 kamtjatkafetblad	(Phedimus kamtschaticus)
+= Sedum kamtschaticum
 kaukasiskt fetblad	(Phedimus spurius)
+= Sedum spurium
 persiskt fetblad	(Phedimus stoloniferus)
 japansk fetblad		(Phedimus ellacombianus)
 rosenrot		(Rhodiola rosea)
@@ -3640,7 +3650,9 @@ klippfingerört		(Potentilla chamissonis)
 klippfingerört × vårfingerört (Potentilla chamissonis × crantzii)
 klippfingerört × lappfingerört (Potentilla chamissonis × nivea)
 backfingerört		(Potentilla sterneri)
+= Potentilla sordida
 gråfingerört		(Potentilla incana)
+= Potentilla acaulis
 -			(Potentilla alchemilloides)
 femfingerört		(Potentilla argentea)
 vanlig femfingerört	(Potentilla argentea var. argentea)
@@ -3678,6 +3690,7 @@ sibirisk kvarnfingerört (Potentilla supina ssp. costata)
 amerikansk kvarnfingerört (Potentilla supina ssp. paradoxa)
 europeisk kvarnfingerört (Potentilla supina ssp. supina)
 småfingerört		(Potentilla verna)
+= Potentilla tabernaemontani
 vårfingerört × småfingerört (Potentilla crantzii × verna)
 tysk fingerört		(Potentilla thuringiaca)
 -			(Potentilla thuringiaca ssp. goldbachii)
@@ -3752,6 +3765,7 @@ spjuthagtorn		(Crataegus macracantha)
 sylhagtorn		(Crataegus × persimilis)
 prickhagtorn		(Crataegus punctata)
 kråkklöver		(Comarum palustre)
+= Potentilla palustris
 sträv nejlikrot		(Geum hispidum)
 rysk nejlikrot		(Geum aleppicum)
 rysk nejlikrot × nejlikrot (Geum aleppicum × urbanum)
@@ -3867,6 +3881,7 @@ storjungfrukam		(Aphanes arvensis)
 kronjungfrukam		(Aphanes microcarpa)
 vippspirea		(Holodiscus discolor)
 gåsört			(Argentina anserina)
+= Potentilla anserina
 vanlig gåsört		(Argentina anserina ssp. anserina)
 grönlandsgåsört		(Argentina anserina ssp. groenlandica)
 alvaroxbär		(Cotoneaster canescens)
@@ -4165,6 +4180,7 @@ kanadapimpinell		(Sanguisorba canadensis)
 -			(Sanguisorba menziesii)
 rosenpimpinell		(Sanguisorba obtusa)
 spetsfingerört		(Sibbaldianthe bifurca)
+= Potentilla bifurca
 -			(Sibbaldianthe bifurca ssp. orientalis)
 dvärgfingerört		(Sibbaldia procumbens)
 stor rönnspirea		(Sorbaria kirilowii)
@@ -4963,7 +4979,9 @@ praktstenört		(Aurinia saxatilis)
 -			(Aurinia petraea)
 rockentrav		(Turritis glabra)
 vårskärvfrö		(Microthlaspi perfoliatum)
+= Thlaspi perfoliatum
 backskärvfrö		(Noccaea caerulescens)
+= Thlaspi caerulescens
 storskärvfrö		(Noccaea caerulescens ssp. brachypetala)
 vanligt backskärvfrö	(Noccaea caerulescens ssp. caerulescens)
 -			(Boechera divaricarpa)
@@ -5397,6 +5415,7 @@ buskviol × luktviol	(Viola hirta × odorata)
 kärrviol		(Viola palustris)
 mossviol × kärrviol	(Viola epipsila × palustris)
 strandviol		(Viola stagnina)
+= Viola persicifolia
 äkta ängsviol × strandviol (Viola canina ssp. canina × stagnina)
 norrlandsviol × strandviol (Viola canina ssp. montana × stagnina)
 storviol × strandviol	(Viola elatior × stagnina)
@@ -5906,6 +5925,7 @@ topplösa		(Lysimachia thyrsiflora)
 strandlysing		(Lysimachia vulgaris)
 = videört
 skogsstjärna		(Lysimachia europaea)
+= Trientalis europaea
 strandkrypa		(Lysimachia maritima)
 guldlysing		(Lysimachia ciliata)
 krypmire		(Lysimachia tenella)
@@ -6444,9 +6464,11 @@ trädgårdspetrovskia	(Perovskia abrotanoides × atriplicifolia)
 stortandad hjärtstilla	(Chaiturus marrubiastrum)
 stenkyndel		(Clinopodium calamintha)
 harmynta		(Clinopodium acinos)
+= Satureja acinos
 rosenmynta		(Clinopodium grandiflorum)
 racketmynta		(Clinopodium graveolens)
 bergmynta		(Clinopodium vulgare)
+= Satureja vulgaris
 rosa stenkyndel		(Clinopodium menthifolium)
 humlesuga		(Betonica officinalis)
 praktbetonika		(Betonica macrantha)
@@ -8991,6 +9013,7 @@ boerstånds		(Senecio inaequidens)
 kängurustånds		(Senecio lautus)
 -			(Senecio leucanthemifolius)
 vårkorsört		(Senecio leucanthemifolius ssp. vernalis)
+= Senecio vernalis
 -			(Senecio leucanthemifolius ssp. leucanthemifolius)
 glesstånds		(Senecio ovatus)
 parkstånds		(Senecio sarracenicus)
@@ -9680,10 +9703,12 @@ brunbaldersbrå		(Tripleurospermum maritimum ssp. phaeocephalum)
 nordbaldersbrå		(Tripleurospermum maritimum ssp. subpolare)
 svartbaldersbrå		(Tripleurospermum maritimum ssp. nigriceps)
 baldersbrå		(Tripleurospermum inodorum)
+= Tripleurospermum perforatum
 -			(Tripleurospermum inodorum × maritimum ssp. maritimum )
 baldersbrå × nordbaldersbrå (Tripleurospermum inodorum × maritimum ssp. subpolare)
 knappbaldersbrå		(Tripleurospermum disciforme)
 strandaster		(Tripolium pannonicum)
+= Tripolium vulgare
 -			(Tripolium pannonicum ssp. tripolium)
 hästhov			(Tussilago farfara)
 = tussilago
@@ -9801,13 +9826,17 @@ svart höstfibbla	(Scorzoneroides autumnalis var. pratensis)
 = mörk höstfibbla
 lyktfibbla		(Helminthotheca echioides)
 flikstånds		(Jacobaea erucifolia)
+= Senecio erucifolius
 gullstånds		(Jacobaea paludosa)
+= Senecio paludosus
 vattenstånds		(Jacobaea aquatica)
+= Senecio aquaticus
 -			(Jacobaea aquatica var. aquatica)
 -			(Jacobaea aquatica var. erratica)
 hampstånds		(Jacobaea cannabifolia)
 silverek		(Jacobaea maritima)
 stånds			(Jacobaea vulgaris)
+= Senecio jacobaea
 alvarstånds		(Jacobaea vulgaris ssp. gotlandica)
 knappstånds		(Jacobaea vulgaris ssp. dunensis)
 vanlig stånds		(Jacobaea vulgaris ssp. vulgaris)
