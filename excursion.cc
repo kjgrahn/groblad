@@ -116,10 +116,26 @@ bool Excursion::finalize()
 namespace {
 
     struct IsTaxon {
-	bool operator() (const Excursion::Sighting& s, TaxonId sp) {
+	const TaxonId sp;
+	explicit IsTaxon(TaxonId sp) : sp(sp) {}
+	IsTaxon() {}
+	bool operator() (const Excursion::Sighting& s, TaxonId sp) const {
+	    return s.sp == sp;
+	}
+	bool operator() (const Excursion::Sighting& s) const {
 	    return s.sp == sp;
 	}
     };
+}
+
+
+/**
+ * True if 'taxon' is present at least once.
+ */
+bool Excursion::contains(TaxonId taxon) const
+{
+    return std::find_if(sightings.begin(), sightings.end(),
+			IsTaxon(taxon)) != sightings.end();
 }
 
 

@@ -8,7 +8,7 @@ SHELL=/bin/bash
 all: groblad
 all: groblad_cat
 all: groblad_grep
-all: build/groblad_report.py
+all: groblad_report
 all: build/groblad_fv.py
 
 all: build/groblad.1
@@ -53,6 +53,9 @@ groblad_grep: groblad_grep.o libgavia.a
 groblad: groblad.o libgavia.a
 	$(CXX) $(CXXFLAGS) -o $@ $< -L. -lgavia
 
+groblad_report: groblad_report.o libgavia.a
+	$(CXX) $(CXXFLAGS) -o $@ $< -L. -lgavia
+
 CFLAGS=-W -Wall -pedantic -ansi -g -Os
 CXXFLAGS=-W -Wall -pedantic -std=c++98 -g -Os
 
@@ -62,8 +65,7 @@ species_raw: dyntaxa/Tracheophyta
 
 .PHONY: install
 install: all
-	install -m555 groblad{,_cat,_grep} $(INSTALLBASE)/bin/
-	install -m555 build/groblad_report.py $(INSTALLBASE)/bin/groblad_report
+	install -m555 groblad{,_cat,_grep,_report} $(INSTALLBASE)/bin/
 	install -m555 build/groblad_fv.py $(INSTALLBASE)/bin/groblad_fv
 	install -m644 build/*.1 $(INSTALLBASE)/man/man1/
 	install -m644 build/*.5 $(INSTALLBASE)/man/man5/
@@ -80,7 +82,7 @@ build/%: %
 .PHONY: tags
 tags: TAGS
 TAGS:
-	etags *.{c,h,cc,hh}
+	etags *.{c,h,cc}
 
 .PHONY: depend
 depend:
@@ -91,7 +93,7 @@ clean:
 	$(RM) groblad
 	$(RM) groblad_cat
 	$(RM) groblad_grep
-	$(RM) build/groblad_report.py
+	$(RM) groblad_report
 	$(RM) build/groblad_fv.py
 	$(RM) build/*.[15]
 	$(RM) *.o lib*.a
@@ -119,6 +121,7 @@ groblad_cat.o: files...h taxa.h taxon.h excursion.h date.h
 groblad.o: taxa.h taxon.h files...h excursion.h date.h lineparse.h editor.h
 groblad.o: filetest.h md5pp.h md5.h
 groblad_grep.o: files...h taxa.h taxon.h excursion.h date.h regex.h
+groblad_report.o: files...h taxa.h taxon.h excursion.h date.h
 indent.o: indent.h
 md5pp.o: md5pp.h md5.h
 regex.o: regex.h

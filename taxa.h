@@ -62,6 +62,10 @@ public:
     std::vector<TaxonId> match(const Regex& re) const;
     std::ostream& put(std::ostream& os) const;
 
+    typedef std::vector<Taxon>::const_iterator const_iterator;
+    const_iterator begin() const { return v.begin(); }
+    const_iterator end() const { return v.end(); }
+
     static std::string species_file();
 
 private:

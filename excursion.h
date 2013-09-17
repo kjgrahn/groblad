@@ -97,6 +97,7 @@ public:
 
     bool operator< (const Excursion& other) const { return date < other.date; }
     bool has_one(const std::vector<TaxonId>& taxa) const;
+    bool contains(TaxonId taxon) const;
 
     std::ostream& put(std::ostream& os,
 		      bool sort = false, size_t indent = 16) const;
