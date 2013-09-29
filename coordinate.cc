@@ -20,7 +20,8 @@ namespace {
 
 Coordinate::Coordinate(const char* a, const char* b)
     : north(0),
-      east(0)
+      east(0),
+      resolution(1)
 {
     const char* p = a;
     while(p!=b && std::isdigit(*p)) p++;
@@ -40,10 +41,16 @@ Coordinate::Coordinate(const char* a, const char* b)
     while(north < 1000000) {
 	north *= 10;
 	east *= 10;
+	resolution *= 10;
     }
 
     if(!in_range(6100000, north, 7800000) ||
        !in_range(1200000, east,  1900000)) {
 	north = east = 0;
+    }
+
+    if(resolution==1) {
+	/* Artportalen doesn't believe in 1m resolution */
+	resolution = 5;
     }
 }

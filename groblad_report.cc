@@ -27,12 +27,14 @@
 #include <string>
 #include <list>
 #include <iostream>
+#include <algorithm>
 #include <stdio.h>
 #include <getopt.h>
 
 #include "files...h"
 #include "taxa.h"
 #include "excursion.h"
+#include "coordinate.h"
 
 
 extern "C" {
@@ -89,9 +91,7 @@ namespace {
 	   << "\\~" << ex.find_header("date") << ".\n";
     }
 
-    void troff(std::ostream& os,
-	       const Book& book,
-	       const Taxa& spp)
+    void troff(std::ostream& os, const Book& book, const Taxa& spp)
     {
 	for(Taxa::const_iterator i=spp.begin(); i!=spp.end(); i++) {
 	    const Taxon& sp = *i;
@@ -109,6 +109,115 @@ namespace {
 		if(i!=b.begin()) os << "\\(em\n";
 		troff(os, *i);
 	    }
+	}
+    }
+
+    std::string join(const std::string& s)
+    {
+	std::string t = s;
+	std::replace(t.begin(), t.end(), '\n', ' ');
+	return t;
+    }
+
+    struct exrow {
+	exrow(std::ostream& os, const Taxa& spp, const Excursion& ex);
+	void operator() (const Excursion::Sighting&) const;
+	std::ostream& os;
+	const Taxa& spp;
+	const Excursion& ex;
+	const std::string place;
+	const std::string& date;
+	const std::string& coordinate;
+	const Coordinate coord;
+    };
+
+    exrow::exrow(std::ostream& os, const Taxa& spp, const Excursion& ex)
+	: os(os),
+	  spp(spp),
+	  ex(ex),
+	  place(join(ex.find_header("place"))),
+	  date(ex.find_header("date")),
+	  coordinate(ex.find_header("coordinate")),
+	  coord(&coordinate[0], &coordinate[0] + coordinate.size())
+    {}
+
+    void exrow::operator() (const Excursion::Sighting& s) const
+    {
+	const Taxon sp = spp[s.sp];
+	if(!sp.latin.empty()) {
+	    os << sp.latin;
+	}
+	else {
+	    os << sp.name;
+	}
+
+	os << "\t\t\t\t\t" << place;
+
+	if(coord.valid()) {
+	    os << '\t'
+	       << coord.east << '\t'
+	       << coord.north << '\t'
+	       << coord.resolution;
+	}
+	else {
+	    os << "\t\t\t";
+	}
+
+	os << '\t' << date
+	   << '\t' << date
+	   << "\t\t\t" << join(s.comment);
+
+	os << '\n';
+    }
+
+    void tbl(std::ostream& os, const Book& book, const Taxa& spp)
+    {
+	os << ".TS H\n"
+	   << "allbox;\n"
+	   << "lrllllrrrlll llllllllllllllllllllllllllllll.\n";
+
+	os << "artnamn"
+	   << '\t' << "antal"
+	   << '\t' << "enhet"
+	   << '\t' << "ålder-stadium"
+	   << '\t' << "kön"
+	   << '\t' << "lokalnamn"
+	   << '\t' << "ost"
+	   << '\t' << "nord"
+	   << '\t' << "noggrannhet"
+	   << '\t' << "startdatum"
+	   << '\t' << "slutdatum"
+	   << '\t' << "starttid"
+	   << '\t' << "sluttid"
+	   << '\t' << "publik kommentar"
+	   << '\t' << "intressant notering"
+	   << '\t' << "privat kommentar"
+	   << '\t' << "ej återfunnen"
+	   << '\t' << "dölj fyndet t.o.m."
+	   << '\t' << "andrahand"
+	   << '\t' << "osäker artbestämning"
+	   << '\t' << "ospontan"
+	   << '\t' << "biotop"
+	   << '\t' << "biotop-beskrivning"
+	   << '\t' << "art som substrat"
+	   << '\t' << "art som substrat beskrivning"
+	   << '\t' << "substrat"
+	   << '\t' << "substrat-beskrivning"
+	   << '\t' << "offentlig samling"
+	   << '\t' << "privat samling"
+	   << '\t' << "samlings-nummer"
+	   << '\t' << "artbestämd av"
+	   << '\t' << "bestämningsdatum"
+	   << '\t' << "beskrivning artbestämning"
+	   << '\t' << "bekräftad av"
+	   << '\t' << "med-observatör"
+	   << '\n'
+	   << ".TH\n";
+
+	for(Book::const_iterator i=book.begin(); i!=book.end(); i++) {
+	    const Excursion& ex = *i;
+
+	    std::for_each(ex.sbegin(), ex.send(), exrow(os, spp, ex));
 	}
     }
 }
@@ -197,6 +306,9 @@ int main(int argc, char ** argv)
 
     if(generate_troff) {
 	troff(std::cout, book, taxa);
+    }
+    else {
+	tbl(std::cout, book, taxa);
     }
 
     return 0;

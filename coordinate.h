@@ -37,10 +37,9 @@ class Coordinate {
 public:
     Coordinate(const char* a, const char* b);
     bool valid() const { return north; }
-
-private:
     unsigned north;
     unsigned east;
+    unsigned resolution;
 };
 
 #endif
