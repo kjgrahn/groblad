@@ -231,19 +231,15 @@ int main(int argc, char ** argv)
     const string usage = string("usage: ")
 	+ prog + " [--ms] file ...\n"
 	"       "
-	+ prog + " --sundh file ...\n"
-	"       "
-	+ prog + " --svalan [-s] [--me name] ... file ...\n"
+	+ prog + " --svalan file ...\n"
 	"       "
 	+ prog + " --version\n"
 	"       "
 	+ prog + " --help";
-    const char optstring[] = "s";
+    const char optstring[] = "";
     const struct option long_options[] = {
 	{"ms", 0, 0, 'M'},
-	{"sundh", 0, 0, 'Z'},
 	{"svalan", 0, 0, 'S'},
-	{"me", 1, 0, 'E'},
 	{"version", 0, 0, 'V'},
 	{"help", 0, 0, 'H'},
 	{0, 0, 0, 0}
@@ -252,21 +248,15 @@ int main(int argc, char ** argv)
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);
 
-    bool filter_unknown = false;
     bool generate_troff = true;
-    bool generate_sundh = false;
-    std::vector<string> me;
 
     int ch;
     while((ch = getopt_long(argc, argv,
 			    optstring,
 			    &long_options[0], 0)) != -1) {
 	switch(ch) {
-	case 's': filter_unknown = true; break;
 	case 'M': generate_troff = true; break;
-	case 'Z': generate_troff = false; generate_sundh = true; break;
-	case 'S': generate_troff = false; generate_sundh = false; break;
-	case 'E': me.push_back(optarg); break;
+	case 'S': generate_troff = false; break;
 	case 'V':
 	    std::cout << prog << ", part of "
 		      << groblad_name() << ' ' << groblad_version() << "\n"
@@ -285,11 +275,6 @@ int main(int argc, char ** argv)
 	default:
 	    break;
 	}
-    }
-
-    if(filter_unknown || generate_sundh) {
-	std::cerr << "Unsupported mode (so far); use --svalan. Sorry!\n";
-	return 1;
     }
 
     Files files(argv+optind, argv+argc);

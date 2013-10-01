@@ -4,7 +4,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad_report 1 "SEP 2013" Groblad "User Manuals"
+.TH groblad_report 1 "OCT 2013" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -13,21 +13,12 @@ groblad_report \- pretty-print botanical observations
 .SH "SYNOPSIS"
 .B groblad_report
 .RB [ --ms ]
-.RI [ file ]
-\&...
-.br
-.B groblad_report
-.B --sundh
-.RI [ file ]
+.I file
 \&...
 .br
 .B groblad_report
 .B --svalan
-.RB [ \-s ]
-.RB [ --me
-.IR name ]
-\&...
-.RI [ file ]
+.I file
 \&...
 .br
 .B groblad_report --version
@@ -36,6 +27,7 @@ groblad_report \- pretty-print botanical observations
 .
 .SH "DESCRIPTION"
 .B groblad_report
+.B --ms
 rearranges one or more files (see
 .BR groblad (5))
 into a list of species in systematic order
@@ -47,9 +39,15 @@ This is useful for reporting findings to organizations which
 collect such data,
 or perhaps for including in an article or report.
 .P
-Some syntax checking is also performed.
-Among other things, species which are unknown are skipped,
-and result in warnings.
+.B groblad_report
+.B --svalan
+instead prints the contents as troff source with
+.BR tbl (1)
+tables, one line per finding.
+This format matches the text file (\[lq]Excel\[rq]) import format currently used by
+.BR Artportalen,
+Rapportsystem f\(:or v\(:axter, djur och svampar,
+.IR \[fo]http://www.artportalen.se/\[fc] .
 .
 .SH "OPTIONS"
 .
@@ -58,44 +56,59 @@ Generate troff \-ms source for a nicely formatted list of observations
 by species, and in systematic order.
 This is the default.
 .
-.BP --sundh
+.BP --svalan
 Generate troff source with
 .BR tbl (1)
 tables, one line per finding.
 Since
 .B tbl
 input is TAB-separated data, this happens to be compatible with
-certain Microsoft Excel-fixated computer systems.
-Use for example as:
-.IP
-groblad_report --sundh file | groff -ms -t > file.ps
+the text file import format currently used by
+.BR Artportalen,
+Rapportsystem f\(:or v\(:axter, djur och svampar,
+.IR \[fo]http://www.artportalen.se/\[fc] .
 .
-.BP --svalan
-Like
-.BR --sundh ,
-but with slightly different and quite a lot more useless columns,
-and no taxonomical ordering.
-This matches the text file (\[lq]Excel\[rq]) import format currently used by
-.IR Artportalen ;
-.IR "Rapportsystemet f\(:or v\(:axter" ,
-.IR \[fo]http://www.artportalen.se/plants/\[fc] .
+.BP
+The columns printed are
+.BR "species name" ;
+.BR "place" ;
+.BR "coordinate" ;
+.BR "comment" .
+The observers are
+.I not
+printed; you have to add a manual step if you want to report findings
+which aren't exclusively your own.
 .
-.BP \-s
-Exclude species not known to groblad, instead of bringing them in and hoping they
-are accepted by
+.SH "ARTPORTALEN WORKFLOW"
+.
+A reasonable way of importing findings to
 .I Artportalen
-anyway.
-Only useful with
-.BR --svalan ;
-the other output options use taxonomical ordering and/or want to print the latin name.
-.IP
-This used to be the default.
+is this:
 .
-.BP --me\ \fIname
-Only useful with
-.BR --svalan .
-Give a name of the reporter (i.e. yourself), to distinguish him from co-observers.
-May be given multiple times, if different names or spellings are given in the input.
+.IP \- 2m
+Mark the field lists you want to import with
+.B "status: to artportalen"
+or similar.
+.
+.IP \-
+Check for syntax errors, and also that they have proper coordinates filled in:
+.IP
+.RI "% groblad_grep 'to artportalen' flora/norrland | grep -w coordinate"
+.
+.IP \-
+Generate the file:
+.IP
+.RI "% groblad_grep 'to artportalen' ../flora/norrland |\e"
+.br
+.RI "./groblad_report --svalan > report"
+.
+.IP \-
+Bring up the file in a text editor, and copy and paste into Artportalen.
+.
+.IP \-
+When everything has been imported successfully, go back to the original
+file and change the status of the imported findings to e.g.
+.BR "reported to artportalen" .
 .
 .
 .SH "FILES"
@@ -103,6 +116,7 @@ May be given multiple times, if different names or spellings are given in the in
 .I INSTALLBASE/lib/groblad/species
 The list of accepted taxa
 and their scientific names (which are included in the output).
+.
 .
 .SH "AUTHOR"
 J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
@@ -115,3 +129,6 @@ J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
 .BR groblad_fv (1),
 .BR troff (1),
 .BR tbl (1).
+.P
+.B Artportalen
+.IR \[fo]http://www.artportalen.se/\[fc] .

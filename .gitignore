@@ -4,6 +4,7 @@ Makefile.bak
 groblad
 groblad_cat
 groblad_grep
+groblad_report
 build/*
 version.c
 TAGS
