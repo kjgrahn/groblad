@@ -79,11 +79,13 @@ Taxa::Taxa(std::istream& is, std::ostream& err)
 		 *   a          c  d         e    f
 		 */
 		if(!genera.seen(d, e)) {
+		    /* the genus is a taxon, too */
 		    const TaxonId id(n++);
-		    std::string name(d, e-d);
-		    name += " sp";
-		    v.push_back(Taxon(id, name));
+		    const std::string latin(d, e-d);
+		    const std::string name = latin + " sp";
+		    v.push_back(Taxon(id, name, latin));
 		    map(name, id, err);
+		    map(latin, id, err);
 		}
 		const TaxonId id(n++);
 		const std::string name(a, c-a);
