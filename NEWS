@@ -1,5 +1,7 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.3 (2013-10-02):
+
  - groblad_report: rewritten. --ms (create a species list in taxonomic
    order) and --svalan (prepare for import into Artportalen) are
    retained, but the other modes and options have been retired. Import
