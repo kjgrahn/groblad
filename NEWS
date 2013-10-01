@@ -1,5 +1,20 @@
 Major changes to groblad by version, latest first:
 
+ - groblad_report: rewritten. --ms (create a species list in taxonomic
+   order) and --svalan (prepare for import into Artportalen) are
+   retained, but the other modes and options have been retired. Import
+   into Artportalen should now require less post-processing.
+
+ - A translation is provided between scientific names and URLs in
+   <http://linnaeus.nrm.se/flora/>, "Den virtuella floran".
+   It's not used for anything at the moment, but would be useful
+   if you ever want to hyperlink to a good description of the
+   taxa.
+
+ - The species/taxon list has been updated with most scientific names
+   from "Den virtuella floran". Its taxonomy turned out to be slightly
+   different from dyntaxa's.
+
 groblad 3.2 (2013-09-04):
 
  - Better input syntax checking.  Warn for things like:

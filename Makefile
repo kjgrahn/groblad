@@ -20,6 +20,7 @@ all: build/groblad_fv.1
 
 all: default
 all: species
+all: linnaeus.nrm.se
 
 INSTALLBASE = /usr/local
 
@@ -72,6 +73,7 @@ install: all
 	install -d $(INSTALLBASE)/lib/groblad
 	install -m644 species $(INSTALLBASE)/lib/groblad
 	install -m644 default $(INSTALLBASE)/lib/groblad
+	install -m644 linnaeus.nrm.se $(INSTALLBASE)/lib/groblad
 
 $(INSTALLBASE)/lib/groblad:
 	install -d $@
