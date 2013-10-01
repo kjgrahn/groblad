@@ -25,3 +25,26 @@ into a black hole is a waste of time.
 - The "minimized listing" of search results is described as
   "compressed", but actually it wastes more space than the
   "detailed listing"!
+
+- The review step shows the sightings in a different order from how
+  you imported them.  Also, the order changes when you edit one of
+  them, confusing you.
+
+- The review step: your settings are forgotten when you edit an entry;
+  you're back at looking at all of it, 25 entries per page. This makes
+  correcting errors, improving the information etc  even more painful.
+
+- "Granska & publicera (36 fynd, 239 importeras nu)" is always off by
+  one; the sum is one more than what you actually reported.
+
+- You can only edit the "Osäker artbestämning" and "Ospontan" fields
+  one entry at a time.
+
+- "För många observationer! Importen är begränsad till maximalt 500
+  observationer." What's the point of having a queue, if it's not
+  dimensioned properly? That just means I have to maintain a second,
+  private queue.
+
+- The button "Publicera alla fynd" looks like it applies to the ones
+  you are seeing (by default 25 at a time) but when you press it, it
+  publishes *ALL*, i.e. mostly things you haven't reviewed.
