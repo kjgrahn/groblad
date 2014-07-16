@@ -1,5 +1,13 @@
 Major changes to groblad by version, latest first:
 
+ - groblad_report --svalan bug fix.  Compensate for what is probably a
+   change in Artportalen behavior in early June: that the lack of
+   trailing columns does not count as empty trailing columns, but as
+   some kind of parse error.
+
+   Simply don't include the many fields (in the heading line) which
+   are never filled in, anyway.
+
 groblad 3.3 (2013-10-02):
 
  - groblad_report: rewritten. --ms (create a species list in taxonomic

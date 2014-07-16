@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Jörgen Grahn
+ * Copyright (c) 2013, 2014 Jörgen Grahn
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -165,9 +165,8 @@ namespace {
 
 	os << '\t' << date
 	   << '\t' << date
-	   << "\t\t\t" << join(s.comment);
-
-	os << '\n';
+	   << "\t\t\t" << join(s.comment)
+	   << '\n';
     }
 
     void tbl(std::ostream& os, const Book& book, const Taxa& spp)
@@ -190,27 +189,6 @@ namespace {
 	   << '\t' << "starttid"
 	   << '\t' << "sluttid"
 	   << '\t' << "publik kommentar"
-	   << '\t' << "intressant notering"
-	   << '\t' << "privat kommentar"
-	   << '\t' << "ej återfunnen"
-	   << '\t' << "dölj fyndet t.o.m."
-	   << '\t' << "andrahand"
-	   << '\t' << "osäker artbestämning"
-	   << '\t' << "ospontan"
-	   << '\t' << "biotop"
-	   << '\t' << "biotop-beskrivning"
-	   << '\t' << "art som substrat"
-	   << '\t' << "art som substrat beskrivning"
-	   << '\t' << "substrat"
-	   << '\t' << "substrat-beskrivning"
-	   << '\t' << "offentlig samling"
-	   << '\t' << "privat samling"
-	   << '\t' << "samlings-nummer"
-	   << '\t' << "artbestämd av"
-	   << '\t' << "bestämningsdatum"
-	   << '\t' << "beskrivning artbestämning"
-	   << '\t' << "bekräftad av"
-	   << '\t' << "med-observatör"
 	   << '\n'
 	   << ".TH\n";
 
@@ -260,7 +238,7 @@ int main(int argc, char ** argv)
 	case 'V':
 	    std::cout << prog << ", part of "
 		      << groblad_name() << ' ' << groblad_version() << "\n"
-		      << "Copyright (c) 2004 - 2013 Jörgen Grahn\n";
+		      << "Copyright (c) 2004 - 2014 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':
