@@ -28,7 +28,7 @@ all: test/test
 INSTALLBASE = /usr/local
 
 version.c: Makefile mkversion
-	./mkversion groblad_{name=Groblad,version=3.5,prefix=$(INSTALLBASE)} $@
+	./mkversion groblad_{name=Groblad,version=3.6,prefix=$(INSTALLBASE)} $@
 
 libgavia.a: contstream.o
 libgavia.a: files...o

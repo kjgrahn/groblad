@@ -1,5 +1,7 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.6 (2014-11-23):
+
  - Better support for genera in the list of accepted species:
    they can be more than just "Salix sp": have common names and
    aliases.  This is mostly so I can use the name "majgräs" for
