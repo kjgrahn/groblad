@@ -1,5 +1,7 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.5 (2014-09-28):
+
  - Support for SWEREF99 coordinates as well as RT90.
 
  - A handful more synonyms.
