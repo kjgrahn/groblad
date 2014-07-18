@@ -25,7 +25,7 @@ all: linnaeus.nrm.se
 INSTALLBASE = /usr/local
 
 version.c: Makefile mkversion
-	./mkversion groblad_{name=Groblad,version=3.3,prefix=$(INSTALLBASE)} $@
+	./mkversion groblad_{name=Groblad,version=3.4,prefix=$(INSTALLBASE)} $@
 
 libgavia.a: contstream.o
 libgavia.a: files...o

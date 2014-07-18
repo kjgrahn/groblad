@@ -1,5 +1,7 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.4 (2014-07-19):
+
  - groblad_report --svalan bug fix.  Compensate for what is probably a
    change in Artportalen behavior in early June: that the lack of
    trailing columns does not count as empty trailing columns, but as
