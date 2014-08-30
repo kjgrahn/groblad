@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Jörgen Grahn
+ * Copyright (c) 2013, 2014 Jörgen Grahn
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -102,7 +102,7 @@ namespace {
      */
     md5::Digest md5sum(const std::string& f)
     {
-	std::ifstream is(f.c_str());
+	std::ifstream is(f);
 	std::string s;
 	md5::Ctx ctx;
 	while(std::getline(is, s)) {
@@ -159,8 +159,8 @@ namespace {
 		 const std::string& dest)
     {
 	const std::string& date = today();
-	std::ifstream is(src.c_str());
-	std::ofstream os(dest.c_str());
+	std::ifstream is(src);
+	std::ofstream os(dest);
 	if(!is || !os) return false;
 	std::string s;
 	while(std::getline(is, s)) {
@@ -202,13 +202,10 @@ namespace {
 		 const std::string& file)
     {
 	const std::vector<Excursion> book = read(cerr, taxa, file);
-	std::ofstream os(file.c_str());
+	std::ofstream os(file);
 
-	for(std::vector<Excursion>::const_iterator i = book.begin();
-	    i != book.end();
-	    i++) {
-
-	    i->put(os) << '\n';
+	for(const Excursion& ex : book) {
+	    ex.put(os) << '\n';
 	}
 
 	if(!os || os.fail()) {
@@ -231,13 +228,10 @@ namespace {
 		    const std::string& dest)
     {
 	const std::vector<Excursion> book = read(cerr, taxa, src);
-	std::ofstream os(dest.c_str(), std::ios_base::app);
+	std::ofstream os(dest, std::ios_base::app);
 
-	for(std::vector<Excursion>::const_iterator i = book.begin();
-	    i != book.end();
-	    i++) {
-
-	    i->put(os) << '\n';
+	for(const Excursion& ex : book) {
+	    ex.put(os) << '\n';
 	}
 
 	if(!os || os.fail()) {
@@ -285,7 +279,7 @@ namespace {
 	    return 0;
 	}
 
-	std::ifstream is(Taxa::species_file().c_str());
+	std::ifstream is(Taxa::species_file());
 	Taxa taxa(is, cerr);
 	is.close();
 	if(!rewrite(cerr, taxa, tmp0)) {

@@ -74,7 +74,7 @@ void Files::open()
 	is = &std::cin;
     }
     else {
-	fs.open(f->c_str(), std::ios_base::in);
+	fs.open(*f, std::ios_base::in);
 	is = &fs;
     }
     lineno = 1;

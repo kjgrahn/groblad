@@ -171,10 +171,8 @@ const Taxon& Taxa::operator[] (TaxonId id) const
 std::vector<TaxonId> Taxa::match(const Regex& re) const
 {
     std::vector<TaxonId> acc;
-    for(std::vector<Taxon>::const_iterator i = v.begin();
-	i != v.end();
-	i++) {
-	if(i->match(re)) acc.push_back(i->id);
+    for(const Taxon& sp: v) {
+	if(sp.match(re)) acc.push_back(sp.id);
     }
     return acc;
 }
@@ -185,8 +183,8 @@ std::vector<TaxonId> Taxa::match(const Regex& re) const
  */
 std::ostream& Taxa::put(std::ostream& os) const
 {
-    for(std::vector<Taxon>::const_iterator i = v.begin(); i!=v.end(); i++) {
-	os << *i << '\n';
+    for(const Taxon& sp: v) {
+	os << sp << '\n';
     }
 
     return os;
@@ -215,11 +213,8 @@ void Taxa::map(const Taxon& sp, std::ostream& err)
 {
     map(sp.name, sp.id, err);
     if(!sp.latin.empty()) map(sp.latin, sp.id, err);
-    for(std::vector<std::string>::const_iterator i = sp.alias.begin();
-	i != sp.alias.end(); i++) {
 
-	map(*i, sp.id, err);
-    }
+    for(const auto& name: sp.alias) map(name, sp.id, err);
 }
 
 
