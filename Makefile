@@ -61,7 +61,7 @@ groblad_report: groblad_report.o libgavia.a
 	$(CXX) $(CXXFLAGS) -o $@ $< -L. -lgavia
 
 CFLAGS=-W -Wall -pedantic -ansi -g -Os
-CXXFLAGS=-W -Wall -pedantic -std=c++98 -g -Os
+CXXFLAGS=-W -Wall -pedantic -std=c++11 -g -Os
 
 .PHONY: check checkv
 check: test/test

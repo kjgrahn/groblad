@@ -46,23 +46,6 @@ extern "C" {
 
 namespace {
 
-    /* Stolen from C++11.
-     */
-    template<typename InputIterator, typename OutputIterator,
-	     typename Predicate>
-    OutputIterator
-    copy_if(InputIterator first, InputIterator last,
-	    OutputIterator result, Predicate pred)
-    {
-	for (; first != last; ++first)
-	    if (pred(*first))
-	    {
-		*result = *first;
-		++result;
-	    }
-	return result;
-    }
-
     struct contains {
 	explicit contains(const Taxon& sp) : id(sp.id) {}
 	explicit contains(const TaxonId& id) : id(id) {}
@@ -76,9 +59,9 @@ namespace {
     Book filter(const Book& src, const Taxon& sp)
     {
 	Book acc;
-	copy_if(src.begin(), src.end(),
-		std::back_insert_iterator<Book>(acc),
-		contains(sp));
+	std::copy_if(src.begin(), src.end(),
+		     std::back_insert_iterator<Book>(acc),
+		     contains(sp));
 	return acc;
     }
 
