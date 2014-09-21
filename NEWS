@@ -1,5 +1,7 @@
 Major changes to groblad by version, latest first:
 
+ - Support for SWEREF99 coordinates as well as RT90.
+
 groblad 3.4 (2014-07-19):
 
  - groblad_report --svalan bug fix.  Compensate for what is probably a

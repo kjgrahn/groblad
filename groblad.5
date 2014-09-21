@@ -7,7 +7,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad 5 "SEP 2013" Groblad "User Manuals"
+.TH groblad 5 "SEP 2014" Groblad "User Manuals"
 .
 .
 .
@@ -75,7 +75,8 @@ taxa
 The place or locality concerned.
 .
 .BP coordinate
-The coordinate of the place in
+The coordinate of the place, in one of two different systems:
+.BP
 .IR "\s-1RT90\s0\ 2.5\ gon\ V" ,
 aka the
 .I "Rikets N\(:at"
@@ -91,9 +92,18 @@ with 100m resolution
 .IR "64368\ 13859" .
 .
 .BP
-Different coordinate systems like
-.I "\s-1SWEREF\ 99\ TM\s0"
-may also be supported in the future.
+.IR "\s-1SWEREF\ 99\ TM\s0" ,
+the designated replacement for \s-1RT90\s0.
+Superficially similar, but always with 1m resolution,
+and with 7+6 digit coordinates. The example location mentioned above
+would be
+.IR "6433764\ 433498" .
+.
+.BP
+Note that it's usually easy to detect a malformed coordinate.
+Confusing the north and east part of a coordinate generates an invalid
+coordinate, and dropping a digit at the end of a 7+7-digit RT90 coordinate
+doesn't make it valid SWEREF99.
 .
 .BP date
 The date, preferably in ISO format, as
