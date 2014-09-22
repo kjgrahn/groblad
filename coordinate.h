@@ -1,6 +1,6 @@
 /* -*- c++ -*-
  *
- * Copyright (c) 2013 Jörgen Grahn
+ * Copyright (c) 2013, 2014 Jörgen Grahn
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -29,14 +29,17 @@
 #define GROBLAD_COORDINATE_H
 
 /**
- * A parsing of the coordinate: header. For now, its purpose is mostly
- * to detect and warn for malformed coordinates and other common
- * errors, such as swapping the north/east components.
+ * A parsing of the coordinate: header, RT90 or SWEREF99.
+ *
+ * For now, its purpose is mostly to detect and warn for malformed
+ * coordinates and other common errors, such as swapping the
+ * north/east components.
  */
 class Coordinate {
 public:
     Coordinate(const char* a, const char* b);
     bool valid() const { return north; }
+    bool rt90() const { return north && east > 1000000; }
     unsigned north;
     unsigned east;
     unsigned resolution;

@@ -10,3 +10,5 @@ version.c
 TAGS
 *.pyc
 species_raw
+test/test
+test/test.cc

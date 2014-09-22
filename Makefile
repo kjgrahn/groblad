@@ -60,6 +60,23 @@ groblad_report: groblad_report.o libgavia.a
 CFLAGS=-W -Wall -pedantic -ansi -g -Os
 CXXFLAGS=-W -Wall -pedantic -std=c++98 -g -Os
 
+.PHONY: check checkv
+check: test/test
+	./test/test
+checkv: test/test
+	valgrind -q ./test/test -v
+
+test/libtest.a: test/test_coord.o
+	$(AR) -r $@ $^
+
+test/test_%.o: CPPFLAGS+=-I.
+
+test/test.cc: test/libtest.a
+	testicle -o $@ $^
+
+test/test: test/test.o test/libtest.a libgavia.a
+	$(CXX) $(CXXFLAGS) -o $@ test/test.o -Ltest/ -ltest -L. -lgavia
+
 species_raw: kärlvl
 species_raw: dyntaxa/Tracheophyta
 	./kärlvl dyntaxa/Tracheophyta | unexpand -a >$@
@@ -88,7 +105,7 @@ TAGS:
 
 .PHONY: depend
 depend:
-	makedepend -- $(CFLAGS) -- -Y -I. *.{c,cc}
+	makedepend -- $(CFLAGS) -- -Y -I. *.{c,cc} test/*.cc
 
 .PHONY: clean
 clean:
@@ -99,6 +116,7 @@ clean:
 	$(RM) build/groblad_fv.py
 	$(RM) build/*.[15]
 	$(RM) *.o lib*.a
+	$(RM) test/test test/test.cc test/*.o test/lib*.a
 	$(RM) *.pyc
 	$(RM) version.c
 	$(RM) Makefile.bak
@@ -123,9 +141,10 @@ groblad_cat.o: files...h taxa.h taxon.h excursion.h date.h
 groblad.o: taxa.h taxon.h files...h excursion.h date.h lineparse.h editor.h
 groblad.o: filetest.h md5pp.h md5.h
 groblad_grep.o: files...h taxa.h taxon.h excursion.h date.h regex.h
-groblad_report.o: files...h taxa.h taxon.h excursion.h date.h
+groblad_report.o: files...h taxa.h taxon.h excursion.h date.h coordinate.h
 indent.o: indent.h
 md5pp.o: md5pp.h md5.h
 regex.o: regex.h
 taxa.o: taxa.h taxon.h lineparse.h
 taxon.o: taxon.h regex.h
+test/test_coord.o: coordinate.h
