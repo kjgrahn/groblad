@@ -67,6 +67,10 @@ checkv: test/test
 	valgrind -q ./test/test -v
 
 test/libtest.a: test/test_coord.o
+test/libtest.a: test/test_date.o
+test/libtest.a: test/test_indent.o
+test/libtest.a: test/test_cont.o
+test/libtest.a: test/test_filetest.o
 	$(AR) -r $@ $^
 
 test/test_%.o: CPPFLAGS+=-I.
@@ -147,4 +151,8 @@ md5pp.o: md5pp.h md5.h
 regex.o: regex.h
 taxa.o: taxa.h taxon.h lineparse.h
 taxon.o: taxon.h regex.h
+test/test_cont.o: contstream.h
 test/test_coord.o: coordinate.h
+test/test_date.o: date.h
+test/test_filetest.o: filetest.h
+test/test_indent.o: indent.h
