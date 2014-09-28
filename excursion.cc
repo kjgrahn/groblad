@@ -30,7 +30,6 @@
 #include "files...h"
 
 #include <algorithm>
-#include <tr1/unordered_set>
 
 
 void Excursion::swap(Excursion& other)

@@ -76,8 +76,7 @@ namespace {
 
     void troff(std::ostream& os, const Book& book, const Taxa& spp)
     {
-	for(Taxa::const_iterator i=spp.begin(); i!=spp.end(); i++) {
-	    const Taxon& sp = *i;
+	for(const Taxon& sp : spp) {
 	    const Book b = filter(book, sp);
 	    if(b.empty()) continue;
 
@@ -175,9 +174,7 @@ namespace {
 	   << '\n'
 	   << ".TH\n";
 
-	for(Book::const_iterator i=book.begin(); i!=book.end(); i++) {
-	    const Excursion& ex = *i;
-
+	for(const Excursion& ex : book) {
 	    std::for_each(ex.sbegin(), ex.send(), exrow(os, spp, ex));
 	}
     }

@@ -30,7 +30,7 @@
 #include "coordinate.h"
 
 #include <algorithm>
-#include <tr1/unordered_map>
+#include <unordered_map>
 #include <iostream>
 
 
@@ -42,7 +42,7 @@ namespace {
 		      Place, Coordinate, Date,
 		      Observers, Comments, Status };
 	Header get(const std::string& name) const;
-	std::tr1::unordered_map<std::string, Header> map;
+	std::unordered_map<std::string, Header> map;
     };
 
     Headers::Headers()
@@ -57,8 +57,7 @@ namespace {
 
     Headers::Header Headers::get(const std::string& s) const
     {
-	std::tr1::unordered_map<std::string,
-				Header>::const_iterator i = map.find(s);
+	auto i = map.find(s);
 	if(i==map.end()) return Headers::Unknown;
 	return i->second;
     }

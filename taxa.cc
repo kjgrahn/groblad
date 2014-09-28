@@ -6,7 +6,7 @@
 #include "taxa.h"
 #include "lineparse.h"
 
-#include <tr1/unordered_set>
+#include <unordered_set>
 #include <iostream>
 #include <algorithm>
 #include <cassert>
@@ -18,7 +18,7 @@ namespace {
      * Just a helper class, for processing a genus name only once.
      */
     class Genera {
-	std::tr1::unordered_set<std::string> s;
+	std::unordered_set<std::string> s;
     public:
 	bool seen(const std::string& name);
 	bool seen(const char* a, const char* b);
