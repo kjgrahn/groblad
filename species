@@ -8,17 +8,13 @@
 # reproduce -- there are no fixed URLs representing these data sets.
 #
 # The list is in the order used at Dyntaxa, presumably a new taxonomic
-# ordering, DNA and stuff.  It's encoded as ISO 8859-1 (latin1) and
-# each line is on one of the forms
-#
-#   common name  (scientific name)
-#   -            (scientific name)  for taxa with no swedish name
-#   = name                          a synonym for the previous name
-#
-# Common name synonyms don't originate with Dyntaxa, but are my additions.
+# ordering, DNA and stuff. Common name synonyms don't originate with
+# Dyntaxa, but are my additions.
 #
 # Note the capitalization. A few common names include capital letters,
 # e.g. Jungfru Marie nycklar.
+#
+# For further notes on the file format, see groblad_species(5).
 
 # Lycopodiaceae
 lopplummer		(Huperzia selago)

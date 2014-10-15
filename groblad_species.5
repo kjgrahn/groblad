@@ -1,0 +1,104 @@
+.ss 12 0
+.de BP
+.IP "\\fB\\$*"
+..
+.hw gro-blad
+.
+.TH groblad_species 5 "OCT 2014" Groblad "User Manuals"
+.
+.
+.SH "NAME"
+groblad_species \- taxon list file format
+.
+.
+.SH "DESCRIPTION"
+The
+.BR groblad (1)
+tools for recording and managing botanical observations use
+lists of valid taxa to catch errors, translate common names to scientific ones,
+and to provide taxonomical ordering.
+This manual documents the file format.
+.
+.
+.SS "Semantics"
+The taxon list defines a list of taxa where each taxon has one or more names.
+One is the primary name, and one (possibly the same one) is the primary
+scientific name.
+It also defines an ordering of the taxa.
+.PP
+It does
+.I not
+describe the taxonomy as a whole, though:
+there's no concept of the taxonomical level of a name, of
+species, genera or families, or of relationships between taxa.
+Nor is there a concept of auctors.
+.
+.
+.SS "Basic syntax"
+The file uses the ISO 8859-1 character set.
+Blank lines and comment lines, introduced by a
+.IR # ,
+are ignored.
+.
+.
+.SS "Taxon lines"
+Remaining lines are on one of these forms:
+.
+.BP "\fIcommon name\fP (\fIscientific name\fP)"
+Define a taxon with a common name and a scientific (latin) name.
+.BP
+Names are capitalized according to the usual language rules.
+E.g. genus names are capitalized, but swedish common names are not
+except in a few cases
+(e.g. Jungfru Marie nycklar).
+.BP
+Additionally, the genus is introduced as a taxon if it's not
+known already: if the scientific name is
+.IR "Quercus robur" ,
+the genus is also introduced as a taxon, under the name
+.IR "Quercus sp" .
+.
+.BP "(\fIscientific name\fP)"
+Same thing, except no common name is introduced for the taxon.
+(Perhaps there
+.I is
+no such name.)
+.
+.BP "= \fIname"
+Define an alternate name for the immediately preceding taxon.
+This can be a scientific name (perhaps a genus has been split in recent years)
+or a common one (perhaps a dialectal name that deserves to be preserved).
+.
+.
+.SH "EXAMPLES"
+This defines four taxa (including
+.IR "Quercus sp" ),
+one of which has an alternate name, and
+one of which is a hybrid.
+.IP
+.ft CW
+.nf
+bergek            (Quercus petraea)
+skogsek           (Quercus robur)
+= ek
+bergek × skogsek  (Quercus petraea × robur)
+.fi
+.
+.SH "FILES"
+.TP
+.I INSTALLBASE/lib/groblad/species
+The location of the default taxon list.
+.
+.
+.SH "AUTHOR"
+J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
+.
+.
+.SH "SEE ALSO"
+.BR groblad_cat (1),
+.BR groblad_grep (1),
+.BR groblad (1),
+.BR groblad_report (1),
+.BR groblad_fv (1),
+.BR groblad (5),
+.BR gavia (5).
