@@ -20,25 +20,26 @@ namespace {
     class Genera {
 	std::tr1::unordered_set<std::string> s;
     public:
+	bool seen(const std::string& name);
 	bool seen(const char* a, const char* b);
     };
 
+    bool Genera::seen(const std::string& name)
+    {
+	return !s.insert(name).second;
+    }
+
     bool Genera::seen(const char* a, const char* b)
     {
-	const std::string name(a, b-a);
-	return !s.insert(name).second;
+	return seen(std::string(a, b-a));
     }
 }
 
 
 /**
  * Create the list from a text file in the format documented
- * in 'species':
+ * in groblad_species(5).
  *
- *   common name
- *   common name  (scientific name)
- *   -            (scientific name)  for taxa with no swedish name
- *   = name                          a synonym for the previous name
  */
 Taxa::Taxa(std::istream& is, std::ostream& err)
 {
@@ -78,26 +79,41 @@ Taxa::Taxa(std::istream& is, std::ostream& err)
 		/* " common name  (scientific name) ..."
 		 *   a          c  d         e    f
 		 */
-		if(!genera.seen(d, e)) {
-		    /* the genus is a taxon, too */
+		if(e==f) {
+		    /* genus */
 		    const TaxonId id(n++);
-		    const std::string latin(d, e-d);
-		    const std::string name = latin + " sp";
-		    v.push_back(Taxon(id, name, latin));
-		    map(name, id, err);
-		    map(latin, id, err);
-		}
-		const TaxonId id(n++);
-		const std::string name(a, c-a);
-		const std::string latin(d, f-d);
-		if(name=="-") {
-		    v.push_back(Taxon(id, latin));
-		    map(latin, id, err);
+		    std::string name(a, c-a);
+		    const std::string latin(d, f-d);
+		    Taxon genus(id, name, latin);
+		    if(genus.name=="-") {
+			genus.name = latin + " sp";
+		    }
+		    else {
+			genus.add(latin + " sp");
+		    }
+		    genera.seen(latin);
+		    map(genus, err);
+		    v.push_back(genus);
 		}
 		else {
-		    v.push_back(Taxon(id, name, latin));
-		    map(name, id, err);
-		    map(latin, id, err);
+		    if(!genera.seen(d, e)) {
+			/* the genus is a taxon, too */
+			const TaxonId id(n++);
+			const std::string latin(d, e-d);
+			const std::string name = latin + " sp";
+			Taxon genus(id, name, latin);
+			map(genus, err);
+			v.push_back(genus);
+		    }
+		    const TaxonId id(n++);
+		    std::string name(a, c-a);
+		    const std::string latin(d, f-d);
+		    Taxon sp(id, name, latin);
+		    if(sp.name=="-") {
+			sp.name = sp.latin;
+		    }
+		    map(sp, err);
+		    v.push_back(sp);
 		}
 	    }
 	}
@@ -189,6 +205,21 @@ std::string Taxa::species_file()
     std::string s = groblad_prefix();
     s += "/lib/groblad/species";
     return s;
+}
+
+
+/**
+ * Helper. Map all names in 'sp'.
+ */
+void Taxa::map(const Taxon& sp, std::ostream& err)
+{
+    map(sp.name, sp.id, err);
+    if(!sp.latin.empty()) map(sp.latin, sp.id, err);
+    for(std::vector<std::string>::const_iterator i = sp.alias.begin();
+	i != sp.alias.end(); i++) {
+
+	map(*i, sp.id, err);
+    }
 }
 
 

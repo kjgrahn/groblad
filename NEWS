@@ -1,5 +1,12 @@
 Major changes to groblad by version, latest first:
 
+ - Better support for genera in the list of accepted species:
+   they can be more than just "Salix sp": have common names and
+   aliases.  This is mostly so I can use the name "majgräs" for
+   Hierochloë spp.
+
+ - A handful of such synonyms added.
+
 groblad 3.5 (2014-09-28):
 
  - Support for SWEREF99 coordinates as well as RT90.

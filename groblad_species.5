@@ -4,7 +4,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad_species 5 "OCT 2014" Groblad "User Manuals"
+.TH groblad_species 5 "NOV 2014" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -58,16 +58,30 @@ known already: if the scientific name is
 the genus is also introduced as a taxon, under the name
 .IR "Quercus sp" .
 .
-.BP "(\fIscientific name\fP)"
+.BP "\fIcommon name"
+Define a taxon with a common name and no known scientific name.
+.
+.BP "\- (\fIscientific name\fP)"
 Same thing, except no common name is introduced for the taxon.
 (Perhaps there
 .I is
 no such name.)
 .
+.BP "\fIcommon name\fP (\fIgenus\fP)"
+.BP "\- (\fIgenus\fP)"
+Define a genus with a a scientific name and optionallt a common name.
+Genera are introduced automatically according to above, but this allows
+you to introduce common names and synonyms.  This is useful for some genera
+where you often cannot identify the species you've seen:
+.IR Alchemilla ,
+.IR Hierochlo\(:e ,
+.I Rubus
+and so on; some of them have well-known common names.
+.
 .BP "= \fIname"
 Define an alternate name for the immediately preceding taxon.
 This can be a scientific name (perhaps a genus has been split in recent years)
-or a common one (perhaps a dialectal name that deserves to be preserved).
+or a common one (perhaps a dialectal name that deserves to be used and preserved).
 .
 .
 .SH "EXAMPLES"

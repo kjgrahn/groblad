@@ -1,6 +1,6 @@
 /* -*- c++ -*-
  *
- * Copyright (c) 2013 Jörgen Grahn
+ * Copyright (c) 2013, 2014 Jörgen Grahn
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -73,6 +73,7 @@ private:
     typedef std::tr1::unordered_map<std::string, TaxonId> Map;
     Map m;
 
+    void map(const Taxon& sp, std::ostream& err);
     void map(const std::string& name, TaxonId id, std::ostream& err);
 };
 

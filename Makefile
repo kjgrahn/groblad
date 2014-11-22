@@ -23,6 +23,8 @@ all: default
 all: species
 all: linnaeus.nrm.se
 
+all: test/test
+
 INSTALLBASE = /usr/local
 
 version.c: Makefile mkversion
@@ -67,6 +69,7 @@ check: test/test
 checkv: test/test
 	valgrind -q ./test/test -v
 
+test/libtest.a: test/test_taxa.o
 test/libtest.a: test/test_coord.o
 test/libtest.a: test/test_date.o
 test/libtest.a: test/test_indent.o
