@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013 Jörgen Grahn
+ * Copyright (c) 2013, 2014 Jörgen Grahn
  * All rights reserved.
  *
  */
@@ -194,11 +194,12 @@ std::string Taxa::species_file()
 
 /**
  * Helper. Create the mapping from 'name' to taxon, and warn if this
- * doesn't work (a mapping already exists).
+ * doesn't work (a different mapping already exists).
  */
 void Taxa::map(const std::string& name, TaxonId id, std::ostream& err)
 {
-    if(!m.insert(std::make_pair(name, id)).second) {
+    std::pair<Map::iterator, bool> p = m.insert(std::make_pair(name, id));
+    if(!p.second && p.first->second != id) {
 	err << "warning: \"" << name << "\" has already been used to name a different taxon\n";
     }
 }
