@@ -79,11 +79,11 @@ test/libtest.a: test/test_filetest.o
 
 test/test_%.o: CPPFLAGS+=-I.
 
-test/test.cc: test/libtest.a
-	testicle -o $@ $^
-
 test/test: test/test.o test/libtest.a libgavia.a
 	$(CXX) $(CXXFLAGS) -o $@ test/test.o -Ltest/ -ltest -L. -lgavia
+
+test/test.cc: test/libtest.a
+	orchis -o $@ $^
 
 species_raw: kärlvl
 species_raw: dyntaxa/Tracheophyta

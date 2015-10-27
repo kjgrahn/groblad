@@ -7,18 +7,18 @@
 #include <iostream>
 #include <sstream>
 
-#include <testicle.h>
+#include <orchis.h>
 
 #include <contstream.h>
 
 using std::istringstream;
 using std::string;
 
-using testicle::TC;
+using orchis::TC;
 
 namespace {
     std::string line(Continuation& c) {
-	testicle::assert_(c);
+	orchis::assert_true(c);
 	string s("deadbeef");
 	getline(c, s);
 	return s;
@@ -28,69 +28,72 @@ namespace {
 		     const int lineno,
 		     const char * const s) {
 	std::string ss;
-	testicle::assert_(getline(c, ss));
-	testicle::assert_eq(ss, s);
-	testicle::assert_eq(c.line(), lineno);
+	orchis::assert_true(getline(c, ss));
+	orchis::assert_eq(ss, s);
+	orchis::assert_eq(c.line(), lineno);
     }
 
     void assert_eof(Continuation& c) {
 	std::string s;
-	testicle::assert_(!getline(c, s));
+	orchis::assert_true(!getline(c, s));
     }
 }
 
 namespace cont {
 
+    using orchis::assert_true;
+    using orchis::assert_eq;
+
     void A(TC) {
 	istringstream iss("");
 	Continuation cs(iss);
-	testicle::assert_eq("deadbeef", line(cs));
-	testicle::assert_(!cs);
+	assert_eq("deadbeef", line(cs));
+	assert_true(!cs);
     }
     void B(TC) {
 	istringstream iss("\n");
 	Continuation cs(iss);
-	testicle::assert_eq("", line(cs));
-	testicle::assert_eq(1, cs.line());
+	assert_eq("", line(cs));
+	assert_eq(1, cs.line());
 	assert_eof(cs);
     }
     void C(TC) {
 	istringstream iss("foo");
 	Continuation cs(iss);
-	testicle::assert_eq("foo", line(cs));
-	testicle::assert_eq(1, cs.line());
+	assert_eq("foo", line(cs));
+	assert_eq(1, cs.line());
 	assert_eof(cs);
     }
     void D(TC) {
 	istringstream iss("foo\n");
 	Continuation cs(iss);
-	testicle::assert_eq("foo", line(cs));
-	testicle::assert_eq(1, cs.line());
+	assert_eq("foo", line(cs));
+	assert_eq(1, cs.line());
 	assert_eof(cs);
     }
     void E(TC) {
 	istringstream iss("foo ");
 	Continuation cs(iss);
-	testicle::assert_eq("foo ", line(cs));
-	testicle::assert_eq(1, cs.line());
+	assert_eq("foo ", line(cs));
+	assert_eq(1, cs.line());
 	assert_eof(cs);
     }
     void F(TC) {
 	istringstream iss("foo\n"
 			  "bar\n");
 	Continuation cs(iss);
-	testicle::assert_eq("foo", line(cs));
-	testicle::assert_eq(1, cs.line());
-	testicle::assert_eq("bar", line(cs));
-	testicle::assert_eq(2, cs.line());
+	assert_eq("foo", line(cs));
+	assert_eq(1, cs.line());
+	assert_eq("bar", line(cs));
+	assert_eq(2, cs.line());
 	assert_eof(cs);
     }
     void G(TC) {
 	istringstream iss("foo bar\t\n"
 			  "  foo bar\n");
 	Continuation cs(iss);
-	testicle::assert_eq("foo bar foo bar", line(cs));
-	testicle::assert_eq(2, cs.line());
+	assert_eq("foo bar foo bar", line(cs));
+	assert_eq(2, cs.line());
 	assert_eof(cs);
     }
     void H(TC) {
@@ -99,10 +102,10 @@ namespace cont {
 			  "  foobar \n"
 			  "foobar\n");
 	Continuation cs(iss);
-	testicle::assert_eq("foobar foobar foobar ", line(cs));
-	testicle::assert_eq(3, cs.line());
-	testicle::assert_eq("foobar", line(cs));
-	testicle::assert_eq(4, cs.line());
+	assert_eq("foobar foobar foobar ", line(cs));
+	assert_eq(3, cs.line());
+	assert_eq("foobar", line(cs));
+	assert_eq(4, cs.line());
 	assert_eof(cs);
     }
     void I(TC) {
@@ -111,12 +114,12 @@ namespace cont {
 			  "\t\t\n"
 			  "foobar\n");
 	Continuation cs(iss);
-	testicle::assert_eq("foobar foobar ", line(cs));
-	testicle::assert_eq(2, cs.line());
-	testicle::assert_eq("\t\t", line(cs));
-	testicle::assert_eq(3, cs.line());
-	testicle::assert_eq("foobar", line(cs));
-	testicle::assert_eq(4, cs.line());
+	assert_eq("foobar foobar ", line(cs));
+	assert_eq(2, cs.line());
+	assert_eq("\t\t", line(cs));
+	assert_eq(3, cs.line());
+	assert_eq("foobar", line(cs));
+	assert_eq(4, cs.line());
 	assert_eof(cs);
     }
     void J(TC) {
@@ -125,18 +128,18 @@ namespace cont {
 			  " foo\n"
 			  " foo\n");
 	Continuation cs(iss);
-	testicle::assert_eq("foo foo foo foo", line(cs));
-	testicle::assert_eq(4, cs.line());
+	assert_eq("foo foo foo foo", line(cs));
+	assert_eq(4, cs.line());
 	assert_eof(cs);
     }
     void K(TC) {
 	istringstream iss("foo     \n"
 			  "bar\n");
 	Continuation cs(iss);
-	testicle::assert_eq("foo     ", line(cs));
-	testicle::assert_eq(1, cs.line());
-	testicle::assert_eq("bar", line(cs));
-	testicle::assert_eq(2, cs.line());
+	assert_eq("foo     ", line(cs));
+	assert_eq(1, cs.line());
+	assert_eq("bar", line(cs));
+	assert_eq(2, cs.line());
 	assert_eof(cs);
     }
 }
@@ -148,8 +151,8 @@ namespace continuation {
 	istringstream iss("");
 	Continuation cs(iss);
 	std::string s("deadbeef");
-	testicle::assert_(!getline(cs, s));
-	testicle::assert_eq(s, "deadbeef");
+	orchis::assert_true(!getline(cs, s));
+	orchis::assert_eq(s, "deadbeef");
     }
     void B(TC) {
 	istringstream iss("\n");

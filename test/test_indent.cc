@@ -3,7 +3,7 @@
  */
 #include <indent.h>
 
-#include <testicle.h>
+#include <orchis.h>
 #include <iostream>
 #include <sstream>
 
@@ -35,11 +35,11 @@ namespace indent {
 
 namespace indent {
 
-    using testicle::TC;
+    using orchis::TC;
 
     void simple(TC)
     {
-	using testicle::assert_eq;
+	using orchis::assert_eq;
 
 	assert_eq(ljust("foo", 5), "foo  ");
 	assert_eq(rjust("foo", 5), "  foo");
@@ -51,7 +51,7 @@ namespace indent {
 
     namespace left {
 
-	using testicle::assert_eq;
+	using orchis::assert_eq;
 
 	void test_0(TC)
 	{
@@ -116,7 +116,7 @@ namespace indent {
 
     namespace right {
 
-	using testicle::assert_eq;
+	using orchis::assert_eq;
 
 	void test_0(TC)
 	{

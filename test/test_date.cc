@@ -4,7 +4,7 @@
  */
 #include <date.h>
 
-#include <testicle.h>
+#include <orchis.h>
 
 namespace {
 
@@ -18,9 +18,9 @@ namespace {
 
 namespace date {
 
-    using testicle::assert_eq;
-    using testicle::assert_lt;
-    using testicle::TC;
+    using orchis::assert_eq;
+    using orchis::assert_lt;
+    using orchis::TC;
 
     void simple(TC)
     {

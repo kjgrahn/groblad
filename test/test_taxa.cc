@@ -5,7 +5,7 @@
 #include <taxa.h>
 #include <sstream>
 
-#include <testicle.h>
+#include <orchis.h>
 
 namespace {
 
@@ -15,32 +15,32 @@ namespace {
 	std::ostringstream err;
 
 	Taxa spp(iss, err);
-	testicle::assert_eq(err.str(), "");
+	orchis::assert_eq(err.str(), "");
 	return spp;
     }
 
     void assert_sp(Taxa::const_iterator i, const char* name, const char* latin)
     {
-	testicle::assert_eq(i->name, name);
-	testicle::assert_eq(i->latin, latin);
+	orchis::assert_eq(i->name, name);
+	orchis::assert_eq(i->latin, latin);
     }
 
     void assert_same(const Taxa& spp, const char* a, const char* b, const char* c = 0)
     {
-	testicle::assert_(spp.find(a));
-	testicle::assert_eq(spp.find(a), spp.find(b));
-	if(c) testicle::assert_eq(spp.find(a), spp.find(c));
+	orchis::assert_(spp.find(a));
+	orchis::assert_eq(spp.find(a), spp.find(b));
+	if(c) orchis::assert_eq(spp.find(a), spp.find(c));
     }
 }
 
 
 namespace taxa {
-    using testicle::TC;
+    using orchis::TC;
 
     void empty(TC)
     {
 	const Taxa spp = list("");
-	testicle::assert_(spp.begin() == spp.end());
+	orchis::assert_(spp.begin() == spp.end());
     }
 
     void two(TC)
@@ -51,7 +51,7 @@ namespace taxa {
 	assert_sp(i++, "Quercus sp", "Quercus");
 	assert_sp(i++, "bergek", "Quercus petraea");
 	assert_sp(i++, "skogsek", "Quercus robur");
-	testicle::assert_(i == spp.end());
+	orchis::assert_(i == spp.end());
     }
 
     void common_only(TC)
@@ -59,7 +59,7 @@ namespace taxa {
 	const Taxa spp = list("skogsek");
 	Taxa::const_iterator i = spp.begin();
 	assert_sp(i++, "skogsek", "");
-	testicle::assert_(i == spp.end());
+	orchis::assert_(i == spp.end());
     }
 
     void scientific_only(TC)
@@ -68,7 +68,7 @@ namespace taxa {
 	Taxa::const_iterator i = spp.begin();
 	assert_sp(i++, "Taraxacum sp", "Taraxacum");
 	assert_sp(i++, "Taraxacum hamosiforme", "Taraxacum hamosiforme");
-	testicle::assert_(i == spp.end());
+	orchis::assert_(i == spp.end());
     }
 
     void alias(TC)
@@ -78,7 +78,7 @@ namespace taxa {
 	Taxa::const_iterator i = spp.begin();
 	assert_sp(i++, "Quercus sp", "Quercus");
 	assert_sp(i++, "skogsek", "Quercus robur");
-	testicle::assert_(i == spp.end());
+	orchis::assert_(i == spp.end());
 
 	assert_same(spp, "skogsek", "ek", "Quercus robur");
     }
@@ -97,7 +97,7 @@ namespace taxa {
 	assert_sp(i++, "finnstarr", "Carex atherodes");
 	assert_sp(i++, "fetblad", "Phedimus");
 	assert_sp(i++, "gyllenfetblad", "Phedimus aizoon");
-	testicle::assert_(i == spp.end());
+	orchis::assert_(i == spp.end());
 
 	assert_same(spp, "Cotoneaster", "Cotoneaster sp");
 	assert_same(spp, "starr", "Carex", "Carex sp");
