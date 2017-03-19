@@ -1,9 +1,11 @@
 /*
- * Copyright (c) 2013 Jörgen Grahn
+ * Copyright (c) 2013, 2017 Jörgen Grahn
  * All rights reserved.
  *
  */
 #include "files...h"
+
+#include <cstring>
 
 namespace {
     static const std::string std_in = "<stdin>";
@@ -76,6 +78,10 @@ void Files::open()
     else {
 	fs.open(*f, std::ios_base::in);
 	is = &fs;
+	if(!fs.is_open()) {
+	    std::cerr << "error: cannot open '" << *f
+		      << "' for reading: " << std::strerror(errno) << '\n';
+	}
     }
     lineno = 1;
 }
