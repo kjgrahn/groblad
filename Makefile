@@ -45,6 +45,7 @@ libgavia.a: filetest.o
 libgavia.a: editor.o
 libgavia.a: md5.o
 libgavia.a: md5pp.o
+libgavia.a: utf8.o
 libgavia.a: version.o
 	$(AR) -r $@ $^
 
@@ -75,6 +76,7 @@ test/libtest.a: test/test_date.o
 test/libtest.a: test/test_indent.o
 test/libtest.a: test/test_cont.o
 test/libtest.a: test/test_filetest.o
+test/libtest.a: test/test_utf8.o
 	$(AR) -r $@ $^
 
 test/test_%.o: CPPFLAGS+=-I.
