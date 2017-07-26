@@ -111,10 +111,6 @@ tags: TAGS
 TAGS:
 	etags *.{c,h,cc}
 
-.PHONY: depend
-depend:
-	makedepend -- $(CFLAGS) -- -Y -I. *.{c,cc} test/*.cc
-
 .PHONY: clean
 clean:
 	$(RM) groblad
@@ -127,36 +123,23 @@ clean:
 	$(RM) test/test test/test.cc test/*.o test/lib*.a
 	$(RM) *.pyc
 	$(RM) version.c
-	$(RM) Makefile.bak
 	$(RM) species_raw
+	$(RM) -r dep
 
 love:
 	@echo "not war?"
 
 # DO NOT DELETE
 
-md5.o: md5.h
-contstream.o: contstream.h
-coordinate.o: coordinate.h
-date.o: date.h
-editor.o: editor.h
-excursion.o: excursion.h taxon.h date.h taxa.h lineparse.h files...h
-excursion_check.o: excursion.h taxon.h date.h taxa.h files...h coordinate.h
-excursion_put.o: excursion.h taxon.h date.h indent.h
-files...o: files...h
-filetest.o: filetest.h
-groblad_cat.o: files...h taxa.h taxon.h excursion.h date.h
-groblad.o: taxa.h taxon.h files...h excursion.h date.h lineparse.h editor.h
-groblad.o: filetest.h md5pp.h md5.h
-groblad_grep.o: files...h taxa.h taxon.h excursion.h date.h regex.h
-groblad_report.o: files...h taxa.h taxon.h excursion.h date.h coordinate.h
-indent.o: indent.h
-md5pp.o: md5pp.h md5.h
-regex.o: regex.h
-taxa.o: taxa.h taxon.h lineparse.h
-taxon.o: taxon.h regex.h
-test/test_cont.o: contstream.h
-test/test_coord.o: coordinate.h
-test/test_date.o: date.h
-test/test_filetest.o: filetest.h
-test/test_indent.o: indent.h
+$(shell mkdir -p dep/test)
+DEPFLAGS=-MT $@ -MMD -MP -MF dep/$*.Td
+COMPILE.cc=$(CXX) $(DEPFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(TARGET_ARCH) -c
+
+%.o: %.cc
+	$(COMPILE.cc) $(OUTPUT_OPTION) $<
+	mv dep/$*.{Td,d}
+
+dep/%.d: ;
+dep/test/%.d: ;
+-include dep/*.d
+-include dep/test/*.d

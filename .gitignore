@@ -1,6 +1,6 @@
 *.o
 lib*.a
-Makefile.bak
+dep/
 groblad
 groblad_cat
 groblad_grep
