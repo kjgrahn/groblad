@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2014 Jörgen Grahn
+ * Copyright (c) 2013, 2014, 2018 Jörgen Grahn
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -266,7 +266,7 @@ namespace {
 	const md5::Digest before = md5sum(tmp0);
 
 	cerr << "Invoking editor... " << std::flush;
-	if(!editor(tmp0)) {
+	if(!editor(tmp0, book)) {
 	    cerr << '\n'
 		 << "Failed; aborting.\n";
 	    return 1;
@@ -289,7 +289,7 @@ namespace {
 	}
 
 	cerr << "again...\n";
-	if(!editor(tmp0)) {
+	if(!editor(tmp0, book)) {
 	    cerr << "Failed; aborting.\n"
 		 << "If you want your text back, look for " << tmp0 << ".\n";
 	    guard.unguard();
@@ -340,7 +340,7 @@ int main(int argc, char ** argv)
 	case 'V':
 	    std::cout << prog << ", part of "
 		      << groblad_name() << ' ' << groblad_version() << "\n"
-		      << "Copyright (c) 2004 - 2013 Jörgen Grahn\n";
+		      << "Copyright (c) 2004 - 2013, 2018 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':

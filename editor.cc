@@ -1,4 +1,4 @@
-/* Copyright (c) 2013 Jörgen Grahn
+/* Copyright (c) 2013, 2018 Jörgen Grahn
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -51,7 +51,8 @@ namespace {
  * the shell, and returns true iff it returns normally with a zero
  * exit status.
  */
-bool editor(const std::string& path)
+bool editor(const std::string& path,
+	    const std::string& reference)
 {
     const std::string ed = editor_name();
 
@@ -65,7 +66,18 @@ bool editor(const std::string& path)
     }
     else {
 	static const char* null;
-	execlp(ed.c_str(), ed.c_str(), path.c_str(), null);
+	if(ed=="emacs") {
+	    execlp(ed.c_str(), ed.c_str(),
+		   "+2:100",
+		   path.c_str(),
+		   reference.c_str(),
+		   "-f",
+		   "delete-window",
+		   null);
+	}
+	else {
+	    execlp(ed.c_str(), ed.c_str(), path.c_str(), null);
+	}
 	std::exit(1);
     }
 }

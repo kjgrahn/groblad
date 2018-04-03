@@ -8,6 +8,7 @@
 
 #include <string>
 
-bool editor(const std::string& path);
+bool editor(const std::string& path,
+	    const std::string& reference);
 
 #endif

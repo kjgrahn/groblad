@@ -1,7 +1,7 @@
 .ss 12 0
 .hw gro-blad
 .
-.TH groblad 1 "OCT 2014" Groblad "User Manuals"
+.TH groblad 1 "JUL 2018" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -32,6 +32,31 @@ starts for you).
 When you exit the editor, the observations are trimmed, syntax-checked,
 and appended to
 .IR file .
+.
+.SS "Emacs-specific features"
+If the editor is
+.BR emacs ,
+the original file is opened in a second buffer in the background, so that
+.I "M-x dabbrev-expand"
+can fetch words (like place names) from earlier entries and make input
+easier and less prone to spelling errors.
+.LP
+Also,
+.B gavia
+comes with an Emacs mode for viewing and editing excursions, called
+.BR gavia-mode .
+This mode works for
+.B groblad
+files, too.
+It colorizes, and lets you mark a species as seen by pressing
+.IR F4 .
+To use it, install gavia and put this line in your Emacs startup file (typically
+.IR ~/.emacs ):
+.IP
+.nf
+.ft CW
+(require 'gavia-mode)
+.fi
 .
 .SH "OPTIONS"
 .IP \-f\ \fItemplate
@@ -85,4 +110,6 @@ J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
 .BR groblad_cat (1),
 .BR groblad_grep (1),
 .BR groblad_report (1),
-.BR groblad_fv (1).
+.BR groblad_fv (1),
+.BR gavia (1),
+.BR emacs (1).
