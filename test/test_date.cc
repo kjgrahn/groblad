@@ -13,6 +13,19 @@ namespace {
 	const char* p = s.c_str();
 	return Date(p, p+s.size());
     }
+
+    void assert_in_may(const Date& d)
+    {
+	orchis::assert_lt(D("2013-04-30"), d);
+	orchis::assert_lt(d, D("2013-06-01"));
+    }
+
+    void assert_not_may(const Date& d)
+    {
+	bool a = D("2013-04-30") < d;
+	bool b = d < D("2013-06-01");
+	orchis::assert_false(a && b);
+    }
 }
 
 
@@ -24,26 +37,26 @@ namespace date {
 
     void simple(TC)
     {
-	assert_eq(D("2013-05-01"), D("2013-05-01"));
-	assert_lt(D("2013-05-18"), D("2013-05-19"));
-    }
+	assert_in_may(D("2013-05-01"));
+	assert_in_may(D("2013-05-31"));
 
-    void crazy(TC)
-    {
-	assert_eq(D("2013-05-41"), D("2013-05"));
-	assert_eq(D("2013-15-01"), D("2013"));
+	assert_not_may(D("2013-04-30"));
+	assert_not_may(D("2013-06-01"));
     }
 
     void old_formats(TC)
     {
-	assert_eq(D("2013-05-01"), D("20130501"));
-	assert_eq(D("2013-05-01"), D("130501"));
+	assert_in_may(D("20130501"));
+	assert_in_may(D("130501"));
+
+	assert_not_may(D("20130601"));
+	assert_not_may(D("130601"));
     }
 
     void extra_crud(TC)
     {
-	assert_eq(D("2013-05-01"), D("2013-05-01--"));
-	assert_eq(D("2013-05-01"), D("2013-05-01ff"));
+	assert_in_may(D("2013-05-01--"));
+	assert_in_may(D("2013-05-01ff"));
     }
 
     void missing_stuff(TC)
@@ -58,7 +71,7 @@ namespace date {
     void empty(TC)
     {
 	assert_lt(D(""), D("1907"));
-	assert_eq(D(""), D("garbage"));
-	assert_eq(D(""), D("19garbage"));
+	assert_lt(D("garbage"), D("1907"));
+	assert_lt(D("19garbage"), D("1907"));
     }
 }
