@@ -26,6 +26,18 @@ namespace {
 	bool b = d < D("2013-06-01");
 	orchis::assert_false(a && b);
     }
+
+    void assert_prints(const Date& d, const std::string& ref)
+    {
+	std::ostringstream oss;
+	oss << d;
+	orchis::assert_eq(oss.str(), ref);
+    }
+
+    void assert_prints(const std::string& d)
+    {
+	assert_prints(D(d), d);
+    }
 }
 
 
@@ -73,5 +85,40 @@ namespace date {
 	assert_lt(D(""), D("1907"));
 	assert_lt(D("garbage"), D("1907"));
 	assert_lt(D("19garbage"), D("1907"));
+    }
+
+    namespace print {
+
+	void simple(TC)
+	{
+	    assert_prints("2018-05-20");
+	}
+
+	void old_formats(TC)
+	{
+	    assert_prints(D("20130501"), "2013-05-01");
+	    assert_prints(D("130501"), "2013-05-01");
+	}
+
+	void extra_crud(TC)
+	{
+	    assert_prints("2013-05-01 foo");
+	    assert_prints("2013-05-01--");
+	    assert_prints("2013-05-01ff");
+
+	    assert_prints(D("20130501 foo"), "2013-05-01 foo");
+	}
+
+	void missing_stuff(TC)
+	{
+	    assert_prints(D("2013-05 foo"), "2013-05 foo");
+	}
+
+	void empty(TC)
+	{
+	    assert_prints("");
+	    assert_prints("garbage");
+	    assert_prints("19garbage");
+	}
     }
 }
