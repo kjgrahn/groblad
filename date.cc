@@ -4,53 +4,68 @@
  *
  */
 #include "date.h"
+#include "lineparse.h"
 
 #include <iostream>
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
-#include <cctype>
 #include <time.h>
 
+namespace {
+    const char* dash(const char* a, const char* b)
+    {
+	if(a!=b && *a=='-') a++;
+	return a;
+    }
+}
 
-Date::Date(const char* a, const char* b)
+
+Date::Date(const char* a, const char* const b)
     : val(0)
 {
-    while(a!=b && !std::isdigit(*a)) a++;
+    auto a0 = Parse::ws(a, b);
+    a = a0;
 
-    /* (pretending to have guarantees that
-     * *b is a readable non-digit)
-     */
-    char* end;
-    unsigned long n = std::strtoul(a, &end, 10);
-    if(end-a == 4+2+2) {
-	val = n;
+    auto c = Parse::digit(a, b);
+    // [a, c) is a leading group of digits
+    if(c-a == std::strlen("yyyymmdd")) {
+	val = std::strtoul(a, nullptr, 10);
     }
-    else if(end-a == 2+2+2) {
+    else if(c-a == std::strlen("yymmdd")) {
+	unsigned n = std::strtoul(a, nullptr, 10);
 	if(n<780101) {
 	    /* y2k */
-	    n+=1000000;
+	    n += 1000000;
 	}
 	n += 19000000;
 	val = n;
     }
-    else if(end-a == 4) {
-	val = n*10000;
-	a = end;
-	if(a==b || *a!='-') return;
-
-	a++;
-	n = std::strtoul(a, &end, 10);
-	if(end-a != 2 || n<1 || n>12) return;
-	val += n*100;
-	a = end;
-	if(a==b || *a!='-') return;
-
-	a++;
-	n = std::strtoul(a, &end, 10);
-	if(end-a != 2 || n<1 || n>31) return;
-	val += n;
+    else if(c-a == std::strlen("yyyy")) {
+	unsigned y = std::strtoul(a, nullptr, 10);
+	a = dash(c, b);
+	c = Parse::digit(a, b);
+	if(c-a == std::strlen("mm")) {
+	    unsigned m = std::strtoul(a, nullptr, 10);
+	    a = dash(c, b);
+	    c = Parse::digit(a, b);
+	    if(c-a == std::strlen("dd")) {
+		unsigned d = std::strtoul(a, nullptr, 10);
+		val = (y * 100 + m) * 100 + d;
+	    }
+	    else {
+		val = (y * 100 + m) * 100;
+	    }
+	}
+	else {
+	    val = y * 10000;
+	}
     }
+    else {
+	c = a0;
+    }
+
+    trailer = {c, b};
 }
 
 
@@ -110,8 +125,8 @@ std::ostream& Date::put(std::ostream& os) const
 	std::sprintf(buf, "%04u", yyyy);
     }
     else {
-	std::strcpy(buf, "nil");
+	std::strcpy(buf, "");
     }
 
-    return os << buf;
+    return os << buf << trailer;
 }

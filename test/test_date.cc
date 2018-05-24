@@ -111,7 +111,9 @@ namespace date {
 
 	void missing_stuff(TC)
 	{
-	    assert_prints(D("2013-05 foo"), "2013-05 foo");
+	    assert_prints("2013-05 foo");
+	    assert_prints("2013+may");
+	    assert_prints("2013-may");
 	}
 
 	void empty(TC)

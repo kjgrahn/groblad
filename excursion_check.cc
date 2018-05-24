@@ -199,7 +199,7 @@ void check_last_header(const Excursion& ex,
     if(hn==Headers::Date) {
 	const char* const s = h.value.c_str();
 	const Date date(s, s + h.value.size());
-	if(date.empty()) {
+	if(!date.valid()) {
 	    err << is.prev_position()
 		<< ": malformed date \"" << h.value << "\"\n";
 	}

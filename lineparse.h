@@ -37,6 +37,11 @@ namespace Parse {
 	return std::isspace(static_cast<unsigned char>(ch));
     }
 
+    inline bool isdigit(char ch)
+    {
+	return std::isdigit(static_cast<unsigned char>(ch));
+    }
+
     /**
      * Trim whitespace to the left in [a, b).
      */
@@ -54,6 +59,13 @@ namespace Parse {
     const char* non_ws(const char* a, const char* b)
     {
 	while(a!=b && !isspace(*a)) a++;
+	return a;
+    }
+
+    inline
+    const char* digit(const char* a, const char* b)
+    {
+	while(a!=b && isdigit(*a)) a++;
 	return a;
     }
 

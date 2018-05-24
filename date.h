@@ -29,29 +29,43 @@
 #define GAVIA_DATE_H
 
 #include <iosfwd>
+#include <string>
 
 struct tm;
 
 /**
- * A parsing of the Gavia date: header, mostly to provide equality and
- * ordering.  Since this header is free-form, with a few suggested
- * date formats, there are lots of heuristics here.
+ * A parsing of the Gavia date: header, mostly to provide ordering.
+ * Since this header is free-form, with a few suggested date formats,
+ * there are heuristics here.  The forms recognized:
  *
- * This class does not preserve the actual text of the header.
+ * yymmdd     trailer
+ * yyyymmdd   trailer
+ * yyyy-mm-dd trailer
+ * other
+ *
+ * There may be whitespace before the "true" date, or between the "true" date and
+ * the trailer.  It's not required after yyyy-mm-dd though, or you wouldn't
+ * want to write "2018-05-20--21".
+ *
+ * This class does preserve the actual text of the header, except for the
+ * actual date formats which are normalized to ISO.
  */
 class Date {
 public:
     Date() : val(0) {}
     Date(const char* a, const char* b);
-    bool operator== (const Date& other) const { return val==other.val; }
-    bool operator< (const Date& other) const  { return val<other.val; }
-    bool empty() const { return !val; }
+    bool operator< (const Date& other) const {
+	if(val != other.val) return val<other.val;
+	return trailer < other.trailer;
+    }
+    bool valid() const { return val; }
 
     struct tm tm() const;
     std::ostream& put(std::ostream& os) const;
 
 private:
     unsigned val;
+    std::string trailer;
 };
 
 inline
