@@ -67,15 +67,21 @@ std::ostream& Excursion::put(std::ostream& os,
     os << "{\n";
     {
 	const size_t n = max_name(begin(headers), end(headers)) + 1;
+	const Date& d = this->date;
 	/* Printing a Header with the colon in
 	 * column 'n', as
 	 *
 	 * name     : text text text
 	 *            text text ...
 	 */
-	auto print = [&os, n](const Header& h) {
+	auto print = [&os, n, &d](const Header& h) {
 			 indent::ljust(os, h.name, n) << ": ";
-			 indent::andjust(os, h.value, n+2) << '\n';
+			 if(h.name != "date") {
+			     indent::andjust(os, h.value, n+2) << '\n';
+			 }
+			 else {
+			     os << d << '\n';
+			 }
 		     };
 
 	std::for_each(begin(headers), end(headers), print);
