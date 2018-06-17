@@ -26,6 +26,8 @@
  */
 #include "indent.h"
 
+#include "utf8.h"
+
 #include <iostream>
 #include <algorithm>
 
@@ -61,73 +63,104 @@ namespace {
 	}
 	return os;
     }
+
+    struct Counter {
+	struct Iterator {
+	    explicit Iterator(Counter& c) : c(c) {}
+	    Iterator& operator++(int) { c.n++; return *this; }
+	    unsigned& operator* () { return c.dummy; }
+	private:
+	    Counter& c;
+	};
+	size_t n = 0;
+	Iterator begin() { return Iterator{*this}; }
+    private:
+	unsigned dummy;
+    };
 }
 
-namespace indent {
 
-    /**
-     * Print 's' followed by enough whitespace to make the width 'n'.
-     * TABs are used as far as possible. For this, it's assumed that
-     * the output starts at column 0.
-     *
-     * <     n       >
-     * foo............
-     */
-    std::ostream& ljust(std::ostream& os, const std::string& s,
-			const size_t n)
-    {
-	const size_t ss = s.size();
-	return spacer(os << s, ss, n);
+/**
+ * The width of 's', as per utf8::decode.  If a decoding error happens
+ * (the string is e.g. iso8859-1) there's a permanent fallback to
+ * plain string::size().
+ */
+size_t Indent::measure(const std::string& s)
+{
+    if(!utf8) return s.size();
+
+    Counter counter;
+    auto q = utf8::decode(begin(s), end(s), counter.begin());
+    if (q != end(s)) {
+	utf8 = false;
+	return s.size();
     }
+    return counter.n;
+}
 
 
-    /**
-     * Print 's' preceded by enough whitespace to make the width 'n'.
-     * TABs are used as far as possible. For this, it's assumed that
-     * the output starts at column 0.
-     *
-     * <     n       >
-     * ............foo
-     */
-    std::ostream& rjust(std::ostream& os, const std::string& s,
-			const size_t n)
-    {
-	const size_t ss = s.size();
-	if(ss < n) {
-	    spacer(os, 0, n - ss);
+/**
+ * Print 's' followed by enough whitespace to make the width 'n'.
+ * TABs are used as far as possible. For this, it's assumed that
+ * the output starts at column 0.
+ *
+ * <     n       >
+ * foo............
+ */
+std::ostream& Indent::ljust(std::ostream& os, const std::string& s,
+			    const size_t n)
+{
+    const size_t ss = measure(s);
+    return spacer(os << s, ss, n);
+}
+
+
+/**
+ * Print 's' preceded by enough whitespace to make the width 'n'.
+ * TABs are used as far as possible. For this, it's assumed that
+ * the output starts at column 0.
+ *
+ * <     n       >
+ * ............foo
+ */
+std::ostream& Indent::rjust(std::ostream& os, const std::string& s,
+			    const size_t n)
+{
+    const size_t ss = measure(s);
+    if(ss < n) {
+	spacer(os, 0, n - ss);
+    }
+    return os << s;
+}
+
+
+/**
+ * Print the string 's', replacing any newlines with a newline and
+ * an indentation (consisting of spaces and TABs) of width 'n'.
+ *
+ * <     n       >
+ *                foo
+ * ...............bar
+ * ...............baz
+ */
+std::ostream& Indent::andjust(std::ostream& os, const std::string& s,
+			      const size_t n) const
+{
+    const char* a = s.c_str();
+    const char* const b = a + s.size();
+
+    while(a!=b) {
+	const char* p = std::find(a, b, '\n');
+	if(p==b) {
+	    os.write(a, p-a);
+	    a = p;
 	}
-	return os << s;
-    }
-
-
-    /**
-     * Print the string 's', replacing any newlines with a newline and
-     * an indentation (consisting of spaces and TABs) of width 'n'.
-     *
-     * <     n       >
-     *                foo
-     * ...............bar
-     * ...............baz
-     */
-    std::ostream& andjust(std::ostream& os, const std::string& s,
-			  const size_t n)
-    {
-	const char* a = s.c_str();
-	const char* const b = a + s.size();
-
-	while(a!=b) {
-	    const char* p = std::find(a, b, '\n');
-	    if(p==b) {
-		os.write(a, p-a);
-		a = p;
-	    }
-	    else {
-		p++;
-		os.write(a, p-a);
-		spacer(os, 0, n);
-		a = p;
-	    }
+	else {
+	    p++;
+	    os.write(a, p-a);
+	    spacer(os, 0, n);
+	    a = p;
 	}
-	return os;
     }
+    return os;
 }

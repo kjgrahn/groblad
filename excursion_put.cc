@@ -34,14 +34,14 @@
 namespace {
 
     /**
-     * The maximum size() of iter->name.
+     * The maximum width of iter->name.
      */
     template<class It>
-    size_t max_name(It a, It b)
+    size_t max_name(Indent& indent, It a, It b)
     {
 	size_t n = 0;
 	while(a!=b) {
-	    size_t m = a->name.size();
+	    size_t m = indent.measure(a->name);
 	    if(m>n) n=m;
 	    a++;
 	}
@@ -62,11 +62,12 @@ namespace {
 std::ostream& Excursion::put(std::ostream& os,
 			     const bool sort) const
 {
-    const size_t indent = 16;
+    Indent indent;
+    const size_t indentation = 16;
 
     os << "{\n";
     {
-	const size_t n = max_name(begin(headers), end(headers)) + 1;
+	const size_t n = max_name(indent, begin(headers), end(headers)) + 1;
 	const Date& d = this->date;
 	/* Printing a Header with the colon in
 	 * column 'n', as
@@ -74,10 +75,10 @@ std::ostream& Excursion::put(std::ostream& os,
 	 * name     : text text text
 	 *            text text ...
 	 */
-	auto print = [&os, n, &d](const Header& h) {
-			 indent::ljust(os, h.name, n) << ": ";
+	auto print = [&os, &indent, n, &d](const Header& h) {
+			 indent.ljust(os, h.name, n) << ": ";
 			 if(h.name != "date") {
-			     indent::andjust(os, h.value, n+2) << '\n';
+			     indent.andjust(os, h.value, n+2) << '\n';
 			 }
 			 else {
 			     os << d << '\n';
@@ -96,7 +97,8 @@ std::ostream& Excursion::put(std::ostream& os,
 
     os << "}{\n";
     {
-	size_t m = std::max(indent, max_name(begin(ss), end(ss)) + 1);
+	size_t m = std::max(indentation,
+			    max_name(indent, begin(ss), end(ss)) + 1);
 	/**
 	 * Printing a Sighting as
 	 *
@@ -104,9 +106,9 @@ std::ostream& Excursion::put(std::ostream& os,
 	 * taxon      :#: text text text
 	 *                text text ...
 	 */
-	auto print = [&os, m](const Sighting& s) {
-			 indent::ljust(os, s.name, m) << ":#: ";
-			 indent::andjust(os, s.comment, m+4) << '\n';
+	auto print = [&os, &indent, m](const Sighting& s) {
+			 indent.ljust(os, s.name, m) << ":#: ";
+			 indent.andjust(os, s.comment, m+4) << '\n';
 		     };
 
 	std::for_each(begin(ss), end(ss), print);

@@ -9,26 +9,29 @@
 
 using std::string;
 
-namespace indent {
+namespace {
 
     string ljust(const std::string& s, const size_t n)
     {
 	std::ostringstream oss;
-	indent::ljust(oss, s, n);
+	Indent indent;
+	indent.ljust(oss, s, n);
 	return oss.str();
     }
 
     string rjust(const std::string& s, const size_t n)
     {
 	std::ostringstream oss;
-	indent::rjust(oss, s, n);
+	Indent indent;
+	indent.rjust(oss, s, n);
 	return oss.str();
     }
 
     string andjust(const std::string& s, const size_t n)
     {
 	std::ostringstream oss;
-	indent::andjust(oss, s, n);
+	const Indent indent;
+	indent.andjust(oss, s, n);
 	return oss.str();
     }
 }
@@ -36,11 +39,10 @@ namespace indent {
 namespace indent {
 
     using orchis::TC;
+    using orchis::assert_eq;
 
     void simple(TC)
     {
-	using orchis::assert_eq;
-
 	assert_eq(ljust("foo", 5), "foo  ");
 	assert_eq(rjust("foo", 5), "  foo");
 	assert_eq(andjust("foo\nbar\nbaz", 1),
@@ -49,9 +51,42 @@ namespace indent {
 		  " baz");
     }
 
-    namespace left {
+    namespace measure {
 
-	using orchis::assert_eq;
+	void null(TC)
+	{
+	    Indent in;
+	    assert_eq(in.measure(""), 0);
+	}
+
+	void ascii(TC)
+	{
+	    Indent in;
+	    assert_eq(in.measure("foo"), 3);
+	}
+
+	void latin1(TC)
+	{
+	    Indent in;
+	    assert_eq(in.measure("na\xefve"), 5);
+	}
+
+	void utf8(TC)
+	{
+	    Indent in;
+	    assert_eq(in.measure("\xc2\x80-\xef\xbf\xbf"), 3);
+	}
+
+	void fallback(TC)
+	{
+	    Indent in;
+	    assert_eq(in.measure("\xc2\x80-\xef\xbf\xbf"), 3);
+	    assert_eq(in.measure("na\xefve"), 5);
+	    assert_eq(in.measure("\xc2\x80-\xef\xbf\xbf"), 6);
+	}
+    }
+
+    namespace left {
 
 	void test_0(TC)
 	{
@@ -115,8 +150,6 @@ namespace indent {
     }
 
     namespace right {
-
-	using orchis::assert_eq;
 
 	void test_0(TC)
 	{

@@ -7,7 +7,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad 5 "OCT 2014" Groblad "User Manuals"
+.TH groblad 5 "JUL 2018" Groblad "User Manuals"
 .
 .
 .
@@ -33,7 +33,14 @@ but less useful for reporting many species from one locality
 (i.e. it doesn't map to the abovementioned field lists).
 .
 .SH "BASIC SYNTAX"
-All files use the ISO 8859-1 character set.
+The
+groblad file format is a line-oriented text file format.
+Allowed text encodings are
+.BR UTF-8 ,
+.B "ISO\ 8859-1"
+(Latin-1), and
+.BR ASCII .
+.PP
 Blank lines and comment lines, introduced by a
 .IR # ,
 are ignored.

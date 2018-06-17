@@ -33,6 +33,21 @@ When you exit the editor, the observations are trimmed, syntax-checked,
 and appended to
 .IR file .
 .
+.SS "Text encoding"
+.B groblad
+supports
+.B Latin-1
+and
+.BR UTF-8 -encoded
+text, independently of your
+.BR locale (5)
+settings.
+Editors typically save a text file using the encoding it had when opened.
+Provided yours does,
+and your observations file,
+template file and list of supported taxa all use a specific encoding,
+the added observations will use that encoding, too, and all is well.
+.
 .SS "Emacs-specific features"
 If the editor is
 .BR emacs ,
