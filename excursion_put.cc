@@ -60,9 +60,10 @@ namespace {
  * more if needed to avoid jaggedness.
  */
 std::ostream& Excursion::put(std::ostream& os,
-			     const bool sort,
-			     const size_t indent) const
+			     const bool sort) const
 {
+    const size_t indent = 16;
+
     os << "{\n";
     {
 	const size_t n = max_name(headers.begin(), headers.end()) + 1;
@@ -113,11 +114,10 @@ std::ostream& Excursion::put(std::ostream& os,
  * popen(3).  Returns true if the writing worked.
  */
 bool Excursion::put(FILE* f,
-		    const bool sort,
-		    const size_t indent) const
+		    const bool sort) const
 {
     std::ostringstream oss;
-    put(oss, sort, indent);
+    put(oss, sort);
     const std::string s = oss.str();
     size_t n = std::fwrite(s.data(), s.size(), 1, f);
     return n==1;
