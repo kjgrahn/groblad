@@ -101,8 +101,13 @@ namespace indent {
 
 
     /**
-     * Print the string 's', replacing any newlines with newline + a
-     * an indentation (consisting of spaces and TABs) of width 'b'.
+     * Print the string 's', replacing any newlines with a newline and
+     * an indentation (consisting of spaces and TABs) of width 'n'.
+     *
+     * <     n       >
+     *                foo
+     * ...............bar
+     * ...............baz
      */
     std::ostream& andjust(std::ostream& os, const std::string& s,
 			  const size_t n)
