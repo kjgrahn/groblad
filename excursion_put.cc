@@ -66,7 +66,7 @@ std::ostream& Excursion::put(std::ostream& os,
 
     os << "{\n";
     {
-	const size_t n = max_name(headers.begin(), headers.end()) + 1;
+	const size_t n = max_name(begin(headers), end(headers)) + 1;
 	/* Printing a Header with the colon in
 	 * column 'n', as
 	 *
@@ -78,19 +78,19 @@ std::ostream& Excursion::put(std::ostream& os,
 			 indent::andjust(os, h.value, n+2) << '\n';
 		     };
 
-	std::for_each(headers.begin(), headers.end(), print);
+	std::for_each(begin(headers), end(headers), print);
     }
 
     Sightings sorted;
     if(sort) {
 	sorted = sightings;
-	std::stable_sort(sorted.begin(), sorted.end());
+	std::stable_sort(begin(sorted), end(sorted));
     }
     const Sightings& ss = sort ? sorted : sightings;
 
     os << "}{\n";
     {
-	size_t m = std::max(indent, max_name(ss.begin(), ss.end()) + 1);
+	size_t m = std::max(indent, max_name(begin(ss), end(ss)) + 1);
 	/**
 	 * Printing a Sighting as
 	 *
@@ -103,7 +103,7 @@ std::ostream& Excursion::put(std::ostream& os,
 			 indent::andjust(os, s.comment, m+4) << '\n';
 		     };
 
-	std::for_each(ss.begin(), ss.end(), print);
+	std::for_each(begin(ss), end(ss), print);
     }
     return os << "}\n";
 }

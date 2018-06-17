@@ -58,7 +58,7 @@ namespace {
     Headers::Header Headers::get(const std::string& s) const
     {
 	auto i = map.find(s);
-	if(i==map.end()) return Headers::Unknown;
+	if(i==end(map)) return Headers::Unknown;
 	return i->second;
     }
 
@@ -145,10 +145,10 @@ void check_sightings(const Excursion& ex, Taxa& taxa,
 		     const Files& is, std::ostream& err)
 {
     std::vector<TaxonId> spp(std::distance(ex.sbegin(), ex.send()));
-    std::transform(ex.sbegin(), ex.send(), spp.begin(), taxon_of());
+    std::transform(ex.sbegin(), ex.send(), begin(spp), taxon_of());
 
     const std::vector<TaxonId>::const_iterator end = spp.end();
-    std::vector<TaxonId>::const_iterator i = spp.begin();
+    std::vector<TaxonId>::const_iterator i = begin(spp);
     while((i = std::adjacent_find(i, end)) != end) {
 	err << is.position() << ": duplicate entries for taxon \""
 	    << taxa[*i].name << "\"\n";

@@ -121,8 +121,8 @@ bool Excursion::contains(TaxonId taxon) const
 	return s.sp == taxon;
     };
 
-    return std::find_if(sightings.begin(), sightings.end(),
-			is_taxon) != sightings.end();
+    return std::find_if(begin(sightings), end(sightings),
+			is_taxon) != end(sightings);
 }
 
 
@@ -148,12 +148,11 @@ bool Excursion::has_one(const std::vector<TaxonId>& taxa) const
 const std::string& Excursion::find_header(const char* name) const
 {
     static const std::string NIL;
-    auto i = std::find_if(headers.begin(),
-			  headers.end(),
+    auto i = std::find_if(begin(headers), end(headers),
 			  [name] (const Header& h) {
 			      return h.name==name;
 			  });
-    if(i==headers.end()) return NIL;
+    if(i==end(headers)) return NIL;
     return i->value;
 }
 

@@ -105,10 +105,10 @@ public:
 
     typedef std::vector<Header> Headers;
     typedef std::vector<Sighting> Sightings;
-    Headers::const_iterator hbegin() const { return headers.begin(); }
-    Headers::const_iterator hend() const { return headers.end(); }
-    Sightings::const_iterator sbegin() const { return sightings.begin(); }
-    Sightings::const_iterator send() const { return sightings.end(); }
+    Headers::const_iterator hbegin() const { return begin(headers); }
+    Headers::const_iterator hend() const { return end(headers); }
+    Sightings::const_iterator sbegin() const { return begin(sightings); }
+    Sightings::const_iterator send() const { return end(sightings); }
 
     const std::string& find_header(const char* name) const;
 
