@@ -2,7 +2,7 @@
  *
  * $Id: contstream.hh,v 1.5 2008-01-03 12:26:57 grahn Exp $
  *
- * contstream.hh
+ * contstream.h
  *
  * Copyright (c) 2006, 2008 Jörgen Grahn
  * All rights reserved.
