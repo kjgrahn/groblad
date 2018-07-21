@@ -1,5 +1,15 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.8 (2018-07-22):
+
+- Fixes, code changes and improvements cherry-picked and/or ported
+  from gavia 4.6. These two have begun deviating too much in recent
+  years and I'd like to align them (but not share a code base).
+
+  - groblad: improved support for entering observations using Emacs.
+  - groblad_cat: dates are normalized in output, to avoid yymmdd dates
+    and similar.
+
 groblad 3.7 (2017-07-26):
 
 - More synonyms for existing taxa: äkta nattviol, kabbeleka, nypon,
