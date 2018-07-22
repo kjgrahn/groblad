@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2017 Jörgen Grahn
+ * Copyright (c) 2013, 2017, 2018 Jörgen Grahn
  * All rights reserved.
  *
  */
@@ -17,11 +17,10 @@ namespace {
  * format. Standard input is called "<stdin>".
  *
  * Undefined unless the last getline() was successful.
- * Also, invalid if the Files object is destroyed.
  */
-Files::Position Files::position() const
+const Files::Position& Files::position() const
 {
-    return Position(*f=="-" ? std_in : *f, lineno);
+    return pos;
 }
 
 
@@ -31,7 +30,9 @@ Files::Position Files::position() const
  */
 Files::Position Files::prev_position() const
 {
-    return Position(*f=="-" ? std_in : *f, lineno-1);
+    Position p{pos};
+    p.line--;
+    return p;
 }
 
 
@@ -73,15 +74,16 @@ bool Files::getline_helper(std::string& s)
 void Files::open()
 {
     if(*f=="-") {
+	pos = {std_in, 1};
 	is = &std::cin;
     }
     else {
+	pos = {*f, 1};
 	fs.open(*f, std::ios_base::in);
 	is = &fs;
 	if(!fs.is_open()) {
-	    std::cerr << "error: cannot open '" << *f
+	    std::cerr << "error: cannot open '" << pos.file
 		      << "' for reading: " << std::strerror(errno) << '\n';
 	}
     }
-    lineno = 1;
 }

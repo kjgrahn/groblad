@@ -1,6 +1,6 @@
 /* -*- c++ -*-
  *
- * Copyright (c) 2012, 2013 Jörgen Grahn
+ * Copyright (c) 2012, 2013, 2018 Jörgen Grahn
  * All rights reserved.
  */
 #ifndef FILES___H
@@ -40,10 +40,10 @@ public:
 	    : file(file),
 	      line(line)
 	{}
-	const std::string& file;
-	const unsigned line;
+	std::string file;
+	unsigned line;
     };
-    Position position() const;
+    const Position& position() const;
     Position prev_position() const;
 
 private:
@@ -57,7 +57,7 @@ private:
     std::vector<std::string>::const_iterator f;
     std::istream* is;
     std::ifstream fs;
-    unsigned lineno;
+    Position pos;
 };
 
 
@@ -69,7 +69,7 @@ private:
 inline
 bool Files::getline(std::string& s)
 {
-    lineno++;
+    pos.line++;
     if(is && std::getline(*is, s)) {
 	return true;
     }
@@ -87,7 +87,7 @@ Files::Files(It begin, It end,
 	     bool empty_is_stdin)
     : ff(begin, end),
       is(0),
-      lineno(0)
+      pos{"", 0}
 {
     if(ff.empty() && empty_is_stdin) ff.push_back("-");
     f = ff.begin();
