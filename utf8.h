@@ -1,14 +1,12 @@
 /* -*- c++ -*-
  *
- * Copyright (c) 2017 Jörgen Grahn <grahn+src@snipabacken.se>
+ * Copyright (c) 2017, 2018 Jörgen Grahn <grahn+src@snipabacken.se>
  * All rights reserved.
  */
 #ifndef GAVIA_UTF8_H
 #define GAVIA_UTF8_H
 
 namespace utf8 {
-
-    class DecodeError {};
 
     /**
      * Automaton for decoding of an UTF-8 character, except the
@@ -17,12 +15,13 @@ namespace utf8 {
      */
     class Automaton {
     public:
-	explicit Automaton(unsigned char ch);
-	unsigned add(unsigned char ch);
+	explicit Automaton(unsigned char ch) noexcept;
+	unsigned add(unsigned char ch) noexcept;
+	bool broken = false;
     private:
 	unsigned acc;
 	unsigned min;
-	unsigned n;
+	unsigned char n;
     };
 
 
@@ -45,29 +44,28 @@ namespace utf8 {
 	while(a!=b) {
 	    const unsigned char c = *a;
 
-	    if (!(c & 0x80)) {
-		*out++ = c;
-		a++;
-		continue;
-	    }
+	    if(c & 0x80) {
+		auto a0 = a++;
+		Automaton au{c};
+		if(au.broken) return a0;
 
-	    try {
-		Automaton au(c);
+		unsigned val = 0;
+		while(a!=b) {
+		    val = au.add(*a++);
+		    if(val) break;
+		    if(au.broken) return a0;
+		}
 
-		It i = a;
-		i++;
-
-		while(i!=b) {
-		    unsigned val = au.add(*i++);
-		    if (val) {
-			*out++ = val;
-			a = i;
-			break;
-		    }
+		if(val) {
+		    *out++ = val;
+		}
+		else {
+		    return a0;
 		}
 	    }
-	    catch (DecodeError) {
-		break;
+	    else {
+		*out++ = c;
+		a++;
 	    }
 	}
 	return a;

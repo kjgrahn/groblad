@@ -113,19 +113,41 @@ namespace encoding {
 
     namespace bad {
 
+	// No part of 'src' decodes to anything.
 	template <class Cont>
 	void assert_nothing(const Cont& src)
 	{
 	    std::string dst;
 	    auto it = utf8::decode(begin(src), end(src),
 				   std::back_inserter(dst));
-	    orchis::assert_true(dst.empty());
+	    orchis::assert_eq(dst, "");
 	    orchis::assert_true(it == begin(src));
+	}
+
+	// The first two octets of 'src' decode to a NBSP.
+	template <class Cont>
+	void assert_nbsp(const Cont& src)
+	{
+	    std::string dst;
+	    auto it = utf8::decode(begin(src), end(src),
+				   std::back_inserter(dst));
+	    orchis::assert_eq(dst, "\xa0");
+	    orchis::assert_true(it == begin(src) + 2);
 	}
 
 	void latin1(orchis::TC)
 	{
 	    const std::string src{"J\xf6G"};
+	    std::string dst;
+	    auto it = utf8::decode(begin(src), end(src),
+				   std::back_inserter(dst));
+	    orchis::assert_eq("J", dst);
+	    orchis::assert_true(it == begin(src) + 1);
+	}
+
+	void latin1_trailer(orchis::TC)
+	{
+	    const std::string src{"J\xf6"};
 	    std::string dst;
 	    auto it = utf8::decode(begin(src), end(src),
 				   std::back_inserter(dst));
@@ -146,6 +168,17 @@ namespace encoding {
 	    assert_nothing(src21);
 	    assert_nothing(src26);
 	    assert_nothing(src31);
+	}
+
+	void trailing_partial(orchis::TC)
+	{
+	    using src = std::vector<unsigned>;
+	    assert_nbsp(src{0xc2, 0xa0});
+	    assert_nbsp(src{0xc2, 0xa0,  0xcf});
+	    assert_nbsp(src{0xc2, 0xa0,  0xef, 0x80});
+	    assert_nbsp(src{0xc2, 0xa0,  0xf7, 0x80, 0x80});
+	    assert_nbsp(src{0xc2, 0xa0,  0xfb, 0x80, 0x80, 0x80});
+	    assert_nbsp(src{0xc2, 0xa0,  0xfd, 0x80, 0x80, 0x80, 0x80});
 	}
     }
 }

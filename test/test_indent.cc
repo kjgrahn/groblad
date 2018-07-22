@@ -68,6 +68,7 @@ namespace indent {
 	void latin1(TC)
 	{
 	    Indent in;
+	    assert_eq(in.measure("na\xef"), 3);
 	    assert_eq(in.measure("na\xefve"), 5);
 	}
 

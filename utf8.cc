@@ -1,4 +1,4 @@
-/* Copyright (c) 2017 Jörgen Grahn <grahn+src@snipabacken.se>
+/* Copyright (c) 2017, 2018 Jörgen Grahn <grahn+src@snipabacken.se>
  * All rights reserved.
  *
  * Collected from utf8(7):
@@ -29,7 +29,7 @@ using utf8::Automaton;
  * Create the automaton from the first octet, which may not be the
  * single-byte encoding.
  */
-Automaton::Automaton(unsigned char ch)
+Automaton::Automaton(unsigned char ch) noexcept
 {
     if((ch & 0xfc) == 0xfc) {
 	n = 5;
@@ -57,7 +57,7 @@ Automaton::Automaton(unsigned char ch)
 	min = 0x80;
     }
     else {
-	throw DecodeError{};
+	broken = true;
     }
 }
 
@@ -71,14 +71,20 @@ Automaton::Automaton(unsigned char ch)
  * Undefined results if you keep using the automaton after
  * it returned its character.
  */
-unsigned Automaton::add(unsigned char ch)
+unsigned Automaton::add(unsigned char ch) noexcept
 {
     n--;
-    if((ch & 0xc0) != 0x80) throw DecodeError{};
+    if((ch & 0xc0) != 0x80) {
+	broken = true;
+	return 0;
+    }
     acc |= shifted(n, ch & 0x3f);
 
     if(n) return 0;
 
-    if(acc < min) throw DecodeError{};
+    if(acc < min) {
+	broken = true;
+	return 0;
+    }
     return acc;
 }
