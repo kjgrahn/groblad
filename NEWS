@@ -1,5 +1,10 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.9 (2018-08-01):
+
+- Botanical observations can use the UTF-8 encoding, rather than
+  just ASCII/Latin-1.
+
 groblad 3.8 (2018-07-22):
 
 - Fixes, code changes and improvements cherry-picked and/or ported
