@@ -85,7 +85,7 @@ public:
 
     void swap(Excursion& other);
 
-    void add_header(const char* a, size_t alen,
+    bool add_header(const char* a, size_t alen,
 		    const char* b, size_t blen);
     bool add_header_cont(const char* a, size_t alen);
 
@@ -110,6 +110,7 @@ public:
     Sightings::const_iterator sbegin() const { return begin(sightings); }
     Sightings::const_iterator send() const { return end(sightings); }
 
+    bool has_header(const std::string& name) const;
     const std::string& find_header(const char* name) const;
 
     Date date;
@@ -121,8 +122,6 @@ private:
 };
 
 
-void check_headers(const Excursion& ex,
-		   const Files& is, std::ostream& err);
 void check_sightings(const Excursion& ex, Taxa& taxa,
 		     const Files& is, std::ostream& err);
 void check_last_header(const Excursion& ex,

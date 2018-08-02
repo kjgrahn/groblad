@@ -30,54 +30,7 @@
 #include "coordinate.h"
 
 #include <algorithm>
-#include <unordered_map>
 #include <iostream>
-
-
-namespace {
-
-    struct Headers {
-	Headers();
-	enum Header { Unknown = 0,
-		      Place, Coordinate, Date,
-		      Observers, Comments, Status };
-	Header get(const std::string& name) const;
-	std::unordered_map<std::string, Header> map;
-    };
-
-    Headers::Headers()
-    {
-	map["place"] = Place;
-	map["coordinate"] = Coordinate;
-	map["date"] = Date;
-	map["observers"] = Observers;
-	map["comments"] = Comments;
-	map["status"] = Status;
-    }
-
-    Headers::Header Headers::get(const std::string& s) const
-    {
-	auto i = map.find(s);
-	if(i==end(map)) return Headers::Unknown;
-	return i->second;
-    }
-
-    static const Headers headers;
-
-    std::ostream& operator<< (std::ostream& os, const Headers::Header val)
-    {
-	switch(val) {
-	default:
-	case Headers::Unknown:    return os << "<unknown>";
-	case Headers::Place:      return os << "place";
-	case Headers::Coordinate: return os << "coordinate";
-	case Headers::Date:       return os << "date";
-	case Headers::Observers:  return os << "observers";
-	case Headers::Comments:   return os << "comments";
-	case Headers::Status:     return os << "status";
-	}
-    }
-}
 
 
 /**
@@ -89,47 +42,6 @@ namespace {
  * The funny interface exists basically so that we can provide
  * relevant line numbers, by doing the check as early as possible.
  */
-
-namespace {
-
-    void check_header(const unsigned* v, const Files& is, std::ostream& err,
-		      const Headers::Header hn)
-    {
-	switch(hn) {
-	case Headers::Place:
-	case Headers::Date:
-	case Headers::Observers:
-	    if(!v[hn]) err << is.position()
-			   << ": missing " << hn << " header\n";
-	case Headers::Coordinate:
-	    if(v[hn]>1) err << is.position()
-			    << ": duplicate " << hn << " header\n";
-	    break;
-	case Headers::Unknown:
-	case Headers::Comments:
-	case Headers::Status:
-	    break;
-	}
-    }
-}
-
-
-void check_headers(const Excursion& ex,
-		   const Files& is, std::ostream& err)
-{
-    unsigned v[7];
-    std::fill(v, v+7, 0);
-    for(Excursion::Headers::const_iterator i=ex.hbegin(); i!=ex.hend(); i++) {
-	v[headers.get(i->name)]++;
-    }
-    check_header(v, is, err, Headers::Place);
-    check_header(v, is, err, Headers::Coordinate);
-    check_header(v, is, err, Headers::Date);
-    check_header(v, is, err, Headers::Observers);
-    check_header(v, is, err, Headers::Comments);
-    check_header(v, is, err, Headers::Status);
-}
-
 
 namespace {
 
@@ -163,31 +75,10 @@ void check_last_header(const Excursion& ex,
     if(ex.hbegin()==ex.hend()) return;
     const Excursion::Header& h = *(ex.hend()-1);
 
-    const Headers::Header hn = headers.get(h.name);
-
-    switch(hn) {
-    case Headers::Place:
-    case Headers::Date:
-    case Headers::Observers:
-	/* Some headers should never be empty, really */
-	if(h.empty()) {
-	    err << is.prev_position()
-		<< ": empty " << h.name << " header\n";
-	}
-	break;
-    case Headers::Unknown:
-	/* Inventing new headers is suspect. */
-	err << is.prev_position()
-	    << ": unfamiliar header \"" << h.name << "\"\n";
-	break;
-    default:
-	break;
-    }
-
     if(h.empty()) return;
 
     /* A few headers aren't really free-form. */
-    if(hn==Headers::Coordinate) {
+    if(h.name == "coordinate") {
 	const char* const s = h.value.c_str();
 	const Coordinate coord(s, s + h.value.size());
 	if(!coord.valid()) {
@@ -195,8 +86,7 @@ void check_last_header(const Excursion& ex,
 		<< ": malformed coordinate \"" << h.value << "\"\n";
 	}
     }
-
-    if(hn==Headers::Date) {
+    else if(h.name == "date") {
 	const char* const s = h.value.c_str();
 	const Date date(s, s + h.value.size());
 	if(!date.valid()) {

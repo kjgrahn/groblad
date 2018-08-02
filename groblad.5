@@ -127,7 +127,21 @@ For example, whether this field list has been reported
 or published.
 .
 .PP
-Other header fields may be added, but might cause tools to issue a warning.
+Headers are rather loosely defined.  You can leave them unfilled or leave them out entirely \-
+or you can invent additional fields.
+However, the
+.BR place ,
+.BR coordinate ,
+.B date
+and
+.B observers
+fields may not be left unfilled; in the unlikely case that you don't want them,
+you should not list them.
+(This will of course cause problems if you wanted to export them to a system which requires
+them, using e.g.
+.BR groblad_report (1)).
+.LP
+The official header fields listed above may not be repeated.
 .
 .
 .SH "Taxa"

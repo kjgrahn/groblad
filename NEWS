@@ -1,5 +1,11 @@
 Major changes to groblad by version, latest first:
 
+- Changes to what excursion header problems are reported as warnings,
+  e.g. by groblad_cat --check:
+  - No warnings for unknown headers.
+  - Header duplication is a warning for the well-known headers.
+  - Well-known headers may be absent, but not empty.
+
 groblad 3.9 (2018-08-01):
 
 - Botanical observations can use the UTF-8 encoding, rather than
