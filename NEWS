@@ -1,5 +1,7 @@
 Major changes to groblad by version, latest first:
 
+groblad 3.10 (2018-08-07):
+
 - Changes to what excursion header problems are reported as warnings,
   e.g. by groblad_cat --check:
   - No warnings for unknown headers.
