@@ -4,7 +4,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad_species 5 "NOV 2014" Groblad "User Manuals"
+.TH groblad_species 5 "AUG 2018" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -35,7 +35,13 @@ Nor is there a concept of auctors.
 .
 .
 .SS "Basic syntax"
-The file uses the ISO 8859-1 character set.
+The file uses either the
+.BR UTF-8
+or
+.B "ISO\ 8859-1"
+(Latin-1) character set, depending on the character set of the
+.BR groblad (5)
+files it is used with.
 Blank lines and comment lines, introduced by a
 .IR # ,
 are ignored.
