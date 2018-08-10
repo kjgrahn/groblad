@@ -9,6 +9,7 @@ all: groblad
 all: groblad_cat
 all: groblad_grep
 all: groblad_report
+all: groblad_comments
 all: build/groblad_fv.py
 
 all: build/groblad.1
@@ -17,6 +18,7 @@ all: build/groblad_species.5
 all: build/groblad_cat.1
 all: build/groblad_grep.1
 all: build/groblad_report.1
+all: build/groblad_comments.1
 all: build/groblad_fv.1
 
 all: default
@@ -36,6 +38,7 @@ libgavia.a: taxon.o
 libgavia.a: taxa.o
 libgavia.a: date.o
 libgavia.a: coordinate.o
+libgavia.a: comments.o
 libgavia.a: excursion.o
 libgavia.a: excursion_check.o
 libgavia.a: excursion_put.o
@@ -61,6 +64,9 @@ groblad: groblad.o libgavia.a
 groblad_report: groblad_report.o libgavia.a
 	$(CXX) $(CXXFLAGS) -o $@ $< -L. -lgavia
 
+groblad_comments: groblad_comments.o libgavia.a
+	$(CXX) $(CXXFLAGS) -o $@ $< -L. -lgavia
+
 CFLAGS=-W -Wall -pedantic -ansi -g -Os
 CXXFLAGS=-W -Wall -pedantic -std=c++11 -g -Os
 
@@ -77,6 +83,7 @@ test/libtest.a: test/test_indent.o
 test/libtest.a: test/test_cont.o
 test/libtest.a: test/test_filetest.o
 test/libtest.a: test/test_utf8.o
+test/libtest.a: test/test_comments.o
 	$(AR) -r $@ $^
 
 test/test_%.o: CPPFLAGS+=-I.
@@ -93,7 +100,7 @@ species_raw: dyntaxa/Tracheophyta
 
 .PHONY: install
 install: all
-	install -m555 groblad{,_cat,_grep,_report} $(INSTALLBASE)/bin/
+	install -m555 groblad{,_cat,_grep,_report,_comments} $(INSTALLBASE)/bin/
 	install -m555 build/groblad_fv.py $(INSTALLBASE)/bin/groblad_fv
 	install -m644 build/*.1 $(INSTALLBASE)/man/man1/
 	install -m644 build/*.5 $(INSTALLBASE)/man/man5/
@@ -115,10 +122,7 @@ TAGS:
 
 .PHONY: clean
 clean:
-	$(RM) groblad
-	$(RM) groblad_cat
-	$(RM) groblad_grep
-	$(RM) groblad_report
+	$(RM) groblad{,_cat,_grep,_report,_comments}
 	$(RM) build/groblad_fv.py
 	$(RM) build/*.[15]
 	$(RM) *.o lib*.a

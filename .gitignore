@@ -5,6 +5,7 @@ groblad
 groblad_cat
 groblad_grep
 groblad_report
+groblad_comments
 build/*
 version.c
 TAGS

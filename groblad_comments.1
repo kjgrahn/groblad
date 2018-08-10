@@ -1,0 +1,73 @@
+.ss 12 0
+.de BP
+.IP \\fB\\$*
+..
+.hw gro-blad
+.
+.TH groblad_comments 1 "AUG 2018" Groblad "User Manuals"
+.
+.SH "NAME"
+groblad_comments \- turn Gavia or Groblad comments into Groblad field lists
+.
+.SH "SYNOPSIS"
+.B groblad_comments
+.B \-s
+.I species
+.I file
+\&...
+.br
+.B groblad_comments --version
+.br
+.B groblad_comments --help
+.
+.SH "DESCRIPTION"
+.B Gavia
+excursions and
+.B Groblad
+field lists have a
+.B comments
+field. My Gavia files in particular tend to list, apart from the birds seen,
+any unusual insects, mammals and so on seen during the excursions. This information
+ends up in the comments field, along with various other \- well, comments.
+.PP
+.B groblad_comments
+parses
+.BR gavia (5)
+and
+.BR groblad (5)
+files, discards the original lists of taxa seen (birds or plants, respectively),
+and replaces them with text from the comments field.
+(It also discards entries without any comments.)
+.PP
+Since the comments field is free-format and can contain any text, the result will
+require manual cleanup, but it's better than nothing.
+.
+.PP
+Like
+.BR groblad_cat (1)
+and other related tools, this
+concatenates one or more Groblad files (or '\-' for standard input)
+and writes the result to standard output.
+.
+.SH "OPTIONS"
+.
+.BP \-s\ \fPspecies
+Recognize taxa from the file
+.IR species ,
+a taxon list on the format specified by
+.BR groblad_species (5).
+.
+.BP --version
+Print version information and exit.
+.BP --help
+Print a brief help text and exit.
+.
+.SH "AUTHOR"
+J\(:orgen Grahn
+.IR \[fo]grahn+src@snipabacken.se\[fc] .
+.
+.SH "SEE ALSO"
+.BR gavia (5),
+.BR groblad (5),
+.BR groblad_species (5),
+.BR groblad_cat (1).
