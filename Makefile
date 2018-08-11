@@ -108,7 +108,7 @@ $(INSTALLBASE)/lib/groblad:
 build/%: %
 	sed "s|INSTALLBASE|$(INSTALLBASE)|" <$< >$@
 
-.PHONY: tags
+.PHONY: tags TAGS
 tags: TAGS
 TAGS:
 	etags *.{c,h,cc}
