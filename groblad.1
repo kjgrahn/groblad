@@ -1,7 +1,10 @@
 .ss 12 0
+.de BP
+.IP \\fB\\$*
+..
 .hw gro-blad
 .
-.TH groblad 1 "JUL 2018" Groblad "User Manuals"
+.TH groblad 1 "AUG 2018" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -11,6 +14,8 @@ groblad \- record botanical observations
 .B groblad
 .RB [ \-f
 .IR template ]
+.RB [ \-s
+.IR species ]
 .I file
 .
 .SH "DESCRIPTION"
@@ -74,13 +79,19 @@ To use it, install gavia and put this line in your Emacs startup file (typically
 .fi
 .
 .SH "OPTIONS"
-.IP \-f\ \fItemplate
+.BP \-f\ \fItemplate
 Use
 .I template
 instead of
 .I ~/.flora
 or
 .IR INSTALLBASE/lib/groblad/default .
+.
+.BP \-s\ \fIspecies
+Use
+.I species
+as the list of recognized species and other taxa, instead of
+.IR INSTALLBASE/lib/groblad/species .
 .
 .SH "FILES"
 .TP
@@ -98,7 +109,7 @@ and none has been given using the
 flag.
 .TP
 .I INSTALLBASE/lib/groblad/species
-The list of supported taxa and their taxonomic ordering; see
+The default list of supported taxa and their taxonomic ordering; see
 .BR groblad_species (5).
 Used by
 .B groblad

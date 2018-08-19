@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2014 Jörgen Grahn
+ * Copyright (c) 2013, 2014, 2018 Jörgen Grahn
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -28,6 +28,7 @@
 #include <list>
 #include <iostream>
 #include <algorithm>
+#include <cstring>
 #include <stdio.h>
 #include <getopt.h>
 
@@ -187,14 +188,14 @@ int main(int argc, char ** argv)
 
     const string prog = argv[0];
     const string usage = string("usage: ")
-	+ prog + " [--ms] file ...\n"
+	+ prog + " [-s species] [--ms] file ...\n"
 	"       "
-	+ prog + " --svalan file ...\n"
+	+ prog + " [-s species] --svalan file ...\n"
 	"       "
 	+ prog + " --version\n"
 	"       "
 	+ prog + " --help";
-    const char optstring[] = "";
+    const char optstring[] = "s:";
     const struct option long_options[] = {
 	{"ms", 0, 0, 'M'},
 	{"svalan", 0, 0, 'S'},
@@ -206,6 +207,7 @@ int main(int argc, char ** argv)
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);
 
+    std::string species_file = Taxa::species_file();
     bool generate_troff = true;
 
     int ch;
@@ -213,12 +215,13 @@ int main(int argc, char ** argv)
 			    optstring,
 			    &long_options[0], 0)) != -1) {
 	switch(ch) {
+	case 's': species_file = optarg; break;
 	case 'M': generate_troff = true; break;
 	case 'S': generate_troff = false; break;
 	case 'V':
 	    std::cout << prog << ", part of "
 		      << groblad_name() << ' ' << groblad_version() << "\n"
-		      << "Copyright (c) 2004 - 2014 Jörgen Grahn\n";
+		      << "Copyright (c) 2004 - 2018 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':
@@ -236,8 +239,15 @@ int main(int argc, char ** argv)
     }
 
     Files files(argv+optind, argv+argc);
-    std::ifstream species(Taxa::species_file().c_str());
+
+    std::ifstream species(species_file);
+    if(!species) {
+        std::cerr << "error: cannot open '" << species_file
+                  << "' for reading: " << std::strerror(errno) << '\n';
+        return 1;
+    }
     Taxa taxa(species, std::cerr);
+    species.close();
 
     std::list<Excursion> book;
     const Excursion nil;

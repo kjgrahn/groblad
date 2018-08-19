@@ -250,6 +250,7 @@ namespace {
      * templates and unwritable books.
      */
     int stellata(std::ostream& cerr,
+		 std::ifstream& species,
 		 const std::string& extemplate,
 		 const std::string& book)
     {
@@ -279,9 +280,8 @@ namespace {
 	    return 0;
 	}
 
-	std::ifstream is(Taxa::species_file());
-	Taxa taxa(is, cerr);
-	is.close();
+	Taxa taxa(species, cerr);
+	species.close();
 	if(!rewrite(cerr, taxa, tmp0)) {
 	    cerr << '\n'
 		 << "Error: some problem rewriting the excursion; aborting.\n";
@@ -314,10 +314,10 @@ int main(int argc, char ** argv)
 
     const string prog = argv[0];
     const string usage = string("usage: ")
-	+ prog + " [-f template] file\n"
+	+ prog + " [-f template] [-s species] file\n"
 	"       "
 	+ prog + " --version";
-    const char optstring[] = "f:";
+    const char optstring[] = "f:s:";
     const struct option long_options[] = {
 	{"version", 0, 0, 'V'},
 	{"help", 0, 0, 'H'},
@@ -327,6 +327,7 @@ int main(int argc, char ** argv)
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);
 
+    std::string species_file = Taxa::species_file();
     string extemplate;
 
     int ch;
@@ -336,6 +337,9 @@ int main(int argc, char ** argv)
 	switch(ch) {
 	case 'f':
 	    extemplate = optarg;
+	    break;
+	case 's':
+	    species_file = optarg;
 	    break;
 	case 'V':
 	    std::cout << prog << ", part of "
@@ -378,5 +382,12 @@ int main(int argc, char ** argv)
 	}
     }
 
-    return stellata(std::cerr, extemplate, book);
+    std::ifstream species(species_file);
+    if(!species) {
+        std::cerr << "error: cannot open '" << species_file
+                  << "' for reading: " << std::strerror(errno) << '\n';
+        return 1;
+    }
+
+    return stellata(std::cerr, species, extemplate, book);
 }

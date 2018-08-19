@@ -26,6 +26,7 @@
  */
 #include <string>
 #include <iostream>
+#include <cstring>
 #include <stdio.h>
 #include <getopt.h>
 
@@ -47,14 +48,14 @@ int main(int argc, char ** argv)
 
     const string prog = argv[0];
     const string usage = string("usage: ")
-	+ prog + " [-cx] file ...\n"
+	+ prog + " [-cx] [-s species] file ...\n"
 	"       "
-	+ prog + " --check file ...\n"
+	+ prog + " [-s species] --check file ...\n"
 	"       "
-	+ prog + " --taxa\n"
+	+ prog + " [-s species] --taxa\n"
 	"       "
 	+ prog + " --version";
-    const char optstring[] = "gcx";
+    const char optstring[] = "gcxs:";
     const struct option long_options[] = {
 	{"check", 0, 0, 'C'},
 	{"taxa", 0, 0, 'T'},
@@ -66,6 +67,7 @@ int main(int argc, char ** argv)
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);
 
+    std::string species_file = Taxa::species_file();
     bool just_list_taxa = false;
     bool sort_spp = false;
     char outfmt = 'g';
@@ -75,6 +77,9 @@ int main(int argc, char ** argv)
 			    optstring,
 			    &long_options[0], 0)) != -1) {
 	switch(ch) {
+	case 's':
+	    species_file = optarg;
+	    break;
 	case 'c':
 	    sort_spp = false;
 	    break;
@@ -108,8 +113,15 @@ int main(int argc, char ** argv)
     }
 
     Files files(argv+optind, argv+argc);
-    std::ifstream species(Taxa::species_file());
+
+    std::ifstream species(species_file);
+    if(!species) {
+        std::cerr << "error: cannot open '" << species_file
+                  << "' for reading: " << std::strerror(errno) << '\n';
+        return 1;
+    }
     Taxa taxa(species, std::cerr);
+    species.close();
 
     if(just_list_taxa) {
 	taxa.put(std::cout);

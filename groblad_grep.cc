@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999--2001, 2013 Jörgen Grahn
+ * Copyright (c) 1999--2001, 2013, 2018 Jörgen Grahn
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -26,6 +26,7 @@
  */
 #include <string>
 #include <iostream>
+#include <cstring>
 #include <getopt.h>
 
 #include "files...h"
@@ -74,10 +75,10 @@ int main(int argc, char ** argv)
 
     const string prog = argv[0];
     const string usage = string("usage: ")
-	+ prog + " [-v] pattern file ...\n"
+	+ prog + " [-s species] [-v] pattern file ...\n"
 	"       "
 	+ prog + " --version";
-    const char optstring[] = "v";
+    const char optstring[] = "vs:";
     const struct option long_options[] = {
 	{"version", 0, 0, 'V'},
 	{"help", 0, 0, 'H'},
@@ -87,6 +88,7 @@ int main(int argc, char ** argv)
     std::cin.sync_with_stdio(false);
     std::cout.sync_with_stdio(false);
 
+    std::string species_file = Taxa::species_file();
     bool invert = false;
 
     int ch;
@@ -97,10 +99,13 @@ int main(int argc, char ** argv)
 	case 'v':
 	    invert = true;
 	    break;
+	case 's':
+	    species_file = optarg;
+	    break;
 	case 'V':
 	    std::cout << prog << ", part of "
 		      << groblad_name() << ' ' << groblad_version() << "\n"
-		      << "Copyright (c) 2013 Jörgen Grahn\n";
+		      << "Copyright (c) 2013, 2018 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':
@@ -132,7 +137,13 @@ int main(int argc, char ** argv)
     }
 
     Files files(argv+optind, argv+argc);
-    std::ifstream species(Taxa::species_file());
+
+    std::ifstream species(species_file);
+    if(!species) {
+        std::cerr << "error: cannot open '" << species_file
+                  << "' for reading: " << std::strerror(errno) << '\n';
+        return 1;
+    }
     Taxa taxa(species, std::cerr);
     species.close();
     const std::vector<TaxonId> matchtx = taxa.match(re);

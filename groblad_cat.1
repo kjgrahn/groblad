@@ -4,24 +4,34 @@
 ..
 .hw gro-blad
 .
-.TH groblad_cat 1 "OCT 2014" Groblad "User Manuals"
+.TH groblad_cat 1 "AUG 2018" Groblad "User Manuals"
 .SH "NAME"
 groblad_cat \- concatenate and print Groblad files
+.
 .SH "SYNOPSIS"
 .B groblad_cat
 .RB [ \-cx ]
+.RB [ \-s
+.IR species ]
 .I file
 \&...
 .br
-.B groblad_cat --check
+.B groblad_cat
+.RB [ \-s
+.IR species ]
+.B --check
 .I file
 \&...
 .br
-.B groblad_cat --taxa
+.B groblad_cat
+.RB [ \-s
+.IR species ]
+.B --taxa
 .br
 .B groblad_cat --version
 .br
 .B groblad_cat --help
+.
 .SH "DESCRIPTION"
 .B groblad_cat
 concatenates one or more Groblad files
@@ -57,11 +67,17 @@ Don't output anything but syntax errors and warnings.
 .
 .BP --taxa
 Don't output anything; just list the recognized taxa.
+.
+.BP \-s\ \fIspecies
+Use
+.I species
+as the list of recognized species and other taxa, instead of
+.IR INSTALLBASE/lib/groblad/species .
+.
 .BP \-c
 Output the taxa in the order they appear in the input (default).
 .BP \-x
-Output the species according to the taxonomic ordering defined by
-.IR INSTALLBASE/lib/groblad/species .
+Output the species in taxonomic order.
 .BP --version
 Print version information and exit.
 .BP --help

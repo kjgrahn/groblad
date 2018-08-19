@@ -3,13 +3,15 @@
 .IP \\fB\\$*
 .hw gro-blad
 ..
-.TH groblad_grep 1 "OCT 2014" Groblad "User Manuals"
+.TH groblad_grep 1 "AUG 2018" Groblad "User Manuals"
 .
 .SH "NAME"
 groblad_grep \- filter botanical observations through regular expression
 .
 .SH "SYNOPSIS"
 .B groblad_grep
+.RB [ \-s
+.IR species ]
 .RB [ \-v ]
 .I pattern
 .I file
@@ -50,6 +52,11 @@ For example, the pattern
 will match any field list containing a Carex species.
 .
 .SH "OPTIONS"
+.BP \-s\ \fIspecies
+Use
+.I species
+as the list of recognized species and other taxa, instead of
+.IR INSTALLBASE/lib/groblad/species .
 .BP \-v
 Inverts handling,
 so that field lists

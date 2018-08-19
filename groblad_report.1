@@ -4,7 +4,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad_report 1 "OCT 2014" Groblad "User Manuals"
+.TH groblad_report 1 "AUG 2018" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -12,11 +12,15 @@ groblad_report \- pretty-print botanical observations
 .
 .SH "SYNOPSIS"
 .B groblad_report
+.RB [ \-s
+.IR species ]
 .RB [ --ms ]
 .I file
 \&...
 .br
 .B groblad_report
+.RB [ \-s
+.IR species ]
 .B --svalan
 .I file
 \&...
@@ -50,6 +54,12 @@ Rapportsystem f\(:or v\(:axter, djur och svampar,
 .IR \[fo]http://www.artportalen.se/\[fc] .
 .
 .SH "OPTIONS"
+.
+.BP \-s\ \fIspecies
+Use
+.I species
+as the list of recognized species and other taxa, instead of
+.IR INSTALLBASE/lib/groblad/species .
 .
 .BP --ms
 Generate troff \-ms source for a nicely formatted list of observations
