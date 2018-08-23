@@ -57,6 +57,7 @@ public:
     TaxonId insert(const std::string& name);
 
     TaxonId find(const std::string& name) const;
+    std::vector<std::string> names() const;
     const Taxon& operator[] (TaxonId id) const;
 
     std::vector<TaxonId> match(const Regex& re) const;

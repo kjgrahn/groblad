@@ -153,6 +153,17 @@ TaxonId Taxa::find(const std::string& name) const
 
 
 /**
+ * All taxon names, aliases and all, in no particular order.
+ */
+std::vector<std::string> Taxa::names() const
+{
+    std::vector<std::string> acc;
+    for(const auto& item: m) acc.push_back(item.first);
+    return acc;
+}
+
+
+/**
  * Return the taxon 'id', which must exist in this taxa list.
  */
 const Taxon& Taxa::operator[] (TaxonId id) const

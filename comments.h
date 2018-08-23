@@ -30,18 +30,18 @@
 
 #include <string>
 #include <vector>
+#include <set>
 
-struct ParsedComment {
-    std::string pre;
 
-    struct Sighting {
-	std::string name;
-	std::string comment;
-    };
-    std::vector<Sighting> sightings;
-};
+namespace comment {
 
-class Taxa;
-ParsedComment parse(const Taxa& taxa, const std::string& s);
+    std::vector<const char*> parse(const std::set<std::string>& names,
+				   const std::string& s);
 
+    template <class It>
+    std::vector<const char*> parse(It a, It b, const std::string& s)
+    {
+	return parse({a, b}, s);
+    }
+}
 #endif

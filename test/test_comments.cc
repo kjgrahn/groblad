@@ -11,47 +11,32 @@
 
 namespace {
 
-    std::istringstream taxa_stream("mindre guldvinge (Lycaena phlaeas)\n"
-				   "videfuks (Nymphalis xanthomelas)\n");
-    std::ostringstream devnull;
-    static const Taxa taxa(taxa_stream, devnull);
-    static const std::array<std::string, 2> taxarr {"mindre guldvinge",
-						    "videfuks"};
+    static const std::array<std::string, 4> taxa {"mindre guldvinge",
+						  "Lycaena phlaeas",
+						  "videfuks",
+						  "Nymphalis xanthomelas"};
 
-    template <class C>
-    void assert_empty(const C& c)
+    void assert_parses(const std::string& ref)
     {
-	orchis::assert_true(c.empty());
-    }
+	std::string s;
+	std::remove_copy(begin(ref), end(ref),
+			 std::back_inserter(s), '/');
+	const auto pc = comment::parse(begin(taxa), end(taxa), s);
 
-    void assert_no_taxa(const char* s)
-    {
-	auto pc = parse(taxa, s);
-	orchis::assert_eq(pc.pre, s);
-	assert_empty(pc.sightings);
-    }
+	orchis::assert_ge(pc.size(), 2);
+	orchis::assert_eq(pc.size() % 2, 0);
 
-    void assert_one_taxon(const char* s,
-			  const char* pre, const char* comment)
-    {
-	auto pc = parse(taxa, s);
-	orchis::assert_eq(pc.pre, pre);
-	orchis::assert_eq(pc.sightings.size(), 1);
-	const auto& sighting = pc.sightings.front();
-	orchis::assert_in(taxarr, sighting.name);
-	orchis::assert_eq(sighting.comment, comment);
-    }
+	std::string acc;
+	auto a = begin(pc);
+	auto b = a+1;
+	while(b!=end(pc)) {
+	    if(a!=begin(pc)) acc.push_back('/');
+	    acc.append(*a, *b);
+	    a = b;
+	    b++;
+	}
 
-    void assert_two_taxa(const char* s,
-			 const char* pre, const char* c0, const char* c1)
-    {
-	auto pc = parse(taxa, s);
-	orchis::assert_eq(pc.pre, pre);
-	orchis::assert_eq(pc.sightings.size(), 2);
-	orchis::assert_in(taxarr, pc.sightings[0].name);
-	orchis::assert_in(taxarr, pc.sightings[1].name);
-	orchis::assert_eq(pc.sightings[0].comment, c0);
-	orchis::assert_eq(pc.sightings[1].comment, c1);
+	orchis::assert_eq(ref, acc);
     }
 }
 
@@ -61,46 +46,52 @@ namespace comments {
 
     void nil(TC)
     {
-	auto pc = parse(taxa, "");
-	assert_empty(pc.pre);
-	assert_empty(pc.sightings);
+	assert_parses("");
     }
 
     void no_taxa(TC)
     {
-	assert_no_taxa("");
-	assert_no_taxa("foo");
-	assert_no_taxa("foo\n"
-		       "bar");
-	assert_no_taxa("foo mindre");
-	assert_no_taxa("mindre foo");
-	assert_no_taxa("videfuksx");
+	assert_parses("foo");
+	assert_parses("foo\n"
+		      "bar");
+	assert_parses("foo mindre");
+	assert_parses("mindre foo");
+    }
+
+    void whole_words(TC)
+    {
+	assert_parses("videfuksx");
+	assert_parses("svidefuks");
     }
 
     void one_taxon(TC)
     {
-	assert_one_taxon("videfuks",      "", "");
-	assert_one_taxon(" videfuks   ",  "", "");
-	assert_one_taxon("videfuks foo",  "", "foo");
-	assert_one_taxon("videfuks: foo", "", ": foo");
+	assert_parses("/videfuks/");
+	assert_parses(" /videfuks/   ");
+	assert_parses("/videfuks/ foo");
+	assert_parses("/videfuks/: foo");
 
-	assert_one_taxon("foo videfuks",  "foo", "");
-	assert_one_taxon("foo:videfuks",  "foo:", "");
+	assert_parses("foo /videfuks/");
+	assert_parses("foo:/videfuks/");
     }
 
     void two_taxa(TC)
     {
-	assert_two_taxa("foo videfuks bar videfuks baz",
-			"foo", "bar", "baz");
+	assert_parses("foo /videfuks/ bar /videfuks/ baz");
     }
 
     void whitespace_taxon(TC)
     {
-	assert_one_taxon("mindre guldvinge",      "", "");
-	assert_one_taxon("mindre guldvinge foo",  "", "foo");
-	assert_one_taxon("mindre guldvinge: foo", "", ": foo");
+	assert_parses("/mindre guldvinge/");
+	assert_parses("/mindre guldvinge/ foo");
+	assert_parses("/mindre guldvinge/: foo");
 
-	assert_one_taxon("foo mindre guldvinge",  "foo", "");
-	assert_one_taxon("foo:mindre guldvinge",  "foo:", "");
+	assert_parses("foo /mindre guldvinge/");
+	assert_parses("foo:/mindre guldvinge/");
+    }
+
+    void capitalization(TC)
+    {
+	assert_parses("/mindre guldvinge/ /Mindre guldvinge/");
     }
 }

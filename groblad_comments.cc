@@ -35,6 +35,7 @@
 #include "excursion.h"
 #include "comments.h"
 #include "indent.h"
+#include "lineparse.h"
 
 
 extern "C" {
@@ -44,6 +45,54 @@ extern "C" {
 
 
 namespace {
+
+    /**
+     * All taxon names, aliases and all, as a set.
+     */
+    std::set<std::string> names(const Taxa& taxa)
+    {
+	const auto v = taxa.names();
+	return {begin(v), end(v)};
+    }
+
+    /**
+     * The n:th substring in 'pc', with whitespace trimmed.
+     */
+    std::string trimmed(const std::vector<const char*>& pc,
+			size_t n)
+    {
+	auto a = pc[n];
+	auto b = pc[n+1];
+	a = Parse::ws(a, b);
+	b = Parse::non_ws(a, b);
+	return {a, b};
+    }
+
+    struct ParsedComment {
+
+	ParsedComment(const std::set<std::string>& names,
+		      const std::string& s);
+
+	std::string pre;
+
+	struct Sighting {
+	    std::string name;
+	    std::string comment;
+	};
+	std::vector<Sighting> sightings;
+    };
+
+    ParsedComment::ParsedComment(const std::set<std::string>& names,
+				 const std::string& s)
+    {
+	const auto pc = comment::parse(names, s);
+	pre = trimmed(pc, 0);
+	const size_t spp = pc.size()/2 - 1;
+	for(unsigned i=0; i<spp; i++) {
+	    sightings.push_back({trimmed(pc, 2*i + 1),
+				 trimmed(pc, 2*i + 2)});
+	}
+    }
 
     /**
      * The maximum width of iter->name.
@@ -189,6 +238,7 @@ int main(int argc, char ** argv)
     }
     Taxa taxa(species, std::cerr);
     species.close();
+    const auto taxa_set = names(taxa);
 
     species.open(Taxa::species_file(), std::ios_base::in);
     Taxa gtaxa(species, std::cerr);
@@ -206,7 +256,7 @@ int main(int argc, char ** argv)
 	if(n++) std::cout << '\n';
 
 	print(std::cout, indent,
-	      ex, parse(taxa, comments));
+	      ex, ParsedComment(taxa_set, comments));
     }
 
     return 0;

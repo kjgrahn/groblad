@@ -22,90 +22,105 @@ namespace {
     };
 
     /**
-     * Trim leading and trailing whitespace in a range.
+     * Is 'b' a prefix of 'a'?
      */
-    std::string trim(const Range& s)
+    bool prefix(const std::string& a, const std::string& b)
     {
-	auto a = Parse::ws(s.a, s.b);
-	auto b = Parse::trimr(a, s.b);
-	return {a, b};
-    }
-
-    bool is_separator(char ch)
-    {
-	if(std::isspace(static_cast<unsigned>(ch))) return true;
-	return std::strchr("!\"'()[],.:;/", ch);
-    }
-
-    const char* eats(const char* a, const char* b)
-    {
-	while(a!=b) {
-	    if(!is_separator(*a)) return a;
-	    a++;
+	if(b.size() > a.size()) return false;
+	auto i = begin(a);
+	for(char ch: b) {
+	    if(ch != *(i++)) return false;
 	}
-	return a;
+	return true;
     }
 
-    const char* eatw(const char* a, const char* b)
+    /**
+     * True if 's' is a prefix of one or more names.
+     */
+    bool prefix(const std::set<std::string>& names, const std::string& s)
     {
-	while(a!=b) {
-	    if(is_separator(*a)) return a;
-	    a++;
-	}
-	return a;
+	auto i = names.lower_bound(s);
+	return i != end(names) && prefix(*i, s);
     }
 
-    std::vector<Range> find_taxa(const Taxa& taxa, const char* a, const char* b)
+    /**
+     * True if 's' is in 'names'.
+     */
+    bool name(const std::set<std::string>& names, const std::string& s)
     {
-	auto is_taxon = [taxa] (const Range& r) {
-			    return taxa.find(r.str());
-			};
+	auto i = names.find(s);
+	return i != end(names);
+    }
 
-	std::vector<Range> acc;
+    /**
+     * True if the sub-range 'c' of 's' is "a word" in some sense.
+     * For now, that just means it's not adjacent to ASCII letters.
+     * E.g. "foo" is not delimited in "foobar" or "barfoo".
+     */
+    bool delimited(const Range& s, const Range& c)
+    {
+	auto letter = [] (char ch) {
+			  bool lower = 'a' <= ch && ch <= 'z';
+			  bool upper = 'A' <= ch && ch <= 'Z';
+			  return upper || lower;
+		      };
+	bool left = c.a==s.a || !letter(*(c.a-1));
+	bool right = c.b==s.b || !letter(*(c.b));
+	return left && right;
+    }
 
-	while(a!=b) {
-	    auto p = eats(a, b);
-	    auto q = eatw(p, b);
-	    const Range r{p, q};
-	    if(is_taxon(r)) {
-		acc.push_back(r);
-		a = q;
+    /**
+     * Find the first, longest name in s, or return an empty range
+     * placed at the end of s.
+     */
+    Range find_one(const std::set<std::string>& names, const Range s)
+    {
+	if(s.empty()) return s;
+
+	Range n{s.b, s.b};
+	Range c{s.a, s.a+1};
+
+	while(c.b < s.b + 1) {
+	    if(prefix(names, c.str())) {
+		if(delimited(s, c) && name(names, c.str())) n = c;
+		c.b++;
 	    }
 	    else {
-		auto t = eats(q, b);
-		q = eatw(t, b);
-		const Range r{p, q};
-		if(is_taxon(r)) {
-		    acc.push_back(r);
-		    a = q;
-		}
-		else {
-		    a = t;
-		}
+		if(!n.empty()) break;
+		c = {c.a + 1, c.a + 2};
 	    }
 	}
-	return acc;
+	return n;
     }
 }
 
-ParsedComment parse(const Taxa& taxa, const std::string& s)
+
+/**
+ * Find all occurrencies of 'names' in 's'.  Except overlaps: the
+ * largest one is chosen.
+ *
+ * Returns the borders between names and non-names as a vector of iterators.
+ * For example:
+ *
+ * ....name....    name.....
+ * a   b   c   d   a   c    d
+ *                 b
+ *
+ * So, N names means 2*(N+1) iterators.
+ */
+std::vector<const char*> comment::parse(const std::set<std::string>& names,
+					const std::string& s)
 {
-    const char* a = s.data();
-    const char* const b = a + s.size();
+    std::vector<const char*> acc;
+    Range r{s.data(), s.data() + s.size()};
 
-    const auto tt = find_taxa(taxa, a, b);
-    if(tt.empty()) return {s, {}};
-
-    ParsedComment pc;
-    pc.pre = trim({a, tt.front().a});
-
-    for(auto i = begin(tt); i!=end(tt); i++) {
-	if(i!=begin(tt)) {
-	    pc.sightings.back().comment = trim({a, i->a});
-	}
-	pc.sightings.push_back({i->str(), ""});
-	a = i->b;
+    while(true) {
+	Range n = find_one(names, r);
+	acc.push_back(r.a);
+	acc.push_back(n.a);
+	r.a = n.b;
+	if(n.empty()) break;
     }
-    pc.sightings.back().comment = trim({tt.back().b, b});
-    return pc;
+
+    return acc;
 }
