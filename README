@@ -1,0 +1,47 @@
+groblad - record botanical observations
+
+groblad makes it convenient to record botanical observations into a
+text file for future reference.
+
+Observations are grouped as a list of the species seen at a specific
+place and time. The format and fields are based on the paper field
+lists used during the census which ended up as Västergötlands
+Flora. See groblad(5).
+
+The basic idea is to fill in a template (using a text editor of your
+choice, which groblad starts for you). When you exit the editor, the
+observations are trimmed, syntax-checked, and appended to file.
+
+groblad is related and similar to Gavia[0], a tool for recording bird
+sightings.  There is also some explicit support for exporting data to
+Artportalen[1].
+
+
+REQUIREMENTS
+
+To compile and install groblad, you'll need a C++11 compiler and Perl.
+To compile the unit tests, you need orchis[2].
+
+Using groblad works best if you combine it with GNU Emacs and a
+revision control system, like Git.
+
+
+INSTALLATION
+
+    % make && make check
+    # make install
+
+
+AUTHOR
+
+Jörgen Grahn <grahn+src@snipabacken.se>.
+
+
+LICENSE
+
+Groblad is released under a modified BSD license.
+
+
+0.  git://snipabacken.se/gavia
+1.  https://artportalen.se
+2.  git://snipabacken.se/orchis
