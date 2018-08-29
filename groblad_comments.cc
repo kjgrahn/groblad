@@ -64,7 +64,7 @@ namespace {
 	auto a = pc[n];
 	auto b = pc[n+1];
 	a = Parse::ws(a, b);
-	b = Parse::non_ws(a, b);
+	b = Parse::trimr(a, b);
 	return {a, b};
     }
 
