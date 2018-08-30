@@ -35,24 +35,6 @@ namespace {
     }
 
     /**
-     * True if 's' is a prefix of one or more names.
-     */
-    bool prefix(const std::set<std::string>& names, const std::string& s)
-    {
-	auto i = names.lower_bound(s);
-	return i != end(names) && prefix(*i, s);
-    }
-
-    /**
-     * True if 's' is in 'names'.
-     */
-    bool name(const std::set<std::string>& names, const std::string& s)
-    {
-	auto i = names.find(s);
-	return i != end(names);
-    }
-
-    /**
      * True if the sub-range 'c' of 's' is "a word" in some sense.
      * For now, that just means it's not adjacent to ASCII letters.
      * E.g. "foo" is not delimited in "foobar" or "barfoo".
@@ -71,7 +53,7 @@ namespace {
 
     /**
      * Find the first, longest name in s, or return an empty range
-     * placed at the end of s.
+     * placed at the end of s.  Finds only delimited() names.
      */
     Range find_one(const std::set<std::string>& names, const Range s)
     {
@@ -81,8 +63,10 @@ namespace {
 	Range c{s.a, s.a+1};
 
 	while(c.b < s.b + 1) {
-	    if(prefix(names, c.str())) {
-		if(delimited(s, c) && name(names, c.str())) n = c;
+	    const std::string cs = c.str();
+	    const auto i = names.lower_bound(cs);
+	    if(i!=names.end() && prefix(*i, cs)) {
+		if(delimited(s, c) && *i == cs) n = c;
 		c.b++;
 	    }
 	    else {
