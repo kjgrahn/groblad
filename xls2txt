@@ -1,56 +1,73 @@
-#!/usr/bin/perl -w
-#
-# Copyright (c) 2012 Jörgen Grahn
-# All rights reserved.
-#
-# Convert Excel files to text, using py_xls2txt(1)
-# from Roman V. Kiseliov's pyexcelerator. Additionally:
-#
-# py_xls2txt creates lines like:
-#   (row, column) = text
-# but for diffability reasons I turn that into
-#   column = text
-# with a single @ line before the row's first entry
-#
-# Latin-1 characters are shown as escape sequences: \xe5.
-# I translate these to latin-1.
-#
-# Sheet names and stuff like that is skipped.
-#
-use strict;
+#!/usr/bin/env python
+# -*- coding: latin-1 -*-
+"""
+convert Excel files to text
 
-sub unescape($) {
-    $_ = shift;
-    while(/(.*?)(\\x(..))(.*)/) {
-	my ($pre, $dd, $post) = ($1, $3, $4);
-	$dd = chr(hex($dd));
-	$_ = "$pre$dd$post";
-    }
-    return $_;
-}
+Copyright (c) 2012, 2018 Jörgen Grahn
+All rights reserved.
+
+Convert Excel files to text, using John Machin's 'xlrd' Python
+module.
+
+Prints the first sheet only. Assumes a matrix of text, with no line
+breaks in the cells (i.e.  99% of all Excel sheets I seem to be
+expected to read). Prints it as:
+
+@  beginning of line
+N = text
+   the text in column N
+
+The text encoding is UTF-8.  Empty cells are skipped.
+"""
+import xlrd
+import codecs
 
 
-# Perform the conversion for one file; print to stdout
-#
-sub convert($) {
-    my ($file) = @_;
-    my $n;
-
-    open(F, '-|', "zcat -f '$file' | py_xls2txt /dev/stdin") or die;
-    while(<F>) {
-	next unless /^\((\d+), (\d+)\) = (.+)/;
-	chomp;
-	my ($row, $column, $text) = ($1, $2, $3);
-	if(not defined $n or $row != $n) {
-	    print "@\n";
-	    $n = $row;
-	}
-	printf("%-2d = %s\n", $column, unescape $text);
-    }
-    close F;
-}
+def rows(sheet):
+    "Iterating through the rows in a sheet."
+    for n in xrange(sheet.nrows):
+        yield sheet.row(n)
 
 
-foreach (@ARGV) {
-    convert $_;
-}
+def convert(f, path):
+    "The actual conversion, from a file name to an output file object."
+    w = f.write
+    book = xlrd.open_workbook(filename=path,
+                              logfile=sys.stderr,
+                              ragged_rows=True)
+    assert book.nsheets > 0
+    sh = book.sheet_by_index(0)
+    for row in rows(sh):
+        w('@\n')
+        for n, cell in zip(xrange(1000), row):
+            if cell.ctype==xlrd.XL_CELL_NUMBER:
+                w('%-2d = %d\n' % (n, cell.value))
+            elif cell.ctype==xlrd.XL_CELL_EMPTY:
+                pass
+            elif cell.value:
+                w('%-2d = %s\n' % (n, cell.value))
+
+
+if __name__ == '__main__':
+    import sys
+    import getopt
+
+    usage = 'usage: %s file' % sys.argv[0]
+
+    try:
+        opts, args = getopt.gnu_getopt(sys.argv[1:], '',
+                                       ['help'])
+        if ('--help', '') in opts:
+            sys.stdout.write('%s\n' % usage)
+            sys.exit(0)
+        if len(args) != 1:
+            raise getopt.GetoptError('incorrect number of arguments')
+        path, = args
+
+    except getopt.GetoptError as e:
+        sys.stderr.write('error: %s\n'
+                         '%s\n' % (e.msg, usage))
+        sys.exit(1)
+
+    stdout = codecs.getwriter('utf-8')(sys.stdout)
+    convert(stdout, path)
