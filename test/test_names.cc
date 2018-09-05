@@ -2,7 +2,7 @@
  * Copyright (C) 2018 Jörgen Grahn.
  * All rights reserved.
  */
-#include <comments.h>
+#include <names.h>
 #include <taxa.h>
 
 #include <array>

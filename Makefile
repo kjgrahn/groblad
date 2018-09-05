@@ -38,7 +38,7 @@ libgavia.a: taxon.o
 libgavia.a: taxa.o
 libgavia.a: date.o
 libgavia.a: coordinate.o
-libgavia.a: comments.o
+libgavia.a: names.o
 libgavia.a: excursion.o
 libgavia.a: excursion_check.o
 libgavia.a: excursion_put.o
@@ -83,7 +83,7 @@ test/libtest.a: test/test_indent.o
 test/libtest.a: test/test_cont.o
 test/libtest.a: test/test_filetest.o
 test/libtest.a: test/test_utf8.o
-test/libtest.a: test/test_comments.o
+test/libtest.a: test/test_names.o
 	$(AR) -r $@ $^
 
 test/test_%.o: CPPFLAGS+=-I.

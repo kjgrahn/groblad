@@ -33,7 +33,7 @@
 #include "files...h"
 #include "taxa.h"
 #include "excursion.h"
-#include "comments.h"
+#include "names.h"
 #include "indent.h"
 #include "lineparse.h"
 
