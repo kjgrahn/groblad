@@ -93,5 +93,12 @@ namespace comments {
     void capitalization(TC)
     {
 	assert_parses("/mindre guldvinge/ /Mindre guldvinge/");
+	assert_parses("MINDRE GULDVINGE");
+	assert_parses("Mindre Guldvinge");
+    }
+
+    void non_capitalization(TC)
+    {
+	assert_parses("lycaena phlaeas /Lycaena phlaeas/");
     }
 }
