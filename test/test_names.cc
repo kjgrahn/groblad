@@ -21,7 +21,7 @@ namespace {
 	std::string s;
 	std::remove_copy(begin(ref), end(ref),
 			 std::back_inserter(s), '/');
-	const auto pc = comment::parse(begin(taxa), end(taxa), s);
+	const auto pc = Names(taxa).find(s);
 
 	orchis::assert_ge(pc.size(), 2);
 	orchis::assert_eq(pc.size() % 2, 0);

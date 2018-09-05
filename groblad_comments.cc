@@ -47,15 +47,6 @@ extern "C" {
 namespace {
 
     /**
-     * All taxon names, aliases and all, as a set.
-     */
-    std::set<std::string> names(const Taxa& taxa)
-    {
-	const auto v = taxa.names();
-	return {begin(v), end(v)};
-    }
-
-    /**
      * The n:th substring in 'pc', with whitespace trimmed.
      */
     std::string trimmed(const std::vector<const char*>& pc,
@@ -70,7 +61,7 @@ namespace {
 
     struct ParsedComment {
 
-	ParsedComment(const std::set<std::string>& names,
+	ParsedComment(const Names& names,
 		      const std::string& s);
 
 	std::string pre;
@@ -82,10 +73,10 @@ namespace {
 	std::vector<Sighting> sightings;
     };
 
-    ParsedComment::ParsedComment(const std::set<std::string>& names,
+    ParsedComment::ParsedComment(const Names& names,
 				 const std::string& s)
     {
-	const auto pc = comment::parse(names, s);
+	const auto pc = names.find(s);
 	pre = trimmed(pc, 0);
 	const size_t spp = pc.size()/2 - 1;
 	for(unsigned i=0; i<spp; i++) {
@@ -238,7 +229,7 @@ int main(int argc, char ** argv)
     }
     Taxa taxa(species, std::cerr);
     species.close();
-    const auto taxa_set = names(taxa);
+    const Names taxa_set {taxa.names()};
 
     species.open(Taxa::species_file(), std::ios_base::in);
     Taxa gtaxa(species, std::cerr);

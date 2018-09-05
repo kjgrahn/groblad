@@ -25,23 +25,40 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-#ifndef GROBLAD_COMMENTS_H
-#define GROBLAD_COMMENTS_H
+#ifndef GROBLAD_NAMES_H
+#define GROBLAD_NAMES_H
 
 #include <string>
 #include <vector>
 #include <set>
 
 
-namespace comment {
+/**
+ * Finding all occurrencies of names in strings.
+ */
+class Names {
+public:
+    template <class It> Names(It begin, It end)
+	: names{begin, end}
+    {}
+    template <class Cont>
+    explicit Names(const Cont& c)
+	: Names{begin(c), end(c)}
+    {}
 
-    std::vector<const char*> parse(const std::set<std::string>& names,
-				   const std::string& s);
+    std::vector<const char*> find(const std::string& s) const;
 
-    template <class It>
-    std::vector<const char*> parse(It a, It b, const std::string& s)
-    {
-	return parse({a, b}, s);
-    }
-}
+    struct Range {
+	const char* a;
+	const char* b;
+	bool empty() const { return a==b; }
+	std::string str() const { return {a, b}; }
+    };
+
+private:
+    std::set<std::string> names;
+
+    Range find_one(const Range s) const;
+};
+
 #endif

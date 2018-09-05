@@ -14,12 +14,7 @@
 
 namespace {
 
-    struct Range {
-	const char* a;
-	const char* b;
-	bool empty() const { return a==b; }
-	std::string str() const { return {a, b}; }
-    };
+    using Range = Names::Range;
 
     /**
      * Is 'b' a prefix of 'a'?
@@ -50,34 +45,33 @@ namespace {
 	bool right = c.b==s.b || !letter(*(c.b));
 	return left && right;
     }
-
-    /**
-     * Find the first, longest name in s, or return an empty range
-     * placed at the end of s.  Finds only delimited() names.
-     */
-    Range find_one(const std::set<std::string>& names, const Range s)
-    {
-	if(s.empty()) return s;
-
-	Range n{s.b, s.b};
-	Range c{s.a, s.a+1};
-
-	while(c.b < s.b + 1) {
-	    const std::string cs = c.str();
-	    const auto i = names.lower_bound(cs);
-	    if(i!=names.end() && prefix(*i, cs)) {
-		if(delimited(s, c) && *i == cs) n = c;
-		c.b++;
-	    }
-	    else {
-		if(!n.empty()) break;
-		c = {c.a + 1, c.a + 2};
-	    }
-	}
-	return n;
-    }
 }
 
+/**
+ * Find the first, longest name in s, or return an empty range
+ * placed at the end of s.  Finds only delimited() names.
+ */
+Range Names::find_one(const Range s) const
+{
+    if(s.empty()) return s;
+
+    Range n{s.b, s.b};
+    Range c{s.a, s.a+1};
+
+    while(c.b < s.b + 1) {
+	const std::string cs = c.str();
+	const auto i = names.lower_bound(cs);
+	if(i!=names.end() && prefix(*i, cs)) {
+	    if(delimited(s, c) && *i == cs) n = c;
+	    c.b++;
+	}
+	else {
+	    if(!n.empty()) break;
+	    c = {c.a + 1, c.a + 2};
+	}
+    }
+    return n;
+}
 
 /**
  * Find all occurrencies of 'names' in 's'.  Except overlaps: the
@@ -92,14 +86,13 @@ namespace {
  *
  * So, N names means 2*(N+1) iterators.
  */
-std::vector<const char*> comment::parse(const std::set<std::string>& names,
-					const std::string& s)
+std::vector<const char*> Names::find(const std::string& s) const
 {
     std::vector<const char*> acc;
     Range r{s.data(), s.data() + s.size()};
 
     while(true) {
-	Range n = find_one(names, r);
+	Range n = find_one(r);
 	acc.push_back(r.a);
 	acc.push_back(n.a);
 	r.a = n.b;
