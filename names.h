@@ -34,13 +34,15 @@
 
 
 /**
- * Finding all occurrencies of names in strings.
+ * Finding all occurrencies of names in strings, with features like:
+ * - longest match rules
+ * - case is significant, but capitalized versions are also found (for A-Z anyway)
+ * - matches inside words are not found
+ * - names may contain whitespace
  */
 class Names {
 public:
-    template <class It> Names(It begin, It end)
-	: names{begin, end}
-    {}
+    template <class It> Names(It begin, It end);
     template <class Cont>
     explicit Names(const Cont& c)
 	: Names{begin(c), end(c)}
@@ -60,5 +62,26 @@ private:
 
     Range find_one(const Range s) const;
 };
+
+
+template <class It>
+Names::Names(It begin, It end)
+{
+    auto capitalize = [] (std::string& s) {
+			  if(s.empty()) return false;
+			  char ch = s[0];
+			  bool lower = 'a' <= ch && ch <= 'z';
+			  if(!lower) return false;
+			  s[0] -= 'a' - 'A';
+			  return true;
+		      };
+
+    It i = begin;
+    while(i!=end) {
+	std::string s = *i++;
+	names.insert(s);
+	if(capitalize(s)) names.insert(s);
+    }
+}
 
 #endif
