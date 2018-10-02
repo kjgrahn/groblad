@@ -44,10 +44,8 @@ extern "C" {
 
 int main(int argc, char ** argv)
 {
-    using std::string;
-
-    const string prog = argv[0];
-    const string usage = string("usage: ")
+    const std::string prog = argv[0];
+    const std::string usage = std::string("usage: ")
 	+ prog + " [-cx] [-s species] file ...\n"
 	"       "
 	+ prog + " [-s species] --check file ...\n"
