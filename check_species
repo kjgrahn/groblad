@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# check_species - sanity-check a groblad_species(5) taxon list
+#                 for duplicates
+
+names() {
+    perl -ne 'next if /^#/;
+              print "$1\n" if /.+\((.+?)\)/;
+              print "$1\n" if /(.+?)\s+\(/;'
+}
+
+dups() {
+    names | sort | uniq -d
+}
+
+dups || exit 1

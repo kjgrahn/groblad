@@ -76,6 +76,10 @@ check: test/test
 checkv: test/test
 	valgrind -q ./test/test -v
 
+.PHONY: check_species
+check_species: species
+	./check_species < $<
+
 test/libtest.a: test/test_taxa.o
 test/libtest.a: test/test_coord.o
 test/libtest.a: test/test_date.o
