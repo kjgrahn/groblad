@@ -98,10 +98,6 @@ test/test: test/test.o test/libtest.a libgavia.a
 test/test.cc: test/libtest.a
 	orchis -o $@ $^
 
-species_raw: kärlvl
-species_raw: dyntaxa/Tracheophyta
-	./kärlvl dyntaxa/Tracheophyta | unexpand -a >$@
-
 .PHONY: install
 install: all
 	install -m555 groblad{,_cat,_grep,_report,_comments} $(INSTALLBASE)/bin/
@@ -133,7 +129,6 @@ clean:
 	$(RM) test/test test/test.cc test/*.o test/lib*.a
 	$(RM) *.pyc
 	$(RM) version.c
-	$(RM) species_raw
 	$(RM) -r dep
 
 love:
