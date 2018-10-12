@@ -1889,6 +1889,8 @@ blågrönt mannagräs × mannagräs (Glyceria declinata × fluitans)
 mannagräs × skånskt mannagräs (Glyceria fluitans × notata)
 hainardia		(Hainardia cylindrica)
 råttsvansvete		(Henrardia persica)
+-			(Hierochloë)
+= majgräs
 fjällmyskgräs		(Hierochloë alpina)
 finskt myskgräs		(Hierochloë australis)
 raggmyskgräs		(Hierochloë hirta)
@@ -2419,6 +2421,7 @@ pastellakleja		(Aquilegia × cultorum)
 vårakleja		(Aquilegia glandulosa)
 akleja			(Aquilegia vulgaris)
 kabbleka		(Caltha palustris)
+= kabbeleka
 vanlig kabbleka		(Caltha palustris ssp. palustris)
 revkabbleka		(Caltha palustris ssp. radicans)
 hornsmörblomma		(Ceratocephala testiculata)
@@ -4868,6 +4871,8 @@ sjönöt			(Trapa natans)
 
 # Onagraceae
 mjölke			(Chamaenerion angustifolium)
+= mjölkört
+= rallarros
 praktmjölke		(Chamaenerion latifolium)
 dvärghäxört		(Circaea alpina)
 mellanhäxört		(Circaea × intermedia)
@@ -5521,6 +5526,7 @@ vitsenap		(Sinapis alba)
 vanlig vitsenap		(Sinapis alba ssp. alba)
 linsenap		(Sinapis alba ssp. dissecta)
 åkersenap		(Sinapis arvensis)
+= svinakåle
 hamnsenap		(Sisymbrium altissimum)
 donausenap		(Sisymbrium austriacum)
 fransksenap		(Sisymbrium erysimoides)
@@ -6045,6 +6051,7 @@ ishavsstjärnblomma	(Stellaria humifusa)
 skogsstjärnblomma	(Stellaria longifolia)
 polarstjärnblomma	(Stellaria longipes)
 våtarv			(Stellaria media)
+= vassarv
 strandvåtarv		(Stellaria media var. maritima)
 vanlig våtarv		(Stellaria media var. media)
 bokarv			(Stellaria neglecta)
@@ -7672,6 +7679,7 @@ praktröllika		(Achillea filipendulina)
 bredröllika		(Achillea macrophylla)
 smalröllika		(Achillea micrantha)
 röllika			(Achillea millefolium)
+= rölleka
 plymröllika		(Achillea millefolium ssp. lanulosa)
 vanlig röllika		(Achillea millefolium ssp. millefolium)
 fjällröllika		(Achillea millefolium ssp. sudetica)
@@ -10550,6 +10558,7 @@ krusig glansbuske	(Pittosporum undulatum)
 
 # Apiaceae
 kirskål			(Aegopodium podagraria)
+= kers
 vildpersilja		(Aethusa cynapium)
 liten vildpersilja	(Aethusa cynapium var. agrestis)
 smal vildpersilja	(Aethusa cynapium var. cynapium)
