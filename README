@@ -21,8 +21,6 @@ REQUIREMENTS
 
 To compile and install groblad, you'll need a C++11 compiler and Perl.
 To compile the unit tests, you need orchis[2].
-To use the internal Dyntaxa manipulation scripts, you need Python 2.x
-and the python-xlrd package.
 
 Using groblad works best if you combine it with GNU Emacs and a
 revision control system, like Git.
