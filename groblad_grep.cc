@@ -154,7 +154,7 @@ int main(int argc, char ** argv)
 
 	if(invert ^ matches(re, ex, matchtx)) {
 	    if(n++) std::cout << '\n';
-	    ex.put(std::cout);
+	    std::cout << ex;
 	}
     }
 
