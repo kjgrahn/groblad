@@ -231,7 +231,7 @@ namespace {
 	std::ofstream os(dest, std::ios_base::app);
 
 	for(const Excursion& ex : book) {
-	    os << ex << '\n';
+	    os << '\n' << ex;
 	}
 
 	if(!os || os.fail()) {
