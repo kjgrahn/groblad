@@ -41,7 +41,7 @@ class Taxa;
 class Files;
 
 /**
- * An excursion, or field list, as it appears in a groblad(5) file but
+ * A field list, or excursion, as it appears in a groblad(5) file but
  * as an internal representation.  Still, does not destroy information
  * found in a well-formed excursion, e.g. the ordering of taxa and
  * unknown header fields.
@@ -56,8 +56,11 @@ class Files;
  * The terminology is off because it's copied from Gavia.  An
  * excursion there is a period of time perhaps visiting several
  * localities; a field list here covers one locality.
+ *
+ * Field list is also not quite right, since that refers to a paper
+ * you bring into the field, rather than a final and permanent record.
  */
-class Excursion
+class FieldList
 {
 public:
     struct Header {
@@ -83,7 +86,7 @@ public:
 	}
     };
 
-    void swap(Excursion& other);
+    void swap(FieldList& other);
 
     bool add_header(const char* a, size_t alen,
 		    const char* b, size_t blen);
@@ -95,7 +98,7 @@ public:
     bool add_sighting_cont(const char* a, size_t alen);
     bool finalize();
 
-    bool operator< (const Excursion& other) const { return date < other.date; }
+    bool operator< (const FieldList& other) const { return date < other.date; }
     bool has_one(const std::vector<TaxonId>& taxa) const;
     bool contains(TaxonId taxon) const;
 
@@ -120,6 +123,9 @@ private:
     Headers headers;
     Sightings sightings;
 };
+
+/* compatibility name */
+using Excursion = FieldList;
 
 
 void check_sightings(const Excursion& ex, Taxa& taxa,
