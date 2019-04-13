@@ -4,7 +4,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad_report 1 "AUG 2018" Groblad "User Manuals"
+.TH groblad_report 1 "APR 2019" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -123,6 +123,54 @@ When everything has been imported successfully, go back to the original
 file and change the status of the imported findings to e.g.
 .BR "reported to artportalen" .
 .
+.SS "With Git"
+.
+If you use
+.BR git (1)
+for version control, there's a better and safer workflow:
+.
+.IP \- 2m
+Create a temporary branch.
+.
+.IP \-
+Make a commit which removes everything you don't want to report at this time.
+.
+.IP \-
+Review the remaining text (using e.g.
+.IR "groblad_cat --check" ),
+make needed changes, and change
+.B status:
+to
+.B "reported to artportalen"
+or whatever you use.
+Commit these changes.
+(You may want to keep the status change as a separate commit.)
+.
+.IP \-
+Generate the file:
+.IP
+% groblad_report --svalan flora/norrland > report
+.
+.IP \-
+Perform the reporting as per above. If you spot any more errors during reporting,
+edit the original files and commit (or commit --amend) these changes, too.
+If you realize you don't want to report a certain field list, remove the
+.B status:
+marker.
+.
+.IP \-
+When everything has been imported successfully, remove the first commit using
+.IR "rebase -i",
+tidy up the others,
+and merge them to trunk.  You now have one or two commits documenting the reporting, and
+the corrections you made during reporting.
+.
+.PP
+This way you're more likely to have a correct local record of what you reported,
+rather than of what you
+.I intended
+to report.
+.
 .
 .SH "FILES"
 .TP
@@ -144,7 +192,8 @@ J\(:orgen Grahn \fI\[fo]grahn+src@snipabacken.se\[fc]
 .BR groblad (1),
 .BR groblad_fv (1),
 .BR troff (1),
-.BR tbl (1).
+.BR tbl (1),
+.BR git (1).
 .P
 .B Artportalen
 .IR \[fo]http://www.artportalen.se/\[fc] .
