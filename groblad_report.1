@@ -108,12 +108,15 @@ Check for syntax errors, and also that they have proper coordinates filled in:
 .IP \-
 Generate the file:
 .IP
-.RI "% groblad_grep 'to artportalen' ../flora/norrland |\e"
+.RI "% groblad_grep 'to artportalen' flora/norrland |\e"
 .br
 .RI "groblad_report --svalan > report"
 .
 .IP \-
 Bring up the file in a text editor, and copy and paste into Artportalen.
+Include the legend line and of course the observations, but skip the
+.BR troff (1)/ tbl (1)
+commands near the top.
 .
 .IP \-
 When everything has been imported successfully, go back to the original
