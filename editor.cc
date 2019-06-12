@@ -25,6 +25,7 @@
  */
 #include "editor.h"
 
+#include <sstream>
 #include <cstdlib>
 #include <unistd.h>
 #include <sys/types.h>
@@ -67,12 +68,17 @@ bool editor(const std::string& path,
     else {
 	static const char* null;
 	if(ed=="emacs") {
+	    std::ostringstream oss;
+	    oss << "(progn "
+		   "(find-file \"" << reference << "\") "
+		   "(find-file \"" << path << "\") "
+		   "(delete-other-windows) "
+		   "(move-end-of-line 2))";
+	    const std::string eval = oss.str();
+
 	    execlp(ed.c_str(), ed.c_str(),
-		   "+2:100",
-		   path.c_str(),
-		   reference.c_str(),
-		   "-f",
-		   "delete-window",
+		   "--eval",
+		   eval.c_str(),
 		   null);
 	}
 	else {
