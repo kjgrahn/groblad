@@ -112,7 +112,11 @@ namespace {
 	const std::string& date;
 	const std::string& coordinate;
 	const Coordinate coord;
+
+	static bool prefer_latin;
     };
+
+    bool exrow::prefer_latin = true;
 
     exrow::exrow(std::ostream& os, const Taxa& spp, const Excursion& ex)
 	: os(os),
@@ -127,7 +131,7 @@ namespace {
     void exrow::operator() (const Excursion::Sighting& s) const
     {
 	const Taxon sp = spp[s.sp];
-	if(!sp.latin.empty()) {
+	if(prefer_latin && !sp.latin.empty()) {
 	    os << sp.latin;
 	}
 	else {
@@ -192,6 +196,8 @@ int main(int argc, char ** argv)
 	"       "
 	+ prog + " [-s species] --svalan file ...\n"
 	"       "
+	+ prog + " [-s species] --svalan-sv file ...\n"
+	"       "
 	+ prog + " --version\n"
 	"       "
 	+ prog + " --help";
@@ -199,6 +205,7 @@ int main(int argc, char ** argv)
     const struct option long_options[] = {
 	{"ms", 0, 0, 'M'},
 	{"svalan", 0, 0, 'S'},
+	{"svalan-sv", 0, 0, 'Z'},
 	{"version", 0, 0, 'V'},
 	{"help", 0, 0, 'H'},
 	{0, 0, 0, 0}
@@ -218,10 +225,14 @@ int main(int argc, char ** argv)
 	case 's': species_file = optarg; break;
 	case 'M': generate_troff = true; break;
 	case 'S': generate_troff = false; break;
+	case 'Z':
+	    generate_troff = false;
+	    exrow::prefer_latin = false;
+	    break;
 	case 'V':
 	    std::cout << prog << ", part of "
 		      << groblad_name() << ' ' << groblad_version() << "\n"
-		      << "Copyright (c) 2004 - 2018 Jörgen Grahn\n";
+		      << "Copyright (c) 2004 - 2019 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':

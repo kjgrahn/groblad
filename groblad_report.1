@@ -4,7 +4,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad_report 1 "APR 2019" Groblad "User Manuals"
+.TH groblad_report 1 "DEC 2019" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -22,6 +22,13 @@ groblad_report \- pretty-print botanical observations
 .RB [ \-s
 .IR species ]
 .B --svalan
+.I file
+\&...
+.br
+.B groblad_report
+.RB [ \-s
+.IR species ]
+.B --svalan-sv
 .I file
 \&...
 .br
@@ -45,6 +52,8 @@ or perhaps for including in an article or report.
 .P
 .B groblad_report
 .B --svalan
+and
+.B --svalan-sv
 instead prints the contents as troff source with
 .BR tbl (1)
 tables, one line per finding.
@@ -88,6 +97,11 @@ The observers are
 .I not
 printed; you have to add a manual step if you want to report findings
 which aren't exclusively your own.
+.
+.BP --svalan-sv
+Same as
+.BR --svalan ,
+but use primary Swedish taxon names instead of the scientific ones.
 .
 .SH "ARTPORTALEN WORKFLOW"
 .
