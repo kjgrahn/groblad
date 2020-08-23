@@ -4,7 +4,7 @@
 ..
 .hw gro-blad
 .
-.TH groblad_report 1 "DEC 2019" Groblad "User Manuals"
+.TH groblad_report 1 "AUG 2020" Groblad "User Manuals"
 .
 .
 .SH "NAME"
@@ -97,6 +97,23 @@ The observers are
 .I not
 printed; you have to add a manual step if you want to report findings
 which aren't exclusively your own.
+.BP
+The columns in the TAB-separated data are the following.
+Many (the ones marked in the list) are derived from the input file;
+the others are there just in case you want to fill them in manually.
+.IP
+.ft CW
+.nf
+* Artnamn                 * Lokalnamn
+  Ej återfunnen           * Ost
+  Osäker artbestämning    * Nord
+  Ospontan                * Noggrannhet
+  Andrahand               * Startdatum
+  Antal                   * Slutdatum
+  Enhet                   * Publik kommentar
+  Ålder-Stadium
+  Kön
+.fi
 .
 .BP --svalan-sv
 Same as
@@ -193,6 +210,13 @@ The list of accepted taxa
 and their scientific names (which are included in the output).
 See
 .BR groblad_species (5).
+.
+.
+.SH "BUGS"
+.B Artportalen
+supports more fields than what
+.B --svalan
+generates, e.g. fields relating to collections and reviewers.
 .
 .
 .SH "AUTHOR"

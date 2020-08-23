@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2014, 2018 Jörgen Grahn
+ * Copyright (c) 2013, 2014, 2018, 2020 Jörgen Grahn
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -102,6 +102,24 @@ namespace {
 	return t;
     }
 
+    template <class Iter>
+    std::ostream& join_to(std::ostream& os,
+			  const char * const delim,
+			  const Iter first, const Iter last)
+    {
+	for(Iter i = first; i!=last; ++i) {
+	    if(i!=first) os << delim;
+	    os << *i;
+	}
+	return os;
+    }
+
+    std::ostream& join(std::ostream& os, const char * const delim,
+		       const std::vector<std::string>& v)
+    {
+	return join_to(os, delim, begin(v), end(v));
+    }
+
     struct exrow {
 	exrow(std::ostream& os, const Taxa& spp, const Excursion& ex);
 	void operator() (const Excursion::Sighting&) const;
@@ -131,53 +149,56 @@ namespace {
     void exrow::operator() (const Excursion::Sighting& s) const
     {
 	const Taxon sp = spp[s.sp];
-	if(prefer_latin && !sp.latin.empty()) {
-	    os << sp.latin;
-	}
-	else {
-	    os << sp.name;
-	}
+	const auto name = (prefer_latin && !sp.latin.empty()) ? sp.latin : sp.name;
 
-	os << "\t\t\t\t\t" << place;
+	auto ifv = [this] (unsigned n) {
+		       if (!coord.valid()) n = 0;
+		       return std::to_string(n);
+		   };
 
-	if(coord.valid()) {
-	    os << '\t'
-	       << coord.east << '\t'
-	       << coord.north << '\t'
-	       << coord.resolution;
-	}
-	else {
-	    os << "\t\t\t";
-	}
-
-	os << '\t' << date
-	   << '\t' << date
-	   << "\t\t\t" << join(s.comment)
-	   << '\n';
+	join(os, "\t", {name,
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			"",
+			place,
+			ifv(coord.east),
+			ifv(coord.north),
+			ifv(coord.resolution),
+			date,
+			date,
+			join(s.comment)})
+	    << '\n';
     }
 
     void tbl(std::ostream& os, const Book& book, const Taxa& spp)
     {
 	os << ".TS H\n"
 	   << "allbox;\n"
-	   << "lrllllrrrlll llllllllllllllllllllllllllllll.\n";
+	   << "lrrrrrllllrrrlll.\n";
 
-	os << "artnamn"
-	   << '\t' << "antal"
-	   << '\t' << "enhet"
-	   << '\t' << "ålder-stadium"
-	   << '\t' << "kön"
-	   << '\t' << "lokalnamn"
-	   << '\t' << "ost"
-	   << '\t' << "nord"
-	   << '\t' << "noggrannhet"
-	   << '\t' << "startdatum"
-	   << '\t' << "slutdatum"
-	   << '\t' << "starttid"
-	   << '\t' << "sluttid"
-	   << '\t' << "publik kommentar"
-	   << '\n'
-	   << ".TH\n";
+	join(os, "\t", {"Artnamn",
+			"Ej återfunnen",
+			"Osäker artbestämning",
+			"Ospontan",
+			"Andrahand",
+			"Antal",
+			"Enhet",
+			"Ålder-Stadium",
+			"Kön",
+			"Lokalnamn",
+			"Ost",
+			"Nord",
+			"Noggrannhet",
+			"Startdatum",
+			"Slutdatum",
+			"Publik kommentar"})
+	    << '\n'
+	    << ".TH\n";
 
 	for(const Excursion& ex : book) {
 	    std::for_each(ex.sbegin(), ex.send(), exrow(os, spp, ex));
@@ -232,7 +253,7 @@ int main(int argc, char ** argv)
 	case 'V':
 	    std::cout << prog << ", part of "
 		      << groblad_name() << ' ' << groblad_version() << "\n"
-		      << "Copyright (c) 2004 - 2019 Jörgen Grahn\n";
+		      << "Copyright (c) 2004 - 2020 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':
