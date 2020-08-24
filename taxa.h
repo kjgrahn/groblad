@@ -71,8 +71,7 @@ public:
 
 private:
     std::vector<Taxon> v;
-    typedef std::unordered_map<std::string, TaxonId> Map;
-    Map m;
+    std::unordered_map<std::string, TaxonId> m;
 
     void map(const Taxon& sp, std::ostream& err);
     void map(const std::string& name, TaxonId id, std::ostream& err);

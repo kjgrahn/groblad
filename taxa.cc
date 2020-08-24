@@ -144,7 +144,7 @@ TaxonId Taxa::insert(const std::string& name)
 TaxonId Taxa::find(const std::string& name) const
 {
     TaxonId id;
-    Map::const_iterator i = m.find(name);
+    auto i = m.find(name);
     if(i!=m.end()) {
 	id = i->second;
     }
@@ -235,7 +235,7 @@ void Taxa::map(const Taxon& sp, std::ostream& err)
  */
 void Taxa::map(const std::string& name, TaxonId id, std::ostream& err)
 {
-    std::pair<Map::iterator, bool> p = m.insert(std::make_pair(name, id));
+    auto p = m.insert(std::make_pair(name, id));
     if(!p.second && p.first->second != id) {
 	err << "warning: \"" << name << "\" has already been used to name a different taxon\n";
     }
