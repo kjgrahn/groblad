@@ -1,6 +1,6 @@
 /* -*- c++ -*-
  *
- * Copyright (c) 1999, 2013 Jörgen Grahn
+ * Copyright (c) 1999, 2013, 2020 Jörgen Grahn
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -64,18 +64,26 @@ class Regex;
  *
  * Then there are also optional aliases: other names applied to the
  * same taxon.  These are usually common names, but may also be
- * scientific names.  There's no classification of the names, except
- * 'latin' of course is a scientific name.
+ * scientific names.
+ *
+ * Names are classified as genera, and other names (species, hybrids,
+ * subspecies and so on). This is a bit vague, but intended to support
+ * duplicate detection in common cases (it's normal to note two
+ * "Alchemilla sp" in one field list, but not two "ormrot").
  */
 class Taxon {
 public:
-    Taxon(TaxonId id, const std::string& name)
+    Taxon(TaxonId id, bool genus,
+	  const std::string& name)
 	: id(id),
+	  genus(genus),
 	  name(name)
     {}
-    Taxon(TaxonId id, const std::string& name,
+    Taxon(TaxonId id, bool genus,
+	  const std::string& name,
 	  const std::string& latin)
 	: id(id),
+	  genus(genus),
 	  name(name),
 	  latin(latin)
     {}
@@ -86,9 +94,10 @@ public:
 
     bool match(const Regex& re) const;
 
-    TaxonId id;
-    std::string name;
-    std::string latin;
+    const TaxonId id;
+    const bool genus;
+    const std::string name;
+    const std::string latin;
     std::vector<std::string> alias;
 };
 

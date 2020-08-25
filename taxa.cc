@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2013, 2014 Jörgen Grahn
+ * Copyright (c) 2013, 2014, 2020 Jörgen Grahn
  * All rights reserved.
  *
  */
@@ -32,6 +32,18 @@ namespace {
     bool Genera::seen(const char* a, const char* b)
     {
 	return seen(std::string(a, b-a));
+    }
+
+    std::string either(const std::string& a, const std::string& b)
+    {
+	if (a=="-") return b;
+	return a;
+    }
+
+    std::string sp(std::string latin)
+    {
+	latin += " sp";
+	return latin;
     }
 }
 
@@ -68,7 +80,7 @@ Taxa::Taxa(std::istream& is, std::ostream& err)
 	    if(d==b) {
 		const TaxonId id(n++);
 		const std::string name(a, b-a);
-		v.push_back(Taxon(id, name));
+		v.push_back(Taxon(id, false, name));
 		map(name, id, err);
 	    }
 	    else {
@@ -84,11 +96,9 @@ Taxa::Taxa(std::istream& is, std::ostream& err)
 		    const TaxonId id(n++);
 		    std::string name(a, c-a);
 		    const std::string latin(d, f-d);
-		    Taxon genus(id, name, latin);
-		    if(genus.name=="-") {
-			genus.name = latin + " sp";
-		    }
-		    else {
+		    const bool empty_name = name=="-";
+		    Taxon genus(id, true, either(name, sp(latin)), latin);
+		    if (!empty_name) {
 			genus.add(latin + " sp");
 		    }
 		    genera.seen(latin);
@@ -100,18 +110,14 @@ Taxa::Taxa(std::istream& is, std::ostream& err)
 			/* the genus is a taxon, too */
 			const TaxonId id(n++);
 			const std::string latin(d, e-d);
-			const std::string name = latin + " sp";
-			Taxon genus(id, name, latin);
+			const Taxon genus(id, true, sp(latin), latin);
 			map(genus, err);
 			v.push_back(genus);
 		    }
 		    const TaxonId id(n++);
 		    std::string name(a, c-a);
 		    const std::string latin(d, f-d);
-		    Taxon sp(id, name, latin);
-		    if(sp.name=="-") {
-			sp.name = sp.latin;
-		    }
+		    const Taxon sp(id, false, either(name, latin), latin);
 		    map(sp, err);
 		    v.push_back(sp);
 		}
@@ -130,7 +136,7 @@ TaxonId Taxa::insert(const std::string& name)
     TaxonId id;
     if(!find(name)) {
 	id = TaxonId(v.size() + 1);
-	v.push_back(Taxon(id, name));
+	v.emplace_back(id, false, name);
 	m[name] = id;
     }
     return id;

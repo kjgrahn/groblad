@@ -93,7 +93,7 @@ int main(int argc, char ** argv)
 	case 'V':
 	    std::cout << prog << ", part of "
 		      << groblad_name() << ' ' << groblad_version() << "\n"
-		      << "Copyright (c) 2004 - 2013 Jörgen Grahn\n";
+		      << "Copyright (c) 2004 - 2013, 2020 Jörgen Grahn\n";
 	    return 0;
 	    break;
 	case 'H':

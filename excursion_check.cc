@@ -1,4 +1,4 @@
-/* Copyright (c) 2013 Jörgen Grahn
+/* Copyright (c) 2013, 2020 Jörgen Grahn
  * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
@@ -62,8 +62,11 @@ void check_sightings(const Excursion& ex, Taxa& taxa,
     const std::vector<TaxonId>::const_iterator end = spp.end();
     std::vector<TaxonId>::const_iterator i = begin(spp);
     while((i = std::adjacent_find(i, end)) != end) {
-	err << is.position() << ": duplicate entries for taxon \""
-	    << taxa[*i].name << "\"\n";
+	const Taxon taxon = taxa[*i];
+	if (!taxon.genus) {
+	    err << is.position() << ": duplicate entries for taxon \""
+		<< taxa[*i].name << "\"\n";
+	}
 	i++;
     }
 }
